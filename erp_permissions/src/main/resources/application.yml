@@ -1,0 +1,87 @@
+server:
+  port: 8001
+spring:
+  # 数据源配置
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://xhh.ddos-sec.cn:3306/erp?useUnicode=true&characterEncoding=utf8&serverTimezone=GMT%2B8&useSSL=false
+    username: root
+    password: 1234
+    # druid
+    druid:
+      max-active: 10
+      min-idle: 5
+      max-wait: 5000
+      initial-size: 5
+      validation-query: select 1
+      stat-view-servlet:
+        enabled: true
+        #        login-username: admin
+        #        login-password: admin
+        #        allow:
+        #        deny:
+        url-pattern: "/druid/*"
+      web-stat-filter:
+        enabled: true
+        url-pattern: "/druid/**"
+        exclusions: '*.js,*.gif,*.jpg,*.jpeg,*.png,*.css,*.ico,*.jsp,/druid/*'
+        principal-session-name: ''
+        session-stat-enable: true
+        session-stat-max-count: 1000
+
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+
+  # redis
+  redis:
+    host: xhh.ddos-sec.cn
+    password: 1234
+    port: 6400
+    jedis:
+      pool:
+        max-active: 20
+        max-idle: 8
+        min-idle: 0
+        max-wait: 2000
+
+#shiro的配置
+shiro:
+  hash-algorithm-name: md5
+  hash-iterations: 2
+  login-url: /index.html
+  unauthorized-url: /unauthorized.html
+  anon-urls:
+    - /**
+    - /index.html*
+    - /login/login*
+    - /resources/**
+  logout-url: /login/logout*
+  authc-urls:
+#    - /**
+
+# mybatisplus的配置
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  mapper-locations: classpath:mapper/*/*Mapper.xml
+
+    #fastdfs设置
+    #fdfs:
+    # 读取时间
+    #  so-timeout: 2500
+    # 连接超时时间
+    #  connect-timeout: 5000
+    # 缩略图
+    #  thumb-image:
+    #    width: 100
+    #    height: 100
+    #  tracker-list:
+  # tracker服务配置地址列表
+#    - 39.106.71.75:22122
+#upload:
+#  base-url: 39.106.71.75/
+#  allow-types:
+#    - image/jpeg
+#    - image/png
+#    - image/bmp

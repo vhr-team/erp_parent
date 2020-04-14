@@ -11,7 +11,7 @@ public class DataGridView {
 
     private Integer code = 0;
     private String msg = "";
-    private Long count;
+    private Long count = 0L;
     private Object data;
 
     public DataGridView(Long count, Object data) {

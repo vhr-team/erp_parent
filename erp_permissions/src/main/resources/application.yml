@@ -1,3 +1,6 @@
+logging:
+  level:
+    cn.ddos: debug
 server:
   port: 8001
 spring:
@@ -64,7 +67,7 @@ shiro:
 mybatis-plus:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
-  mapper-locations: classpath:mapper/*/*Mapper.xml
+  mapper-locations: classpath:mapper/*Mapper.xml
 
     #fastdfs设置
     #fdfs:
@@ -76,7 +79,7 @@ mybatis-plus:
     #  thumb-image:
     #    width: 100
     #    height: 100
-    #  tracker-list:
+  #  tracker-list:
   # tracker服务配置地址列表
 #    - 39.106.71.75:22122
 #upload:

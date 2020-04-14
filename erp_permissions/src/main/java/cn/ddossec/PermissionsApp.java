@@ -3,6 +3,7 @@ package cn.ddossec;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cache.annotation.EnableCaching;
 
 /**
  * @author 唐疑豪
@@ -14,6 +15,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 // mapper接口的扫描
 @MapperScan(basePackages = {"cn.ddossec.mapper"})
+@EnableCaching
 public class PermissionsApp {
 
     public static void main(String[] args) {

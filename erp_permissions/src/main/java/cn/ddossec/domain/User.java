@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -68,6 +69,9 @@ public class User implements Serializable {
     @TableField(value = "deptid")
     private Integer deptid;
 
+    @TableField(exist = false)
+    private String deptname;
+
     /**
      * 入职时间
      */
@@ -98,7 +102,7 @@ public class User implements Serializable {
     private String salt;
 
     /**
-     *  是否可用
+     * 是否可用
      */
     @TableField(value = "available")
     private Integer available;

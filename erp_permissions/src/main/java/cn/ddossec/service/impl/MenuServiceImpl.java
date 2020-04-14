@@ -11,6 +11,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.function.Consumer;
 
@@ -20,6 +21,11 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Transactional
 public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements MenuService {
+
+    @Override
+    public Menu getById(Serializable id) {
+        return super.getById(id);
+    }
 
     @Autowired
     private MenuMapper menuMapper;
@@ -66,12 +72,13 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements Me
 
     @Override
     public Integer queryMenuMaxOrderNum() {
-        return null;
+        return this.menuMapper.queryMenuMaxOrderNum();
     }
 
     @Override
     public Menu saveMenu(Menu menu) {
-        return null;
+        this.menuMapper.insert(menu);
+        return menu;
     }
 
     @Override
@@ -81,6 +88,6 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements Me
 
     @Override
     public Integer queryMenuChildrenCountById(Integer id) {
-        return null;
+        return this.menuMapper.queryMenuChildrenCountById(id);
     }
 }

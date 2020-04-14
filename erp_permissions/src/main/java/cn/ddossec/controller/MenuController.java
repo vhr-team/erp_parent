@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 /**
  * @author 唐颖豪
  * @title: MenuController
@@ -40,6 +42,17 @@ public class MenuController {
     }
 
     /**
+     * 查询菜单
+     * @param menuVo
+     * @return
+     */
+    @RequestMapping("/loadMenu")
+    public Object loadMenu(MenuVo menuVo) {
+        List<Menu> menus = this.menuService.queryAllMenuForList();
+        return new DataGridView(Long.valueOf(menus.size()), menus);
+    }
+
+    /**
      * 查询菜单和权限最大的排序码
      */
     @GetMapping("/queryMenuMaxOrderNum")
@@ -58,7 +71,13 @@ public class MenuController {
     @PostMapping("/addMenu")
     public ResultObj addMenu(Menu menu) {
         try {
+            // 如果是顶端菜单
+            if(menu.getType().equals("topmenu")){
+                menu.setPid(0);
+            }
+            // 默认不展开
             menu.setSpread(Constant.SPREAD_FALSE);
+            // 默认可用
             menu.setAvailable(Constant.AVAILABLE_TRUE);
 
             this.menuService.saveMenu(menu);
@@ -114,11 +133,11 @@ public class MenuController {
      * @return
      */
     @RequestMapping("/deleteMenu")
-    public ResultObj deleteDpet(Integer id){
-        try{
+    public ResultObj deleteDpet(Integer id) {
+        try {
             this.menuService.removeById(id);
             return ResultObj.DELETE_SUCCESS;
-        }catch (Exception e){
+        } catch (Exception e) {
             return ResultObj.DELETE_ERROR;
         }
     }

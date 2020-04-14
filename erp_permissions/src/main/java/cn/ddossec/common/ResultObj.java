@@ -21,6 +21,9 @@ public class ResultObj {
     public static final ResultObj UPDATE_SUCCESS = new ResultObj(200, "修改成功");
     public static final ResultObj UPDATE_ERROR = new ResultObj(-1, "修改失败");
 
+    public static final ResultObj DISPATCH_SUCCESS = new ResultObj(200, "分配成功");
+    public static final ResultObj DISPATCH_ERROR = new ResultObj(-1, "分配失败");
+
     private Integer code = 200;
     private String msg = "";
     private String token = "";

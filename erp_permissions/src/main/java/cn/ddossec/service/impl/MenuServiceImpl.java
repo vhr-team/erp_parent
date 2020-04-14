@@ -1,10 +1,13 @@
 package cn.ddossec.service.impl;
 
 import cn.ddossec.common.Constant;
+import cn.ddossec.common.DataGridView;
 import cn.ddossec.domain.Menu;
 import cn.ddossec.mapper.MenuMapper;
 import cn.ddossec.service.MenuService;
+import cn.ddossec.vo.MenuVo;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -49,5 +52,35 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements Me
         });
         qw.orderByAsc("ordernum");
         return this.menuMapper.selectList(qw);
+    }
+
+    @Override
+    public DataGridView queryAllMenu(MenuVo menuVo) {
+        QueryWrapper<Menu> qw = new QueryWrapper<>();
+        qw.eq(menuVo.getAvailable() != null, "available", menuVo.getAvailable());
+        qw.orderByAsc("ordernum");
+
+        List<Menu> menus = this.menuMapper.selectList(qw);
+        return new DataGridView(Long.valueOf(menus.size()), menus);
+    }
+
+    @Override
+    public Integer queryMenuMaxOrderNum() {
+        return null;
+    }
+
+    @Override
+    public Menu saveMenu(Menu menu) {
+        return null;
+    }
+
+    @Override
+    public Menu updateMenu(Menu menu) {
+        return null;
+    }
+
+    @Override
+    public Integer queryMenuChildrenCountById(Integer id) {
+        return null;
     }
 }

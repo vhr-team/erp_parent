@@ -3,9 +3,9 @@ package cn.ddossec.controller;
 import cn.ddossec.common.Constant;
 import cn.ddossec.common.DataGridView;
 import cn.ddossec.common.ResultObj;
-import cn.ddossec.domain.Dept;
-import cn.ddossec.service.DeptService;
-import cn.ddossec.vo.DeptVo;
+import cn.ddossec.domain.Menu;
+import cn.ddossec.service.MenuService;
+import cn.ddossec.vo.MenuVo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,53 +15,53 @@ import org.springframework.web.bind.annotation.RestController;
 
 /**
  * @author 唐颖豪
- * @title: DeptController
+ * @title: MenuController
  * @projectName erp_parent
  * @description: TODO
  * @date 2020-04-147:29
  */
 @RestController
-@RequestMapping("/dept")
+@RequestMapping("/menu")
 @Slf4j
 public class MenuController {
 
     @Autowired
-    private DeptService deptService;
+    private MenuService menuService;
 
     /**
-     * 查询部门
+     * 查询菜单和权限
      *
-     * @param deptVo
+     * @param menuVo
      * @return
      */
-    @GetMapping("/loadAllDept")
-    public Object loadAllDept(DeptVo deptVo) {
-        return this.deptService.queryAllDept(deptVo);
+    @GetMapping("/loadAllMenu")
+    public Object loadAllMenu(MenuVo menuVo) {
+        return this.menuService.queryAllMenu(menuVo);
     }
 
     /**
-     * 查询部门最大的排序码
+     * 查询菜单和权限最大的排序码
      */
-    @GetMapping("/queryDeptMaxOrderNum")
-    public Object queryDeptMaxOrderNum() {
-        Integer maxValue = this.deptService.queryDeptMaxOrderNum();
+    @GetMapping("/queryMenuMaxOrderNum")
+    public Object queryMenuMaxOrderNum() {
+        Integer maxValue = this.menuService.queryMenuMaxOrderNum();
         return new DataGridView(maxValue + 1);
     }
 
 
     /**
-     * 添加部门
+     * 添加菜单和权限
      *
-     * @param dept
+     * @param menu
      * @return
      */
-    @PostMapping("/addDept")
-    public ResultObj addDept(Dept dept) {
+    @PostMapping("/addMenu")
+    public ResultObj addMenu(Menu menu) {
         try {
-            dept.setSpread(Constant.SPREAD_FALSE);
-            dept.setAvailable(Constant.AVAILABLE_TRUE);
+            menu.setSpread(Constant.SPREAD_FALSE);
+            menu.setAvailable(Constant.AVAILABLE_TRUE);
 
-            this.deptService.saveDept(dept);
+            this.menuService.saveMenu(menu);
             return ResultObj.ADD_SUCCESS;
         } catch (Exception e) {
             return ResultObj.ADD_ERROR;
@@ -69,16 +69,16 @@ public class MenuController {
     }
 
     /**
-     * 修改部门
+     * 修改菜单和权限
      * 修改—是否展开是否可用
      *
-     * @param dept
+     * @param menu
      * @return
      */
-    @PostMapping("/updateDept")
-    public ResultObj updateDept(Dept dept) {
+    @PostMapping("/updateMenu")
+    public ResultObj updateMenu(Menu menu) {
         try {
-            this.deptService.updateDept(dept);
+            this.menuService.updateMenu(menu);
             return ResultObj.UPDATE_SUCCESS;
         } catch (Exception e) {
             return ResultObj.UPDATE_ERROR;
@@ -86,25 +86,25 @@ public class MenuController {
     }
 
     /**
-     * 部门修改
+     * 菜单和权限修改
      *
      * @param id
      * @return
      */
-    @GetMapping("/getDeptById")
-    public Object getDeptById(Integer id) {
-        return new DataGridView(this.deptService.getById(id));
+    @GetMapping("/getMenuById")
+    public Object getMenuById(Integer id) {
+        return new DataGridView(this.menuService.getById(id));
     }
 
     /**
-     * 根据ID查询，当前部门的子部门的个数
+     * 根据ID查询，当前菜单和权限的子菜单和权限的个数
      *
      * @param id
      * @return
      */
-    @GetMapping("/getDeptChildrenCountById")
-    public Object getDeptChildrenCountById(Integer id) {
-        Integer count = this.deptService.queryDeptChildrenCountById(id);
+    @GetMapping("/getMenuChildrenCountById")
+    public Object getMenuChildrenCountById(Integer id) {
+        Integer count = this.menuService.queryMenuChildrenCountById(id);
         return new DataGridView(count);
     }
 
@@ -113,10 +113,10 @@ public class MenuController {
      * @param id
      * @return
      */
-    @RequestMapping("/deleteDept")
+    @RequestMapping("/deleteMenu")
     public ResultObj deleteDpet(Integer id){
         try{
-            this.deptService.removeById(id);
+            this.menuService.removeById(id);
             return ResultObj.DELETE_SUCCESS;
         }catch (Exception e){
             return ResultObj.DELETE_ERROR;

@@ -7,6 +7,9 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = false)
 public class RoleVo extends BaseVo {
 
-    private String title;
+    private String name;
+    private String remark;
+
+    private Integer available;
 
 }

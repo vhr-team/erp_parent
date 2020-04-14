@@ -68,13 +68,6 @@ public class Menu implements Serializable {
     @TableField(value = "spread")
     private Integer spread;
 
-    @TableField(exist = false)
-    private Boolean open;
-
-    public Boolean getOpen() {
-        return this.spread == 1 ? true : false;
-    }
-
     /**
      * 排序码
      */

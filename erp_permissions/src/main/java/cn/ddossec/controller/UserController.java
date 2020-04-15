@@ -67,4 +67,40 @@ public class UserController {
         }
     }
 
+    /**
+     * 修改用户
+     *
+     * @param user
+     * @return
+     */
+    @PostMapping("/updateUser")
+    public ResultObj updateUser(User user) {
+        try {
+            this.userService.updateUser(user);
+            return ResultObj.UPDATE_SUCCESS;
+        } catch (Exception e) {
+            return ResultObj.UPDATE_ERROR;
+        }
+    }
+
+    /**
+     * 重置用户密码
+     *
+     * @param id
+     * @return
+     */
+    @PostMapping("/resetUserPwd")
+    public ResultObj resetUserPwd(Integer id) {
+        try {
+            User user = new User();
+            user.setId(id);
+            user.setSalt(MD5Utils.createUUID());
+            user.setPwd(MD5Utils.md5(Constant.DEFAULT_PWD, user.getSalt(), 2));
+
+            this.userService.updateUser(user);
+            return ResultObj.RESET_ERROR;
+        } catch (Exception e) {
+            return ResultObj.RESET_ERROR;
+        }
+    }
 }

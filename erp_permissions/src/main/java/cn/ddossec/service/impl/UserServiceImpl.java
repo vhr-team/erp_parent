@@ -93,4 +93,10 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         this.userMapper.insert(user);
         return user;
     }
+
+    @Override
+    public User updateUser(User user) {
+        this.userMapper.updateById(user);
+        return user;
+    }
 }

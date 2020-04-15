@@ -24,6 +24,9 @@ public class ResultObj {
     public static final ResultObj DISPATCH_SUCCESS = new ResultObj(200, "分配成功");
     public static final ResultObj DISPATCH_ERROR = new ResultObj(-1, "分配失败");
 
+    public static final ResultObj RESET_SUCCESS = new ResultObj(200, "重置成功");
+    public static final ResultObj RESET_ERROR = new ResultObj(-1, "重置成功");
+
     private Integer code = 200;
     private String msg = "";
     private String token = "";

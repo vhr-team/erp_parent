@@ -20,4 +20,6 @@ public interface UserService extends IService<User> {
     Integer queryUserMaxOrderNum();
 
     User saveUser(User user);
+
+    User updateUser(User user);
 }

@@ -6,6 +6,7 @@ import cn.ddossec.common.ResultObj;
 import cn.ddossec.domain.Role;
 import cn.ddossec.service.RoleService;
 import cn.ddossec.vo.RoleVo;
+import com.sun.org.apache.bcel.internal.generic.RETURN;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -50,11 +51,12 @@ public class RoleController {
 
     /**
      * 根据角色ID查询角色拥有的菜单和权限ID
+     *
      * @param id 角色ID
      */
     @RequestMapping("queryMenuIdsByRid")
-    public Object queryMenuIdsByRid(Integer id){
-        List<Integer> mids=this.roleService.queryMenuIdsByRid(id);
+    public Object queryMenuIdsByRid(Integer id) {
+        List<Integer> mids = this.roleService.queryMenuIdsByRid(id);
         return new DataGridView(mids);
     }
 
@@ -62,11 +64,11 @@ public class RoleController {
      * 保存角色和菜单权限之间的关系
      */
     @RequestMapping("saveRoleMenu")
-    public ResultObj saveRoleMenu(Integer rid,Integer[] mids){
+    public ResultObj saveRoleMenu(Integer rid, Integer[] mids) {
         try {
-            this.roleService.saveRoleMenu(rid,mids);
+            this.roleService.saveRoleMenu(rid, mids);
             return ResultObj.DISPATCH_SUCCESS;
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             return ResultObj.DISPATCH_ERROR;
         }
@@ -101,4 +103,15 @@ public class RoleController {
         }
     }
 
+    /**
+     * 查询所有可用的角色
+     *
+     * @param roleVo
+     * @return
+     */
+    @RequestMapping("/loadAllAvailableRoleNoPage")
+    public Object loadAllAvailableRoleNoPage(RoleVo roleVo) {
+        roleVo.setAvailable(Constant.AVAILABLE_TRUE);
+        return this.roleService.loadAllAvailableRoleNoPage(roleVo);
+    }
 }

@@ -110,7 +110,8 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements Me
 
     @Override
     public Menu updateMenu(Menu menu) {
-        return null;
+        this.menuMapper.updateById(menu);
+        return menu;
     }
 
     @Override

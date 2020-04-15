@@ -103,4 +103,19 @@ public class UserController {
             return ResultObj.RESET_ERROR;
         }
     }
+
+    /**
+     * 删除
+     * @param id
+     * @return
+     */
+    @RequestMapping("/deleteUser")
+    public ResultObj deleteUser(Integer id){
+        try {
+            this.userService.LogicToDelete(id);
+            return ResultObj.DELETE_SUCCESS;
+        } catch (Exception e) {
+            return ResultObj.DELETE_ERROR;
+        }
+    }
 }

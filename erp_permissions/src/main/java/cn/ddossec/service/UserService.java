@@ -22,4 +22,6 @@ public interface UserService extends IService<User> {
     User saveUser(User user);
 
     User updateUser(User user);
+
+    User LogicToDelete(Integer id);
 }

@@ -6,6 +6,7 @@ import cn.ddossec.common.DataGridView;
 import cn.ddossec.domain.Dept;
 import cn.ddossec.domain.Role;
 import cn.ddossec.domain.User;
+import cn.ddossec.mapper.RoleMapper;
 import cn.ddossec.mapper.UserMapper;
 import cn.ddossec.service.DeptService;
 import cn.ddossec.service.UserService;
@@ -35,6 +36,9 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 
     @Autowired
     private UserMapper userMapper;
+
+    @Autowired
+    private RoleMapper roleMapper;
 
     @Override
     public User queryUserByLoginName(String loginname) {
@@ -81,5 +85,35 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
             }
         }
         return new DataGridView(page.getTotal(), records);
+    }
+
+    @Override
+    public Integer queryUserMaxOrderNum() {
+        return this.userMapper.queryUserMaxOrderNum();
+    }
+
+    @Override
+    public User saveUser(User user) {
+        this.userMapper.insert(user);
+        return user;
+    }
+
+    @Override
+    public User updateUser(User user) {
+        this.userMapper.updateById(user);
+        return user;
+    }
+
+    @Override
+    public User LogicToDelete(Integer id) {
+        // 根据用户ID删除角色和用户中间表的数据
+        roleMapper.deleteRoleUserByUid(id);
+
+        // 根据ID 查询需要删除的用户
+        User user = this.userMapper.selectById(id);
+        // 设置为不可用
+        user.setAvailable(Constant.AVAILABLE_FALSE);
+        this.userMapper.updateById(user);
+        return user;
     }
 }

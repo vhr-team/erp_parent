@@ -31,5 +31,5 @@ public class Constant {
      * 默认信息
      */
     public static final String DEFAULT_PWD = "123456";
-    public static final String DEFAULT_TITLE_IMAGE = "http://39.106.71.75:8888/group1/M00/00/00/rBGuPl6B6qWAcLIXAADAIoOz3QA698.jpg";
+    public static final String DEFAULT_TITLE_IMAGE = "group1/M00/00/00/rBGuPl6XAZiATNasAAAnSW-kclA511.jpg";
 }

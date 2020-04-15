@@ -24,4 +24,6 @@ public interface UserService extends IService<User> {
     User updateUser(User user);
 
     User LogicToDelete(Integer id);
+
+    void saveUserRole(Integer uid, Integer[] rids);
 }

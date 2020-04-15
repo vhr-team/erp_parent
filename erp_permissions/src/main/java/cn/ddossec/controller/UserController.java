@@ -106,16 +106,31 @@ public class UserController {
 
     /**
      * 删除
+     *
      * @param id
      * @return
      */
     @RequestMapping("/deleteUser")
-    public ResultObj deleteUser(Integer id){
+    public ResultObj deleteUser(Integer id) {
         try {
             this.userService.LogicToDelete(id);
             return ResultObj.DELETE_SUCCESS;
         } catch (Exception e) {
             return ResultObj.DELETE_ERROR;
+        }
+    }
+
+    /**
+     * 保存用户和角色之间的关系
+     */
+    @RequestMapping("/saveUserRole")
+    public ResultObj saveUserRole(Integer uid, Integer[] rids) {
+        try {
+            this.userService.saveUserRole(uid, rids);
+            return ResultObj.DISPATCH_SUCCESS;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResultObj.DISPATCH_ERROR;
         }
     }
 }

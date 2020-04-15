@@ -116,4 +116,16 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         this.userMapper.updateById(user);
         return user;
     }
+
+    @Override
+    public void saveUserRole(Integer uid, Integer[] rids) {
+        // 根据用户ID，删除角色和用户中间表的关系数据
+        this.roleMapper.deleteRoleUserByUid(uid);
+
+        if (null != rids && rids.length > 0) {
+            for (Integer rid : rids) {
+                this.userMapper.saveUserRole(uid, rid);
+            }
+        }
+    }
 }

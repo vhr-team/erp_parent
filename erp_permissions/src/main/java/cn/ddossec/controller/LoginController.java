@@ -49,12 +49,14 @@ public class LoginController {
 
             String token = subject.getSession().getId().toString();
             ActiveUser activeUser = (ActiveUser) subject.getPrincipal();
+            User user=activeUser.getUser();
 
             // 写入登陆日志
             List<String> permissions = activeUser.getPermissions();
             Map<String, Object> map = new HashMap<>();
             map.put("token", token);
             map.put("permissions", permissions);
+            map.put("usertype", user.getType());
             return new ResultObj(200, "登陆成功", map);
         } catch (AuthenticationException e) {
             e.printStackTrace();

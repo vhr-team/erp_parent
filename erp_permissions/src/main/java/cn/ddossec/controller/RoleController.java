@@ -7,16 +7,21 @@ import cn.ddossec.domain.Role;
 import cn.ddossec.service.RoleService;
 import cn.ddossec.vo.RoleVo;
 import com.sun.org.apache.bcel.internal.generic.RETURN;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
 @RestController
 @RequestMapping("/role")
+@Slf4j
 public class RoleController {
 
     @Autowired
@@ -113,5 +118,29 @@ public class RoleController {
     public Object loadAllAvailableRoleNoPage(RoleVo roleVo) {
         roleVo.setAvailable(Constant.AVAILABLE_TRUE);
         return this.roleService.loadAllAvailableRoleNoPage(roleVo);
+    }
+
+    /**
+     * 批量删除
+     * @param ids
+     * @return
+     */
+    @RequestMapping("/batchDeleteRole")
+    public ResultObj batchDeleteRole(Integer[] ids){
+        try{
+            if(null == ids || 0 == ids.length){
+                log.error("参数不能为空");
+                return ResultObj.DELETE_ERROR;
+            }
+            Collection<Serializable> idList = new ArrayList<>();
+            for (Integer id : ids) {
+                idList.add(id);
+            }
+            this.roleService.removeByIds(idList);
+            return ResultObj.DELETE_SUCCESS;
+        }catch (Exception e){
+            log.error("删除失败");
+            return ResultObj.DELETE_ERROR;
+        }
     }
 }

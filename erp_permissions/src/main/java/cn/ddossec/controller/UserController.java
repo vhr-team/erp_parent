@@ -1,12 +1,10 @@
 package cn.ddossec.controller;
 
-import cn.ddossec.common.Constant;
-import cn.ddossec.common.DataGridView;
-import cn.ddossec.common.MD5Utils;
-import cn.ddossec.common.ResultObj;
+import cn.ddossec.common.*;
 import cn.ddossec.domain.User;
 import cn.ddossec.service.UserService;
 import cn.ddossec.vo.UserVo;
+import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -132,5 +130,16 @@ public class UserController {
             e.printStackTrace();
             return ResultObj.DISPATCH_ERROR;
         }
+    }
+
+    /**
+     * 查询当前登录的用户
+     *
+     * @return
+     */
+    @GetMapping("/getCurrentUser")
+    public Object getCurrentUser() {
+        ActiveUser activeUser = (ActiveUser) SecurityUtils.getSubject().getPrincipal();
+        return new DataGridView(activeUser.getUser());
     }
 }

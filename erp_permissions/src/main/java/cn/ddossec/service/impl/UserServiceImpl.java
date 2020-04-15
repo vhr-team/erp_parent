@@ -82,4 +82,15 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         }
         return new DataGridView(page.getTotal(), records);
     }
+
+    @Override
+    public Integer queryUserMaxOrderNum() {
+        return this.userMapper.queryUserMaxOrderNum();
+    }
+
+    @Override
+    public User saveUser(User user) {
+        this.userMapper.insert(user);
+        return user;
+    }
 }

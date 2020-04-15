@@ -16,4 +16,8 @@ public interface UserService extends IService<User> {
     public User queryUserByLoginName(String loginname);
 
     DataGridView loadAllUser(UserVo userVo);
+
+    Integer queryUserMaxOrderNum();
+
+    User saveUser(User user);
 }

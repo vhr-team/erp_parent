@@ -48,10 +48,14 @@ public class LoginController {
             subject.login(loginToken);
 
             String token = subject.getSession().getId().toString();
+            ActiveUser activeUser = (ActiveUser) subject.getPrincipal();
 
             // 写入登陆日志
-
-            return new ResultObj(200, "登陆成功", token);
+            List<String> permissions = activeUser.getPermissions();
+            Map<String, Object> map = new HashMap<>();
+            map.put("token", token);
+            map.put("permissions", permissions);
+            return new ResultObj(200, "登陆成功", map);
         } catch (AuthenticationException e) {
             e.printStackTrace();
             return new ResultObj(-1, "用户名或密码不正确");

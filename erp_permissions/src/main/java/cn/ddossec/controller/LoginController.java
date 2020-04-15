@@ -57,14 +57,13 @@ public class LoginController {
             map.put("token", token);
             map.put("permissions", permissions);
             map.put("usertype", user.getType());
+            map.put("username", user.getName());
             return new ResultObj(200, "登陆成功", map);
         } catch (AuthenticationException e) {
             e.printStackTrace();
             return new ResultObj(-1, "用户名或密码不正确");
         }
     }
-
-    // 验证码
 
     /**
      * 加载所有菜单[顶部菜单左侧菜单]

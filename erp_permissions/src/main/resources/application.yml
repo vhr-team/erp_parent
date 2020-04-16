@@ -55,13 +55,11 @@ shiro:
   login-url: /index.html
   unauthorized-url: /unauthorized.html
   anon-urls:
-    - /**
-    - /index.html*
-    - /login/login*
-    - /resources/**
+    - /login/doLogin*
+    - /durid/**
   logout-url: /login/logout*
   authc-urls:
-#    - /**
+    - /**
 
 # mybatisplus的配置
 mybatis-plus:

@@ -12,25 +12,42 @@ spring:
     password: 1234
     # druid
     druid:
-      max-active: 10
-      min-idle: 5
-      max-wait: 5000
-      initial-size: 5
-      validation-query: select 1
-      stat-view-servlet:
-        enabled: true
-        #        login-username: admin
-        #        login-password: admin
-        #        allow:
-        #        deny:
-        url-pattern: "/druid/*"
+      initialSize: 3
+      minIdle: 3
+      maxActive: 30
+      maxWait: 15000
+      validationQuery: SELECT 'x'
+      testWhileIdle: true
+      testOnBorrow: false
+      testOnReturn: false
+      poolPreparedStatements: true
+      # 配置监控统计拦截的filters，去掉后监控界面sql无法统计，
+      #'wall'用于防火墙，SpringBoot中没有log4j，我改成了log4j2
+      filters: stat,wall,log4j2
+      #最大PSCache连接
+      maxPoolPreparedStatementPerConnectionSize: 20
+      useGlobalDataSourceStat: true
+      # 通过connectProperties属性来打开mergeSql功能；慢SQL记录
+      connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=500
+      # 配置StatFilter
       web-stat-filter:
+        #默认为false，设置为true启动
         enabled: true
-        url-pattern: "/druid/**"
-        exclusions: '*.js,*.gif,*.jpg,*.jpeg,*.png,*.css,*.ico,*.jsp,/druid/*'
-        principal-session-name: ''
-        session-stat-enable: true
-        session-stat-max-count: 1000
+        url-pattern: "/*"
+        exclusions: "*.js,*.gif,*.jpg,*.bmp,*.png,*.css,*.ico,/druid/*"
+      #配置StatViewServlet
+      stat-view-servlet:
+        url-pattern: "/druid/*"
+        #允许那些ip
+        # allow:
+        # login-username: root
+        # login-password: 1234
+        #禁止那些ip
+        # deny:
+        #是否可以重置
+        reset-enable: true
+        #启用
+        enabled: true
 
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
@@ -56,7 +73,7 @@ shiro:
   unauthorized-url: /unauthorized.html
   anon-urls:
     - /login/doLogin*
-    - /durid/**
+    - /druid/**
     - /swagger-ui.html
     - /webjars/**
     - /swagger-resources/**

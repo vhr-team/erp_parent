@@ -8,6 +8,7 @@ import cn.ddossec.service.RoleService;
 import cn.ddossec.vo.RoleVo;
 import com.sun.org.apache.bcel.internal.generic.RETURN;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -42,6 +43,7 @@ public class RoleController {
      * 添加角色
      */
     @PostMapping("/addRole")
+    @RequiresPermissions(value = {"role:add"})
     public ResultObj addRole(Role role) {
         try {
             role.setCreatetime(new Date());
@@ -69,6 +71,7 @@ public class RoleController {
      * 保存角色和菜单权限之间的关系
      */
     @RequestMapping("saveRoleMenu")
+    @RequiresPermissions(value = {"role:assignpermissions"})
     public ResultObj saveRoleMenu(Integer rid, Integer[] mids) {
         try {
             this.roleService.saveRoleMenu(rid, mids);
@@ -83,6 +86,7 @@ public class RoleController {
      * 修改角色
      */
     @PostMapping("/updateRole")
+    @RequiresPermissions(value = {"role:update"})
     public ResultObj updateRole(Role role) {
         try {
             this.roleService.updateRole(role);
@@ -98,6 +102,7 @@ public class RoleController {
      * 删除
      */
     @RequestMapping("/deleteRole")
+    @RequiresPermissions(value = {"role:delete"})
     public ResultObj deleteRole(Integer id) {
         try {
             this.roleService.removeById(id);
@@ -126,6 +131,7 @@ public class RoleController {
      * @return
      */
     @RequestMapping("/batchDeleteRole")
+    @RequiresPermissions(value = {"role:batchdelete"})
     public ResultObj batchDeleteRole(Integer[] ids){
         try{
             if(null == ids || 0 == ids.length){

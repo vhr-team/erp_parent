@@ -57,6 +57,10 @@ shiro:
   anon-urls:
     - /login/doLogin*
     - /durid/**
+    - /swagger-ui.html
+    - /webjars/**
+    - /swagger-resources/**
+    - /v2/**
   logout-url: /login/logout*
   authc-urls:
     - /**

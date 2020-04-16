@@ -7,6 +7,7 @@ import cn.ddossec.domain.Dept;
 import cn.ddossec.service.DeptService;
 import cn.ddossec.vo.DeptVo;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -56,6 +57,7 @@ public class DeptController {
      * @return
      */
     @PostMapping("/addDept")
+    @RequiresPermissions(value = {"dept:add"})
     public ResultObj addDept(Dept dept) {
         try {
             dept.setSpread(Constant.SPREAD_FALSE);
@@ -76,6 +78,7 @@ public class DeptController {
      * @return
      */
     @PostMapping("/updateDept")
+    @RequiresPermissions(value = {"dept:update"})
     public ResultObj updateDept(Dept dept) {
         try {
             this.deptService.updateDept(dept);
@@ -114,6 +117,7 @@ public class DeptController {
      * @return
      */
     @RequestMapping("/deleteDept")
+    @RequiresPermissions(value = {"dept:delete"})
     public ResultObj deleteDpet(Integer id){
         try{
             this.deptService.removeById(id);

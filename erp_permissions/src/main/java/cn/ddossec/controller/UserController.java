@@ -5,6 +5,7 @@ import cn.ddossec.domain.User;
 import cn.ddossec.service.UserService;
 import cn.ddossec.vo.UserVo;
 import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -48,6 +49,7 @@ public class UserController {
      * @return
      */
     @PostMapping("/addUser")
+    @RequiresPermissions(value = {"user:add"})
     public ResultObj addUser(User user) {
         try {
             // 设置盐
@@ -72,6 +74,7 @@ public class UserController {
      * @return
      */
     @PostMapping("/updateUser")
+    @RequiresPermissions(value = {"user:update"})
     public ResultObj updateUser(User user) {
         try {
             this.userService.updateUser(user);
@@ -88,6 +91,7 @@ public class UserController {
      * @return
      */
     @PostMapping("/resetUserPwd")
+    @RequiresPermissions(value = {"user:reset"})
     public ResultObj resetUserPwd(Integer id) {
         try {
             User user = new User();
@@ -109,6 +113,7 @@ public class UserController {
      * @return
      */
     @RequestMapping("/deleteUser")
+    @RequiresPermissions(value = {"user:delete"})
     public ResultObj deleteUser(Integer id) {
         try {
             this.userService.LogicToDelete(id);
@@ -122,6 +127,7 @@ public class UserController {
      * 保存用户和角色之间的关系
      */
     @RequestMapping("/saveUserRole")
+    @RequiresPermissions(value = {"user:assignroles"})
     public ResultObj saveUserRole(Integer uid, Integer[] rids) {
         try {
             this.userService.saveUserRole(uid, rids);

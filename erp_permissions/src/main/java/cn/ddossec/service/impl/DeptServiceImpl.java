@@ -1,8 +1,14 @@
 package cn.ddossec.service.impl;
 
 import cn.ddossec.common.DataGridView;
+import cn.ddossec.domain.Dept;
+import cn.ddossec.mapper.DeptMapper;
+import cn.ddossec.service.DeptService;
 import cn.ddossec.vo.DeptVo;
+import cn.hutool.core.bean.BeanUtil;
+import cn.hutool.core.bean.copier.CopyOptions;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,16 +16,10 @@ import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.annotation.Resource;
 import java.io.Serializable;
 import java.util.List;
-
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import cn.ddossec.mapper.DeptMapper;
-import cn.ddossec.domain.Dept;
-import cn.ddossec.service.DeptService;
-import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @author 30315
@@ -67,8 +67,10 @@ public class DeptServiceImpl extends ServiceImpl<DeptMapper, Dept> implements De
     @Override
     @CachePut(cacheNames = "cn.ddossec.service.impl.DeptServiceImpl", key = "#result.id")
     public Dept updateDept(Dept dept) {
-        this.deptMapper.updateById(dept);
-        return dept;
+        Dept selectById = this.deptMapper.selectById(dept.getId());
+        BeanUtil.copyProperties(dept,selectById, CopyOptions.create().setIgnoreNullValue(true).setIgnoreError(true));
+        this.deptMapper.updateById(selectById);
+        return selectById;
     }
 
     @Override

@@ -2,8 +2,8 @@ package cn.ddossec.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.bind.annotation.RestController;
 import springfox.documentation.builders.ApiInfoBuilder;
+import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.service.ApiInfo;
 import springfox.documentation.service.Contact;
@@ -20,9 +20,12 @@ public class Swagger2AutoConfiguration {
      * @return
      */
     @Bean
-    public Docket swaggerSpringMvcPlugin() {
-        return new Docket(DocumentationType.SWAGGER_2).apiInfo(apiInfo()).select()
-                .apis(RequestHandlerSelectors.withClassAnnotation(RestController.class))
+    public Docket createRestApi() {
+        return new Docket(DocumentationType.SWAGGER_2)
+                .apiInfo(apiInfo())
+                .select()
+                .apis(RequestHandlerSelectors.basePackage("cn.ddossec"))// 指定扫描包下面的注解
+                .paths(PathSelectors.any())
                 .build();
     }
 

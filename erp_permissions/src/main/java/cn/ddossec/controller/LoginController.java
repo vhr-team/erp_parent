@@ -30,7 +30,7 @@ import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 @Controller
-@RequestMapping("login")
+@RequestMapping("/login")
 public class LoginController {
 
     @Autowired

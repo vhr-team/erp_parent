@@ -78,6 +78,7 @@ shiro:
     - /webjars/**
     - /swagger-resources/**
     - /v2/**
+    - /login/captcha
   logout-url: /login/logout*
   authc-urls:
     - /**

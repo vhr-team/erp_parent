@@ -7,6 +7,7 @@ import cn.ddossec.domain.Menu;
 import cn.ddossec.service.MenuService;
 import cn.ddossec.vo.MenuVo;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -69,6 +70,7 @@ public class MenuController {
      * @return
      */
     @PostMapping("/addMenu")
+    @RequiresPermissions(value = {"menu:add"})
     public ResultObj addMenu(Menu menu) {
         try {
             // 如果是顶端菜单
@@ -95,6 +97,7 @@ public class MenuController {
      * @return
      */
     @PostMapping("/updateMenu")
+    @RequiresPermissions(value = {"menu:update"})
     public ResultObj updateMenu(Menu menu) {
         try {
             this.menuService.updateMenu(menu);
@@ -133,6 +136,7 @@ public class MenuController {
      * @return
      */
     @RequestMapping("/deleteMenu")
+    @RequiresPermissions(value = {"menu:delete"})
     public ResultObj deleteDpet(Integer id) {
         try {
             this.menuService.removeById(id);

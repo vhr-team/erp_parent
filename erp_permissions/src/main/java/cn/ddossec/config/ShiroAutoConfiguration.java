@@ -1,5 +1,6 @@
 package cn.ddossec.config;
 
+import cn.ddossec.filter.ShiroLoginFilter;
 import cn.ddossec.realm.UserRealm;
 import org.apache.shiro.authc.credential.CredentialsMatcher;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
@@ -24,6 +25,7 @@ import org.springframework.web.filter.DelegatingFilterProxy;
 import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.JedisPoolConfig;
 
+import javax.servlet.Filter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -93,30 +95,26 @@ public class ShiroAutoConfiguration {
         Map<String, String> filterChainDefinition = new HashMap<>();
 
         //创建自定义filter
-//        OptionsAccessControlFilter filter = new OptionsAccessControlFilter();
-//        Map<String, Filter> map=new HashMap<>();
-//        map.put("options",filter);
-//        bean.setFilters(map);
+        Map<String, Filter> map=new HashMap<>();
+        map.put("authc",new ShiroLoginFilter());
+        bean.setFilters(map);
 
         //注入放行地址
         if (shiroProperties.getAnonUrls() != null && shiroProperties.getAnonUrls().length > 0) {
             String[] anonUrls = shiroProperties.getAnonUrls();
             for (String anonUrl : anonUrls) {
                 filterChainDefinition.put(anonUrl, "anon");
-//                filterChainDefinition.put(anonUrl,"options");
             }
         }
         //注入登出的地址
         if (shiroProperties.getLogoutUrl() != null) {
             filterChainDefinition.put(shiroProperties.getLogoutUrl(), "logout");
-//            filterChainDefinition.put(shiroProperties.getLogoutUrl(),"options");
         }
         //注拦截的地址
         String[] authcUrls = shiroProperties.getAuthcUrls();
         if (authcUrls != null && authcUrls.length > 0) {
             for (String authcUrl : authcUrls) {
                 filterChainDefinition.put(authcUrl, "authc");
-//                filterChainDefinition.put(authcUrl,"options");
             }
         }
         bean.setFilterChainDefinitionMap(filterChainDefinition);

@@ -9,8 +9,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ResultObj {
 
-    public static final ResultObj IS_LOGIN = new ResultObj(200, "已登陆");
-    public static final ResultObj UN_LOGIN = new ResultObj(-1, "未登陆");
+    public static final ResultObj IS_LOGIN = new ResultObj(200, "已登录");
+    public static final ResultObj UN_LOGIN = new ResultObj(-1, "未登录");
 
     public static final ResultObj DELETE_SUCCESS = new ResultObj(200, "删除成功");
     public static final ResultObj DELETE_ERROR = new ResultObj(-1, "删除失败");

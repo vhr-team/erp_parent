@@ -12,7 +12,6 @@
         <module>erp_design</module>
         <module>erp_warehouse</module>
         <module>erp-production</module>
-
     </modules>
 
     <packaging>pom</packaging>

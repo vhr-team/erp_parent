@@ -6,15 +6,15 @@ server:
 spring:
   application:
     name: erp_permissions # 服务名称
-#  cloud:
-#    nacos:
-#      discovery:
-#        server-addr: 39.106.71.75:8848 #nacos服务的地址 不要加http
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 175.24.22.3:8850 #nacos服务的地址 不要加http
 
   # 数据源配置
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://xhh.ddos-sec.cn:3306/RBAC?useUnicode=true&characterEncoding=utf8&serverTimezone=GMT%2B8&useSSL=false
+    url: jdbc:mysql://xhh.ddos-sec.cn:3306/erp?useUnicode=true&characterEncoding=utf8&serverTimezone=GMT%2B8&useSSL=false
     username: root
     password: 1234
     # druid

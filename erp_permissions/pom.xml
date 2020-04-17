@@ -123,10 +123,17 @@
             <version>${swagger.version}</version>
         </dependency>
 
-        <!--<dependency>
+        <dependency>
             <groupId>com.alibaba.cloud</groupId>
             <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
-        </dependency>-->
+        </dependency>
+
+        <!--activiti-spring-boot-starter-->
+        <dependency>
+            <groupId>org.activiti</groupId>
+            <artifactId>activiti-spring-boot-starter</artifactId>
+            <version>7.0.0.Beta5</version>
+        </dependency>
     </dependencies>
 
     <build>

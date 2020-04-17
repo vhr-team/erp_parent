@@ -4,6 +4,7 @@ import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cache.annotation.EnableCaching;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 /**
  * @author 唐疑豪
@@ -18,7 +19,7 @@ import org.springframework.cache.annotation.EnableCaching;
 // 开启Redis缓存
 @EnableCaching
 // 服务发现
-//@EnableDiscoveryClient
+@EnableDiscoveryClient
 public class PermissionsApp {
     public static void main(String[] args) {
         SpringApplication.run(PermissionsApp.class, args);

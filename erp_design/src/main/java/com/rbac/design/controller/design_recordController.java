@@ -5,10 +5,7 @@ import com.rbac.design.entity.Response;
 import com.rbac.design.pojo.design_record;
 import com.rbac.design.service.design_record_Service;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -50,7 +47,7 @@ public class design_recordController {
      * @param record 添加的产品集合
      * @return
      */
-    @RequestMapping("/addrecord")
+    @PostMapping("/addrecord")
     public Response addrecord(@RequestBody design_record record){
         try {
             service.addrecord(record);
@@ -60,7 +57,7 @@ public class design_recordController {
         }
     }
 
-    @RequestMapping("/updaterecordById")
+    @PostMapping("/updaterecordById")
     public Response updaterecordById(@RequestBody design_record record){
         try {
             service.updaterecordById(record);

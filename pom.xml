@@ -10,6 +10,7 @@
     <modules>
         <module>erp_permissions</module>
         <module>erp_design</module>
+        <module>erp-production</module>
     </modules>
 
     <packaging>pom</packaging>

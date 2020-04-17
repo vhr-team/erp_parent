@@ -60,4 +60,9 @@ public class design_record_ServiceImpl implements design_record_Service {
         PageResult result = new PageResult(design_records.getTotal(), design_records.getResult());
         return result;
     }
+
+    @Override
+    public void addrecord(design_record record) {
+        mapper.insertSelective(record);
+    }
 }

@@ -25,4 +25,9 @@ public interface design_record_Service {
      */
     public PageResult findPage(Integer page, Integer pageSize,design_record record );
 
+    /**
+     * 添加产品档案
+     * @param record
+     */
+    public void addrecord(design_record record);
 }

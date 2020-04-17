@@ -9,6 +9,7 @@
     <version>1.0</version>
     <modules>
         <module>erp_permissions</module>
+        <module>erp_design</module>
         <module>erp_warehouse</module>
         <module>erp-production</module>
 

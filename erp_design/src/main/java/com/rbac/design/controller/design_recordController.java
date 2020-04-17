@@ -1,9 +1,11 @@
 package com.rbac.design.controller;
 
 import com.rbac.design.entity.PageResult;
+import com.rbac.design.entity.Response;
 import com.rbac.design.pojo.design_record;
 import com.rbac.design.service.design_record_Service;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -42,4 +44,20 @@ public class design_recordController {
         PageResult list = service.findPage(page, pageSize, record);
         return list;
     }
+
+    /**
+     * 添加产品档案
+     * @param record 添加的产品集合
+     * @return
+     */
+    @RequestMapping("/addrecord")
+    public Response addrecord(@RequestBody design_record record){
+        try {
+            service.addrecord(record);
+            return new Response(true,"添加成功");
+        }catch (Exception e){
+            return new Response(true,"添加失败");
+        }
+    }
+
 }

@@ -5,6 +5,7 @@ import com.rbac.design.entity.Response;
 import com.rbac.design.pojo.design_record;
 import com.rbac.design.service.design_record_Service;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -25,7 +26,7 @@ public class design_recordController {
     /**
      * 查询所有产品档案
      */
-    @RequestMapping("/design_recordAll")
+    @GetMapping("/design_recordAll")
     public void design_recordAll() {
         List<design_record> design_records = service.queryAll();
         System.out.println(design_records);
@@ -39,7 +40,7 @@ public class design_recordController {
      * @param record   传入的查询值
      * @return 总记录数 查询的数据
      */
-    @RequestMapping("/findPage")
+    @GetMapping("/findPage")
     public PageResult findPage(Integer page, Integer pageSize, design_record record) {
         PageResult list = service.findPage(page, pageSize, record);
         return list;
@@ -57,6 +58,16 @@ public class design_recordController {
             return new Response(true,"添加成功");
         }catch (Exception e){
             return new Response(true,"添加失败");
+        }
+    }
+
+    @RequestMapping("/updaterecordById")
+    public Response updaterecordById(@RequestBody design_record record){
+        try {
+            service.updaterecordById(record);
+            return new Response(true,"修改成功");
+        }catch (Exception e){
+            return new Response(true,"修改失败");
         }
     }
 

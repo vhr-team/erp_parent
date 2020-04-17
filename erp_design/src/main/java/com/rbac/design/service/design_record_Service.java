@@ -30,4 +30,10 @@ public interface design_record_Service {
      * @param record
      */
     public void addrecord(design_record record);
+
+    /**
+     * 根据主键修改产品档案
+     * @param record
+     */
+    public void updaterecordById(design_record record);
 }

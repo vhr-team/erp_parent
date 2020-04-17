@@ -11,6 +11,7 @@
         <module>erp_permissions</module>
         <module>erp_design</module>
         <module>erp-production</module>
+        <module>erp_warehouse</module>
     </modules>
 
     <packaging>pom</packaging>

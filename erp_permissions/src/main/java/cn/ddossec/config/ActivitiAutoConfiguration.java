@@ -30,7 +30,7 @@ public class ActivitiAutoConfiguration {
 		SpringProcessEngineConfiguration spec = new SpringProcessEngineConfiguration();
         spec.setDataSource(dataSource);
         spec.setTransactionManager(platformTransactionManager);
-		spec.setDatabaseSchemaUpdate("true");
+		spec.setDatabaseSchemaUpdate("false");
 		Resource[] resources = null;
         // 启动自动部署流程
 		try {

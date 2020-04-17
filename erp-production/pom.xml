@@ -9,8 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>erp_permissions</artifactId>
-
+    <artifactId>erp-production</artifactId>
     <properties>
         <shiro.version>1.4.0</shiro.version>
         <druid.version>1.1.10</druid.version>
@@ -82,19 +81,9 @@
             <version>${mybatisplus.version}</version>
         </dependency>
         <dependency>
-            <groupId>org.apache.shiro</groupId>
-            <artifactId>shiro-spring</artifactId>
-            <version>${shiro.version}</version>
-        </dependency>
-        <dependency>
             <groupId>com.github.tobato</groupId>
             <artifactId>fastdfs-client</artifactId>
             <version>1.26.7</version>
-        </dependency>
-        <dependency>
-            <groupId>org.crazycake</groupId>
-            <artifactId>shiro-redis</artifactId>
-            <version>3.2.3</version>
         </dependency>
         <dependency>
             <groupId>org.junit.platform</groupId>
@@ -122,11 +111,6 @@
             <artifactId>springfox-swagger-ui</artifactId>
             <version>${swagger.version}</version>
         </dependency>
-
-        <!--<dependency>
-            <groupId>com.alibaba.cloud</groupId>
-            <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
-        </dependency>-->
     </dependencies>
 
     <build>
@@ -138,3 +122,5 @@
         </plugins>
     </build>
 </project>
+
+

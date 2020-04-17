@@ -2,15 +2,8 @@ logging:
   level:
     cn.ddos: debug
 server:
-  port: 8001
+  port: 8002
 spring:
-  application:
-    name: erp_permissions # 服务名称
-#  cloud:
-#    nacos:
-#      discovery:
-#        server-addr: 39.106.71.75:8848 #nacos服务的地址 不要加http
-
   # 数据源配置
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -60,35 +53,9 @@ spring:
     date-format: yyyy-MM-dd HH:mm:ss
     time-zone: GMT+8
 
-  # redis
-  redis:
-    host: xhh.ddos-sec.cn
-    password: 1234
-    port: 6400
-    jedis:
-      pool:
-        max-active: 20
-        max-idle: 8
-        min-idle: 0
-        max-wait: 2000
 
-#shiro的配置
-shiro:
-  hash-algorithm-name: md5
-  hash-iterations: 2
-  login-url: /index.html
-  unauthorized-url: /unauthorized.html
-  anon-urls:
-    - /login/doLogin*
-    - /druid/**
-    - /swagger-ui.html
-    - /webjars/**
-    - /swagger-resources/**
-    - /v2/**
-    - /login/captcha
-  logout-url: /login/logout*
-  authc-urls:
-    - /**
+
+
 
 # mybatisplus的配置
 mybatis-plus:

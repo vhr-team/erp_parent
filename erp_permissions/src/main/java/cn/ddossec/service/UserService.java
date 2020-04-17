@@ -5,6 +5,8 @@ import cn.ddossec.domain.User;
 import cn.ddossec.vo.UserVo;
 import com.baomidou.mybatisplus.extension.service.IService;
 
+import java.util.List;
+
 public interface UserService extends IService<User> {
 
     /**
@@ -26,4 +28,6 @@ public interface UserService extends IService<User> {
     User LogicToDelete(Integer id);
 
     void saveUserRole(Integer uid, Integer[] rids);
+
+    public List<User> queryUserByDeptId(Integer deptid);
 }

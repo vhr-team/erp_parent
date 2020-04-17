@@ -4,7 +4,6 @@ import cn.ddossec.common.AppUtils;
 import cn.ddossec.common.Constant;
 import cn.ddossec.common.DataGridView;
 import cn.ddossec.domain.Dept;
-import cn.ddossec.domain.Role;
 import cn.ddossec.domain.User;
 import cn.ddossec.mapper.RoleMapper;
 import cn.ddossec.mapper.UserMapper;
@@ -14,31 +13,35 @@ import cn.ddossec.vo.UserVo;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import lombok.extern.slf4j.Slf4j;
-import lombok.val;
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import com.baomidou.mybatisplus.core.metadata.IPage;
-import org.springframework.stereotype.Service;
-
-import javax.annotation.Resource;
-import java.util.List;
-
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 @Transactional
 @Slf4j
-public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements UserService {
+public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements UserService, ApplicationContextAware {
 
     @Autowired
     private UserMapper userMapper;
 
     @Autowired
     private RoleMapper roleMapper;
+
+    private ApplicationContext context;
+
+    @Override
+    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+        this.context = applicationContext;
+    }
 
     @Override
     public User queryUserByLoginName(String loginname) {
@@ -83,6 +86,14 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
                 Dept dept = deptService.getById(record.getDeptid());
                 record.setDeptname(dept.getTitle());
             }
+
+            // 根据领导ID查询领导名称
+            if (null != record.getMgr()) {
+                // 如果直接使用this那么缓存切面不生效
+                UserService userService = context.getBean(UserService.class);
+                User queryUser = userService.getById(record.getMgr());
+                record.setLeadername(queryUser.getName());
+            }
         }
         return new DataGridView(page.getTotal(), records);
     }
@@ -126,6 +137,19 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
             for (Integer rid : rids) {
                 this.userMapper.saveUserRole(uid, rid);
             }
+        }
+    }
+
+    //    根据部门ID查询员工集合
+    @Override
+    public List<User> queryUserByDeptId(Integer deptid) {
+        if (null == deptid) {
+            return null;
+        } else {
+            QueryWrapper<User> qw = new QueryWrapper<>();
+            qw.eq("type", Constant.USER_TYPE_NORMAL);
+            qw.eq(deptid != null, "deptid", deptid);
+            return this.getBaseMapper().selectList(qw);
         }
     }
 }

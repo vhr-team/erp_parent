@@ -36,7 +36,7 @@ public class design_recordController {
      * @param record   传入的查询值
      * @return 总记录数 查询的数据
      */
-    @GetMapping("/findPage")
+    @RequestMapping("/findPage")
     public PageResult findPage(Integer page, Integer pageSize, design_record record) {
         PageResult list = service.findPage(page, pageSize, record);
         return list;
@@ -47,7 +47,7 @@ public class design_recordController {
      * @param record 添加的产品集合
      * @return
      */
-    @PostMapping("/addrecord")
+    @RequestMapping("/addrecord")
     public Response addrecord(@RequestBody design_record record){
         try {
             service.addrecord(record);

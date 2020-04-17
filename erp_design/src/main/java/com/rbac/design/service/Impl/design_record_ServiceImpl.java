@@ -61,8 +61,21 @@ public class design_record_ServiceImpl implements design_record_Service {
         return result;
     }
 
+    /**
+     * 添加产品档案
+     * @param record
+     */
     @Override
     public void addrecord(design_record record) {
         mapper.insertSelective(record);
+    }
+
+    /**
+     * 根据主键修改档案
+     * @param record
+     */
+    @Override
+    public void updaterecordById(design_record record) {
+        mapper.updateByPrimaryKeySelective(record);
     }
 }

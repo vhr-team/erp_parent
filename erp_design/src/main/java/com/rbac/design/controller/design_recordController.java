@@ -27,9 +27,8 @@ public class design_recordController {
      * 查询所有产品档案
      */
     @GetMapping("/design_recordAll")
-    public void design_recordAll() {
-        List<design_record> design_records = service.queryAll();
-        System.out.println(design_records);
+    public List<design_record> design_recordAll() {
+        return service.queryAll();
     }
 
     /**

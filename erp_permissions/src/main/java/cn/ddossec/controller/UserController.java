@@ -43,6 +43,16 @@ public class UserController {
     }
 
     /**
+     * 根据部门ID查询员工
+     * @param deptid
+     * @return
+     */
+    @RequestMapping("queryUserByDeptId")
+    public DataGridView queryUserByDeptId(Integer deptid){
+        return new DataGridView(this.userService.queryUserByDeptId(deptid));
+    }
+
+    /**
      * 添加用户
      *
      * @param user
@@ -147,5 +157,16 @@ public class UserController {
     public Object getCurrentUser() {
         ActiveUser activeUser = (ActiveUser) SecurityUtils.getSubject().getPrincipal();
         return new DataGridView(activeUser.getUser());
+    }
+
+    /**
+     * 根据用户ID查询用户对象
+     * @param userId
+     * @return
+     */
+    @RequestMapping("loadUserByUserId")
+    public DataGridView loadUserByUserId(Integer userId){
+        User user = this.userService.getById(userId);
+        return new DataGridView(user);
     }
 }

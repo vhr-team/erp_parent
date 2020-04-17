@@ -4,16 +4,15 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-
-import java.io.Serializable;
-import java.util.Date;
-
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
+
+import java.io.Serializable;
+import java.util.Date;
 
 @Data
 @AllArgsConstructor
@@ -78,7 +77,7 @@ public class User implements Serializable {
      */
     @TableField(value = "hiredate")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @JsonFormat(pattern = "yyyy-MM-dd",timezone = "GMT+8")
+    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
     private Date hiredate;
 
     @TableField(value = "ordernum")
@@ -109,6 +108,15 @@ public class User implements Serializable {
      */
     @TableField(value = "available")
     private Integer available;
+
+    /**
+     * 直属领导
+     */
+    @TableField(value = "mgr")
+    private Integer mgr;
+
+    @TableField(exist = false)
+    private String leadername;
 
     private static final long serialVersionUID = 1L;
 

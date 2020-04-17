@@ -15,9 +15,11 @@ import org.springframework.cache.annotation.EnableCaching;
 @SpringBootApplication
 // mapper接口的扫描
 @MapperScan(basePackages = {"cn.ddossec.mapper"})
+// 开启Redis缓存
 @EnableCaching
+// 服务发现
+//@EnableDiscoveryClient
 public class PermissionsApp {
-
     public static void main(String[] args) {
         SpringApplication.run(PermissionsApp.class, args);
     }

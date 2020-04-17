@@ -4,6 +4,13 @@ logging:
 server:
   port: 8001
 spring:
+  application:
+    name: erp_permissions # 服务名称
+#  cloud:
+#    nacos:
+#      discovery:
+#        server-addr: 39.106.71.75:8848 #nacos服务的地址 不要加http
+
   # 数据源配置
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver

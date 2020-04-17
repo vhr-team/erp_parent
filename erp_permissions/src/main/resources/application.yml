@@ -18,13 +18,13 @@ spring:
     username: root
     password: 1234
     # druid
-    druid:
+    druid:e
       initialSize: 3
       minIdle: 3
       maxActive: 30
       maxWait: 15000
       validationQuery: SELECT 'x'
-      testWhileIdle: true
+      testWhileIdle: truee
       testOnBorrow: false
       testOnReturn: false
       poolPreparedStatements: true

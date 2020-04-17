@@ -15,20 +15,15 @@ import java.io.IOException;
 
 /**
  * activiti自动配置类
- *
- * @author LJH
- *
  */
 @Configuration
 public class ActivitiAutoConfiguration {
-
 
 	@Autowired
 	private DataSource dataSource;
 
 	@Autowired
 	private PlatformTransactionManager platformTransactionManager;
-
 
 	@Bean
 	public SpringProcessEngineConfiguration springProcessEngineConfiguration(){
@@ -53,7 +48,6 @@ public class ActivitiAutoConfiguration {
 		processEngineFactoryBean.setProcessEngineConfiguration(springProcessEngineConfiguration);
 		return processEngineFactoryBean;
 	}
-
 
 	@Bean
 	public RepositoryService repositoryService(ProcessEngineFactoryBean processEngine) throws Exception{

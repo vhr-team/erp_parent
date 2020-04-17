@@ -1,19 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.ddossec.mapper.LeavebillMapper">
-  <resultMap id="BaseResultMap" type="cn.ddossec.domain.Leavebill">
-    <!--@mbg.generated-->
-    <!--@Table sys_leavebill-->
-    <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="title" jdbcType="VARCHAR" property="title" />
-    <result column="content" jdbcType="VARCHAR" property="content" />
-    <result column="days" jdbcType="DOUBLE" property="days" />
-    <result column="leavetime" jdbcType="TIMESTAMP" property="leavetime" />
-    <result column="state" jdbcType="VARCHAR" property="state" />
-    <result column="userid" jdbcType="INTEGER" property="userid" />
-  </resultMap>
-  <sql id="Base_Column_List">
-    <!--@mbg.generated-->
-    id, title, content, `days`, leavetime, `state`, userid
-  </sql>
+    <resultMap id="BaseResultMap" type="cn.ddossec.domain.Leavebill">
+        <!--@mbg.generated-->
+        <!--@Table sys_leavebill-->
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="title" jdbcType="VARCHAR" property="title"/>
+        <result column="content" jdbcType="VARCHAR" property="content"/>
+        <result column="days" jdbcType="DOUBLE" property="days"/>
+        <result column="leavetime" jdbcType="TIMESTAMP" property="leavetime"/>
+        <result column="state" jdbcType="VARCHAR" property="state"/>
+        <result column="userid" jdbcType="INTEGER" property="userid"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        <!--@mbg.generated-->
+        id, title, content, `days`, leavetime, `state`, userid
+    </sql>
+    <!-- 查询请假单的信息 -->
+    <select id="queryAllLeavebill" resultType="cn.ddossec.domain.Leavebill">
+
+    </select>
 </mapper>

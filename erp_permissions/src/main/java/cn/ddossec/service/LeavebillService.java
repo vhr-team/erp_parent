@@ -21,9 +21,8 @@ public interface LeavebillService extends IService<Leavebill> {
 
     /**
      * 添加请假单
-     * @param leaveBillVo
      */
-    public void addLeaveBill(LeavebillVo leaveBillVo);
+    public void addLeaveBill(Leavebill leavebill);
 
     /**
      * 根据ID查询请假单

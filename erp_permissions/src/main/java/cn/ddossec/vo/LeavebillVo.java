@@ -14,11 +14,11 @@ public class LeavebillVo extends Leavebill implements Serializable {
     private Integer[] ids;
 
     // 开始时间
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date startTime;
 
     // 结束时间
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date endTime;
 
     private Integer page;

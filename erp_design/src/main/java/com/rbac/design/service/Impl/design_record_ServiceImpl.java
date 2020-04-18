@@ -11,6 +11,8 @@ import org.springframework.transaction.annotation.Transactional;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -67,6 +69,8 @@ public class design_record_ServiceImpl implements design_record_Service {
      */
     @Override
     public void addrecord(design_record record) {
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
+        record.setRegisterTime(df.format(new Date()));
         mapper.insertSelective(record);
     }
 
@@ -76,6 +80,30 @@ public class design_record_ServiceImpl implements design_record_Service {
      */
     @Override
     public void updaterecordById(design_record record) {
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
+        record.setChangeTime(df.format(new Date()));//变更时间
+        record.setChangeTag("已变更");//
+        record.setFileChangeAmount(record.getFileChangeAmount()+1);//修改档案就登记添加一次修改次数
+        mapper.updateByPrimaryKeySelective(record);
+    }
+
+    /**
+     * 临时下架商品 不删除
+     * @param record
+     */
+    @Override
+    public void soldOutrecord(design_record record) {
+        record.setDeleteTag("已下架");
+        mapper.updateByPrimaryKeySelective(record);
+    }
+
+    /**
+     * 商品上架
+     * @param record
+     */
+    @Override
+    public void putawayrecord(design_record record) {
+        record.setDeleteTag("未下架");
         mapper.updateByPrimaryKeySelective(record);
     }
 }

@@ -1,7 +1,6 @@
 package com.rbac.design.pojo;
 
 import java.io.Serializable;
-import java.util.Date;
 
 public class design_record implements Serializable {
     /**
@@ -117,7 +116,7 @@ public class design_record implements Serializable {
     /**
      * 建档时间
      */
-    private Date registerTime;
+    private String registerTime;
 
     /**
      * 复核人
@@ -127,7 +126,7 @@ public class design_record implements Serializable {
     /**
      * 复核时间
      */
-    private Date checkTime;
+    private String checkTime;
 
     /**
      * 审核标志(等待审核/审核通过/审核不通过)
@@ -142,7 +141,7 @@ public class design_record implements Serializable {
     /**
      * 变更时间
      */
-    private Date changeTime;
+    private String changeTime;
 
     /**
      * 档案变更标志(未变更/已变更)
@@ -347,12 +346,12 @@ public class design_record implements Serializable {
         this.register = register == null ? null : register.trim();
     }
 
-    public Date getRegisterTime() {
+    public String getRegisterTime() {
         return registerTime;
     }
 
-    public void setRegisterTime(Date registerTime) {
-        this.registerTime = registerTime;
+    public void setRegisterTime(String registerTime) {
+        this.registerTime = registerTime == null ? null : registerTime.trim();
     }
 
     public String getChecker() {
@@ -363,12 +362,12 @@ public class design_record implements Serializable {
         this.checker = checker == null ? null : checker.trim();
     }
 
-    public Date getCheckTime() {
+    public String getCheckTime() {
         return checkTime;
     }
 
-    public void setCheckTime(Date checkTime) {
-        this.checkTime = checkTime;
+    public void setCheckTime(String checkTime) {
+        this.checkTime = checkTime == null ? null : checkTime.trim();
     }
 
     public String getCheckTag() {
@@ -387,12 +386,12 @@ public class design_record implements Serializable {
         this.changer = changer == null ? null : changer.trim();
     }
 
-    public Date getChangeTime() {
+    public String getChangeTime() {
         return changeTime;
     }
 
-    public void setChangeTime(Date changeTime) {
-        this.changeTime = changeTime;
+    public void setChangeTime(String changeTime) {
+        this.changeTime = changeTime == null ? null : changeTime.trim();
     }
 
     public String getChangeTag() {
@@ -492,38 +491,38 @@ public class design_record implements Serializable {
         }
         design_record other = (design_record) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
-            && (this.getProductId() == null ? other.getProductId() == null : this.getProductId().equals(other.getProductId()))
-            && (this.getProductName() == null ? other.getProductName() == null : this.getProductName().equals(other.getProductName()))
-            && (this.getFactoryName() == null ? other.getFactoryName() == null : this.getFactoryName().equals(other.getFactoryName()))
-            && (this.getFirstKindId() == null ? other.getFirstKindId() == null : this.getFirstKindId().equals(other.getFirstKindId()))
-            && (this.getFirstKindName() == null ? other.getFirstKindName() == null : this.getFirstKindName().equals(other.getFirstKindName()))
-            && (this.getSecondKindId() == null ? other.getSecondKindId() == null : this.getSecondKindId().equals(other.getSecondKindId()))
-            && (this.getSecondKindName() == null ? other.getSecondKindName() == null : this.getSecondKindName().equals(other.getSecondKindName()))
-            && (this.getProductNick() == null ? other.getProductNick() == null : this.getProductNick().equals(other.getProductNick()))
-            && (this.getType() == null ? other.getType() == null : this.getType().equals(other.getType()))
-            && (this.getProductClass() == null ? other.getProductClass() == null : this.getProductClass().equals(other.getProductClass()))
-            && (this.getPersonalUnit() == null ? other.getPersonalUnit() == null : this.getPersonalUnit().equals(other.getPersonalUnit()))
-            && (this.getPersonalValue() == null ? other.getPersonalValue() == null : this.getPersonalValue().equals(other.getPersonalValue()))
-            && (this.getProviderGroup() == null ? other.getProviderGroup() == null : this.getProviderGroup().equals(other.getProviderGroup()))
-            && (this.getWarranty() == null ? other.getWarranty() == null : this.getWarranty().equals(other.getWarranty()))
-            && (this.getListPrice() == null ? other.getListPrice() == null : this.getListPrice().equals(other.getListPrice()))
-            && (this.getCostPrice() == null ? other.getCostPrice() == null : this.getCostPrice().equals(other.getCostPrice()))
-            && (this.getRealCostPrice() == null ? other.getRealCostPrice() == null : this.getRealCostPrice().equals(other.getRealCostPrice()))
-            && (this.getAmountUnit() == null ? other.getAmountUnit() == null : this.getAmountUnit().equals(other.getAmountUnit()))
-            && (this.getProductDescribe() == null ? other.getProductDescribe() == null : this.getProductDescribe().equals(other.getProductDescribe()))
-            && (this.getResponsiblePerson() == null ? other.getResponsiblePerson() == null : this.getResponsiblePerson().equals(other.getResponsiblePerson()))
-            && (this.getRegister() == null ? other.getRegister() == null : this.getRegister().equals(other.getRegister()))
-            && (this.getRegisterTime() == null ? other.getRegisterTime() == null : this.getRegisterTime().equals(other.getRegisterTime()))
-            && (this.getChecker() == null ? other.getChecker() == null : this.getChecker().equals(other.getChecker()))
-            && (this.getCheckTime() == null ? other.getCheckTime() == null : this.getCheckTime().equals(other.getCheckTime()))
-            && (this.getCheckTag() == null ? other.getCheckTag() == null : this.getCheckTag().equals(other.getCheckTag()))
-            && (this.getChanger() == null ? other.getChanger() == null : this.getChanger().equals(other.getChanger()))
-            && (this.getChangeTime() == null ? other.getChangeTime() == null : this.getChangeTime().equals(other.getChangeTime()))
-            && (this.getChangeTag() == null ? other.getChangeTag() == null : this.getChangeTag().equals(other.getChangeTag()))
-            && (this.getPriceChangeTag() == null ? other.getPriceChangeTag() == null : this.getPriceChangeTag().equals(other.getPriceChangeTag()))
-            && (this.getFileChangeAmount() == null ? other.getFileChangeAmount() == null : this.getFileChangeAmount().equals(other.getFileChangeAmount()))
-            && (this.getDeleteTag() == null ? other.getDeleteTag() == null : this.getDeleteTag().equals(other.getDeleteTag()))
-            && (this.getMaterialList() == null ? other.getMaterialList() == null : this.getMaterialList().equals(other.getMaterialList()));
+                && (this.getProductId() == null ? other.getProductId() == null : this.getProductId().equals(other.getProductId()))
+                && (this.getProductName() == null ? other.getProductName() == null : this.getProductName().equals(other.getProductName()))
+                && (this.getFactoryName() == null ? other.getFactoryName() == null : this.getFactoryName().equals(other.getFactoryName()))
+                && (this.getFirstKindId() == null ? other.getFirstKindId() == null : this.getFirstKindId().equals(other.getFirstKindId()))
+                && (this.getFirstKindName() == null ? other.getFirstKindName() == null : this.getFirstKindName().equals(other.getFirstKindName()))
+                && (this.getSecondKindId() == null ? other.getSecondKindId() == null : this.getSecondKindId().equals(other.getSecondKindId()))
+                && (this.getSecondKindName() == null ? other.getSecondKindName() == null : this.getSecondKindName().equals(other.getSecondKindName()))
+                && (this.getProductNick() == null ? other.getProductNick() == null : this.getProductNick().equals(other.getProductNick()))
+                && (this.getType() == null ? other.getType() == null : this.getType().equals(other.getType()))
+                && (this.getProductClass() == null ? other.getProductClass() == null : this.getProductClass().equals(other.getProductClass()))
+                && (this.getPersonalUnit() == null ? other.getPersonalUnit() == null : this.getPersonalUnit().equals(other.getPersonalUnit()))
+                && (this.getPersonalValue() == null ? other.getPersonalValue() == null : this.getPersonalValue().equals(other.getPersonalValue()))
+                && (this.getProviderGroup() == null ? other.getProviderGroup() == null : this.getProviderGroup().equals(other.getProviderGroup()))
+                && (this.getWarranty() == null ? other.getWarranty() == null : this.getWarranty().equals(other.getWarranty()))
+                && (this.getListPrice() == null ? other.getListPrice() == null : this.getListPrice().equals(other.getListPrice()))
+                && (this.getCostPrice() == null ? other.getCostPrice() == null : this.getCostPrice().equals(other.getCostPrice()))
+                && (this.getRealCostPrice() == null ? other.getRealCostPrice() == null : this.getRealCostPrice().equals(other.getRealCostPrice()))
+                && (this.getAmountUnit() == null ? other.getAmountUnit() == null : this.getAmountUnit().equals(other.getAmountUnit()))
+                && (this.getProductDescribe() == null ? other.getProductDescribe() == null : this.getProductDescribe().equals(other.getProductDescribe()))
+                && (this.getResponsiblePerson() == null ? other.getResponsiblePerson() == null : this.getResponsiblePerson().equals(other.getResponsiblePerson()))
+                && (this.getRegister() == null ? other.getRegister() == null : this.getRegister().equals(other.getRegister()))
+                && (this.getRegisterTime() == null ? other.getRegisterTime() == null : this.getRegisterTime().equals(other.getRegisterTime()))
+                && (this.getChecker() == null ? other.getChecker() == null : this.getChecker().equals(other.getChecker()))
+                && (this.getCheckTime() == null ? other.getCheckTime() == null : this.getCheckTime().equals(other.getCheckTime()))
+                && (this.getCheckTag() == null ? other.getCheckTag() == null : this.getCheckTag().equals(other.getCheckTag()))
+                && (this.getChanger() == null ? other.getChanger() == null : this.getChanger().equals(other.getChanger()))
+                && (this.getChangeTime() == null ? other.getChangeTime() == null : this.getChangeTime().equals(other.getChangeTime()))
+                && (this.getChangeTag() == null ? other.getChangeTag() == null : this.getChangeTag().equals(other.getChangeTag()))
+                && (this.getPriceChangeTag() == null ? other.getPriceChangeTag() == null : this.getPriceChangeTag().equals(other.getPriceChangeTag()))
+                && (this.getFileChangeAmount() == null ? other.getFileChangeAmount() == null : this.getFileChangeAmount().equals(other.getFileChangeAmount()))
+                && (this.getDeleteTag() == null ? other.getDeleteTag() == null : this.getDeleteTag().equals(other.getDeleteTag()))
+                && (this.getMaterialList() == null ? other.getMaterialList() == null : this.getMaterialList().equals(other.getMaterialList()));
     }
 
     @Override

@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -116,6 +117,14 @@ public class WorkFlowServiceImpl implements WorkFlowService {
     public void addWorkFlow(InputStream inputStream, String deploymentName) {
         ZipInputStream zipInputStream = new ZipInputStream(inputStream);
         this.repositoryService.createDeployment().name(deploymentName).addZipInputStream(zipInputStream).deploy();
+
+        // 释放资源
+        try {
+            zipInputStream.close();
+            inputStream.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 }

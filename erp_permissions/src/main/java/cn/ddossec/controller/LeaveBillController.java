@@ -1,10 +1,15 @@
 package cn.ddossec.controller;
 
+import cn.ddossec.common.ActiveUser;
+import cn.ddossec.common.Constant;
 import cn.ddossec.common.DataGridView;
 import cn.ddossec.common.ResultObj;
 import cn.ddossec.domain.Leavebill;
+import cn.ddossec.domain.User;
 import cn.ddossec.service.LeavebillService;
 import cn.ddossec.vo.LeavebillVo;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,7 +28,17 @@ public class LeaveBillController {
     @RequestMapping("loadAllLeaveBills")
     @ResponseBody
     public DataGridView loadAllLeaveBills(LeavebillVo leaveBillVo) {
-        return this.leaveBillService.queryAllLeaveBills(leaveBillVo);
+        // 得到当前登陆的用户
+        Subject subject = SecurityUtils.getSubject();
+        ActiveUser activeUser = (ActiveUser) subject.getPrincipal();
+        User user = activeUser.getUser();
+        // 如果是超级管理员查询全部
+        if (user.getType().equals(Constant.USER_TYPE_SUPER)) {
+            return this.leaveBillService.queryAllLeaveBills(leaveBillVo);
+        } else {
+            leaveBillVo.setUserid(user.getId());
+            return this.leaveBillService.queryAllLeaveBills(leaveBillVo);
+        }
     }
 
     /**
@@ -31,9 +46,16 @@ public class LeaveBillController {
      */
     @RequestMapping("addLeaveBill")
     @ResponseBody
-    public ResultObj addLeaveBill(LeavebillVo leaveBillVo) {
+    public ResultObj addLeaveBill(Leavebill leavebill) {
         try {
-            this.leaveBillService.addLeaveBill(leaveBillVo);
+            leavebill.setState("0");
+            // 得到当前登陆的用户
+            Subject subject = SecurityUtils.getSubject();
+            ActiveUser activeUser = (ActiveUser) subject.getPrincipal();
+            User user = activeUser.getUser();
+
+            leavebill.setUserid(user.getId());
+            this.leaveBillService.addLeaveBill(leavebill);
             return ResultObj.ADD_SUCCESS;
         } catch (Exception e) {
             return ResultObj.ADD_ERROR;

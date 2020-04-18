@@ -74,4 +74,9 @@ public class ActivitiAutoConfiguration {
 	public FormService formService(ProcessEngineFactoryBean processEngine) throws Exception{
 		return processEngine.getObject().getFormService();
 	}
+
+	@Bean
+	public ManagementService managementService(ProcessEngineFactoryBean processEngine) throws Exception{
+		return processEngine.getObject().getManagementService();
+	}
 }

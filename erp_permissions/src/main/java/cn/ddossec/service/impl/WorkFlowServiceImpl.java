@@ -14,10 +14,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.zip.ZipInputStream;
 
 /**
  * @author 30315
@@ -103,6 +105,17 @@ public class WorkFlowServiceImpl implements WorkFlowService {
         }
 
         return new DataGridView(count,data);
+    }
+
+    /**
+     * 添加流程部署
+     * @param inputStream
+     * @param deploymentName
+     */
+    @Override
+    public void addWorkFlow(InputStream inputStream, String deploymentName) {
+        ZipInputStream zipInputStream = new ZipInputStream(inputStream);
+        this.repositoryService.createDeployment().name(deploymentName).addZipInputStream(zipInputStream).deploy();
     }
 
 }

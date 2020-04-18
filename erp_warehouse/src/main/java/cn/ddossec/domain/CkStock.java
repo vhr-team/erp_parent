@@ -1,5 +1,9 @@
 package cn.ddossec.domain;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import java.util.Date;
 import java.io.Serializable;
 
@@ -9,6 +13,9 @@ import java.io.Serializable;
  * @author makejava
  * @since 2020-04-17 18:20:00
  */
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class CkStock implements Serializable {
     private static final long serialVersionUID = 644440507641036358L;
     /**
@@ -79,142 +86,5 @@ public class CkStock implements Serializable {
     * 0表示材料，1表示成品
     */
     private Integer skState;
-
-    
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-    
-    public String getSkId() {
-        return skId;
-    }
-
-    public void setSkId(String skId) {
-        this.skId = skId;
-    }
-    
-    public String getProductId() {
-        return productId;
-    }
-
-    public void setProductId(String productId) {
-        this.productId = productId;
-    }
-    
-    public String getProductName() {
-        return productName;
-    }
-
-    public void setProductName(String productName) {
-        this.productName = productName;
-    }
-    
-    public Integer getSkAlarmUpper() {
-        return skAlarmUpper;
-    }
-
-    public void setSkAlarmUpper(Integer skAlarmUpper) {
-        this.skAlarmUpper = skAlarmUpper;
-    }
-    
-    public Integer getSkAlarmLower() {
-        return skAlarmLower;
-    }
-
-    public void setSkAlarmLower(Integer skAlarmLower) {
-        this.skAlarmLower = skAlarmLower;
-    }
-    
-    public Integer getSkStorageMax() {
-        return skStorageMax;
-    }
-
-    public void setSkStorageMax(Integer skStorageMax) {
-        this.skStorageMax = skStorageMax;
-    }
-    
-    public Integer getSkStorageCurrent() {
-        return skStorageCurrent;
-    }
-
-    public void setSkStorageCurrent(Integer skStorageCurrent) {
-        this.skStorageCurrent = skStorageCurrent;
-    }
-    
-    public Integer getUId() {
-        return uId;
-    }
-
-    public void setUId(Integer uId) {
-        this.uId = uId;
-    }
-    
-    public Date getSkRegisterDate() {
-        return skRegisterDate;
-    }
-
-    public void setSkRegisterDate(Date skRegisterDate) {
-        this.skRegisterDate = skRegisterDate;
-    }
-    
-    public String getSkCompany() {
-        return skCompany;
-    }
-
-    public void setSkCompany(String skCompany) {
-        this.skCompany = skCompany;
-    }
-    
-    public Double getSkPrice() {
-        return skPrice;
-    }
-
-    public void setSkPrice(Double skPrice) {
-        this.skPrice = skPrice;
-    }
-    
-    public Date getSkDate() {
-        return skDate;
-    }
-
-    public void setSkDate(Date skDate) {
-        this.skDate = skDate;
-    }
-    
-    public Date getSkEffectiveDate() {
-        return skEffectiveDate;
-    }
-
-    public void setSkEffectiveDate(Date skEffectiveDate) {
-        this.skEffectiveDate = skEffectiveDate;
-    }
-    
-    public String getSkModel() {
-        return skModel;
-    }
-
-    public void setSkModel(String skModel) {
-        this.skModel = skModel;
-    }
-    
-    public Integer getSkCount() {
-        return skCount;
-    }
-
-    public void setSkCount(Integer skCount) {
-        this.skCount = skCount;
-    }
-    
-    public Integer getSkState() {
-        return skState;
-    }
-
-    public void setSkState(Integer skState) {
-        this.skState = skState;
-    }
 
 }

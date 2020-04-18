@@ -32,4 +32,5 @@ public class Constant {
      */
     public static final String DEFAULT_PWD = "123456";
     public static final String DEFAULT_TITLE_IMAGE = "group1/M00/00/00/rBGuPl6XAZiATNasAAAnSW-kclA511.jpg";
+
 }

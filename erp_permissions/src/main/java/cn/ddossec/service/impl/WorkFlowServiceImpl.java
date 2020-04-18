@@ -87,19 +87,21 @@ public class WorkFlowServiceImpl implements WorkFlowService {
         for (Deployment deployment : list) {
             deploymentIds.add(deployment.getId());
         }
-        long count = this.repositoryService.createProcessDefinitionQuery().deploymentIds(deploymentIds).count();
-
-        int firstResult = workFlowVo.getLimit();
-        int maxResults = (workFlowVo.getPage()-1)*workFlowVo.getLimit();
-        List<ProcessDefinition> listPage = this.repositoryService.createProcessDefinitionQuery().deploymentIds(deploymentIds).listPage(firstResult, maxResults);
-
+        long count = 0;
         List<ActProcessDefinitionEntity> data = new ArrayList<>();
+        if(deploymentIds.size() > 0){
+            count = this.repositoryService.createProcessDefinitionQuery().deploymentIds(deploymentIds).count();
+            int firstResult = workFlowVo.getLimit();
+            int maxResults = (workFlowVo.getPage()-1)*workFlowVo.getLimit();
+            List<ProcessDefinition> listPage = this.repositoryService.createProcessDefinitionQuery().deploymentIds(deploymentIds).listPage(firstResult, maxResults);
 
-        for (ProcessDefinition processDefinition : listPage) {
-            ActProcessDefinitionEntity entity = new ActProcessDefinitionEntity();
-            BeanUtils.copyProperties(processDefinition, entity);
-            data.add(entity);
+            for (ProcessDefinition processDefinition : listPage) {
+                ActProcessDefinitionEntity entity = new ActProcessDefinitionEntity();
+                BeanUtils.copyProperties(processDefinition, entity);
+                data.add(entity);
+            }
         }
+
         return new DataGridView(count,data);
     }
 

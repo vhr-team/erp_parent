@@ -16,29 +16,4 @@
         <!--@mbg.generated-->
         id, title, content, `days`, leavetime, `state`, userid
     </sql>
-    <!-- 查询请假单的信息 -->
-    <select id="queryAllLeavebill" resultMap="BaseResultMap" parameterType="cn.ddossec.vo.LeavebillVo">
-        select
-        <include refid="Base_Column_List"/>
-        from sys_leavebill
-        <where>
-            <if test="title!=null">
-                and title like "%"#{title}"%"
-            </if>
-            <if test="content!=null">
-                and content like "%"#{content}"%"
-            </if>
-            <if test="startTime!=null">
-                and leavetime>=#{startTime}
-            </if>
-            <if test="endTime!=null">
-                and leavetime  <![CDATA[<=]]>
-                #{endTime}
-            </if>
-            <if test="userid!=null">
-                and userid=#{userid}
-            </if>
-        </where>
-        order by leavetime desc
-    </select>
 </mapper>

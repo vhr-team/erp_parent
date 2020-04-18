@@ -6,10 +6,12 @@ import cn.ddossec.domain.User;
 import cn.ddossec.mapper.LeavebillMapper;
 import cn.ddossec.service.LeavebillService;
 import cn.ddossec.vo.LeavebillVo;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -35,8 +37,18 @@ public class LeavebillServiceImpl extends ServiceImpl<LeavebillMapper, Leavebill
     @Override
     public DataGridView queryAllLeaveBills(LeavebillVo leaveBillVo) {
         IPage<User> page = new Page<>(leaveBillVo.getPage(), leaveBillVo.getLimit());
+        QueryWrapper<Leavebill> qw = new QueryWrapper<>();
+        qw.like(StringUtils.isNotBlank(leaveBillVo.getTitle()), "title", leaveBillVo.getTitle());
+        qw.like(StringUtils.isNotBlank(leaveBillVo.getContent()), "content", leaveBillVo.getContent());
 
-        List<Leavebill> data = this.leaveBillMapper.queryAllLeavebill(leaveBillVo);
+        qw.ge(leaveBillVo.getStartTime() != null, "leavetime", leaveBillVo.getStartTime());
+        qw.le(leaveBillVo.getEndTime() != null, "leavetime", leaveBillVo.getEndTime());
+
+        qw.eq(null != leaveBillVo.getUserid(), "userid", leaveBillVo.getUserid());
+
+        qw.orderByDesc("leavetime");
+
+        List<Leavebill> data = this.leaveBillMapper.selectList(qw);
         DataGridView view = new DataGridView(page.getTotal(), data);
         return view;
     }
@@ -45,8 +57,8 @@ public class LeavebillServiceImpl extends ServiceImpl<LeavebillMapper, Leavebill
      * 添加请假单
      */
     @Override
-    public void addLeaveBill(LeavebillVo leaveBillVo) {
-        this.leaveBillMapper.insert(leaveBillVo);
+    public void addLeaveBill(Leavebill leavebill) {
+        this.leaveBillMapper.insert(leavebill);
     }
 
     @Override

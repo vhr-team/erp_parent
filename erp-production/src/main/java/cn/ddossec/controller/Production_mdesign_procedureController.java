@@ -19,11 +19,11 @@ public class Production_mdesign_procedureController {
     Production_mdesign_procedureService production_mdesign_procedureService;
 
     @RequestMapping("/getAllProduction")
-    public String getAllProduction(Model model){
+    public   List<Production_mdesign_procedure> getAllProduction(Model model){
         /*获取所有信息*/
         List<Production_mdesign_procedure> list = production_mdesign_procedureService.findAllProduction_mdesign_procedure();
         model.addAttribute("list",list);
-        return "index";
+        return list;
     }
 
     /**

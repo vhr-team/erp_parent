@@ -36,4 +36,14 @@ public interface design_record_Service {
      * @param record
      */
     public void updaterecordById(design_record record);
+
+    /**
+     *
+     * @param record
+     */
+    void soldOutrecord(design_record record);
+    /**
+     *
+     */
+    void putawayrecord(design_record record);
 }

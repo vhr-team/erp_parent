@@ -2,7 +2,6 @@ package cn.ddossec.service.impl;
 
 import cn.ddossec.common.DataGridView;
 import cn.ddossec.domain.Leavebill;
-import cn.ddossec.domain.User;
 import cn.ddossec.mapper.LeavebillMapper;
 import cn.ddossec.service.LeavebillService;
 import cn.ddossec.vo.LeavebillVo;
@@ -15,8 +14,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
 
 /**
  * @author 30315
@@ -33,10 +30,10 @@ public class LeavebillServiceImpl extends ServiceImpl<LeavebillMapper, Leavebill
     @Autowired
     private LeavebillMapper leaveBillMapper;
 
-
     @Override
     public DataGridView queryAllLeaveBills(LeavebillVo leaveBillVo) {
-        IPage<User> page = new Page<>(leaveBillVo.getPage(), leaveBillVo.getLimit());
+        IPage<Leavebill> page = new Page<>(leaveBillVo.getPage(), leaveBillVo.getLimit());
+
         QueryWrapper<Leavebill> qw = new QueryWrapper<>();
         qw.like(StringUtils.isNotBlank(leaveBillVo.getTitle()), "title", leaveBillVo.getTitle());
         qw.like(StringUtils.isNotBlank(leaveBillVo.getContent()), "content", leaveBillVo.getContent());
@@ -48,9 +45,8 @@ public class LeavebillServiceImpl extends ServiceImpl<LeavebillMapper, Leavebill
 
         qw.orderByDesc("leavetime");
 
-        List<Leavebill> data = this.leaveBillMapper.selectList(qw);
-        DataGridView view = new DataGridView(page.getTotal(), data);
-        return view;
+        this.leaveBillMapper.selectPage(page, qw);
+        return new DataGridView(page.getTotal(), page.getRecords());
     }
 
     /**

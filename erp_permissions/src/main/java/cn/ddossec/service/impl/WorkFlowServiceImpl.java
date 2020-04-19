@@ -56,56 +56,57 @@ public class WorkFlowServiceImpl implements WorkFlowService {
     @Override
     public DataGridView queryProcessDeploy(WorkFlowVo workFlowVo){
 
-        if(workFlowVo.getDeploymentName()==null){
+        if (workFlowVo.getDeploymentName() == null) {
             workFlowVo.setDeploymentName("");
         }
         String name = workFlowVo.getDeploymentName();
-        // 1.查询总条数
+        // 查询总条数
         long count = repositoryService.createDeploymentQuery().deploymentNameLike("%" + name + "%").count();
-        // 2.查询
-        int firstResult = workFlowVo.getLimit();
-        int maxResults = (workFlowVo.getPage()-1)*workFlowVo.getLimit();
-        List<Deployment> list = repositoryService.createDeploymentQuery().deploymentNameLike("%" + name + "%").listPage(firstResult, maxResults);
-        List<ActDeploymentEntity> data = new ArrayList<>();
-
+        // 查询
+        int firstResult = (workFlowVo.getPage() - 1) * workFlowVo.getLimit();
+        int maxResults = workFlowVo.getLimit();
+        List<Deployment> list = repositoryService.createDeploymentQuery().deploymentNameLike("%" + name + "%")
+                .listPage(firstResult, maxResults);
+        List<ActDeploymentEntity> data = new ArrayList<ActDeploymentEntity>();
         for (Deployment deployment : list) {
-            // copy
             ActDeploymentEntity entity = new ActDeploymentEntity();
+            // copy
             BeanUtils.copyProperties(deployment, entity);
             data.add(entity);
         }
-
-        return new DataGridView(count,data);
+        System.out.println("queryProcessDeploy---"+data);
+        return new DataGridView(count, data);
     }
 
     @Override
     public DataGridView queryloadAllProcessDefinition(WorkFlowVo workFlowVo) {
-        if(workFlowVo.getDeploymentName()==null){
+        if (workFlowVo.getDeploymentName() == null) {
             workFlowVo.setDeploymentName("");
         }
         String name = workFlowVo.getDeploymentName();
-        // 先根据部署的名称模糊查询出所有的部署的ID
-        List<Deployment> list = repositoryService.createDeploymentQuery().deploymentNameLike("%" + name + "%").list();
+        // 先根据部署的的名称模糊查询出所有的部署的ID
+        List<Deployment> dlist = repositoryService.createDeploymentQuery().deploymentNameLike("%" + name + "%").list();
         Set<String> deploymentIds = new HashSet<>();
-        for (Deployment deployment : list) {
+        for (Deployment deployment : dlist) {
             deploymentIds.add(deployment.getId());
         }
         long count = 0;
         List<ActProcessDefinitionEntity> data = new ArrayList<>();
-        if(deploymentIds.size() > 0){
+        if (deploymentIds.size() > 0) {
             count = this.repositoryService.createProcessDefinitionQuery().deploymentIds(deploymentIds).count();
-            int firstResult = workFlowVo.getLimit();
-            int maxResults = (workFlowVo.getPage()-1)*workFlowVo.getLimit();
-            List<ProcessDefinition> listPage = this.repositoryService.createProcessDefinitionQuery().deploymentIds(deploymentIds).listPage(firstResult, maxResults);
-
-            for (ProcessDefinition processDefinition : listPage) {
+            // 查询流程部署信息
+            int firstResult = (workFlowVo.getPage() - 1) * workFlowVo.getLimit();
+            int maxResults = workFlowVo.getLimit();
+            List<ProcessDefinition> list = this.repositoryService.createProcessDefinitionQuery()
+                    .deploymentIds(deploymentIds).listPage(firstResult, maxResults);
+            for (ProcessDefinition pd : list) {
                 ActProcessDefinitionEntity entity = new ActProcessDefinitionEntity();
-                BeanUtils.copyProperties(processDefinition, entity);
+                BeanUtils.copyProperties(pd, entity);
                 data.add(entity);
             }
         }
-
-        return new DataGridView(count,data);
+        System.out.println("queryloadAllProcessDefinition"+data);
+        return new DataGridView(count, data);
     }
 
     /**

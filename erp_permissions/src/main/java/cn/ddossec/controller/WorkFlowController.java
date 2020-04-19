@@ -41,7 +41,7 @@ public class WorkFlowController {
      * @param workFlowVo
      * @return
      */
-    @GetMapping("loadAllProcessDefinition")
+    @RequestMapping("loadAllProcessDefinition")
     @ResponseBody
     public DataGridView loadAllProcessDefinition(WorkFlowVo workFlowVo){
         return this.workFlowService.queryloadAllProcessDefinition(workFlowVo);

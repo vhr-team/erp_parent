@@ -81,6 +81,7 @@ public class MenuController {
             menu.setSpread(Constant.SPREAD_FALSE);
             // 默认可用
             menu.setAvailable(Constant.AVAILABLE_TRUE);
+            menu.setIcon("fa "+menu.getIcon());
 
             this.menuService.saveMenu(menu);
             return ResultObj.ADD_SUCCESS;
@@ -100,6 +101,8 @@ public class MenuController {
     @RequiresPermissions(value = {"menu:update"})
     public ResultObj updateMenu(Menu menu) {
         try {
+            menu.setIcon("fa "+menu.getIcon());
+
             this.menuService.updateMenu(menu);
             return ResultObj.UPDATE_SUCCESS;
         } catch (Exception e) {

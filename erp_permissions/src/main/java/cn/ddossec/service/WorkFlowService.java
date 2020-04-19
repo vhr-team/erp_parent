@@ -35,4 +35,11 @@ public interface WorkFlowService {
      * @param deploymentId
      */
     void deleteWorkFlow(String deploymentId);
+
+    /**
+     * 根据流程部署ID查询流程图
+     * @param deploymentId
+     * @return
+     */
+    InputStream queryProcessDeploymentImage(String deploymentId);
 }

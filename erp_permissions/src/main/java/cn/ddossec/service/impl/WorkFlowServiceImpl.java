@@ -137,4 +137,24 @@ public class WorkFlowServiceImpl implements WorkFlowService {
         this.repositoryService.deleteDeployment(deploymentId,true);
     }
 
+    /**
+     * 根据流程部署ID查询流程图
+     * @param deploymentId
+     * @return
+     */
+    @Override
+    public InputStream queryProcessDeploymentImage(String deploymentId) {
+        // 1.根据部署ID，查询流程定义对象
+        ProcessDefinition processDefinition = this.repositoryService.createProcessDefinitionQuery().deploymentId(deploymentId).singleResult();
+
+        // 2.从流程定义对象，得到图片的名称
+        String resourceName = processDefinition.getDiagramResourceName();
+
+        // 3.使用部署ID，和资源文件的图片名称得到图片流
+        InputStream stream = this.repositoryService.getResourceAsStream(deploymentId, resourceName);
+
+        // 4.返回图片流
+        return stream;
+    }
+
 }

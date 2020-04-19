@@ -78,4 +78,23 @@ public class WorkFlowController {
         }
     }
 
+    /**
+     * 批量删除流程部署
+     * @param workFlowVo
+     * @return
+     */
+    @RequestMapping("batchDeleteWorkFlow")
+    @ResponseBody
+    public ResultObj deleteWorkFlow(WorkFlowVo workFlowVo){
+        try{
+            String[] deploymentIds = workFlowVo.getIds();
+            for (String deploymentId : deploymentIds) {
+                this.workFlowService.deleteWorkFlow(deploymentId);
+            }
+            return ResultObj.DELETE_SUCCESS;
+        }catch (Exception e){
+            return ResultObj.DELETE_ERROR;
+        }
+    }
+
 }

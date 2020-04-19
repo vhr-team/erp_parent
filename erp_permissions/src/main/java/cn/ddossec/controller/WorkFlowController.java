@@ -62,4 +62,20 @@ public class WorkFlowController {
         }
     }
 
+    /**
+     * 删除流程部署
+     * @param workFlowVo
+     * @return
+     */
+    @RequestMapping("deleteWorkFlow")
+    @ResponseBody
+    public ResultObj deleteWorkFlow(WorkFlowVo workFlowVo){
+        try{
+            this.workFlowService.deleteWorkFlow(workFlowVo.getDeploymentId());
+            return ResultObj.DELETE_SUCCESS;
+        }catch (Exception e){
+            return ResultObj.DELETE_ERROR;
+        }
+    }
+
 }

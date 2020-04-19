@@ -86,6 +86,7 @@ shiro:
     - /swagger-resources/**
     - /v2/**
     - /login/captcha
+    - /workFlow/viewProcessImage*
   logout-url: /login/logout*
   authc-urls:
     - /**

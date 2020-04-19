@@ -116,4 +116,9 @@ public class design_record_ServiceImpl implements design_record_Service {
     public design_record selectById(design_record record) {
         return mapper.selectByPrimaryKey(record.getId());
     }
+
+    @Override
+    public void deletebatch(Long[] id) {
+
+    }
 }

@@ -1,6 +1,11 @@
 package cn.ddossec.service.impl;
 
+import cn.ddossec.common.ActiveUser;
+import cn.ddossec.common.Constant;
 import cn.ddossec.common.DataGridView;
+import cn.ddossec.domain.LeaveBill;
+import cn.ddossec.domain.User;
+import cn.ddossec.mapper.LeavebillMapper;
 import cn.ddossec.service.WorkFlowService;
 import cn.ddossec.vo.WorkFlowVo;
 import cn.ddossec.vo.act.ActDeploymentEntity;
@@ -9,6 +14,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.activiti.engine.*;
 import org.activiti.engine.repository.Deployment;
 import org.activiti.engine.repository.ProcessDefinition;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.subject.Subject;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,10 +23,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.zip.ZipInputStream;
 
 /**
@@ -49,12 +53,16 @@ public class WorkFlowServiceImpl implements WorkFlowService {
     @Autowired
     private ManagementService managementService;
 
+    @Autowired
+    private LeavebillMapper leavebillMapper;
+
     /**
      * 查询流程部署信息
+     *
      * @return
      */
     @Override
-    public DataGridView queryProcessDeploy(WorkFlowVo workFlowVo){
+    public DataGridView queryProcessDeploy(WorkFlowVo workFlowVo) {
 
         if (workFlowVo.getDeploymentName() == null) {
             workFlowVo.setDeploymentName("");
@@ -74,7 +82,7 @@ public class WorkFlowServiceImpl implements WorkFlowService {
             BeanUtils.copyProperties(deployment, entity);
             data.add(entity);
         }
-        System.out.println("queryProcessDeploy---"+data);
+        System.out.println("queryProcessDeploy---" + data);
         return new DataGridView(count, data);
     }
 
@@ -105,12 +113,13 @@ public class WorkFlowServiceImpl implements WorkFlowService {
                 data.add(entity);
             }
         }
-        System.out.println("queryloadAllProcessDefinition"+data);
+        System.out.println("queryloadAllProcessDefinition" + data);
         return new DataGridView(count, data);
     }
 
     /**
      * 添加流程部署
+     *
      * @param inputStream
      * @param deploymentName
      */
@@ -130,11 +139,12 @@ public class WorkFlowServiceImpl implements WorkFlowService {
 
     /**
      * 根据流程部署ID，删除流程部署信息
+     *
      * @param deploymentId
      */
     @Override
     public void deleteWorkFlow(String deploymentId) {
-        this.repositoryService.deleteDeployment(deploymentId,true);
+        this.repositoryService.deleteDeployment(deploymentId, true);
     }
 
     /**
@@ -151,6 +161,33 @@ public class WorkFlowServiceImpl implements WorkFlowService {
         // 3使用部署ID和图片名称去查询图片流
         InputStream stream = this.repositoryService.getResourceAsStream(deploymentId, resourceName);
         return stream;
+    }
+
+    /**
+     * 启动流程
+     * @param leaveBillId
+     */
+    @Override
+    public void startProcess(Integer leaveBillId) {
+        // 找到流程的key
+
+        String processDefinitionKey = LeaveBill.class.getSimpleName();
+        String businessKey = processDefinitionKey + ":" + leaveBillId;
+
+        Map<String, Object> variables = new HashMap<>();
+        // 设置流程变量去设置下个任务的办理人
+        Subject subject = SecurityUtils.getSubject();
+        ActiveUser activeUser = (ActiveUser) subject.getPrincipal();
+        User user = activeUser.getUser();
+        variables.put("username", user.getName());
+
+        this.runtimeService.startProcessInstanceByKey(processDefinitionKey, businessKey, variables);
+
+        // 更新请假单的状态
+        LeaveBill leaveBill = leavebillMapper.selectById(leaveBillId);
+        leaveBill.setState(Constant.STATE_LEAVEBILL_ONE);// 设置状态为审批中
+
+        this.leavebillMapper.updateById(leaveBill);
     }
 
 }

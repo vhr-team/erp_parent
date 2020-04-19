@@ -1,6 +1,6 @@
 package cn.ddossec.mapper;
 
-import cn.ddossec.domain.Leavebill;
+import cn.ddossec.domain.LeaveBill;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**
@@ -10,6 +10,6 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * @description: TODO
  * @date 2020-04-1720:29
  */
-public interface LeavebillMapper extends BaseMapper<Leavebill> {
+public interface LeavebillMapper extends BaseMapper<LeaveBill> {
 
 }

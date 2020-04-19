@@ -129,4 +129,20 @@ public class WorkFlowController {
         }
     }
 
+    /**
+     * 启动流程
+     */
+    @RequestMapping("startProcess")
+    @ResponseBody
+    public ResultObj startProcess(WorkFlowVo workFlowVo) {
+        try {
+            System.out.println(workFlowVo.getId());
+            Integer leaveBillId = workFlowVo.getId();
+            this.workFlowService.startProcess(leaveBillId);
+            return ResultObj.START_SUCCESS;
+        } catch (Exception e) {
+            return ResultObj.START_ERROR;
+        }
+    }
+
 }

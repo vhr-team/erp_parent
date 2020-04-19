@@ -42,4 +42,10 @@ public interface WorkFlowService {
      * @return
      */
     InputStream queryProcessDeploymentImage(String deploymentId);
+
+    /**
+     * 启动流程
+     * @param leaveBillId
+     */
+    void startProcess(Integer leaveBillId);
 }

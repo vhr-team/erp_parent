@@ -1,11 +1,12 @@
 package com.rbac.design.mapper;
 
+
 import com.rbac.design.pojo.design_record;
 import com.rbac.design.pojo.design_recordQuery;
-import java.util.List;
-
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 @Mapper
 public interface design_recordmapper {
     int countByExample(design_recordQuery example);

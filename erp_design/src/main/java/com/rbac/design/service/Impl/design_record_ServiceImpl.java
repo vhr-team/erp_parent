@@ -1,5 +1,7 @@
 package com.rbac.design.service.Impl;
 
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import com.rbac.design.entity.PageResult;
 import com.rbac.design.mapper.design_recordmapper;
 import com.rbac.design.pojo.design_record;
@@ -8,8 +10,6 @@ import com.rbac.design.service.design_record_Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import com.github.pagehelper.Page;
-import com.github.pagehelper.PageHelper;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -55,7 +55,8 @@ public class design_record_ServiceImpl implements design_record_Service {
                 criteria.andProductNameLike("%" + record.getProductName() + "%");
             }
             if (record.getRegisterTime() != null) {//建档时间
-                criteria.andProductNameLike("%" + record.getRegisterTime() + "%");
+
+                criteria.andRegisterTimeLike("%" + record.getRegisterTime() + "%");
             }
         }
         Page<design_record> design_records = (Page<design_record>) mapper.selectByExample(Query);
@@ -65,6 +66,7 @@ public class design_record_ServiceImpl implements design_record_Service {
 
     /**
      * 添加产品档案
+     *
      * @param record
      */
     @Override
@@ -76,6 +78,7 @@ public class design_record_ServiceImpl implements design_record_Service {
 
     /**
      * 根据主键修改档案
+     *
      * @param record
      */
     @Override
@@ -83,12 +86,13 @@ public class design_record_ServiceImpl implements design_record_Service {
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
         record.setChangeTime(df.format(new Date()));//变更时间
         record.setChangeTag("已变更");//
-        record.setFileChangeAmount(record.getFileChangeAmount()+1);//修改档案就登记添加一次修改次数
+        record.setFileChangeAmount(record.getFileChangeAmount() + 1);//修改档案就登记添加一次修改次数
         mapper.updateByPrimaryKeySelective(record);
     }
 
     /**
      * 临时下架商品 不删除
+     *
      * @param record
      */
     @Override
@@ -99,11 +103,17 @@ public class design_record_ServiceImpl implements design_record_Service {
 
     /**
      * 商品上架
+     *
      * @param record
      */
     @Override
     public void putawayrecord(design_record record) {
         record.setDeleteTag("未下架");
         mapper.updateByPrimaryKeySelective(record);
+    }
+
+    @Override
+    public design_record selectById(design_record record) {
+        return mapper.selectByPrimaryKey(record.getId());
     }
 }

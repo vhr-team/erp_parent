@@ -69,12 +69,20 @@ public class design_recordController {
     @ApiOperation("根据主键修改")
     @RequestMapping("/updaterecordById")
     public Response updaterecordById(@RequestBody design_record record){
-        try {
-            service.updaterecordById(record);
-            return new Response(true,"修改成功");
-        }catch (Exception e){
-            return new Response(true,"修改失败");
+        design_record design_record = service.selectById(record);
+
+        if (design_record == record) {
+            System.out.println(1111111);
+            return new Response(true, "请修改值在提交");
+        } else {
+            try {
+                service.updaterecordById(record);
+                return new Response(true, "修改成功");
+            } catch (Exception e) {
+                return new Response(true, "修改失败");
+            }
         }
+
     }
 
     @ApiOperation("下架商品")

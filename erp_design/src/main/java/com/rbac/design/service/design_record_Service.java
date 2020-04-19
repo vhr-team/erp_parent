@@ -38,12 +38,17 @@ public interface design_record_Service {
     public void updaterecordById(design_record record);
 
     /**
-     *
      * @param record
      */
     void soldOutrecord(design_record record);
+
     /**
      *
      */
     void putawayrecord(design_record record);
+
+    /**
+     * 根据主键查询
+     */
+    design_record selectById(design_record record);
 }

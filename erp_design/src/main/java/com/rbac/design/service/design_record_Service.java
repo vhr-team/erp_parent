@@ -51,4 +51,6 @@ public interface design_record_Service {
      * 根据主键查询
      */
     design_record selectById(design_record record);
+
+    void deletebatch(Long[] id);
 }

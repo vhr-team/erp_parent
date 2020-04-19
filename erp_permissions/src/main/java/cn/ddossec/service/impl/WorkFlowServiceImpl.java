@@ -128,4 +128,13 @@ public class WorkFlowServiceImpl implements WorkFlowService {
         }
     }
 
+    /**
+     * 根据流程部署ID，删除流程部署信息
+     * @param deploymentId
+     */
+    @Override
+    public void deleteWorkFlow(String deploymentId) {
+        this.repositoryService.deleteDeployment(deploymentId,true);
+    }
+
 }

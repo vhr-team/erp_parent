@@ -25,7 +25,7 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @TableName(value = "sys_leavebill")
-public class Leavebill implements Serializable {
+public class LeaveBill implements Serializable {
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
 

@@ -4,10 +4,10 @@ import cn.ddossec.common.ActiveUser;
 import cn.ddossec.common.Constant;
 import cn.ddossec.common.DataGridView;
 import cn.ddossec.common.ResultObj;
-import cn.ddossec.domain.Leavebill;
+import cn.ddossec.domain.LeaveBill;
 import cn.ddossec.domain.User;
 import cn.ddossec.service.LeavebillService;
-import cn.ddossec.vo.LeavebillVo;
+import cn.ddossec.vo.LeaveBillVo;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +27,7 @@ public class LeaveBillController {
      */
     @RequestMapping("loadAllLeaveBills")
     @ResponseBody
-    public DataGridView loadAllLeaveBills(LeavebillVo leaveBillVo) {
+    public DataGridView loadAllLeaveBills(LeaveBillVo leaveBillVo) {
         // 得到当前登陆的用户
         Subject subject = SecurityUtils.getSubject();
         ActiveUser activeUser = (ActiveUser) subject.getPrincipal();
@@ -46,7 +46,7 @@ public class LeaveBillController {
      */
     @RequestMapping("addLeaveBill")
     @ResponseBody
-    public ResultObj addLeaveBill(Leavebill leavebill) {
+    public ResultObj addLeaveBill(LeaveBill leavebill) {
         try {
             leavebill.setState("0");
             // 得到当前登陆的用户
@@ -63,8 +63,8 @@ public class LeaveBillController {
     }
 
     @RequestMapping("toUpdateLeaveBill")
-    public Leavebill toUpdateLeaveBill(LeavebillVo leaveBillVo) {
-        Leavebill leaveBill = this.leaveBillService.queryLeaveBillById(leaveBillVo.getId());
+    public LeaveBill toUpdateLeaveBill(LeaveBillVo leaveBillVo) {
+        LeaveBill leaveBill = this.leaveBillService.queryLeaveBillById(leaveBillVo.getId());
         return leaveBill;
     }
 
@@ -73,7 +73,7 @@ public class LeaveBillController {
      */
     @RequestMapping("updateLeaveBill")
     @ResponseBody
-    public ResultObj updateLeaveBill(LeavebillVo leaveBillVo) {
+    public ResultObj updateLeaveBill(LeaveBillVo leaveBillVo) {
         try {
             //做修改
             this.leaveBillService.updateLeaveBill(leaveBillVo);
@@ -88,7 +88,7 @@ public class LeaveBillController {
      */
     @RequestMapping("deleteLeaveBill")
     @ResponseBody
-    public ResultObj deleteLeaveBill(LeavebillVo leaveBillVo) {
+    public ResultObj deleteLeaveBill(LeaveBillVo leaveBillVo) {
         try {
             //做删除
             this.leaveBillService.deleteLeaveBill(leaveBillVo.getId());
@@ -103,7 +103,7 @@ public class LeaveBillController {
      */
     @RequestMapping("batchDeleteLeaveBill")
     @ResponseBody
-    public ResultObj batchDeleteLeaveBill(LeavebillVo leaveBillVo) {
+    public ResultObj batchDeleteLeaveBill(LeaveBillVo leaveBillVo) {
         try {
             //做删除
             Integer[] ids = leaveBillVo.getIds();

@@ -1,16 +1,15 @@
 package cn.ddossec.service;
 
-import cn.ddossec.domain.CkStock;
-
+import cn.ddossec.domain.WarehouseStock;
 import java.util.List;
 
 /**
- * (CkStock)表服务接口
+ * (WarehouseStock)表服务接口
  *
- * @author makejava
- * @since 2020-04-17 18:19:59
+ * @author 谷辉
+ * @since 2020-04-19 15:05:40
  */
-public interface CkStockService {
+public interface WarehouseStockService {
 
     /**
      * 通过ID查询单条数据
@@ -18,7 +17,7 @@ public interface CkStockService {
      * @param id 主键
      * @return 实例对象
      */
-    CkStock queryById(Integer id);
+    WarehouseStock queryById(Integer id);
 
     /**
      * 查询多条数据
@@ -27,23 +26,23 @@ public interface CkStockService {
      * @param limit 查询条数
      * @return 对象列表
      */
-    List<CkStock> queryAllByLimit(int offset, int limit);
+    List<WarehouseStock> queryAllByLimit(int offset, int limit);
 
     /**
      * 新增数据
      *
-     * @param ckStock 实例对象
+     * @param warehouseStock 实例对象
      * @return 实例对象
      */
-    CkStock insert(CkStock ckStock);
+    WarehouseStock insert(WarehouseStock warehouseStock);
 
     /**
      * 修改数据
      *
-     * @param ckStock 实例对象
+     * @param warehouseStock 实例对象
      * @return 实例对象
      */
-    CkStock update(CkStock ckStock);
+    WarehouseStock update(WarehouseStock warehouseStock);
 
     /**
      * 通过主键删除数据

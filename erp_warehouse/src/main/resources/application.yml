@@ -1,9 +1,15 @@
 logging:
   level:
-    cn.ddos: debug
+    cn.ddossec: debug
 server:
   port: 8004
 spring:
+  application:
+    name: erp_warehouse
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 175.24.22.3:8850 #nacos服务的地址 不要加http
   # 数据源配置
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -48,6 +54,11 @@ spring:
         reset-enable: true
         #启用
         enabled: true
+
+  devtools:
+    restart:
+      poll-interval: 2000ms
+      quiet-period: 1999ms
 
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss

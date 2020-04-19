@@ -33,6 +33,12 @@ public class ResultObj {
     public static final ResultObj DEPLOYMENT_SUCCESS = new ResultObj(200, "部署成功");
     public static final ResultObj DEPLOYMENT_ERROR = new ResultObj(-1, "部署失败");
 
+    /**
+     * 启动信息
+     */
+    public static final ResultObj START_SUCCESS = new ResultObj(200, "启动成功");
+    public static final ResultObj START_ERROR = new ResultObj(-1, "启动失败");
+
     private Integer code = 200;
     private String msg = "";
     private Object token = "";

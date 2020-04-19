@@ -16,4 +16,7 @@ public class WorkFlowVo extends BaseVo {
     //流程部署ID
     private String deploymentId;
 
+    //请假单ID
+    private Integer id;
+
 }

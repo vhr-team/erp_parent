@@ -1,6 +1,6 @@
 logging:
   level:
-    cn.ddos: debug
+    cn.ddossec: debug
 server:
   port: 8004
 spring:
@@ -54,6 +54,11 @@ spring:
         reset-enable: true
         #启用
         enabled: true
+
+  devtools:
+    restart:
+      poll-interval: 2000ms
+      quiet-period: 1999ms
 
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss

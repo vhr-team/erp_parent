@@ -85,7 +85,7 @@ public class WorkFlowController {
      */
     @RequestMapping("batchDeleteWorkFlow")
     @ResponseBody
-    public ResultObj deleteWorkFlow(WorkFlowVo workFlowVo){
+    public ResultObj batchDeleteWorkFlow(WorkFlowVo workFlowVo){
         try{
             String[] deploymentIds = workFlowVo.getIds();
             for (String deploymentId : deploymentIds) {

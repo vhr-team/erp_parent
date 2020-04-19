@@ -37,10 +37,7 @@ public interface design_record_Service {
      */
     public void updaterecordById(design_record record);
 
-    /**
-     * @param record
-     */
-    void soldOutrecord(design_record record);
+
 
     /**
      *
@@ -52,5 +49,5 @@ public interface design_record_Service {
      */
     design_record selectById(design_record record);
 
-    void deletebatch(Long[] id);
+    void deletebatch(Integer[] idx);
 }

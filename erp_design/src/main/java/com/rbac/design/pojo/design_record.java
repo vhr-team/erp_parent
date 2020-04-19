@@ -1,7 +1,10 @@
 package com.rbac.design.pojo;
 
+import lombok.Data;
+
 import java.io.Serializable;
 
+@Data
 public class design_record implements Serializable {
     /**
      * 序号

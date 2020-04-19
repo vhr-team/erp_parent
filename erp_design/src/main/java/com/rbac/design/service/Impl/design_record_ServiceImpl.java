@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -73,6 +74,9 @@ public class design_record_ServiceImpl implements design_record_Service {
     public void addrecord(design_record record) {
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
         record.setRegisterTime(df.format(new Date()));
+        record.setPriceChangeTag("未变更");
+        record.setDeleteTag("已上架");
+        record.setFileChangeAmount(0);
         mapper.insertSelective(record);
     }
 
@@ -90,25 +94,14 @@ public class design_record_ServiceImpl implements design_record_Service {
         mapper.updateByPrimaryKeySelective(record);
     }
 
-    /**
-     * 临时下架商品 不删除
-     *
-     * @param record
-     */
-    @Override
-    public void soldOutrecord(design_record record) {
-        record.setDeleteTag("已下架");
-        mapper.updateByPrimaryKeySelective(record);
-    }
 
     /**
-     * 商品上架
+     * 商品上下架
      *
      * @param record
      */
     @Override
     public void putawayrecord(design_record record) {
-        record.setDeleteTag("未下架");
         mapper.updateByPrimaryKeySelective(record);
     }
 
@@ -118,7 +111,12 @@ public class design_record_ServiceImpl implements design_record_Service {
     }
 
     @Override
-    public void deletebatch(Long[] id) {
+    public void deletebatch(Integer[] idx) {
 
+        design_recordQuery Query = new design_recordQuery();//创建brandQuery对象
+        design_recordQuery.Criteria criteria = Query.createCriteria();//createCriteria： 创建追加条件
+        criteria.andIdIn(Arrays.asList(idx));//根据id集合删除品牌
+        mapper.deleteByExample(Query);
     }
+
 }

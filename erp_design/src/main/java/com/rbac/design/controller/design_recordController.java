@@ -57,6 +57,7 @@ public class design_recordController {
             service.addrecord(record);
             return new Response(true,"添加成功");
         }catch (Exception e){
+            e.printStackTrace();
             return new Response(true,"添加失败");
         }
     }
@@ -68,42 +69,49 @@ public class design_recordController {
      */
     @ApiOperation("根据主键修改")
     @RequestMapping("/updaterecordById")
-    public Response updaterecordById(@RequestBody design_record record){
+    public Response updaterecordById(@RequestBody design_record record) {
         design_record design_record = service.selectById(record);
+        if (record.getRealCostPrice() != design_record.getRealCostPrice()) {
+            record.setPriceChangeTag("已变更");
+        }
 
         if (design_record == record) {
-            System.out.println(1111111);
             return new Response(true, "请修改值在提交");
         } else {
             try {
                 service.updaterecordById(record);
                 return new Response(true, "修改成功");
             } catch (Exception e) {
+                e.printStackTrace();
                 return new Response(true, "修改失败");
             }
         }
 
     }
 
-    @ApiOperation("下架商品")
-    @PostMapping("/soldOutrecord")
-    public Response soldOutrecord(@RequestBody design_record record){
-        try {
-            service.soldOutrecord(record);
-            return new Response(true,"下架成功");
-        }catch (Exception e){
-            return new Response(true,"下架失败");
-        }
-    }
-    @ApiOperation("上架商品")
+
+    @ApiOperation("上下架商品")
     @PostMapping("/putawayrecord")
-    public Response putawayrecord(@RequestBody design_record record){
+    public Response putawayrecord(@RequestBody design_record record) {
         try {
             service.putawayrecord(record);
-            return new Response(true,"上架成功");
-        }catch (Exception e){
-            return new Response(true,"上架失败");
+            return new Response(true, "成功");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new Response(true, "失败");
         }
     }
 
+    @RequestMapping("/deletebatch")
+    public Response deletebatch(@RequestBody Integer[] idx) {
+
+        try {
+            service.deletebatch(idx);
+            return new Response(true, "删除成功");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new Response(false, "删除失败");
+        }
+
+    }
 }

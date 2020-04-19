@@ -1,6 +1,7 @@
 package cn.ddossec.controller;
 
 import cn.ddossec.common.DataGridView;
+import cn.ddossec.common.ResultObj;
 import cn.ddossec.service.WorkFlowService;
 import cn.ddossec.vo.WorkFlowVo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * @author 30315
@@ -39,10 +41,25 @@ public class WorkFlowController {
      * @param workFlowVo
      * @return
      */
-    @GetMapping("loadAllProcessDefinition")
+    @RequestMapping("loadAllProcessDefinition")
     @ResponseBody
     public DataGridView loadAllProcessDefinition(WorkFlowVo workFlowVo){
         return this.workFlowService.queryloadAllProcessDefinition(workFlowVo);
+    }
+
+    /**
+     * 添加流程部署
+     * @return
+     */
+    @RequestMapping("addWorkFlow")
+    @ResponseBody
+    public ResultObj addWorkFlow(MultipartFile mf,WorkFlowVo workFlowVo){
+        try{
+            this.workFlowService.addWorkFlow(mf.getInputStream(),workFlowVo.getDeploymentName());
+            return ResultObj.DEPLOYMENT_SUCCESS;
+        }catch (Exception e){
+            return ResultObj.DEPLOYMENT_ERROR;
+        }
     }
 
 }

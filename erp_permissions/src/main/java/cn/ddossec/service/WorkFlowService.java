@@ -3,6 +3,8 @@ package cn.ddossec.service;
 import cn.ddossec.common.DataGridView;
 import cn.ddossec.vo.WorkFlowVo;
 
+import java.io.InputStream;
+
 /**
  * @author 30315
  * @title: WorkFlowService
@@ -20,4 +22,11 @@ public interface WorkFlowService {
      * @return
      */
     DataGridView queryloadAllProcessDefinition(WorkFlowVo workFlowVo);
+
+    /**
+     * 添加流程部署
+     * @param inputStream
+     * @param deploymentName
+     */
+    void addWorkFlow(InputStream inputStream, String deploymentName);
 }

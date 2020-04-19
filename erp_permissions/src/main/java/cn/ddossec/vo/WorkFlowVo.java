@@ -7,6 +7,9 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = false)
 public class WorkFlowVo extends BaseVo {
 
+    //批量删除使用
+    private String[] ids;
+
     // 流程部署名称
     private String deploymentName;
 

@@ -4,6 +4,7 @@ import cn.ddossec.common.DataGridView;
 import cn.ddossec.common.ResultObj;
 import cn.ddossec.service.WorkFlowService;
 import cn.ddossec.vo.WorkFlowVo;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,6 +27,7 @@ import java.io.InputStream;
  */
 @Controller
 @RequestMapping("workFlow")
+@Slf4j
 public class WorkFlowController {
 
     @Autowired
@@ -121,7 +123,7 @@ public class WorkFlowController {
             stream.close();
             outputStream.close();
         }catch (Exception e){
-
+            log.debug("查询流程图失败！");
         }
     }
 

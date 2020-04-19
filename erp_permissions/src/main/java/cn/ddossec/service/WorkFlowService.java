@@ -29,4 +29,10 @@ public interface WorkFlowService {
      * @param deploymentName
      */
     void addWorkFlow(InputStream inputStream, String deploymentName);
+
+    /**
+     * 根据流程部署ID，删除流程部署信息
+     * @param deploymentId
+     */
+    void deleteWorkFlow(String deploymentId);
 }

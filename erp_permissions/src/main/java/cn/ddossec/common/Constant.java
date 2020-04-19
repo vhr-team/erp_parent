@@ -38,6 +38,6 @@ public class Constant {
      */
     public static final String STATE_LEAVEBILL_ZORO = "0";//未提交
     public static final String STATE_LEAVEBILL_ONE = "1";//审批中
-    public static final String STATE_LEAVEBILL_TOW = "2";//审批完成
+    public static final String STATE_LEAVEBILL_TWO = "2";//审批完成
     public static final String STATE_LEAVEBILL_THREE = "3";//已放弃
 }

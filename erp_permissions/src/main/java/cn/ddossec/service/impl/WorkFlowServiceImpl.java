@@ -3,7 +3,7 @@ package cn.ddossec.service.impl;
 import cn.ddossec.common.ActiveUser;
 import cn.ddossec.common.Constant;
 import cn.ddossec.common.DataGridView;
-import cn.ddossec.domain.Leavebill;
+import cn.ddossec.domain.LeaveBill;
 import cn.ddossec.domain.User;
 import cn.ddossec.mapper.LeavebillMapper;
 import cn.ddossec.service.WorkFlowService;
@@ -170,7 +170,8 @@ public class WorkFlowServiceImpl implements WorkFlowService {
     @Override
     public void startProcess(Integer leaveBillId) {
         // 找到流程的key
-        String processDefinitionKey = Leavebill.class.getSimpleName();
+
+        String processDefinitionKey = LeaveBill.class.getSimpleName();
         String businessKey = processDefinitionKey + ":" + leaveBillId;
 
         Map<String, Object> variables = new HashMap<>();
@@ -183,7 +184,7 @@ public class WorkFlowServiceImpl implements WorkFlowService {
         this.runtimeService.startProcessInstanceByKey(processDefinitionKey, businessKey, variables);
 
         // 更新请假单的状态
-        Leavebill leaveBill = leavebillMapper.selectById(leaveBillId);
+        LeaveBill leaveBill = leavebillMapper.selectById(leaveBillId);
         leaveBill.setState(Constant.STATE_LEAVEBILL_ONE);// 设置状态为审批中
 
         this.leavebillMapper.updateById(leaveBill);

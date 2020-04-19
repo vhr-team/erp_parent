@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.ddossec.mapper.LeavebillMapper">
-    <resultMap id="BaseResultMap" type="cn.ddossec.domain.Leavebill">
+    <resultMap id="BaseResultMap" type="cn.ddossec.domain.LeaveBill">
         <!--@mbg.generated-->
         <!--@Table sys_leavebill-->
         <id column="id" jdbcType="INTEGER" property="id"/>

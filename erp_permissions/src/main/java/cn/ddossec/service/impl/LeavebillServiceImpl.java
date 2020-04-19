@@ -1,10 +1,10 @@
 package cn.ddossec.service.impl;
 
 import cn.ddossec.common.DataGridView;
-import cn.ddossec.domain.Leavebill;
+import cn.ddossec.domain.LeaveBill;
 import cn.ddossec.mapper.LeavebillMapper;
 import cn.ddossec.service.LeavebillService;
-import cn.ddossec.vo.LeavebillVo;
+import cn.ddossec.vo.LeaveBillVo;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -25,16 +25,16 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Transactional
 @Slf4j
-public class LeavebillServiceImpl extends ServiceImpl<LeavebillMapper, Leavebill> implements LeavebillService {
+public class LeavebillServiceImpl extends ServiceImpl<LeavebillMapper, LeaveBill> implements LeavebillService {
 
     @Autowired
     private LeavebillMapper leaveBillMapper;
 
     @Override
-    public DataGridView queryAllLeaveBills(LeavebillVo leaveBillVo) {
-        IPage<Leavebill> page = new Page<>(leaveBillVo.getPage(), leaveBillVo.getLimit());
+    public DataGridView queryAllLeaveBills(LeaveBillVo leaveBillVo) {
+        IPage<LeaveBill> page = new Page<>(leaveBillVo.getPage(), leaveBillVo.getLimit());
 
-        QueryWrapper<Leavebill> qw = new QueryWrapper<>();
+        QueryWrapper<LeaveBill> qw = new QueryWrapper<>();
         qw.like(StringUtils.isNotBlank(leaveBillVo.getTitle()), "title", leaveBillVo.getTitle());
         qw.like(StringUtils.isNotBlank(leaveBillVo.getContent()), "content", leaveBillVo.getContent());
 
@@ -53,18 +53,18 @@ public class LeavebillServiceImpl extends ServiceImpl<LeavebillMapper, Leavebill
      * 添加请假单
      */
     @Override
-    public void addLeaveBill(Leavebill leavebill) {
+    public void addLeaveBill(LeaveBill leavebill) {
         this.leaveBillMapper.insert(leavebill);
     }
 
     @Override
-    public Leavebill queryLeaveBillById(Integer id) {
+    public LeaveBill queryLeaveBillById(Integer id) {
 
         return this.leaveBillMapper.selectById(id);
     }
 
     @Override
-    public void updateLeaveBill(LeavebillVo leaveBillVo) {
+    public void updateLeaveBill(LeaveBillVo leaveBillVo) {
         this.leaveBillMapper.updateById(leaveBillVo);
     }
 

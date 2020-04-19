@@ -17,8 +17,6 @@ import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 import java.awt.image.BufferedImage;
 import java.io.InputStream;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * @author 30315
@@ -138,6 +136,7 @@ public class WorkFlowController {
     @ResponseBody
     public ResultObj startProcess(WorkFlowVo workFlowVo) {
         try {
+            System.out.println(workFlowVo.getId());
             Integer leaveBillId = workFlowVo.getId();
             this.workFlowService.startProcess(leaveBillId);
             return ResultObj.START_SUCCESS;

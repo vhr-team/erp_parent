@@ -1,8 +1,8 @@
 package cn.ddossec.service;
 
 import cn.ddossec.common.DataGridView;
-import cn.ddossec.domain.Leavebill;
-import cn.ddossec.vo.LeavebillVo;
+import cn.ddossec.domain.LeaveBill;
+import cn.ddossec.vo.LeaveBillVo;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
@@ -12,17 +12,17 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @description: TODO
  * @date 2020-04-1720:29
  */
-public interface LeavebillService extends IService<Leavebill> {
+public interface LeavebillService extends IService<LeaveBill> {
 
     /**
      * 查询所有请假单返回DataGridView
      */
-    public DataGridView queryAllLeaveBills(LeavebillVo leaveBillVo);
+    public DataGridView queryAllLeaveBills(LeaveBillVo leaveBillVo);
 
     /**
      * 添加请假单
      */
-    public void addLeaveBill(Leavebill leavebill);
+    public void addLeaveBill(LeaveBill leavebill);
 
     /**
      * 根据ID查询请假单
@@ -30,14 +30,14 @@ public interface LeavebillService extends IService<Leavebill> {
      * @param id
      * @return
      */
-    public Leavebill queryLeaveBillById(Integer id);
+    public LeaveBill queryLeaveBillById(Integer id);
 
     /**
      * 修改请假单信息
      *
      * @param leaveBillVo
      */
-    public void updateLeaveBill(LeavebillVo leaveBillVo);
+    public void updateLeaveBill(LeaveBillVo leaveBillVo);
 
     /**
      * 删除

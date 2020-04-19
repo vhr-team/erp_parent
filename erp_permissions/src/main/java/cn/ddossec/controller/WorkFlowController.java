@@ -11,6 +11,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.imageio.ImageIO;
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletResponse;
+import java.awt.image.BufferedImage;
+import java.io.InputStream;
+
 /**
  * @author 30315
  * @title: WorkFlowController
@@ -94,6 +100,28 @@ public class WorkFlowController {
             return ResultObj.DELETE_SUCCESS;
         }catch (Exception e){
             return ResultObj.DELETE_ERROR;
+        }
+    }
+
+    /**
+     * 查询流程图
+     * @param workFlowVo
+     * @param response
+     */
+    @GetMapping("viewProcessImage")
+    public void viewProcessImage(WorkFlowVo workFlowVo, HttpServletResponse response){
+        try{
+            InputStream stream = this.workFlowService.queryProcessDeploymentImage(workFlowVo.getDeploymentId());
+            BufferedImage image = ImageIO.read(stream);
+
+            ServletOutputStream outputStream = response.getOutputStream();
+            ImageIO.write(image, "JPEG", outputStream);
+
+            // 释放流
+            stream.close();
+            outputStream.close();
+        }catch (Exception e){
+
         }
     }
 

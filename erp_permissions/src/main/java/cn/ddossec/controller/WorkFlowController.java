@@ -17,6 +17,8 @@ import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 import java.awt.image.BufferedImage;
 import java.io.InputStream;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author 30315
@@ -126,6 +128,21 @@ public class WorkFlowController {
             outputStream.close();
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    /**
+     * 启动流程
+     */
+    @RequestMapping("startProcess")
+    @ResponseBody
+    public ResultObj startProcess(WorkFlowVo workFlowVo) {
+        try {
+            Integer leaveBillId = workFlowVo.getId();
+            this.workFlowService.startProcess(leaveBillId);
+            return ResultObj.START_SUCCESS;
+        } catch (Exception e) {
+            return ResultObj.START_ERROR;
         }
     }
 

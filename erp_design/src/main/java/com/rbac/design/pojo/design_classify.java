@@ -13,6 +13,7 @@ public class design_classify implements Serializable {
      */
     private Integer pId;
 
+
     /**
      * 分类编号
      */
@@ -22,6 +23,44 @@ public class design_classify implements Serializable {
      * 分类名称
      */
     private String kindName;
+
+    private String name;
+
+    public design_classify() {
+    }
+
+    public design_classify(Integer id, Integer pId, String kindId, String kindName, String name, Integer kindLevel) {
+        this.id = id;
+        this.pId = pId;
+        this.kindId = kindId;
+        this.kindName = kindName;
+        this.name = name;
+        this.kindLevel = kindLevel;
+    }
+
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
+    }
+
+    @Override
+    public String toString() {
+        return "design_classify{" +
+                "id=" + id +
+                ", pId=" + pId +
+                ", kindId='" + kindId + '\'' +
+                ", kindName='" + kindName + '\'' +
+                ", name='" + name + '\'' +
+                ", kindLevel=" + kindLevel +
+                '}';
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
     /**
      * 级别
@@ -68,22 +107,6 @@ public class design_classify implements Serializable {
 
     public void setKindLevel(Integer kindLevel) {
         this.kindLevel = kindLevel;
-    }
-
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(getClass().getSimpleName());
-        sb.append(" [");
-        sb.append("Hash = ").append(hashCode());
-        sb.append(", id=").append(id);
-        sb.append(", pId=").append(pId);
-        sb.append(", kindId=").append(kindId);
-        sb.append(", kindName=").append(kindName);
-        sb.append(", kindLevel=").append(kindLevel);
-        sb.append(", serialVersionUID=").append(serialVersionUID);
-        sb.append("]");
-        return sb.toString();
     }
 
     @Override

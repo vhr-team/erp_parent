@@ -1,5 +1,8 @@
 package com.rbac.design.service.Impl;
 
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
+import com.rbac.design.entity.PageResult;
 import com.rbac.design.mapper.design_classifymapper;
 import com.rbac.design.pojo.design_classify;
 import com.rbac.design.pojo.design_classifyQuery;
@@ -27,8 +30,15 @@ public class design_classifyServiceImpl implements design_classifyService {
      * @return
      */
     @Override
-    public List<design_classify> queryAll() {
-        return mapper.selectByExample(null);
+    public List<design_classify> queryAll(design_classify classify) {
+        design_classifyQuery query = new design_classifyQuery();
+        if (classify != null) {
+            design_classifyQuery.Criteria criteria = query.createCriteria();
+            if (classify.getpId() != null) {
+                criteria.andPIdEqualTo(classify.getpId());
+            }
+        }
+        return mapper.selectByExample(query);
     }
 
     /**
@@ -54,5 +64,31 @@ public class design_classifyServiceImpl implements design_classifyService {
             criteria.andIdEqualTo(classify.getId());
             mapper.deleteByExample(design_classifyQuery);
         }
+    }
+
+    @Override
+    public PageResult findPage(Integer page, Integer pageSize, design_classify classify) {
+        PageHelper.startPage(page, pageSize);
+        design_classifyQuery query = new design_classifyQuery();
+        if (classify != null) {
+            design_classifyQuery.Criteria criteria = query.createCriteria();
+            if (classify.getKindName() != null) {
+                criteria.andKindNameLike("%" + classify.getKindName() + "%");
+            }
+        }
+        Page<design_classify> design_classifies = (Page<design_classify>) mapper.selectByExample(query);
+        return new PageResult(design_classifies.getTotal(), design_classifies.getResult());
+    }
+
+    @Override
+    public void updateclassifyById(design_classify classify) {
+
+
+        mapper.updateByPrimaryKeySelective(classify);
+    }
+
+    @Override
+    public design_classify queryByName(design_classify classify) {
+        return mapper.selectId(classify.getKindName());
     }
 }

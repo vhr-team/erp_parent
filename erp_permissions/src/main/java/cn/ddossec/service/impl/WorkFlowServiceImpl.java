@@ -1,11 +1,9 @@
 package cn.ddossec.service.impl;
 
-import cn.ddossec.common.ActiveUser;
 import cn.ddossec.common.Constant;
 import cn.ddossec.common.DataGridView;
 import cn.ddossec.common.toolUtils;
 import cn.ddossec.domain.LeaveBill;
-import cn.ddossec.domain.User;
 import cn.ddossec.mapper.LeavebillMapper;
 import cn.ddossec.service.WorkFlowService;
 import cn.ddossec.vo.WorkFlowVo;
@@ -17,8 +15,6 @@ import org.activiti.engine.*;
 import org.activiti.engine.repository.Deployment;
 import org.activiti.engine.repository.ProcessDefinition;
 import org.activiti.engine.task.Task;
-import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.subject.Subject;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -177,10 +173,7 @@ public class WorkFlowServiceImpl implements WorkFlowService {
 
         Map<String, Object> variables = new HashMap<>();
         // 设置流程变量去设置下个任务的办理人
-        Subject subject = SecurityUtils.getSubject();
-        ActiveUser activeUser = (ActiveUser) subject.getPrincipal();
-        User user = activeUser.getUser();
-        variables.put("username", user.getName());
+        variables.put("username", toolUtils.getCurrentUser().getName());
 
         this.runtimeService.startProcessInstanceByKey(processDefinitionKey, businessKey, variables);
 

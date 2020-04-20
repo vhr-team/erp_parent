@@ -87,7 +87,6 @@ shiro:
     - /v2/**
     - /login/captcha
     - /workFlow/viewProcessImage*
-    - /workFlow/loadCurrentUserTask*
   logout-url: /login/logout*
   authc-urls:
     - /**

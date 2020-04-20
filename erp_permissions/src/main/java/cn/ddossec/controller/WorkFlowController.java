@@ -18,6 +18,7 @@ import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 import java.awt.image.BufferedImage;
 import java.io.InputStream;
+import java.util.List;
 
 /**
  * @author 30315
@@ -163,5 +164,14 @@ public class WorkFlowController {
     @ResponseBody
     public LeaveBill queryLeaveBillByTaskId(WorkFlowVo workFlowVo){
         return this.workFlowService.queryLeaveBillByTaskId(workFlowVo.getTaskId());
+    }
+
+    /**
+     * 根据任务ID查询连线信息
+     * @return
+     */
+    @GetMapping("queryOutComeByTaskId")
+    public List<String> queryOutComeByTaskId(WorkFlowVo workFlowVo){
+        return this.workFlowService.queryOutComeByTaskId(workFlowVo.getTaskId());
     }
 }

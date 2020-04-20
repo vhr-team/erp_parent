@@ -13,6 +13,7 @@ import cn.ddossec.vo.act.ActProcessDefinitionEntity;
 import cn.ddossec.vo.act.ActTaskEntity;
 import lombok.extern.slf4j.Slf4j;
 import org.activiti.engine.*;
+import org.activiti.engine.impl.identity.Authentication;
 import org.activiti.engine.impl.persistence.entity.ProcessDefinitionEntity;
 import org.activiti.engine.impl.pvm.PvmTransition;
 import org.activiti.engine.impl.pvm.process.ActivityImpl;
@@ -277,6 +278,7 @@ public class WorkFlowServiceImpl implements WorkFlowService {
 
     /**
      * 根据任务ID查询批注信息
+     *
      * @param taskId
      * @return
      */
@@ -298,5 +300,50 @@ public class WorkFlowServiceImpl implements WorkFlowService {
         return new DataGridView(Long.valueOf(data.size()), data);
     }
 
+    /**
+     * 完成任务
+     * @param workFlowVo
+     */
+    @Override
+    public void completeTask(WorkFlowVo workFlowVo) {
+        String taskId = workFlowVo.getTaskId();// 任务ID
+        String outcome = workFlowVo.getOutcome();// 连接名称
+        Integer leaveBillId = workFlowVo.getId();// 请假单ID
+        String comment = workFlowVo.getComment();// 批注信息
+
+        // 1,根据任务ID查询任务实例
+        Task task = this.taskService.createTaskQuery().taskId(taskId).singleResult();
+        // 2,从任务里面取出流程实例ID
+        String processInstanceId = task.getProcessInstanceId();
+        // 设置批注人名
+        String userName = toolUtils.getCurrentUser().getName();
+        /*
+         * 因为批注人是org.activiti.engine.impl.cmd.AddCommentCmd 80代码使用 String userId =
+         * Authentication.getAuthenticatedUserId(); CommentEntity comment = new
+         * CommentEntity(); comment.setUserId(userId);
+         * Authentication这类里面使用了一个ThreadLocal的线程局部变量
+         */
+        Authentication.setAuthenticatedUserId(userName);
+        // 添加批注信息
+        this.taskService.addComment(taskId, processInstanceId, "[" + outcome + "]" + comment);
+        // 完成任务
+        Map<String, Object> variables = new HashMap<>();
+        variables.put("outcome", outcome);
+        this.taskService.complete(taskId, variables);
+        // 判断任务是否结束
+        ProcessInstance processInstance = this.runtimeService.createProcessInstanceQuery()
+                .processInstanceId(processInstanceId).singleResult();
+        if (null == processInstance) {
+            LeaveBill leaveBill = new LeaveBill();
+            leaveBill.setId(leaveBillId);
+            // 说明流程结束
+            if (outcome.equals("放弃")) {
+                leaveBill.setState(Constant.STATE_LEAVEBILL_THREE);// 已放弃
+            } else {
+                leaveBill.setState(Constant.STATE_LEAVEBILL_TWO);// 审批完成
+            }
+            this.leavebillMapper.updateById(leaveBill);
+        }
+    }
 
 }

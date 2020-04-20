@@ -238,5 +238,14 @@ public class WorkFlowController {
         return this.workFlowService.queryTaskCoordinateByTaskId(workFlowVo.getTaskId());
     }
 
-
+    /**
+     * 根据请假单的ID查询批注信息
+     * @param workFlowVo
+     * @return
+     */
+    @RequestMapping("loadCommentByLeaveBillId")
+    @ResponseBody
+    public DataGridView loadCommentByLeaveBillId(WorkFlowVo workFlowVo) {
+        return this.workFlowService.querydCommentByLeaveBillId(workFlowVo.getId());
+    }
 }

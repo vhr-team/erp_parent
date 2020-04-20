@@ -2,6 +2,7 @@ package cn.ddossec.controller;
 
 import cn.ddossec.common.DataGridView;
 import cn.ddossec.common.ResultObj;
+import cn.ddossec.domain.LeaveBill;
 import cn.ddossec.service.WorkFlowService;
 import cn.ddossec.vo.WorkFlowVo;
 import lombok.extern.slf4j.Slf4j;
@@ -151,5 +152,16 @@ public class WorkFlowController {
     @ResponseBody
     public DataGridView loadCurrentUserTask(WorkFlowVo workFlowVo) {
         return this.workFlowService.queryCurrentUserTask(workFlowVo);
+    }
+
+    /**
+     * 根据任务ID查询请假单的信息
+     * @param workFlowVo
+     * @return
+     */
+    @GetMapping("queryLeaveBillByTaskId")
+    @ResponseBody
+    public LeaveBill queryLeaveBillByTaskId(WorkFlowVo workFlowVo){
+        return this.workFlowService.queryLeaveBillByTaskId(workFlowVo.getTaskId());
     }
 }

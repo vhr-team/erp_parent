@@ -3,6 +3,7 @@ package cn.ddossec.service.impl;
 import cn.ddossec.common.ActiveUser;
 import cn.ddossec.common.Constant;
 import cn.ddossec.common.DataGridView;
+import cn.ddossec.common.toolUtils;
 import cn.ddossec.domain.LeaveBill;
 import cn.ddossec.domain.User;
 import cn.ddossec.mapper.LeavebillMapper;
@@ -10,10 +11,12 @@ import cn.ddossec.service.WorkFlowService;
 import cn.ddossec.vo.WorkFlowVo;
 import cn.ddossec.vo.act.ActDeploymentEntity;
 import cn.ddossec.vo.act.ActProcessDefinitionEntity;
+import cn.ddossec.vo.act.ActTaskEntity;
 import lombok.extern.slf4j.Slf4j;
 import org.activiti.engine.*;
 import org.activiti.engine.repository.Deployment;
 import org.activiti.engine.repository.ProcessDefinition;
+import org.activiti.engine.task.Task;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.BeanUtils;
@@ -163,6 +166,7 @@ public class WorkFlowServiceImpl implements WorkFlowService {
 
     /**
      * 启动流程
+     *
      * @param leaveBillId
      */
     @Override
@@ -186,5 +190,31 @@ public class WorkFlowServiceImpl implements WorkFlowService {
 
         this.leavebillMapper.updateById(leaveBill);
     }
+
+    /**
+     * 查询当前登陆人的代办任务
+     * @param workFlowVo
+     * @return
+     */
+    @Override
+    public DataGridView queryCurrentUserTask(WorkFlowVo workFlowVo) {
+        //1,得到办理人信息
+        String assignee = toolUtils.getCurrentUser().getName();
+
+        //2,查询总数
+        long count = this.taskService.createTaskQuery().taskAssignee(assignee).count();
+        //3,查询集合
+        int firstResult = (workFlowVo.getPage() - 1) * workFlowVo.getLimit();
+        int maxResults = workFlowVo.getLimit();
+        List<Task> list = this.taskService.createTaskQuery().taskAssignee(assignee).listPage(firstResult, maxResults);
+        List<ActTaskEntity> taskEntities = new ArrayList<>();
+        for (Task task : list) {
+            ActTaskEntity entity = new ActTaskEntity();
+            BeanUtils.copyProperties(task, entity);
+            taskEntities.add(entity);
+        }
+        return new DataGridView(count, taskEntities);
+    }
+
 
 }

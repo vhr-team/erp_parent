@@ -1,6 +1,5 @@
 package com.rbac.design.mapper;
 
-
 import com.rbac.design.pojo.design_record;
 import com.rbac.design.pojo.design_recordQuery;
 import org.apache.ibatis.annotations.Mapper;

@@ -6,7 +6,6 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
-
 @Mapper
 public interface design_material_detailmapper {
     int countByExample(design_material_detailQuery example);

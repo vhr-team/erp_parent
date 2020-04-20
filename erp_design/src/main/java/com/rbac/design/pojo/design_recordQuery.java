@@ -1164,52 +1164,52 @@ public class design_recordQuery {
             return (Criteria) this;
         }
 
-        public Criteria andListPriceEqualTo(Integer value) {
+        public Criteria andListPriceEqualTo(Double value) {
             addCriterion("list_price =", value, "listPrice");
             return (Criteria) this;
         }
 
-        public Criteria andListPriceNotEqualTo(Integer value) {
+        public Criteria andListPriceNotEqualTo(Double value) {
             addCriterion("list_price <>", value, "listPrice");
             return (Criteria) this;
         }
 
-        public Criteria andListPriceGreaterThan(Integer value) {
+        public Criteria andListPriceGreaterThan(Double value) {
             addCriterion("list_price >", value, "listPrice");
             return (Criteria) this;
         }
 
-        public Criteria andListPriceGreaterThanOrEqualTo(Integer value) {
+        public Criteria andListPriceGreaterThanOrEqualTo(Double value) {
             addCriterion("list_price >=", value, "listPrice");
             return (Criteria) this;
         }
 
-        public Criteria andListPriceLessThan(Integer value) {
+        public Criteria andListPriceLessThan(Double value) {
             addCriterion("list_price <", value, "listPrice");
             return (Criteria) this;
         }
 
-        public Criteria andListPriceLessThanOrEqualTo(Integer value) {
+        public Criteria andListPriceLessThanOrEqualTo(Double value) {
             addCriterion("list_price <=", value, "listPrice");
             return (Criteria) this;
         }
 
-        public Criteria andListPriceIn(List<Integer> values) {
+        public Criteria andListPriceIn(List<Double> values) {
             addCriterion("list_price in", values, "listPrice");
             return (Criteria) this;
         }
 
-        public Criteria andListPriceNotIn(List<Integer> values) {
+        public Criteria andListPriceNotIn(List<Double> values) {
             addCriterion("list_price not in", values, "listPrice");
             return (Criteria) this;
         }
 
-        public Criteria andListPriceBetween(Integer value1, Integer value2) {
+        public Criteria andListPriceBetween(Double value1, Double value2) {
             addCriterion("list_price between", value1, value2, "listPrice");
             return (Criteria) this;
         }
 
-        public Criteria andListPriceNotBetween(Integer value1, Integer value2) {
+        public Criteria andListPriceNotBetween(Double value1, Double value2) {
             addCriterion("list_price not between", value1, value2, "listPrice");
             return (Criteria) this;
         }
@@ -1224,52 +1224,52 @@ public class design_recordQuery {
             return (Criteria) this;
         }
 
-        public Criteria andCostPriceEqualTo(Integer value) {
+        public Criteria andCostPriceEqualTo(Double value) {
             addCriterion("cost_price =", value, "costPrice");
             return (Criteria) this;
         }
 
-        public Criteria andCostPriceNotEqualTo(Integer value) {
+        public Criteria andCostPriceNotEqualTo(Double value) {
             addCriterion("cost_price <>", value, "costPrice");
             return (Criteria) this;
         }
 
-        public Criteria andCostPriceGreaterThan(Integer value) {
+        public Criteria andCostPriceGreaterThan(Double value) {
             addCriterion("cost_price >", value, "costPrice");
             return (Criteria) this;
         }
 
-        public Criteria andCostPriceGreaterThanOrEqualTo(Integer value) {
+        public Criteria andCostPriceGreaterThanOrEqualTo(Double value) {
             addCriterion("cost_price >=", value, "costPrice");
             return (Criteria) this;
         }
 
-        public Criteria andCostPriceLessThan(Integer value) {
+        public Criteria andCostPriceLessThan(Double value) {
             addCriterion("cost_price <", value, "costPrice");
             return (Criteria) this;
         }
 
-        public Criteria andCostPriceLessThanOrEqualTo(Integer value) {
+        public Criteria andCostPriceLessThanOrEqualTo(Double value) {
             addCriterion("cost_price <=", value, "costPrice");
             return (Criteria) this;
         }
 
-        public Criteria andCostPriceIn(List<Integer> values) {
+        public Criteria andCostPriceIn(List<Double> values) {
             addCriterion("cost_price in", values, "costPrice");
             return (Criteria) this;
         }
 
-        public Criteria andCostPriceNotIn(List<Integer> values) {
+        public Criteria andCostPriceNotIn(List<Double> values) {
             addCriterion("cost_price not in", values, "costPrice");
             return (Criteria) this;
         }
 
-        public Criteria andCostPriceBetween(Integer value1, Integer value2) {
+        public Criteria andCostPriceBetween(Double value1, Double value2) {
             addCriterion("cost_price between", value1, value2, "costPrice");
             return (Criteria) this;
         }
 
-        public Criteria andCostPriceNotBetween(Integer value1, Integer value2) {
+        public Criteria andCostPriceNotBetween(Double value1, Double value2) {
             addCriterion("cost_price not between", value1, value2, "costPrice");
             return (Criteria) this;
         }
@@ -1284,52 +1284,52 @@ public class design_recordQuery {
             return (Criteria) this;
         }
 
-        public Criteria andRealCostPriceEqualTo(Integer value) {
+        public Criteria andRealCostPriceEqualTo(Double value) {
             addCriterion("real_cost_price =", value, "realCostPrice");
             return (Criteria) this;
         }
 
-        public Criteria andRealCostPriceNotEqualTo(Integer value) {
+        public Criteria andRealCostPriceNotEqualTo(Double value) {
             addCriterion("real_cost_price <>", value, "realCostPrice");
             return (Criteria) this;
         }
 
-        public Criteria andRealCostPriceGreaterThan(Integer value) {
+        public Criteria andRealCostPriceGreaterThan(Double value) {
             addCriterion("real_cost_price >", value, "realCostPrice");
             return (Criteria) this;
         }
 
-        public Criteria andRealCostPriceGreaterThanOrEqualTo(Integer value) {
+        public Criteria andRealCostPriceGreaterThanOrEqualTo(Double value) {
             addCriterion("real_cost_price >=", value, "realCostPrice");
             return (Criteria) this;
         }
 
-        public Criteria andRealCostPriceLessThan(Integer value) {
+        public Criteria andRealCostPriceLessThan(Double value) {
             addCriterion("real_cost_price <", value, "realCostPrice");
             return (Criteria) this;
         }
 
-        public Criteria andRealCostPriceLessThanOrEqualTo(Integer value) {
+        public Criteria andRealCostPriceLessThanOrEqualTo(Double value) {
             addCriterion("real_cost_price <=", value, "realCostPrice");
             return (Criteria) this;
         }
 
-        public Criteria andRealCostPriceIn(List<Integer> values) {
+        public Criteria andRealCostPriceIn(List<Double> values) {
             addCriterion("real_cost_price in", values, "realCostPrice");
             return (Criteria) this;
         }
 
-        public Criteria andRealCostPriceNotIn(List<Integer> values) {
+        public Criteria andRealCostPriceNotIn(List<Double> values) {
             addCriterion("real_cost_price not in", values, "realCostPrice");
             return (Criteria) this;
         }
 
-        public Criteria andRealCostPriceBetween(Integer value1, Integer value2) {
+        public Criteria andRealCostPriceBetween(Double value1, Double value2) {
             addCriterion("real_cost_price between", value1, value2, "realCostPrice");
             return (Criteria) this;
         }
 
-        public Criteria andRealCostPriceNotBetween(Integer value1, Integer value2) {
+        public Criteria andRealCostPriceNotBetween(Double value1, Double value2) {
             addCriterion("real_cost_price not between", value1, value2, "realCostPrice");
             return (Criteria) this;
         }

@@ -39,6 +39,12 @@ public class ResultObj {
     public static final ResultObj START_SUCCESS = new ResultObj(200, "启动成功");
     public static final ResultObj START_ERROR = new ResultObj(-1, "启动失败");
 
+    /**
+     * 任务信息
+     */
+    public static final ResultObj TASK_START_SUCCESS = new ResultObj(-1, "任务完成成功");
+    public static final ResultObj TASK_START_ERROR = new ResultObj(-1, "任务完成失败");
+
     private Integer code = 200;
     private String msg = "";
     private Object token = "";

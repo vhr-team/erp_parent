@@ -19,4 +19,7 @@ public class WorkFlowVo extends BaseVo {
     //请假单ID
     private Integer id;
 
+    //任务ID
+    private String taskId;
+
 }

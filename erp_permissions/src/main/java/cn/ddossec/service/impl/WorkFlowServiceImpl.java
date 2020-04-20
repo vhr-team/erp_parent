@@ -13,6 +13,7 @@ import cn.ddossec.vo.act.ActProcessDefinitionEntity;
 import cn.ddossec.vo.act.ActTaskEntity;
 import lombok.extern.slf4j.Slf4j;
 import org.activiti.engine.*;
+import org.activiti.engine.history.HistoricProcessInstance;
 import org.activiti.engine.impl.identity.Authentication;
 import org.activiti.engine.impl.persistence.entity.ProcessDefinitionEntity;
 import org.activiti.engine.impl.pvm.PvmTransition;
@@ -374,6 +375,7 @@ public class WorkFlowServiceImpl implements WorkFlowService {
 
     /**
      * 根据任务ID查询节点坐标
+     *
      * @param taskId
      * @return
      */
@@ -404,5 +406,29 @@ public class WorkFlowServiceImpl implements WorkFlowService {
         return coordinate;
     }
 
+    /**
+     * 根据请假单的ID查询批注信息
+     * @param id
+     * @return
+     */
+    @Override
+    public DataGridView querydCommentByLeaveBillId(Integer id) {
+        // 组装businesskey
+        String businessKey = LeaveBill.class.getSimpleName() + ":" + id;
+        // 根据业务ID查询历史流程实例
+        HistoricProcessInstance historicProcessInstance = historyService.createHistoricProcessInstanceQuery()
+                .processInstanceBusinessKey(businessKey).singleResult();
+        // 使用taskService+流程实例ID查询批注
+        List<Comment> comments = this.taskService.getProcessInstanceComments(historicProcessInstance.getId());
+        List<ActCommentEntity> data = new ArrayList<>();
+        if (null != comments && comments.size() > 0) {
+            for (Comment comment : comments) {
+                ActCommentEntity entity = new ActCommentEntity();
+                BeanUtils.copyProperties(comment, entity);
+                data.add(entity);
+            }
+        }
+        return new DataGridView(Long.valueOf(data.size()), data);
+    }
 
 }

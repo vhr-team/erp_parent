@@ -171,6 +171,7 @@ public class WorkFlowController {
      * @return
      */
     @GetMapping("queryOutComeByTaskId")
+    @ResponseBody
     public List<String> queryOutComeByTaskId(WorkFlowVo workFlowVo){
         return this.workFlowService.queryOutComeByTaskId(workFlowVo.getTaskId());
     }

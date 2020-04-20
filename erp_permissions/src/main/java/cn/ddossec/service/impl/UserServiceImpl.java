@@ -125,7 +125,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     @CachePut(cacheNames = "cn.ddossec.service.impl.UserServiceImpl", key = "#result.id")
     public User updateUser(User user) {
         User selectUser = this.userMapper.selectById(user.getId());
-        BeanUtil.copyProperties(user,selectUser, CopyOptions.create().setIgnoreNullValue(true).setIgnoreError(true));
+        BeanUtil.copyProperties(user, selectUser, CopyOptions.create().setIgnoreNullValue(true).setIgnoreError(true));
 
         this.userMapper.updateById(selectUser);
         return user;
@@ -167,5 +167,15 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
             qw.eq(deptid != null, "deptid", deptid);
             return this.getBaseMapper().selectList(qw);
         }
+    }
+
+    /**
+     * 查询领导信息
+     * @param mgr
+     * @return
+     */
+    @Override
+    public User queryUserById(Integer mgr) {
+        return this.userMapper.selectById(mgr);
     }
 }

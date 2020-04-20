@@ -7,6 +7,7 @@ import cn.ddossec.domain.LeaveBill;
 import cn.ddossec.mapper.LeavebillMapper;
 import cn.ddossec.service.WorkFlowService;
 import cn.ddossec.vo.WorkFlowVo;
+import cn.ddossec.vo.act.ActCommentEntity;
 import cn.ddossec.vo.act.ActDeploymentEntity;
 import cn.ddossec.vo.act.ActProcessDefinitionEntity;
 import cn.ddossec.vo.act.ActTaskEntity;
@@ -18,6 +19,7 @@ import org.activiti.engine.impl.pvm.process.ActivityImpl;
 import org.activiti.engine.repository.Deployment;
 import org.activiti.engine.repository.ProcessDefinition;
 import org.activiti.engine.runtime.ProcessInstance;
+import org.activiti.engine.task.Comment;
 import org.activiti.engine.task.Task;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -238,6 +240,7 @@ public class WorkFlowServiceImpl implements WorkFlowService {
 
     /**
      * 根据任务ID查询连线信息
+     *
      * @param taskId
      * @return
      */
@@ -270,6 +273,29 @@ public class WorkFlowServiceImpl implements WorkFlowService {
             }
         }
         return names;
+    }
+
+    /**
+     * 根据任务ID查询批注信息
+     * @param taskId
+     * @return
+     */
+    @Override
+    public DataGridView queryCommentByTaskId(String taskId) {
+        // 1,根据任务ID查询任务实例
+        Task task = this.taskService.createTaskQuery().taskId(taskId).singleResult();
+        // 2,从任务里面取出流程实例ID
+        String processInstanceId = task.getProcessInstanceId();
+        List<Comment> comments = taskService.getProcessInstanceComments(processInstanceId);
+        List<ActCommentEntity> data = new ArrayList<>();
+        if (null != comments && comments.size() > 0) {
+            for (Comment comment : comments) {
+                ActCommentEntity entity = new ActCommentEntity();
+                BeanUtils.copyProperties(comment, entity);
+                data.add(entity);
+            }
+        }
+        return new DataGridView(Long.valueOf(data.size()), data);
     }
 
 

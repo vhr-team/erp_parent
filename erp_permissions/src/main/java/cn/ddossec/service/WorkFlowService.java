@@ -3,6 +3,7 @@ package cn.ddossec.service;
 import cn.ddossec.common.DataGridView;
 import cn.ddossec.domain.LeaveBill;
 import cn.ddossec.vo.WorkFlowVo;
+import org.activiti.engine.repository.ProcessDefinition;
 
 import java.io.InputStream;
 import java.util.List;
@@ -91,4 +92,11 @@ public interface WorkFlowService {
      * @param workFlowVo
      */
     void completeTask(WorkFlowVo workFlowVo);
+
+    /**
+     * 根据任务ID，查询流程定义对象
+     * @param taskId
+     * @return
+     */
+    ProcessDefinition queryProcessDefinitionByTaskId(String taskId);
 }

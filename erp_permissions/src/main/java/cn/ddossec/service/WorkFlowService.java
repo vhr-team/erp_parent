@@ -5,6 +5,7 @@ import cn.ddossec.domain.LeaveBill;
 import cn.ddossec.vo.WorkFlowVo;
 
 import java.io.InputStream;
+import java.util.List;
 
 /**
  * @author 30315
@@ -63,4 +64,12 @@ public interface WorkFlowService {
      * @return
      */
     LeaveBill queryLeaveBillByTaskId(String taskId);
+
+    /**
+     * 根据任务ID查询连线信息
+     * @param taskId
+     * @return
+     */
+    List<String> queryOutComeByTaskId(String taskId);
+
 }

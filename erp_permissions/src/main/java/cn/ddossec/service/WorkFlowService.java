@@ -48,4 +48,11 @@ public interface WorkFlowService {
      * @param leaveBillId
      */
     void startProcess(Integer leaveBillId);
+
+    /**
+     * 查询当前登陆人的代办任务
+     * @param workFlowVo
+     * @return
+     */
+    DataGridView queryCurrentUserTask(WorkFlowVo workFlowVo);
 }

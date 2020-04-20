@@ -14,6 +14,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.activiti.engine.*;
 import org.activiti.engine.repository.Deployment;
 import org.activiti.engine.repository.ProcessDefinition;
+import org.activiti.engine.runtime.ProcessInstance;
 import org.activiti.engine.task.Task;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -186,6 +187,7 @@ public class WorkFlowServiceImpl implements WorkFlowService {
 
     /**
      * 查询当前登陆人的代办任务
+     *
      * @param workFlowVo
      * @return
      */
@@ -207,6 +209,27 @@ public class WorkFlowServiceImpl implements WorkFlowService {
             taskEntities.add(entity);
         }
         return new DataGridView(count, taskEntities);
+    }
+
+    /**
+     * 根据任务ID查询请假单的信息
+     * @param taskId
+     * @return
+     */
+    @Override
+    public LeaveBill queryLeaveBillByTaskId(String taskId) {
+        // 1,根据任务ID查询任务实例
+        Task task = this.taskService.createTaskQuery().taskId(taskId).singleResult();
+        // 2,从任务里面取出流程实例ID
+        String processInstanceId = task.getProcessInstanceId();
+        // 3,根据流程实例ID查询流程实例
+        ProcessInstance processInstance = this.runtimeService.createProcessInstanceQuery()
+                .processInstanceId(processInstanceId).singleResult();
+        // 4,取出business_key
+        String businessKey = processInstance.getBusinessKey();// LeaveBill:9
+        String leaveBillId = businessKey.split(":")[1];
+        return this.leavebillMapper.selectById(Integer.valueOf(leaveBillId));
+
     }
 
 

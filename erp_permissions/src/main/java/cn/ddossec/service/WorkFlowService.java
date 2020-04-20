@@ -20,6 +20,7 @@ public interface WorkFlowService {
 
     /**
      * 查询所有流程定义
+     *
      * @param workFlowVo
      * @return
      */
@@ -27,6 +28,7 @@ public interface WorkFlowService {
 
     /**
      * 添加流程部署
+     *
      * @param inputStream
      * @param deploymentName
      */
@@ -34,12 +36,14 @@ public interface WorkFlowService {
 
     /**
      * 根据流程部署ID，删除流程部署信息
+     *
      * @param deploymentId
      */
     void deleteWorkFlow(String deploymentId);
 
     /**
      * 根据流程部署ID查询流程图
+     *
      * @param deploymentId
      * @return
      */
@@ -47,12 +51,14 @@ public interface WorkFlowService {
 
     /**
      * 启动流程
+     *
      * @param leaveBillId
      */
     void startProcess(Integer leaveBillId);
 
     /**
      * 查询当前登陆人的代办任务
+     *
      * @param workFlowVo
      * @return
      */
@@ -60,6 +66,7 @@ public interface WorkFlowService {
 
     /**
      * 根据任务ID查询请假单的信息
+     *
      * @param taskId
      * @return
      */
@@ -67,15 +74,21 @@ public interface WorkFlowService {
 
     /**
      * 根据任务ID查询连线信息
+     *
      * @param taskId
      * @return
      */
     List<String> queryOutComeByTaskId(String taskId);
 
     /**
-     *
      * @param taskId
      * @return
      */
     DataGridView queryCommentByTaskId(String taskId);
+
+    /**
+     * 完成任务
+     * @param workFlowVo
+     */
+    void completeTask(WorkFlowVo workFlowVo);
 }

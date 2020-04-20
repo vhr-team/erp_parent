@@ -346,4 +346,28 @@ public class WorkFlowServiceImpl implements WorkFlowService {
         }
     }
 
+    /**
+     * 根据任务ID，查询流程定义对象
+     * @param taskId
+     * @return
+     */
+    @Override
+    public ProcessDefinition queryProcessDefinitionByTaskId(String taskId) {
+        // 1.根据任务ID，查询任务实例
+        Task task = this.taskService.createTaskQuery().taskId(taskId).singleResult();
+
+        // 2.取出流程实例ID
+        String processInstanceId = task.getProcessInstanceId();
+
+        // 3.根据流程实例ID，查询流程实例对象
+        ProcessInstance processInstance = this.runtimeService.createProcessInstanceQuery().processInstanceId(processInstanceId).singleResult();
+
+        // 4.取出流程部署ID
+        String processDefinitionId = processInstance.getProcessDefinitionId();
+
+        // 5.查询流程定义对象
+        ProcessDefinition processDefinition = this.repositoryService.createProcessDefinitionQuery().processDefinitionId(processDefinitionId).singleResult();
+        return processDefinition;
+    }
+
 }

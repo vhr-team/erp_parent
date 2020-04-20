@@ -72,4 +72,10 @@ public interface WorkFlowService {
      */
     List<String> queryOutComeByTaskId(String taskId);
 
+    /**
+     *
+     * @param taskId
+     * @return
+     */
+    DataGridView queryCommentByTaskId(String taskId);
 }

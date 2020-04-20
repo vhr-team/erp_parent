@@ -107,4 +107,11 @@ public interface WorkFlowService {
      * @return
      */
     Map<String, Object> queryTaskCoordinateByTaskId(String taskId);
+
+    /**
+     * 根据请假单的ID查询批注信息
+     * @param id
+     * @return
+     */
+    DataGridView querydCommentByLeaveBillId(Integer id);
 }

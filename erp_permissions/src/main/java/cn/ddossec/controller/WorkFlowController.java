@@ -176,5 +176,14 @@ public class WorkFlowController {
         return this.workFlowService.queryOutComeByTaskId(workFlowVo.getTaskId());
     }
 
-
+    /**
+     * 根据任务ID查询批注信息
+     * @param workFlowVo
+     * @return
+     */
+    @GetMapping("loadAllCommentByTaskId")
+    @ResponseBody
+    public DataGridView loadAllCommentByTaskId(WorkFlowVo workFlowVo) {
+        return this.workFlowService.queryCommentByTaskId(workFlowVo.getTaskId());
+    }
 }

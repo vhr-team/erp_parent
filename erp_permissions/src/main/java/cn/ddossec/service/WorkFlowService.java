@@ -1,6 +1,7 @@
 package cn.ddossec.service;
 
 import cn.ddossec.common.DataGridView;
+import cn.ddossec.domain.LeaveBill;
 import cn.ddossec.vo.WorkFlowVo;
 
 import java.io.InputStream;
@@ -55,4 +56,11 @@ public interface WorkFlowService {
      * @return
      */
     DataGridView queryCurrentUserTask(WorkFlowVo workFlowVo);
+
+    /**
+     * 根据任务ID查询请假单的信息
+     * @param taskId
+     * @return
+     */
+    LeaveBill queryLeaveBillByTaskId(String taskId);
 }

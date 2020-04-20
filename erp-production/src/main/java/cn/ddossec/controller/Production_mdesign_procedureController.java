@@ -63,6 +63,7 @@ public class Production_mdesign_procedureController {
         return "update";
     }
 
+    @RequestMapping("/updateProductionById")
     public ModelAndView updateProductionById(Production_mdesign_procedure production_mdesign_procedure){
         ModelAndView mv = new ModelAndView();
         boolean b = production_mdesign_procedureService.updateProduction_mdesign_procedure(production_mdesign_procedure);

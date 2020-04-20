@@ -136,7 +136,6 @@ public class WorkFlowController {
     @ResponseBody
     public ResultObj startProcess(WorkFlowVo workFlowVo) {
         try {
-            System.out.println(workFlowVo.getId());
             Integer leaveBillId = workFlowVo.getId();
             this.workFlowService.startProcess(leaveBillId);
             return ResultObj.START_SUCCESS;
@@ -145,4 +144,12 @@ public class WorkFlowController {
         }
     }
 
+    /**
+     * 查询当前登陆人的代办任务
+     */
+    @RequestMapping("loadCurrentUserTask")
+    @ResponseBody
+    public DataGridView loadCurrentUserTask(WorkFlowVo workFlowVo) {
+        return this.workFlowService.queryCurrentUserTask(workFlowVo);
+    }
 }

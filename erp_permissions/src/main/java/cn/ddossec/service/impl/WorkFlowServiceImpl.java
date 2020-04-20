@@ -82,7 +82,6 @@ public class WorkFlowServiceImpl implements WorkFlowService {
             BeanUtils.copyProperties(deployment, entity);
             data.add(entity);
         }
-        System.out.println("queryProcessDeploy---" + data);
         return new DataGridView(count, data);
     }
 
@@ -113,7 +112,6 @@ public class WorkFlowServiceImpl implements WorkFlowService {
                 data.add(entity);
             }
         }
-        System.out.println("queryloadAllProcessDefinition" + data);
         return new DataGridView(count, data);
     }
 
@@ -170,7 +168,6 @@ public class WorkFlowServiceImpl implements WorkFlowService {
     @Override
     public void startProcess(Integer leaveBillId) {
         // 找到流程的key
-
         String processDefinitionKey = LeaveBill.class.getSimpleName();
         String businessKey = processDefinitionKey + ":" + leaveBillId;
 

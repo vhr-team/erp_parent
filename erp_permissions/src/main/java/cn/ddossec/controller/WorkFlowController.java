@@ -6,6 +6,7 @@ import cn.ddossec.domain.LeaveBill;
 import cn.ddossec.service.WorkFlowService;
 import cn.ddossec.vo.WorkFlowVo;
 import lombok.extern.slf4j.Slf4j;
+import org.activiti.engine.repository.ProcessDefinition;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -206,6 +207,23 @@ public class WorkFlowController {
         } catch (Exception e) {
             return ResultObj.TASK_START_ERROR;
         }
+    }
+
+    /**
+     * 根据任务ID查看流程进度图
+     * @param workFlowVo
+     */
+    @GetMapping("ViewProcessByTaskId")
+    @ResponseBody
+    public String ViewProcessByTaskId(WorkFlowVo workFlowVo,HttpServletResponse response) {
+
+        ProcessDefinition processDefinition = this.workFlowService.queryProcessDefinitionByTaskId(workFlowVo.getTaskId());
+
+        //取出流程部署ID
+        String deploymentId = processDefinition.getDeploymentId();
+        workFlowVo.setDeploymentId(deploymentId);
+
+        return deploymentId;
     }
 
 }

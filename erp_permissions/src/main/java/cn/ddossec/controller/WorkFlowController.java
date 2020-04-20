@@ -157,27 +157,30 @@ public class WorkFlowController {
 
     /**
      * 根据任务ID查询请假单的信息
+     *
      * @param workFlowVo
      * @return
      */
     @GetMapping("queryLeaveBillByTaskId")
     @ResponseBody
-    public LeaveBill queryLeaveBillByTaskId(WorkFlowVo workFlowVo){
+    public LeaveBill queryLeaveBillByTaskId(WorkFlowVo workFlowVo) {
         return this.workFlowService.queryLeaveBillByTaskId(workFlowVo.getTaskId());
     }
 
     /**
      * 根据任务ID查询连线信息
+     *
      * @return
      */
     @GetMapping("queryOutComeByTaskId")
     @ResponseBody
-    public List<String> queryOutComeByTaskId(WorkFlowVo workFlowVo){
+    public List<String> queryOutComeByTaskId(WorkFlowVo workFlowVo) {
         return this.workFlowService.queryOutComeByTaskId(workFlowVo.getTaskId());
     }
 
     /**
      * 根据任务ID查询批注信息
+     *
      * @param workFlowVo
      * @return
      */
@@ -186,4 +189,23 @@ public class WorkFlowController {
     public DataGridView loadAllCommentByTaskId(WorkFlowVo workFlowVo) {
         return this.workFlowService.queryCommentByTaskId(workFlowVo.getTaskId());
     }
+
+
+    /**
+     * 完成任务
+     *
+     * @param workFlowVo
+     * @return
+     */
+    @RequestMapping("doTask")
+    @ResponseBody
+    public ResultObj doTask(WorkFlowVo workFlowVo) {
+        try {
+            this.workFlowService.completeTask(workFlowVo);
+            return ResultObj.TASK_START_SUCCESS;
+        } catch (Exception e) {
+            return ResultObj.TASK_START_ERROR;
+        }
+    }
+
 }

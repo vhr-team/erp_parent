@@ -7,6 +7,7 @@ import org.activiti.engine.repository.ProcessDefinition;
 
 import java.io.InputStream;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author 30315
@@ -99,4 +100,11 @@ public interface WorkFlowService {
      * @return
      */
     ProcessDefinition queryProcessDefinitionByTaskId(String taskId);
+
+    /**
+     * 根据任务ID查询节点坐标
+     * @param taskId
+     * @return
+     */
+    Map<String, Object> queryTaskCoordinateByTaskId(String taskId);
 }

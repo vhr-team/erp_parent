@@ -22,4 +22,10 @@ public class WorkFlowVo extends BaseVo {
     //任务ID
     private String taskId;
 
+    // 连接名称
+    private String outcome;
+
+    // 批注信息
+    private String comment;
+
 }

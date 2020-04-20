@@ -20,6 +20,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.awt.image.BufferedImage;
 import java.io.InputStream;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author 30315
@@ -211,19 +212,31 @@ public class WorkFlowController {
 
     /**
      * 根据任务ID查看流程进度图
+     *
      * @param workFlowVo
      */
     @GetMapping("ViewProcessByTaskId")
     @ResponseBody
-    public String ViewProcessByTaskId(WorkFlowVo workFlowVo,HttpServletResponse response) {
+    public String ViewProcessByTaskId(WorkFlowVo workFlowVo, HttpServletResponse response) {
 
         ProcessDefinition processDefinition = this.workFlowService.queryProcessDefinitionByTaskId(workFlowVo.getTaskId());
 
         //取出流程部署ID
         String deploymentId = processDefinition.getDeploymentId();
         workFlowVo.setDeploymentId(deploymentId);
-
         return deploymentId;
     }
+
+    /**
+     * 根据任务ID查询节点坐标
+     * @param workFlowVo
+     * @return
+     */
+    @GetMapping("queryTaskCoordinateByTaskId")
+    @ResponseBody
+    public Map<String, Object> queryTaskCoordinateByTaskId(WorkFlowVo workFlowVo) {
+        return this.workFlowService.queryTaskCoordinateByTaskId(workFlowVo.getTaskId());
+    }
+
 
 }

@@ -98,4 +98,22 @@ public class design_classifyController {
             return new Response(true, "修改失败");
         }
     }
+
+    /**
+     * 根据id查询分类菜单
+     *
+     * @return
+     */
+    List<design_classify> selectById(Integer id) {
+        return null;
+    }
+
+    /**
+     * 根据pid查询分类菜单
+     *
+     * @return
+     */
+    List<design_classify> selectBypId(Integer pId) {
+        return null;
+    }
 }

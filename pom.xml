@@ -13,7 +13,7 @@
         <module>erp-basic</module>
         <module>erp_warehouse</module>
         <module>erp-production</module>
-        <module>erp_warehouse</module>
+        <module>erp-basic</module>
     </modules>
 
     <packaging>pom</packaging>

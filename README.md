@@ -2,6 +2,11 @@
 
 # erp_parent 2.0
 
+![https://img.shields.io/badge/license-Apache%202.0-blue.svg?longCache=true&style=flat-square](https://img.shields.io/badge/license-Apache%202.0-blue.svg?longCache=true&style=flat-square)
+![https://img.shields.io/badge/springboot-2.2.1-yellow.svg?style=flat-square](https://img.shields.io/badge/springboot-2.2.1-yellow.svg?style=flat-square)
+![https://img.shields.io/badge/shiro-1.4.2-orange.svg?longCache=true&style=flat-square](https://img.shields.io/badge/shiro-1.4.2-orange.svg?longCache=true&style=flat-square)
+![https://img.shields.io/badge/layui-2.5.5-brightgreen.svg?longCache=true&style=flat-square](https://img.shields.io/badge/layui-2.5.5-brightgreen.svg?longCache=true&style=flat-square)
+
 ## 开发环境
 
 语言：Java 8
@@ -56,3 +61,5 @@ git clone https://github.com/vhr-team/erp_parent.git
 ## 支持作者
 
 如果该系统对您有帮助的话，请作者喝杯肥宅水吧🍺~
+
+![支持作者](https://images.cnblogs.com/cnblogs_com/TangXiaoHuiHui/1653035/t_200409010025QQ%E5%9B%BE%E7%89%8720200409085946.png?a=1587439705089)

@@ -23,11 +23,12 @@ public interface WarehouseStockMapper {
     /**
      * 查询指定行数据
      *
+     * @param stockId 根据库存编号模糊查询
      * @param offset 查询起始位置
      * @param limit 查询条数
      * @return 对象列表
      */
-    List<WarehouseStock> queryAllByLimit(@Param("offset") int offset, @Param("limit") int limit);
+    List<WarehouseStock> queryAllByLimit(@Param("stockId") String stockId, @Param("offset") int offset, @Param("limit") int limit);
 
 
     /**

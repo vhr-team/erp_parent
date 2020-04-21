@@ -42,11 +42,17 @@ public class WarehouseStockController {
      * @param limit 查询条数
      * @return
      */
-    @ApiOperation(value = "分页查询所有数据")
-    @GetMapping("queryAllByLimit/{offset}/{limit}")
-    public List<WarehouseStock> queryAllByLimit(@PathVariable("offset") Integer offset,@PathVariable("limit") Integer limit){
-        List<WarehouseStock> list = warehouseStockServiceImpl.queryAllByLimit(offset,limit);
+    @ApiOperation(value = "按库存编号模糊查询+分页查询所有数据")
+    @GetMapping(value = {"queryAllByLimit/{offset}/{limit}/{stockId}","queryAllByLimit/{offset}/{limit}"})
+    public List<WarehouseStock> queryAllByLimit(@PathVariable("offset") Integer offset,
+                                                @PathVariable("limit") Integer limit,
+                                                @PathVariable(value = "stockId",required = false) String stockId){
+        if (stockId==null){
+            stockId="";
+        }
+        List<WarehouseStock> list = warehouseStockServiceImpl.queryAllByLimit(stockId,offset,limit);
         return list;
     }
+
 
 }

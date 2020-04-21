@@ -26,7 +26,7 @@ public class Production_mdesign_procedureController {
         return list;
     }
 
-    /**
+    /*
      * 根据id删除
      * @param id
      * @return
@@ -37,7 +37,7 @@ public class Production_mdesign_procedureController {
         return "redirect:/production/getAllproduction";
     }
 
-    /**
+    /*
      * 添加
      * @param production_mdesign_procedure
      * @return
@@ -49,7 +49,7 @@ public class Production_mdesign_procedureController {
     }
 
 
-    /**
+    /*
      * 修改之前查询数据
      * @param id
      * @param model
@@ -63,6 +63,12 @@ public class Production_mdesign_procedureController {
         return "update";
     }
 
+    /*
+     * 修改
+     * @param production_mdesign_procedure
+     * @return
+     */
+    @RequestMapping("/updateProductionById")
     public ModelAndView updateProductionById(Production_mdesign_procedure production_mdesign_procedure){
         ModelAndView mv = new ModelAndView();
         boolean b = production_mdesign_procedureService.updateProduction_mdesign_procedure(production_mdesign_procedure);

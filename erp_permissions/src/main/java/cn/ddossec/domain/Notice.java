@@ -12,18 +12,18 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**  
-    * @title: SysNotice
+    * @title: Notice
     * @projectName erp_parent
     * @description: TODO
     * @author 30315
-    * @date 2020-04-2111:34
+    * @date 2020-04-2111:42
     */
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @TableName(value = "sys_notice")
-public class SysNotice implements Serializable {
+public class Notice implements Serializable {
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
 

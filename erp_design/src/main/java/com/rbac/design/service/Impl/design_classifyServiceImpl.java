@@ -53,16 +53,16 @@ public class design_classifyServiceImpl implements design_classifyService {
 
     /**
      * 删除分類選項的方法
+     *
      * @param classify
      */
     @Override
-    public void deleteclassifyById(design_classify classify) {
-        mapper.deleteByPrimaryKey(classify.getId());
-        design_classifyQuery design_classifyQuery = new design_classifyQuery();
-        com.rbac.design.pojo.design_classifyQuery.Criteria criteria = design_classifyQuery.createCriteria();
-        if (classify.getpId() == 0) {//如果删除的父级分类 相应的子级分类也会删除
-            criteria.andIdEqualTo(classify.getId());
-            mapper.deleteByExample(design_classifyQuery);
+    public void deleteclassifyById(Integer id, String kindName) {
+        if (kindName == "父级" || "父级".equals(kindName)) {
+            mapper.deleteclassifyById(id);
+            mapper.deleteclassifyBypId(id);
+        } else if (kindName == "子级" || "子级".equals(kindName)) {
+            mapper.deleteclassifyById(id);
         }
     }
 
@@ -82,13 +82,32 @@ public class design_classifyServiceImpl implements design_classifyService {
 
     @Override
     public void updateclassifyById(design_classify classify) {
-
-
         mapper.updateByPrimaryKeySelective(classify);
     }
 
     @Override
     public design_classify queryByName(design_classify classify) {
         return mapper.selectId(classify.getKindName());
+    }
+
+    @Override
+    public void deleteclassifyBypId(Integer pId) {
+        mapper.deleteclassifyBypId(pId);
+    }
+
+    @Override
+    public List<design_classify> selectById(Integer id) {
+        design_classifyQuery query = new design_classifyQuery();
+        design_classifyQuery.Criteria criteria = query.createCriteria();
+        criteria.andIdEqualTo(id);
+        return mapper.selectByExample(query);
+    }
+
+    @Override
+    public List<design_classify> selectBypId(Integer pId) {
+        design_classifyQuery query = new design_classifyQuery();
+        design_classifyQuery.Criteria criteria = query.createCriteria();
+        criteria.andPIdEqualTo(pId);
+        return mapper.selectByExample(query);
     }
 }

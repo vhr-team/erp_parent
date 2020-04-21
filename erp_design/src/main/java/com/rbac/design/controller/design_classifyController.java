@@ -60,9 +60,9 @@ public class design_classifyController {
 
     @ApiOperation("/根据主键删除分类")
     @PostMapping("/deleteclassifyById")
-    public Response deleteclassifyById(@RequestBody design_classify classify) {
+    public Response deleteclassifyById(@RequestParam("id") Integer id, @RequestParam("kindId") String kindId) {
         try {
-            service.deleteclassifyById(classify);
+            service.deleteclassifyById(id, kindId);
             return new Response(true, "删除成功");
         } catch (Exception e) {
             return new Response(true, "删除失败");

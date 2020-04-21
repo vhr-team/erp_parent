@@ -30,7 +30,7 @@ public interface design_classifyService {
      *
      * @param classify
      */
-    void deleteclassifyById(design_classify classify);
+    void deleteclassifyById(Integer id, String kindName);
 
     /**
      * 分页查询
@@ -41,7 +41,40 @@ public interface design_classifyService {
      */
     PageResult findPage(Integer page, Integer pageSize, design_classify classify);
 
+    /**
+     * 根据id修改分类
+     *
+     * @param classify
+     */
     void updateclassifyById(design_classify classify);
 
+    /**
+     * 根据分类名称查询分类
+     *
+     * @param classify
+     * @return
+     */
     design_classify queryByName(design_classify classify);
+
+    /**
+     * 根据父级id删除分类
+     *
+     * @param pId
+     */
+    void deleteclassifyBypId(Integer pId);
+
+    /**
+     * 根据id查询分类菜单
+     *
+     * @return
+     */
+    List<design_classify> selectById(Integer id);
+
+
+    /**
+     * 根据pid查询分类菜单
+     *
+     * @return
+     */
+    List<design_classify> selectBypId(Integer pId);
 }

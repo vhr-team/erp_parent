@@ -9,7 +9,7 @@ spring:
   cloud:
     nacos:
       discovery:
-        server-addr: 175.24.22.3:8850 #nacos服务的地址 不要加http
+        server-addr: 121.43.145.142:8849,121.43.145.142:8851 #nacos服务的地址 不要加http
 
   # 数据源配置
   datasource:

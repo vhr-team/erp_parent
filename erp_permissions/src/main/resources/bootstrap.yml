@@ -1,0 +1,12 @@
+spring:
+  profiles:
+    active: dev  #${spring.profile.active}
+
+  application:
+    name: consumer-user  #${prefix}
+
+  cloud:
+    nacos:
+      config:
+        server-addr: localhost:80
+        file-extension: yaml  #${file-extension}

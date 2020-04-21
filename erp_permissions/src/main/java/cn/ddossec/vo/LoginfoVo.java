@@ -8,8 +8,8 @@ import java.util.Date;
 
 
 @Data
-@EqualsAndHashCode(callSuper=false)
-public class LoginfoVo extends  BaseVo{
+@EqualsAndHashCode(callSuper = false)
+public class LoginfoVo extends BaseVo {
 
     private String loginname;
     private String loginip;

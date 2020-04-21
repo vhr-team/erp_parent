@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author 30315
@@ -42,6 +44,7 @@ public class NoticeController {
 
     /**
      * 添加公告
+     *
      * @param notice
      * @return
      */
@@ -62,20 +65,57 @@ public class NoticeController {
 
     /**
      * 修改公告
+     *
      * @param notice
      * @return
      */
     @RequestMapping("updateNotice")
-    public ResultObj updateNotice(Notice notice){
+    public ResultObj updateNotice(Notice notice) {
         try {
             this.noticeService.updateById(notice);  //update()  updateSelective()
             return ResultObj.UPDATE_SUCCESS;
-        }catch (Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
             return ResultObj.UPDATE_ERROR;
         }
+    }
 
+    /**
+     * 删除
+     *
+     * @param id
+     * @return
+     */
+    @RequestMapping("deleteNotice")
+    public ResultObj deleteNotice(Integer id) {
+        try {
+            this.noticeService.removeById(id);
+            return ResultObj.DELETE_SUCCESS;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResultObj.DELETE_ERROR;
+        }
+    }
+
+    /**
+     * 批量删除
+     *
+     * @param ids
+     * @return
+     */
+    @RequestMapping("batchDeleteNotice")
+    public ResultObj batchdeleteNotice(Integer[] ids) {
+        try {
+            List<Integer> idsList = new ArrayList<>();
+            for (Integer id : ids) {
+                idsList.add(id);
+            }
+            this.noticeService.removeByIds(idsList);
+            return ResultObj.DELETE_SUCCESS;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResultObj.DELETE_ERROR;
+        }
     }
 
 }

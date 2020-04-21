@@ -60,4 +60,22 @@ public class NoticeController {
         }
     }
 
+    /**
+     * 修改公告
+     * @param notice
+     * @return
+     */
+    @RequestMapping("updateNotice")
+    public ResultObj updateNotice(Notice notice){
+        try {
+            this.noticeService.updateById(notice);  //update()  updateSelective()
+            return ResultObj.UPDATE_SUCCESS;
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+            return ResultObj.UPDATE_ERROR;
+        }
+
+    }
+
 }

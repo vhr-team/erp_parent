@@ -6,6 +6,7 @@ import cn.ddossec.domain.LeaveBill;
 import cn.ddossec.service.WorkFlowService;
 import cn.ddossec.vo.WorkFlowVo;
 import lombok.extern.slf4j.Slf4j;
+import org.activiti.engine.repository.ProcessDefinition;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,6 +20,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.awt.image.BufferedImage;
 import java.io.InputStream;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author 30315
@@ -208,4 +210,42 @@ public class WorkFlowController {
         }
     }
 
+    /**
+     * 根据任务ID查看流程进度图
+     *
+     * @param workFlowVo
+     */
+    @GetMapping("ViewProcessByTaskId")
+    @ResponseBody
+    public String ViewProcessByTaskId(WorkFlowVo workFlowVo, HttpServletResponse response) {
+
+        ProcessDefinition processDefinition = this.workFlowService.queryProcessDefinitionByTaskId(workFlowVo.getTaskId());
+
+        //取出流程部署ID
+        String deploymentId = processDefinition.getDeploymentId();
+        workFlowVo.setDeploymentId(deploymentId);
+        return deploymentId;
+    }
+
+    /**
+     * 根据任务ID查询节点坐标
+     * @param workFlowVo
+     * @return
+     */
+    @GetMapping("queryTaskCoordinateByTaskId")
+    @ResponseBody
+    public Map<String, Object> queryTaskCoordinateByTaskId(WorkFlowVo workFlowVo) {
+        return this.workFlowService.queryTaskCoordinateByTaskId(workFlowVo.getTaskId());
+    }
+
+    /**
+     * 根据请假单的ID查询批注信息
+     * @param workFlowVo
+     * @return
+     */
+    @RequestMapping("loadCommentByLeaveBillId")
+    @ResponseBody
+    public DataGridView loadCommentByLeaveBillId(WorkFlowVo workFlowVo) {
+        return this.workFlowService.querydCommentByLeaveBillId(workFlowVo.getId());
+    }
 }

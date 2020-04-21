@@ -36,4 +36,18 @@ public interface design_record_Service {
      * @param record
      */
     public void updaterecordById(design_record record);
+
+
+
+    /**
+     *
+     */
+    void putawayrecord(design_record record);
+
+    /**
+     * 根据主键查询
+     */
+    design_record selectById(design_record record);
+
+    void deletebatch(Integer[] idx);
 }

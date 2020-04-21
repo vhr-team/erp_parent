@@ -49,7 +49,6 @@ public class DeptController {
         return new DataGridView(maxValue + 1);
     }
 
-
     /**
      * 添加部门
      *

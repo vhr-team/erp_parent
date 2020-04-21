@@ -18,13 +18,13 @@ spring:
     username: root
     password: 1234
     # druid
-    druid:e
+    druid:
       initialSize: 3
       minIdle: 3
       maxActive: 30
       maxWait: 15000
       validationQuery: SELECT 'x'
-      testWhileIdle: truee
+      testWhileIdle: true
       testOnBorrow: false
       testOnReturn: false
       poolPreparedStatements: true
@@ -86,6 +86,7 @@ shiro:
     - /swagger-resources/**
     - /v2/**
     - /login/captcha
+    - /workFlow/viewProcessImage*
   logout-url: /login/logout*
   authc-urls:
     - /**

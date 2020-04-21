@@ -66,6 +66,7 @@ public class LoginController {
                     ActiveUser activeUser = (ActiveUser) subject.getPrincipal();
                     User user = activeUser.getUser();
 
+
                     List<String> permissions = activeUser.getPermissions();
                     Map<String, Object> map = new HashMap<>();
                     map.put("token", token);

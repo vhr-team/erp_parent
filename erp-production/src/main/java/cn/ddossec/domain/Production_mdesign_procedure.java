@@ -2,11 +2,13 @@ package cn.ddossec.domain;
 
 
 import lombok.Data;
+import lombok.ToString;
 
 import java.io.Serializable;
 import java.util.Date;
 
 @Data
+@ToString
 public class Production_mdesign_procedure implements Serializable {
 
     /**

@@ -10,6 +10,8 @@ import cn.ddossec.mapper.UserMapper;
 import cn.ddossec.service.DeptService;
 import cn.ddossec.service.UserService;
 import cn.ddossec.vo.UserVo;
+import cn.hutool.core.bean.BeanUtil;
+import cn.hutool.core.bean.copier.CopyOptions;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -18,11 +20,14 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.io.Serializable;
 import java.util.List;
 
 @Service
@@ -55,6 +60,12 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         qw.eq("loginname", loginname);
         User user = userMapper.selectOne(qw);
         return user;
+    }
+
+    @Override
+    @Cacheable(cacheNames = "cn.ddossec.service.impl.UserServiceImpl", key = "#id")
+    public User getById(Serializable id) {
+        return super.getById(id);
     }
 
     @Override
@@ -104,14 +115,19 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     }
 
     @Override
+    @CachePut(cacheNames = "cn.ddossec.service.impl.UserServiceImpl", key = "#result.id")
     public User saveUser(User user) {
         this.userMapper.insert(user);
         return user;
     }
 
     @Override
+    @CachePut(cacheNames = "cn.ddossec.service.impl.UserServiceImpl", key = "#result.id")
     public User updateUser(User user) {
-        this.userMapper.updateById(user);
+        User selectUser = this.userMapper.selectById(user.getId());
+        BeanUtil.copyProperties(user, selectUser, CopyOptions.create().setIgnoreNullValue(true).setIgnoreError(true));
+
+        this.userMapper.updateById(selectUser);
         return user;
     }
 
@@ -151,5 +167,15 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
             qw.eq(deptid != null, "deptid", deptid);
             return this.getBaseMapper().selectList(qw);
         }
+    }
+
+    /**
+     * 查询领导信息
+     * @param mgr
+     * @return
+     */
+    @Override
+    public User queryUserById(Integer mgr) {
+        return this.userMapper.selectById(mgr);
     }
 }

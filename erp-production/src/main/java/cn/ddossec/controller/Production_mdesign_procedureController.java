@@ -19,11 +19,11 @@ public class Production_mdesign_procedureController {
     Production_mdesign_procedureService production_mdesign_procedureService;
 
     @RequestMapping("/getAllProduction")
-    public String getAllProduction(Model model){
+    public   List<Production_mdesign_procedure> getAllProduction(Model model){
         /*获取所有信息*/
         List<Production_mdesign_procedure> list = production_mdesign_procedureService.findAllProduction_mdesign_procedure();
         model.addAttribute("list",list);
-        return "index";
+        return list;
     }
 
     /**
@@ -63,6 +63,7 @@ public class Production_mdesign_procedureController {
         return "update";
     }
 
+    @RequestMapping("/updateProductionById")
     public ModelAndView updateProductionById(Production_mdesign_procedure production_mdesign_procedure){
         ModelAndView mv = new ModelAndView();
         boolean b = production_mdesign_procedureService.updateProduction_mdesign_procedure(production_mdesign_procedure);

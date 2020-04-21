@@ -25,7 +25,25 @@ public class ResultObj {
     public static final ResultObj DISPATCH_ERROR = new ResultObj(-1, "分配失败");
 
     public static final ResultObj RESET_SUCCESS = new ResultObj(200, "重置成功");
-    public static final ResultObj RESET_ERROR = new ResultObj(-1, "重置成功");
+    public static final ResultObj RESET_ERROR = new ResultObj(-1, "重置失败");
+
+    /**
+     * 部署信息
+     */
+    public static final ResultObj DEPLOYMENT_SUCCESS = new ResultObj(200, "部署成功");
+    public static final ResultObj DEPLOYMENT_ERROR = new ResultObj(-1, "部署失败");
+
+    /**
+     * 启动信息
+     */
+    public static final ResultObj START_SUCCESS = new ResultObj(200, "启动成功");
+    public static final ResultObj START_ERROR = new ResultObj(-1, "启动失败");
+
+    /**
+     * 任务信息
+     */
+    public static final ResultObj TASK_START_SUCCESS = new ResultObj(-1, "任务完成成功");
+    public static final ResultObj TASK_START_ERROR = new ResultObj(-1, "任务完成失败");
 
     private Integer code = 200;
     private String msg = "";

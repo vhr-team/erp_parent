@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.ddossec.mapper.WarehouseStockMapper">
+
+    <resultMap type="WarehouseStock" id="WarehouseStockMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="stockId" column="stock_id" jdbcType="VARCHAR"/>
+        <result property="productId" column="product_id" jdbcType="VARCHAR"/>
+        <result property="productName" column="product_name" jdbcType="VARCHAR"/>
+        <result property="firstKindId" column="first_kind_id" jdbcType="VARCHAR"/>
+        <result property="firstKindName" column="first_kind_name" jdbcType="VARCHAR"/>
+        <result property="secondKindId" column="second_kind_id" jdbcType="VARCHAR"/>
+        <result property="secondKindName" column="second_kind_name" jdbcType="VARCHAR"/>
+        <result property="minAmount" column="min_amount" jdbcType="INTEGER"/>
+        <result property="maxAmount" column="max_amount" jdbcType="INTEGER"/>
+        <result property="maxCapacityAmount" column="max_capacity_amount" jdbcType="INTEGER"/>
+        <result property="amount" column="amount" jdbcType="INTEGER"/>
+        <result property="config" column="config" jdbcType="VARCHAR"/>
+        <result property="register" column="register" jdbcType="VARCHAR"/>
+        <result property="registerTime" column="register_time" jdbcType="TIMESTAMP"/>
+        <result property="checker" column="checker" jdbcType="VARCHAR"/>
+        <result property="checkTime" column="check_time" jdbcType="TIMESTAMP"/>
+        <result property="checkTag" column="check_tag" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="WarehouseStockMap">
+        select
+          id, stock_id, product_id, product_name, first_kind_id, first_kind_name, second_kind_id, second_kind_name, min_amount, max_amount, max_capacity_amount, amount, config, register, register_time, checker, check_time, check_tag
+        from erp.Warehouse_stock
+        where id = #{id}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="WarehouseStockMap">
+        select
+          id, stock_id, product_id, product_name, first_kind_id, first_kind_name, second_kind_id, second_kind_name, min_amount, max_amount, max_capacity_amount, amount, config, register, register_time, checker, check_time, check_tag
+        from erp.Warehouse_stock
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="WarehouseStockMap">
+        select
+          id, stock_id, product_id, product_name, first_kind_id, first_kind_name, second_kind_id, second_kind_name, min_amount, max_amount, max_capacity_amount, amount, config, register, register_time, checker, check_time, check_tag
+        from erp.Warehouse_stock
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="stockId != null and stockId != ''">
+                and stock_id = #{stockId}
+            </if>
+            <if test="productId != null and productId != ''">
+                and product_id = #{productId}
+            </if>
+            <if test="productName != null and productName != ''">
+                and product_name = #{productName}
+            </if>
+            <if test="firstKindId != null and firstKindId != ''">
+                and first_kind_id = #{firstKindId}
+            </if>
+            <if test="firstKindName != null and firstKindName != ''">
+                and first_kind_name = #{firstKindName}
+            </if>
+            <if test="secondKindId != null and secondKindId != ''">
+                and second_kind_id = #{secondKindId}
+            </if>
+            <if test="secondKindName != null and secondKindName != ''">
+                and second_kind_name = #{secondKindName}
+            </if>
+            <if test="minAmount != null">
+                and min_amount = #{minAmount}
+            </if>
+            <if test="maxAmount != null">
+                and max_amount = #{maxAmount}
+            </if>
+            <if test="maxCapacityAmount != null">
+                and max_capacity_amount = #{maxCapacityAmount}
+            </if>
+            <if test="amount != null">
+                and amount = #{amount}
+            </if>
+            <if test="config != null and config != ''">
+                and config = #{config}
+            </if>
+            <if test="register != null and register != ''">
+                and register = #{register}
+            </if>
+            <if test="registerTime != null">
+                and register_time = #{registerTime}
+            </if>
+            <if test="checker != null and checker != ''">
+                and checker = #{checker}
+            </if>
+            <if test="checkTime != null">
+                and check_time = #{checkTime}
+            </if>
+            <if test="checkTag != null and checkTag != ''">
+                and check_tag = #{checkTag}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into erp.Warehouse_stock(stock_id, product_id, product_name, first_kind_id, first_kind_name, second_kind_id, second_kind_name, min_amount, max_amount, max_capacity_amount, amount, config, register, register_time, checker, check_time, check_tag)
+        values (#{stockId}, #{productId}, #{productName}, #{firstKindId}, #{firstKindName}, #{secondKindId}, #{secondKindName}, #{minAmount}, #{maxAmount}, #{maxCapacityAmount}, #{amount}, #{config}, #{register}, #{registerTime}, #{checker}, #{checkTime}, #{checkTag})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update erp.Warehouse_stock
+        <set>
+            <if test="stockId != null and stockId != ''">
+                stock_id = #{stockId},
+            </if>
+            <if test="productId != null and productId != ''">
+                product_id = #{productId},
+            </if>
+            <if test="productName != null and productName != ''">
+                product_name = #{productName},
+            </if>
+            <if test="firstKindId != null and firstKindId != ''">
+                first_kind_id = #{firstKindId},
+            </if>
+            <if test="firstKindName != null and firstKindName != ''">
+                first_kind_name = #{firstKindName},
+            </if>
+            <if test="secondKindId != null and secondKindId != ''">
+                second_kind_id = #{secondKindId},
+            </if>
+            <if test="secondKindName != null and secondKindName != ''">
+                second_kind_name = #{secondKindName},
+            </if>
+            <if test="minAmount != null">
+                min_amount = #{minAmount},
+            </if>
+            <if test="maxAmount != null">
+                max_amount = #{maxAmount},
+            </if>
+            <if test="maxCapacityAmount != null">
+                max_capacity_amount = #{maxCapacityAmount},
+            </if>
+            <if test="amount != null">
+                amount = #{amount},
+            </if>
+            <if test="config != null and config != ''">
+                config = #{config},
+            </if>
+            <if test="register != null and register != ''">
+                register = #{register},
+            </if>
+            <if test="registerTime != null">
+                register_time = #{registerTime},
+            </if>
+            <if test="checker != null and checker != ''">
+                checker = #{checker},
+            </if>
+            <if test="checkTime != null">
+                check_time = #{checkTime},
+            </if>
+            <if test="checkTag != null and checkTag != ''">
+                check_tag = #{checkTag},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from erp.Warehouse_stock where id = #{id}
+    </delete>
+
+</mapper>

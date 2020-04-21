@@ -30,4 +30,11 @@ public interface UserService extends IService<User> {
     void saveUserRole(Integer uid, Integer[] rids);
 
     public List<User> queryUserByDeptId(Integer deptid);
+
+    /**
+     * 查询领导信息
+     * @param mgr
+     * @return
+     */
+    User queryUserById(Integer mgr);
 }

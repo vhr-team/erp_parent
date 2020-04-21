@@ -2,10 +2,12 @@ package com.rbac.design.mapper;
 
 import com.rbac.design.pojo.design_material;
 import com.rbac.design.pojo.design_materialQuery;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
+@Mapper
 public interface design_materialmapper {
     int countByExample(design_materialQuery example);
 

@@ -2,6 +2,7 @@ package com.rbac.design.mapper;
 
 import com.rbac.design.pojo.design_material;
 import com.rbac.design.pojo.design_materialQuery;
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -29,4 +30,7 @@ public interface design_materialmapper {
     int updateByPrimaryKeySelective(design_material record);
 
     int updateByPrimaryKey(design_material record);
+
+    @Delete("delete from product_design_material where product_id=#{proid}")
+    int deleteByProId(String proid);
 }

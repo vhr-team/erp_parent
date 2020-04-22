@@ -2,6 +2,8 @@ package com.rbac.design.controller;
 
 import com.rbac.design.entity.PageResult;
 import com.rbac.design.entity.Response;
+import com.rbac.design.entity.material_detail;
+import com.rbac.design.entity.material_details;
 import com.rbac.design.pojo.design_classify;
 import com.rbac.design.pojo.design_material;
 import com.rbac.design.pojo.design_material_detail;
@@ -15,7 +17,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author joker_dj
@@ -54,6 +58,7 @@ public class design_materialController {
      * @param changer
      * @return
      */
+    @ApiOperation("修改物料&&物料详细")
     @RequestMapping("/updatematerial")
     public Response updatematerial(@RequestParam("id") Integer id,
                                    @RequestParam("proid") String proid,
@@ -66,7 +71,6 @@ public class design_materialController {
                                    @RequestParam("amountUnit") String amountUnit,
                                    @RequestParam("cost_price_sum") Double cost_price_sum,
                                    @RequestParam("changer") String changer) {
-
         design_material material = new design_material();
         material.setId(id);
         material.setFirstKindName(firstKindName);
@@ -74,6 +78,7 @@ public class design_materialController {
         material.setProductName(productName);
         material.setModuleDescribe(moduleDescribe);
         material.setCostPriceSum(cost_price_sum);
+        material.setCheckTag("等待审核");
         material.setChangeTag("已变更");
         material.setChanger(changer);
         material.setProductId(proid);
@@ -89,6 +94,7 @@ public class design_materialController {
         }
     }
 
+    @ApiOperation("添加物料&&物料详细")
     @RequestMapping("/addmaterial")
     public Response addmaterial(@RequestParam("type") String type,
                                 @RequestParam("product_describe") String product_describe,
@@ -115,7 +121,7 @@ public class design_materialController {
 
         material.setDesignId("wl" + priductId);
         material.setDesigner(changer);
-        material.setChangeTag("等待审核"); //审核标志
+        material.setCheckTag("等待审核"); //审核标志
         material.setFirstKindId(classifyOne.getId().toString());
         material.setSecondKindId(classifyTwo.getId().toString());
         material.setProductId(priductId);//商品ID
@@ -148,5 +154,34 @@ public class design_materialController {
     }
 
 
+    @ApiOperation("删除物料")
+    @RequestMapping("/delete_material")
+    public Response delete_material(@RequestParam("proid") String proid) {
+        try {
+            service.delete_design_material(proid);
+            detailService.delete_detail(proid);
+            return new Response(true, "删除成功");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new Response(true, "删除失败");
+        }
+    }
+
+
+    @RequestMapping("/selectAll")
+    public material_detail selectAll() {
+        material_details details = null;
+        List<material_details> material_details = new ArrayList<>();
+
+        List<design_material> design_material_details = service.selectAll();
+        System.out.println(design_material_details);
+        for (design_material design_material_detail : design_material_details) {
+            details = new material_details();
+            details.setName(design_material_detail.getProductName());
+            details.setValue(design_material_detail.getCostPriceSum());
+            material_details.add(details);
+        }
+        return new material_detail("0", "success", material_details);
+    }
 }
 

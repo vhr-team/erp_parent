@@ -1,0 +1,24 @@
+package com.rbac.design.service.Impl;
+
+import com.rbac.design.mapper.design_material_detailmapper;
+import com.rbac.design.pojo.design_material_detail;
+import com.rbac.design.service.design_material_detailService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+/**
+ * @author joker_dj
+ * @create 2020-04-22日 12:30
+ */
+@Service
+@Transactional
+public class design_material_detailServiceImpl implements design_material_detailService {
+    @Autowired
+    design_material_detailmapper mapper;
+
+    @Override
+    public design_material_detail selectByproductId(String productId) {
+        return mapper.selectByproductId(productId);
+    }
+}

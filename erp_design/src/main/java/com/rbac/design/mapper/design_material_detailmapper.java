@@ -2,10 +2,13 @@ package com.rbac.design.mapper;
 
 import com.rbac.design.pojo.design_material_detail;
 import com.rbac.design.pojo.design_material_detailQuery;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 
+@Mapper
 public interface design_material_detailmapper {
     int countByExample(design_material_detailQuery example);
 
@@ -28,4 +31,7 @@ public interface design_material_detailmapper {
     int updateByPrimaryKeySelective(design_material_detail record);
 
     int updateByPrimaryKey(design_material_detail record);
+
+    @Select("select id as id,product_id as productId  ,product_name as productName ,type as type ,product_describe as productDescribe ,amount_unit as amountUnit ,residual_amount as residualAmount ,cost_price as costPrice  from product_design_material_detail  where product_id=#{productId}  ")
+    design_material_detail selectByproductId(String productId);
 }

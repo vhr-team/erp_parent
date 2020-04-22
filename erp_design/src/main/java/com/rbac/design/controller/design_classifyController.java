@@ -104,8 +104,10 @@ public class design_classifyController {
      *
      * @return
      */
+    @ApiOperation("根据id查询分类菜单")
+    @RequestMapping("/selectById")
     List<design_classify> selectById(Integer id) {
-        return null;
+        return service.selectById(id);
     }
 
     /**
@@ -113,7 +115,9 @@ public class design_classifyController {
      *
      * @return
      */
+    @ApiOperation("根据pid查询分类菜单")
+    @RequestMapping("/selectBypId")
     List<design_classify> selectBypId(Integer pId) {
-        return null;
+        return service.selectBypId(pId);
     }
 }

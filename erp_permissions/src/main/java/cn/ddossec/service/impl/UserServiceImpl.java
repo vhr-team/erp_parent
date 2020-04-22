@@ -88,6 +88,8 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         // 查询可用
         qw.eq("available", Constant.AVAILABLE_TRUE);
 
+        qw.orderByDesc("hiredate");
+
         this.userMapper.selectPage(page, qw);
         List<User> records = page.getRecords();
         DeptService deptService = AppUtils.getContext().getBean(DeptService.class);

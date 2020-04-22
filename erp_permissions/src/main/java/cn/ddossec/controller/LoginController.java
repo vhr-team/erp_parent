@@ -4,8 +4,10 @@ import cn.ddossec.common.ActiveUser;
 import cn.ddossec.common.Constant;
 import cn.ddossec.common.MenuTreeNode;
 import cn.ddossec.common.ResultObj;
+import cn.ddossec.domain.Loginfo;
 import cn.ddossec.domain.Menu;
 import cn.ddossec.domain.User;
+import cn.ddossec.service.LoginfoService;
 import cn.ddossec.service.MenuService;
 import cn.hutool.captcha.CaptchaUtil;
 import cn.hutool.captcha.ShearCaptcha;
@@ -23,10 +25,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 @Controller
@@ -38,6 +37,9 @@ public class LoginController {
 
     @Autowired
     private StringRedisTemplate redisTemplate;
+
+    @Autowired
+    private LoginfoService loginfoService;
 
     /**
      * 用户登录
@@ -65,6 +67,13 @@ public class LoginController {
                     //写入登陆日志
                     ActiveUser activeUser = (ActiveUser) subject.getPrincipal();
                     User user = activeUser.getUser();
+
+                    Loginfo loginfo = new Loginfo();
+                    // 设置登录日志信息
+                    loginfo.setLoginname(user.getName() + ":" + user.getLoginname());
+                    loginfo.setLoginip(request.getRemoteAddr());
+                    loginfo.setLogintime(new Date());
+                    this.loginfoService.save(loginfo);
 
                     List<String> permissions = activeUser.getPermissions();
                     Map<String, Object> map = new HashMap<>();

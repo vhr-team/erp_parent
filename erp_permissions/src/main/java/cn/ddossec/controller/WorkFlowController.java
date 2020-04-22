@@ -2,9 +2,11 @@ package cn.ddossec.controller;
 
 import cn.ddossec.common.DataGridView;
 import cn.ddossec.common.ResultObj;
+import cn.ddossec.domain.LeaveBill;
 import cn.ddossec.service.WorkFlowService;
 import cn.ddossec.vo.WorkFlowVo;
 import lombok.extern.slf4j.Slf4j;
+import org.activiti.engine.repository.ProcessDefinition;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,6 +19,8 @@ import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 import java.awt.image.BufferedImage;
 import java.io.InputStream;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author 30315
@@ -136,7 +140,6 @@ public class WorkFlowController {
     @ResponseBody
     public ResultObj startProcess(WorkFlowVo workFlowVo) {
         try {
-            System.out.println(workFlowVo.getId());
             Integer leaveBillId = workFlowVo.getId();
             this.workFlowService.startProcess(leaveBillId);
             return ResultObj.START_SUCCESS;
@@ -145,4 +148,104 @@ public class WorkFlowController {
         }
     }
 
+    /**
+     * 查询当前登陆人的代办任务
+     */
+    @RequestMapping("loadCurrentUserTask")
+    @ResponseBody
+    public DataGridView loadCurrentUserTask(WorkFlowVo workFlowVo) {
+        return this.workFlowService.queryCurrentUserTask(workFlowVo);
+    }
+
+    /**
+     * 根据任务ID查询请假单的信息
+     *
+     * @param workFlowVo
+     * @return
+     */
+    @GetMapping("queryLeaveBillByTaskId")
+    @ResponseBody
+    public LeaveBill queryLeaveBillByTaskId(WorkFlowVo workFlowVo) {
+        return this.workFlowService.queryLeaveBillByTaskId(workFlowVo.getTaskId());
+    }
+
+    /**
+     * 根据任务ID查询连线信息
+     *
+     * @return
+     */
+    @GetMapping("queryOutComeByTaskId")
+    @ResponseBody
+    public List<String> queryOutComeByTaskId(WorkFlowVo workFlowVo) {
+        return this.workFlowService.queryOutComeByTaskId(workFlowVo.getTaskId());
+    }
+
+    /**
+     * 根据任务ID查询批注信息
+     *
+     * @param workFlowVo
+     * @return
+     */
+    @GetMapping("loadAllCommentByTaskId")
+    @ResponseBody
+    public DataGridView loadAllCommentByTaskId(WorkFlowVo workFlowVo) {
+        return this.workFlowService.queryCommentByTaskId(workFlowVo.getTaskId());
+    }
+
+
+    /**
+     * 完成任务
+     *
+     * @param workFlowVo
+     * @return
+     */
+    @RequestMapping("doTask")
+    @ResponseBody
+    public ResultObj doTask(WorkFlowVo workFlowVo) {
+        try {
+            this.workFlowService.completeTask(workFlowVo);
+            return ResultObj.TASK_START_SUCCESS;
+        } catch (Exception e) {
+            return ResultObj.TASK_START_ERROR;
+        }
+    }
+
+    /**
+     * 根据任务ID查看流程进度图
+     *
+     * @param workFlowVo
+     */
+    @GetMapping("ViewProcessByTaskId")
+    @ResponseBody
+    public String ViewProcessByTaskId(WorkFlowVo workFlowVo, HttpServletResponse response) {
+
+        ProcessDefinition processDefinition = this.workFlowService.queryProcessDefinitionByTaskId(workFlowVo.getTaskId());
+
+        //取出流程部署ID
+        String deploymentId = processDefinition.getDeploymentId();
+        workFlowVo.setDeploymentId(deploymentId);
+        return deploymentId;
+    }
+
+    /**
+     * 根据任务ID查询节点坐标
+     * @param workFlowVo
+     * @return
+     */
+    @GetMapping("queryTaskCoordinateByTaskId")
+    @ResponseBody
+    public Map<String, Object> queryTaskCoordinateByTaskId(WorkFlowVo workFlowVo) {
+        return this.workFlowService.queryTaskCoordinateByTaskId(workFlowVo.getTaskId());
+    }
+
+    /**
+     * 根据请假单的ID查询批注信息
+     * @param workFlowVo
+     * @return
+     */
+    @RequestMapping("loadCommentByLeaveBillId")
+    @ResponseBody
+    public DataGridView loadCommentByLeaveBillId(WorkFlowVo workFlowVo) {
+        return this.workFlowService.querydCommentByLeaveBillId(workFlowVo.getId());
+    }
 }

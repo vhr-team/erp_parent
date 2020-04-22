@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.ddossec.mapper.Basics_supperMapper">
+
+    <select id="findAllBasics_supper" resultType="cn.ddossec.domain.Basics_supper">
+        SELECT * from basics_supper;
+    </select>
+
+    <delete id="delBasics_supperMapperById">
+        DELETE FROM basics_supper WHERE id = #{id}
+    </delete>
+
+    <insert id="insertBasics_supper">
+        INSERT INTO basics_supper(id,address,contact,name,number,remarks) VALUES(#{id},#{address},#{contact},{name},#{number},#{remarks})
+    </insert>
+
+    <update id="updateBasics_supper">
+            update  basics_supper
+            <trim prefix="set" suffixOverrides=",">
+                <if test="address!=null">address=#{address},</if>
+                <if test="contact!=null">contact=#{contact},</if>
+                <if test="name!=null">name=#{name},</if>
+                <if test="number!=null">number=#{number},</if>
+                <if test="remarks!=null">remarks=#{remarks},</if>
+            </trim>
+            where id=#{id}
+    </update>
+
+    <select id="selectById" resultType="cn.ddossec.domain.Basics_supper">
+        SELECT * FROM basics_supper WHERE id = #{id}
+    </select>
+
+</mapper>

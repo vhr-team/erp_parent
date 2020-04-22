@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>erp-production</artifactId>
+    <artifactId>erp_production</artifactId>
     <properties>
         <shiro.version>1.4.0</shiro.version>
         <druid.version>1.1.10</druid.version>
@@ -122,5 +122,3 @@
         </plugins>
     </build>
 </project>
-
-

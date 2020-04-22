@@ -8,4 +8,13 @@ import com.rbac.design.pojo.design_material_detail;
  */
 public interface design_material_detailService {
     design_material_detail selectByproductId(String productId);
+
+    /*
+    * detail.setProductId(proid);
+            detail.setType(type);
+            detail.setProductDescribe(product_describe);
+            detail.setAmountUnit(amountUnit);*/
+    void update_detail(String proid, String productName, String type, String product_describe, String amountUnit);
+
+    void add_detail(design_material_detail detail);
 }

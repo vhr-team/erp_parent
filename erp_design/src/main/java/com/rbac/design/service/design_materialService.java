@@ -9,4 +9,8 @@ import com.rbac.design.pojo.design_material;
  */
 public interface design_materialService {
     PageResult findpage(Integer page, Integer pageSize, design_material material);
+
+    void updatedesign_material(design_material material);
+
+    void adddesign_material(design_material material);
 }

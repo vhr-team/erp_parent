@@ -1,12 +1,21 @@
 package com.rbac.design.controller;
 
 import com.rbac.design.entity.PageResult;
+import com.rbac.design.entity.Response;
+import com.rbac.design.pojo.design_classify;
 import com.rbac.design.pojo.design_material;
+import com.rbac.design.pojo.design_material_detail;
+import com.rbac.design.service.design_classifyService;
 import com.rbac.design.service.design_materialService;
+import com.rbac.design.service.design_material_detailService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * @author joker_dj
@@ -17,10 +26,127 @@ import org.springframework.web.bind.annotation.RestController;
 public class design_materialController {
     @Autowired
     design_materialService service;
+    @Autowired
+    design_classifyService classifyService;
+
+    @Autowired
+    design_material_detailService detailService;
 
     @ApiOperation("分页查询")
     @RequestMapping("/findPage")
     public PageResult findPage(Integer page, Integer pageSize, design_material material) {
         return service.findpage(page, pageSize, material);
     }
+
+    /**
+     * 物料修改
+     *
+     * @param id
+     * @param proid
+     * @param type
+     * @param product_describe
+     * @param firstKindName
+     * @param secondKindName
+     * @param productName
+     * @param moduleDescribe
+     * @param amountUnit
+     * @param cost_price_sum
+     * @param changer
+     * @return
+     */
+    @RequestMapping("/updatematerial")
+    public Response updatematerial(@RequestParam("id") Integer id,
+                                   @RequestParam("proid") String proid,
+                                   @RequestParam("type") String type,
+                                   @RequestParam("product_describe") String product_describe,
+                                   @RequestParam("firstKindName") String firstKindName,
+                                   @RequestParam("secondKindName") String secondKindName,
+                                   @RequestParam("productName") String productName,
+                                   @RequestParam("moduleDescribe") String moduleDescribe,
+                                   @RequestParam("amountUnit") String amountUnit,
+                                   @RequestParam("cost_price_sum") Double cost_price_sum,
+                                   @RequestParam("changer") String changer) {
+
+        design_material material = new design_material();
+        material.setId(id);
+        material.setFirstKindName(firstKindName);
+        material.setSecondKindName(secondKindName);
+        material.setProductName(productName);
+        material.setModuleDescribe(moduleDescribe);
+        material.setCostPriceSum(cost_price_sum);
+        material.setChangeTag("已变更");
+        material.setChanger(changer);
+        material.setProductId(proid);
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
+        material.setChangeTime(df.format(new Date()).toString());// 初始化日期
+        try {
+            detailService.update_detail(proid, productName, type, product_describe, amountUnit);
+            service.updatedesign_material(material);
+            return new Response(true, "修改成功");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new Response(true, "修改失败");
+        }
+    }
+
+    @RequestMapping("/addmaterial")
+    public Response addmaterial(@RequestParam("type") String type,
+                                @RequestParam("product_describe") String product_describe,
+                                @RequestParam("firstKindName") String firstKindName,
+                                @RequestParam("secondKindName") String secondKindName,
+                                @RequestParam("productName") String productName,
+                                @RequestParam("moduleDescribe") String moduleDescribe,
+                                @RequestParam("amountUnit") String amountUnit,
+                                @RequestParam("cost_price_sum") Double cost_price_sum,
+                                @RequestParam("residualAmount") Integer residualAmount,
+                                @RequestParam("changer") String changer) {
+
+        design_classify classifyfirst = new design_classify();
+        design_classify classifysecond = new design_classify();
+        classifysecond.setKindName(secondKindName);
+        classifyfirst.setKindName(firstKindName);
+        design_classify classifyOne = classifyService.queryByName(classifyfirst);
+        design_classify classifyTwo = classifyService.queryByName(classifysecond);
+        design_material material = new design_material();
+
+        Date date = new Date();
+        Object time = date.getTime();
+        String priductId = time.toString();
+
+        material.setDesignId("wl" + priductId);
+        material.setDesigner(changer);
+        material.setChangeTag("等待审核"); //审核标志
+        material.setFirstKindId(classifyOne.getId().toString());
+        material.setSecondKindId(classifyTwo.getId().toString());
+        material.setProductId(priductId);//商品ID
+        material.setFirstKindName(firstKindName);//一级分类
+        material.setSecondKindName(secondKindName);//二级分类
+        material.setProductName(productName);//产品名称
+        material.setModuleDescribe(moduleDescribe);//设计要求
+        material.setCostPriceSum(cost_price_sum);//物料总成本
+        material.setChangeTag("未变更");//变更状态
+        material.setRegister(changer);//登记人
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
+        material.setRegisterTime(df.format(new Date()).toString());// 登记时间
+
+        design_material_detail detail = new design_material_detail();
+        detail.setProductId(priductId);//产品编号
+        detail.setProductName(productName);//产品名称
+        detail.setType(type);//产品类型
+        detail.setProductDescribe(product_describe);//产品描述
+        detail.setAmountUnit(amountUnit);//单位
+        detail.setResidualAmount(residualAmount);//数量
+        detail.setCostPrice(cost_price_sum);//总价
+        try {
+            detailService.add_detail(detail);
+            service.adddesign_material(material);
+            return new Response(true, "修改成功");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new Response(true, "修改失败");
+        }
+    }
+
+
 }
+

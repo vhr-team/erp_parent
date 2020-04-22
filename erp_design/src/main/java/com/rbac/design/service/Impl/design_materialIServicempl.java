@@ -34,4 +34,14 @@ public class design_materialIServicempl implements design_materialService {
         Page<design_material> design_materials = (Page<design_material>) mapper.selectByExample(query);
         return new PageResult(design_materials.getTotal(), design_materials.getResult());
     }
+
+    @Override
+    public void updatedesign_material(design_material material) {
+        mapper.updateByPrimaryKeySelective(material);
+    }
+
+    @Override
+    public void adddesign_material(design_material material) {
+        mapper.insertSelective(material);
+    }
 }

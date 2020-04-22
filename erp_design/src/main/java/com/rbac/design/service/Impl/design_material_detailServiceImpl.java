@@ -21,4 +21,16 @@ public class design_material_detailServiceImpl implements design_material_detail
     public design_material_detail selectByproductId(String productId) {
         return mapper.selectByproductId(productId);
     }
+
+    @Override
+    public void update_detail(String proid, String productName, String type, String product_describe, String amountUnit) {
+        mapper.update_detail(proid, productName, type, product_describe, amountUnit);
+    }
+
+    @Override
+    public void add_detail(design_material_detail detail) {
+        mapper.insertSelective(detail);
+    }
+
+
 }

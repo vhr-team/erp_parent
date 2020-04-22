@@ -37,6 +37,7 @@
         select
           id, stock_id, product_id, product_name, first_kind_id, first_kind_name, second_kind_id, second_kind_name, min_amount, max_amount, max_capacity_amount, amount, config, register, register_time, checker, check_time, check_tag
         from erp.Warehouse_stock
+        where stock_id like concat('%',#{stockId},'%')
         limit #{offset}, #{limit}
     </select>
 

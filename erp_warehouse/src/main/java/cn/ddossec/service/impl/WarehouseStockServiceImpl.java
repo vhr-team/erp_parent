@@ -34,13 +34,14 @@ public class WarehouseStockServiceImpl implements WarehouseStockService {
     /**
      * 查询多条数据
      *
+     * @param stockId 根据库存编号模糊查询
      * @param offset 查询起始位置
      * @param limit 查询条数
      * @return 对象列表
      */
     @Override
-    public List<WarehouseStock> queryAllByLimit(int offset, int limit) {
-        return this.warehouseStockMapper.queryAllByLimit(offset, limit);
+    public List<WarehouseStock> queryAllByLimit(String stockId, int offset, int limit) {
+        return this.warehouseStockMapper.queryAllByLimit(stockId, offset, limit);
     }
 
     /**

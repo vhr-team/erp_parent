@@ -67,6 +67,7 @@ public class LoginController {
                     //写入登陆日志
                     ActiveUser activeUser = (ActiveUser) subject.getPrincipal();
                     User user = activeUser.getUser();
+                    user.setPwd(null);
 
                     Loginfo loginfo = new Loginfo();
                     // 设置登录日志信息
@@ -80,7 +81,7 @@ public class LoginController {
                     map.put("token", token);
                     map.put("permissions", permissions);
                     map.put("usertype", user.getType());
-                    map.put("username", user.getName());
+                    map.put("user", user);
                     return new ResultObj(200, "登陆成功", map);
                 } else {
                     return new ResultObj(-1, "验证码出错");

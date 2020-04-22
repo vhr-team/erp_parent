@@ -2,6 +2,7 @@ package cn.ddossec.controller;
 
 import cn.ddossec.domain.WarehouseStock;
 import cn.ddossec.service.WarehouseStockService;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,6 +30,7 @@ public class WarehouseStockController {
      * @param id 主键
      * @return 单条数据
      */
+    @ApiOperation(value = "通过主键查询单条数据")
     @GetMapping("selectOne")
     public WarehouseStock selectOne(Integer id) {
         return this.warehouseStockServiceImpl.queryById(id);
@@ -40,9 +42,15 @@ public class WarehouseStockController {
      * @param limit 查询条数
      * @return
      */
-    @GetMapping("queryAllByLimit/{offset}/{limit}")
-    public List<WarehouseStock> queryAllByLimit(@PathVariable("offset") int offset,@PathVariable("limit") int limit){
-        List<WarehouseStock> list = warehouseStockServiceImpl.queryAllByLimit(offset,limit);
+    @ApiOperation(value = "按库存编号模糊查询+分页查询所有数据")
+    @GetMapping(value = {"queryAllByLimit/{offset}/{limit}/{stockId}","queryAllByLimit/{offset}/{limit}"})
+    public List<WarehouseStock> queryAllByLimit(@PathVariable("offset") Integer offset,
+                                                @PathVariable("limit") Integer limit,
+                                                @PathVariable(value = "stockId",required = false) String stockId){
+        if (stockId==null){
+            stockId="";
+        }
+        List<WarehouseStock> list = warehouseStockServiceImpl.queryAllByLimit(stockId,offset,limit);
         return list;
     }
 

@@ -1,15 +1,15 @@
 package cn.ddossec.service;
 
-import cn.ddossec.domain.WarehouseStock;
+import cn.ddossec.domain.WarehouseOutbound;
 import java.util.List;
 
 /**
- * (WarehouseStock)表服务接口
+ * (WarehouseOutbound)表服务接口
  *
  * @author 谷辉
- * @since 2020-04-19 15:05:40
+ * @since 2020-04-22 14:34:41
  */
-public interface WarehouseStockService {
+public interface WarehouseOutboundService {
 
     /**
      * 通过ID查询单条数据
@@ -17,33 +17,33 @@ public interface WarehouseStockService {
      * @param id 主键
      * @return 实例对象
      */
-    WarehouseStock queryById(Integer id);
+    WarehouseOutbound queryById(Integer id);
 
     /**
      * 查询多条数据
      *
-     * @param stockId 根据库存编号模糊查询
+     * @Param outbound_id 根据出库单编号模糊查询
      * @param offset 查询起始位置
      * @param limit 查询条数
      * @return 对象列表
      */
-    List<WarehouseStock> queryAllByLimit(String stockId, int offset, int limit);
+    List<WarehouseOutbound> queryAllByLimit(String outbound_id, int offset, int limit);
 
     /**
      * 新增数据
      *
-     * @param warehouseStock 实例对象
+     * @param warehouseOutbound 实例对象
      * @return 实例对象
      */
-    WarehouseStock insert(WarehouseStock warehouseStock);
+    WarehouseOutbound insert(WarehouseOutbound warehouseOutbound);
 
     /**
      * 修改数据
      *
-     * @param warehouseStock 实例对象
+     * @param warehouseOutbound 实例对象
      * @return 实例对象
      */
-    WarehouseStock update(WarehouseStock warehouseStock);
+    WarehouseOutbound update(WarehouseOutbound warehouseOutbound);
 
     /**
      * 通过主键删除数据

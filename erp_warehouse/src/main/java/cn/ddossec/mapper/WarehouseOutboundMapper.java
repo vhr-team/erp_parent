@@ -1,16 +1,16 @@
 package cn.ddossec.mapper;
 
-import cn.ddossec.domain.WarehouseStock;
+import cn.ddossec.domain.WarehouseOutbound;
 import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
 /**
- * (WarehouseStock)表数据库访问层
+ * (WarehouseOutbound)表数据库访问层
  *
  * @author 谷辉
- * @since 2020-04-19 15:05:40
+ * @since 2020-04-22 14:34:41
  */
-public interface WarehouseStockMapper {
+public interface WarehouseOutboundMapper {
 
     /**
      * 通过ID查询单条数据
@@ -18,42 +18,42 @@ public interface WarehouseStockMapper {
      * @param id 主键
      * @return 实例对象
      */
-    WarehouseStock queryById(Integer id);
+    WarehouseOutbound queryById(Integer id);
 
     /**
      * 查询指定行数据
      *
-     * @param stockId 根据库存编号模糊查询
+     * @Param outbound_id 根据出库单编号模糊查询
      * @param offset 查询起始位置
      * @param limit 查询条数
      * @return 对象列表
      */
-    List<WarehouseStock> queryAllByLimit(@Param("stockId") String stockId, @Param("offset") int offset, @Param("limit") int limit);
+    List<WarehouseOutbound> queryAllByLimit(@Param("outbound_id") String outbound_id, @Param("offset") int offset, @Param("limit") int limit);
 
 
     /**
      * 通过实体作为筛选条件查询
      *
-     * @param warehouseStock 实例对象
+     * @param warehouseOutbound 实例对象
      * @return 对象列表
      */
-    List<WarehouseStock> queryAll(WarehouseStock warehouseStock);
+    List<WarehouseOutbound> queryAll(WarehouseOutbound warehouseOutbound);
 
     /**
      * 新增数据
      *
-     * @param warehouseStock 实例对象
+     * @param warehouseOutbound 实例对象
      * @return 影响行数
      */
-    int insert(WarehouseStock warehouseStock);
+    int insert(WarehouseOutbound warehouseOutbound);
 
     /**
      * 修改数据
      *
-     * @param warehouseStock 实例对象
+     * @param warehouseOutbound 实例对象
      * @return 影响行数
      */
-    int update(WarehouseStock warehouseStock);
+    int update(WarehouseOutbound warehouseOutbound);
 
     /**
      * 通过主键删除数据

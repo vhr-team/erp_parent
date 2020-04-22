@@ -43,6 +43,8 @@ public class design_classifyController {
         System.out.println(classify);
         design_classify design_classify = service.queryByName(classify);
         if (classify.getKindName() != "") {
+            classify.setKindId("子级");
+            classify.setKindLevel(2);
             classify.setpId(design_classify.getId());
         } else {
             classify.setKindId("父级");
@@ -119,5 +121,15 @@ public class design_classifyController {
     @RequestMapping("/selectBypId")
     List<design_classify> selectBypId(Integer pId) {
         return service.selectBypId(pId);
+    }
+
+
+    @RequestMapping("/selectByName")
+    List<design_classify> selectByName(String kindName) {
+        design_classify classify = new design_classify();
+        classify.setKindName(kindName);
+        design_classify classify1 = service.queryByName(classify);
+        List<design_classify> design_classifies = service.selectBypId(classify1.getId());
+        return design_classifies;
     }
 }

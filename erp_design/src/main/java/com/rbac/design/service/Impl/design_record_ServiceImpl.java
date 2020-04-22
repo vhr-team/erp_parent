@@ -74,8 +74,10 @@ public class design_record_ServiceImpl implements design_record_Service {
     public void addrecord(design_record record) {
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
         record.setRegisterTime(df.format(new Date()));// 初始化日期
+        record.setChangeTag("未变更");
+        record.setCheckTag("等待审核");
         record.setPriceChangeTag("未变更");//初始化价格
-        record.setDeleteTag("已上架"); //添加档案后默认上架
+        record.setDeleteTag("已下架"); //添加档案后默认上架
         record.setFileChangeAmount(0);//初始化变更次数
         mapper.insertSelective(record);
     }

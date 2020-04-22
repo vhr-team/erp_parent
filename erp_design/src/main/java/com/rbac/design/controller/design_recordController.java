@@ -2,12 +2,15 @@ package com.rbac.design.controller;
 
 import com.rbac.design.entity.PageResult;
 import com.rbac.design.entity.Response;
+import com.rbac.design.pojo.design_classify;
 import com.rbac.design.pojo.design_record;
+import com.rbac.design.service.design_classifyService;
 import com.rbac.design.service.design_record_Service;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -20,6 +23,9 @@ public class design_recordController {
 
     @Autowired
     private design_record_Service service;
+
+    @Autowired
+    design_classifyService classifyService;
 
     /**
      * 查询所有产品档案
@@ -52,13 +58,30 @@ public class design_recordController {
      */
     @PostMapping("/addrecord")
     @ApiOperation("添加产品档案")
-    public Response addrecord(@RequestBody design_record record){
+    public Response addrecord(@RequestBody design_record record) {
+        design_classify classify1 = new design_classify();
+        classify1.setKindName(record.getFirstKindName());
+        design_classify one = classifyService.queryByName(classify1);
+        /*获取分类id*/
+        design_classify classify2 = new design_classify();
+        classify2.setKindName(record.getSecondKindName());
+        design_classify two = classifyService.queryByName(classify2);
+        /*设置分类id*/
+        record.setFirstKindId(one.getId().toString());
+        record.setSecondKindId(two.getId().toString());
+
+        Date date = new Date();
+        Object time = date.getTime();
+        String priductId = time.toString();
+        /*设置产品id*/
+        record.setProductId(priductId);
+        System.out.println(record);
         try {
             service.addrecord(record);
-            return new Response(true,"添加成功");
-        }catch (Exception e){
+            return new Response(true, "添加成功");
+        } catch (Exception e) {
             e.printStackTrace();
-            return new Response(true,"添加失败");
+            return new Response(true, "添加失败");
         }
     }
 

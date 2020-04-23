@@ -11,4 +11,10 @@ import lombok.Data;
  */
 @Data
 public class ProductTypeVo extends BaseVo {
+
+    // 供应商ID
+    private Integer supperId;
+    // 分类名称
+    private String name;
+
 }

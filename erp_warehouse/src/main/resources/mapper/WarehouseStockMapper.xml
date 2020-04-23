@@ -104,11 +104,25 @@
         </where>
     </select>
 
-    <!--新增所有列-->
-    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
-        insert into erp.Warehouse_stock(stock_id, product_id, product_name, first_kind_id, first_kind_name, second_kind_id, second_kind_name, min_amount, max_amount, max_capacity_amount, amount, config, register, register_time, checker, check_time, check_tag)
-        values (#{stockId}, #{productId}, #{productName}, #{firstKindId}, #{firstKindName}, #{secondKindId}, #{secondKindName}, #{minAmount}, #{maxAmount}, #{maxCapacityAmount}, #{amount}, #{config}, #{register}, #{registerTime}, #{checker}, #{checkTime}, #{checkTag})
+    <!--新增安全库存配置单-->
+    <insert id="insertSecuritySheet">
+        insert into erp.Warehouse_stock(product_name,product_id,min_amount,max_amount,register,register_time,config,max_capacity_amount)
+        values (#{product_name}, #{product_id}, #{min_amount}, #{max_amount}, #{register}, #{register_time}, #{config}, #{max_capacity_amount})
     </insert>
+
+    <!--查询库存安全配置单-->
+    <select id="querySecuritySheet" resultMap="WarehouseStockMap">
+        select
+           product_name,product_id,min_amount,max_amount,register,register_time,config,max_capacity_amount
+        from erp.Warehouse_stock
+        where check_tag = #{check_tag}
+    </select>
+
+    <!--复核成功-->
+    <update id="updateSecuritySheet">
+      update erp.Warehouse_stock set check_tag = #{check_tag},check_time = #{check_time},checker = #{checker}
+       where product_id = #{product_id}
+    </update>
 
     <!--通过主键修改数据-->
     <update id="update">

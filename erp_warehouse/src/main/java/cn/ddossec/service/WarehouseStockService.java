@@ -1,6 +1,9 @@
 package cn.ddossec.service;
 
 import cn.ddossec.domain.WarehouseStock;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -35,7 +38,25 @@ public interface WarehouseStockService {
      * @param warehouseStock 实例对象
      * @return 实例对象
      */
-    WarehouseStock insert(WarehouseStock warehouseStock);
+    int insertSecuritySheet(WarehouseStock warehouseStock);
+
+    /**
+     *查询安全库存配置
+     *
+     * @param check_tag 复核标志
+     * @return 安全库存数据
+     */
+    List<WarehouseStock> querySecuritySheet(String check_tag);
+
+    /**
+     * 复核成功
+     *
+     * @param check_tag 复核标志
+     * @param check_time 复核时间
+     * @param product_id 产品编号
+     * @return 影响行数
+     */
+    int updateSecuritySheet(String check_tag, Date check_time, String product_id, String checker);
 
     /**
      * 修改数据
@@ -43,7 +64,7 @@ public interface WarehouseStockService {
      * @param warehouseStock 实例对象
      * @return 实例对象
      */
-    WarehouseStock update(WarehouseStock warehouseStock);
+    int update(WarehouseStock warehouseStock);
 
     /**
      * 通过主键删除数据

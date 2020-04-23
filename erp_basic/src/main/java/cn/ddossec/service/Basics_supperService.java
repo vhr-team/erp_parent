@@ -11,15 +11,19 @@ import java.util.List;
 
 public interface Basics_supperService {
 
+    public List<Basics_supper> findAll();
     /*查询所有供货商**/
-    public List<Basics_supper> findAllBasics_supper();
-
+    public List<Basics_supper> findAllBasics_supper(Integer page,Integer rows);
+    /*查询多少供应商*/
+    public int sellCount();
     /*根据id删除**/
     public int delBasics_supperMapperById(Integer id);
-
+    /* 批量删除*/
+    public void deleteIds(String params);
     /*添加**/
     public void insertBasics_supper(Basics_supper basics_supper);
-
+    /*根据供应商名称查询**/
+    public List<Basics_supper> sellName(String  name,Integer page,Integer rows);
     /*修改**/
     public boolean updateBasics_supper(Basics_supper basics_supper);
 

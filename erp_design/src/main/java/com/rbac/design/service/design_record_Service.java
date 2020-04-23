@@ -38,9 +38,8 @@ public interface design_record_Service {
     public void updaterecordById(design_record record);
 
 
-
     /**
-     *
+     * 上下架商品
      */
     void putawayrecord(design_record record);
 
@@ -49,5 +48,10 @@ public interface design_record_Service {
      */
     design_record selectById(design_record record);
 
+    /**
+     * 批量删除
+     *
+     * @param idx
+     */
     void deletebatch(Integer[] idx);
 }

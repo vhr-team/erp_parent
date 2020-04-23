@@ -1,7 +1,6 @@
 package com.rbac.design.pojo;
 
 import java.io.Serializable;
-import java.util.Date;
 
 public class design_material implements Serializable {
     /**
@@ -57,7 +56,7 @@ public class design_material implements Serializable {
     /**
      * 物料总成本
      */
-    private Integer costPriceSum;
+    private Double costPriceSum;
 
     /**
      * 登记人
@@ -67,7 +66,7 @@ public class design_material implements Serializable {
     /**
      * 登记时间
      */
-    private Date registerTime;
+    private String registerTime;
 
     /**
      * 复核人
@@ -77,7 +76,7 @@ public class design_material implements Serializable {
     /**
      * 复核时间
      */
-    private Date checkTime;
+    private String checkTime;
 
     /**
      * 变更人
@@ -87,7 +86,7 @@ public class design_material implements Serializable {
     /**
      * 变更时间
      */
-    private Date changeTime;
+    private String changeTime;
 
     /**
      * 审核标志(等待审核/审核通过/审核不通过)
@@ -181,11 +180,11 @@ public class design_material implements Serializable {
         this.moduleDescribe = moduleDescribe == null ? null : moduleDescribe.trim();
     }
 
-    public Integer getCostPriceSum() {
+    public Double getCostPriceSum() {
         return costPriceSum;
     }
 
-    public void setCostPriceSum(Integer costPriceSum) {
+    public void setCostPriceSum(Double costPriceSum) {
         this.costPriceSum = costPriceSum;
     }
 
@@ -197,12 +196,12 @@ public class design_material implements Serializable {
         this.register = register == null ? null : register.trim();
     }
 
-    public Date getRegisterTime() {
+    public String getRegisterTime() {
         return registerTime;
     }
 
-    public void setRegisterTime(Date registerTime) {
-        this.registerTime = registerTime;
+    public void setRegisterTime(String registerTime) {
+        this.registerTime = registerTime == null ? null : registerTime.trim();
     }
 
     public String getChecker() {
@@ -213,12 +212,12 @@ public class design_material implements Serializable {
         this.checker = checker == null ? null : checker.trim();
     }
 
-    public Date getCheckTime() {
+    public String getCheckTime() {
         return checkTime;
     }
 
-    public void setCheckTime(Date checkTime) {
-        this.checkTime = checkTime;
+    public void setCheckTime(String checkTime) {
+        this.checkTime = checkTime == null ? null : checkTime.trim();
     }
 
     public String getChanger() {
@@ -229,12 +228,12 @@ public class design_material implements Serializable {
         this.changer = changer == null ? null : changer.trim();
     }
 
-    public Date getChangeTime() {
+    public String getChangeTime() {
         return changeTime;
     }
 
-    public void setChangeTime(Date changeTime) {
-        this.changeTime = changeTime;
+    public void setChangeTime(String changeTime) {
+        this.changeTime = changeTime == null ? null : changeTime.trim();
     }
 
     public String getCheckTag() {

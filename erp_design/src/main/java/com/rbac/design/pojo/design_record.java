@@ -1,10 +1,7 @@
 package com.rbac.design.pojo;
 
-import lombok.Data;
-
 import java.io.Serializable;
 
-@Data
 public class design_record implements Serializable {
     /**
      * 序号
@@ -84,17 +81,17 @@ public class design_record implements Serializable {
     /**
      * 市场单价
      */
-    private Integer listPrice;
+    private Double listPrice;
 
     /**
      * 计划成本单价
      */
-    private Integer costPrice;
+    private Double costPrice;
 
     /**
      * 成本单价
      */
-    private Integer realCostPrice;
+    private Double realCostPrice;
 
     /**
      * 单位
@@ -293,27 +290,27 @@ public class design_record implements Serializable {
         this.warranty = warranty == null ? null : warranty.trim();
     }
 
-    public Integer getListPrice() {
+    public Double getListPrice() {
         return listPrice;
     }
 
-    public void setListPrice(Integer listPrice) {
+    public void setListPrice(Double listPrice) {
         this.listPrice = listPrice;
     }
 
-    public Integer getCostPrice() {
+    public Double getCostPrice() {
         return costPrice;
     }
 
-    public void setCostPrice(Integer costPrice) {
+    public void setCostPrice(Double costPrice) {
         this.costPrice = costPrice;
     }
 
-    public Integer getRealCostPrice() {
+    public Double getRealCostPrice() {
         return realCostPrice;
     }
 
-    public void setRealCostPrice(Integer realCostPrice) {
+    public void setRealCostPrice(Double realCostPrice) {
         this.realCostPrice = realCostPrice;
     }
 

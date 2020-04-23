@@ -7,10 +7,7 @@ import cn.ddossec.vo.UserVo;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @author 30315
@@ -44,11 +41,12 @@ public class UserController {
 
     /**
      * 根据部门ID查询员工
+     *
      * @param deptid
      * @return
      */
     @RequestMapping("queryUserByDeptId")
-    public DataGridView queryUserByDeptId(Integer deptid){
+    public DataGridView queryUserByDeptId(Integer deptid) {
         return new DataGridView(this.userService.queryUserByDeptId(deptid));
     }
 
@@ -161,12 +159,50 @@ public class UserController {
 
     /**
      * 根据用户ID查询用户对象
+     *
      * @param userId
      * @return
      */
     @RequestMapping("loadUserByUserId")
-    public DataGridView loadUserByUserId(Integer userId){
+    public DataGridView loadUserByUserId(Integer userId) {
         User user = this.userService.getById(userId);
         return new DataGridView(user);
+    }
+
+    /*
+    修改密码
+     * @param oldWord
+     * @return
+     */
+    @RequestMapping("/updatePassword")
+    @ResponseBody
+    public ResultObj updatePassword(String oldPwd, String newPwd) {
+        try {
+            // 1.获取当前登录的用户
+            User user = toolUtils.getCurrentUser();
+
+            // 2.对原密码加密
+            String s = MD5Utils.md5(oldPwd, user.getSalt(), 2);
+
+            // 3.判断旧密码是否跟登录密码一致
+            if (!user.getPwd().equals(s)) {
+                throw new IllegalArgumentException("输入的旧密码不正确！");
+            }
+
+            // 4判断新旧密码是否一致
+            if (newPwd.equals(oldPwd)) {
+                throw new IllegalArgumentException("新密码不能与旧密码相同！");
+            }
+
+            user.setSalt(MD5Utils.createUUID());
+            String currentNewPwd = MD5Utils.md5(newPwd, user.getSalt(), 2);
+            user.setPwd(currentNewPwd);
+
+            // 5.更新密码
+            this.userService.updateUser(user);
+            return ResultObj.UPDATE_SUCCESS;
+        } catch (Exception e) {
+            return ResultObj.UPDATE_ERROR;
+        }
     }
 }

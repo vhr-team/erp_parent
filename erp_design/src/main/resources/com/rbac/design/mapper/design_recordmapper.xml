@@ -7,29 +7,29 @@
     <result column="product_name" property="productName" jdbcType="VARCHAR" />
     <result column="factory_name" property="factoryName" jdbcType="VARCHAR" />
     <result column="first_kind_id" property="firstKindId" jdbcType="VARCHAR" />
-    <result column="first_kind_name" property="firstKindName" jdbcType="VARCHAR" />
-    <result column="second_kind_id" property="secondKindId" jdbcType="VARCHAR" />
-    <result column="second_kind_name" property="secondKindName" jdbcType="VARCHAR" />
-    <result column="product_nick" property="productNick" jdbcType="VARCHAR" />
-    <result column="type" property="type" jdbcType="VARCHAR" />
-    <result column="product_class" property="productClass" jdbcType="VARCHAR" />
-    <result column="personal_unit" property="personalUnit" jdbcType="VARCHAR" />
-    <result column="personal_value" property="personalValue" jdbcType="VARCHAR" />
-    <result column="provider_group" property="providerGroup" jdbcType="VARCHAR" />
-    <result column="warranty" property="warranty" jdbcType="VARCHAR" />
-    <result column="list_price" property="listPrice" jdbcType="INTEGER" />
-    <result column="cost_price" property="costPrice" jdbcType="INTEGER" />
-    <result column="real_cost_price" property="realCostPrice" jdbcType="INTEGER" />
-    <result column="amount_unit" property="amountUnit" jdbcType="VARCHAR" />
-    <result column="product_describe" property="productDescribe" jdbcType="VARCHAR" />
-    <result column="responsible_person" property="responsiblePerson" jdbcType="VARCHAR" />
-    <result column="register" property="register" jdbcType="VARCHAR" />
-    <result column="register_time" property="registerTime" jdbcType="VARCHAR" />
-    <result column="checker" property="checker" jdbcType="VARCHAR" />
-    <result column="check_time" property="checkTime" jdbcType="VARCHAR" />
-    <result column="check_tag" property="checkTag" jdbcType="VARCHAR" />
-    <result column="changer" property="changer" jdbcType="VARCHAR" />
-    <result column="change_time" property="changeTime" jdbcType="VARCHAR" />
+      <result column="first_kind_name" property="firstKindName" jdbcType="VARCHAR"/>
+      <result column="second_kind_id" property="secondKindId" jdbcType="VARCHAR"/>
+      <result column="second_kind_name" property="secondKindName" jdbcType="VARCHAR"/>
+      <result column="product_nick" property="productNick" jdbcType="VARCHAR"/>
+      <result column="type" property="type" jdbcType="VARCHAR"/>
+      <result column="product_class" property="productClass" jdbcType="VARCHAR"/>
+      <result column="personal_unit" property="personalUnit" jdbcType="VARCHAR"/>
+      <result column="personal_value" property="personalValue" jdbcType="VARCHAR"/>
+      <result column="provider_group" property="providerGroup" jdbcType="VARCHAR"/>
+      <result column="warranty" property="warranty" jdbcType="VARCHAR"/>
+      <result column="list_price" property="listPrice" jdbcType="DOUBLE"/>
+      <result column="cost_price" property="costPrice" jdbcType="DOUBLE"/>
+      <result column="real_cost_price" property="realCostPrice" jdbcType="DOUBLE"/>
+      <result column="amount_unit" property="amountUnit" jdbcType="VARCHAR"/>
+      <result column="product_describe" property="productDescribe" jdbcType="VARCHAR"/>
+      <result column="responsible_person" property="responsiblePerson" jdbcType="VARCHAR"/>
+      <result column="register" property="register" jdbcType="VARCHAR"/>
+      <result column="register_time" property="registerTime" jdbcType="VARCHAR"/>
+      <result column="checker" property="checker" jdbcType="VARCHAR"/>
+      <result column="check_time" property="checkTime" jdbcType="VARCHAR"/>
+      <result column="check_tag" property="checkTag" jdbcType="VARCHAR"/>
+      <result column="changer" property="changer" jdbcType="VARCHAR"/>
+      <result column="change_time" property="changeTime" jdbcType="VARCHAR"/>
     <result column="change_tag" property="changeTag" jdbcType="VARCHAR" />
     <result column="price_change_tag" property="priceChangeTag" jdbcType="VARCHAR" />
     <result column="file_change_amount" property="fileChangeAmount" jdbcType="INTEGER" />
@@ -96,11 +96,11 @@
   </sql>
   <sql id="Base_Column_List" >
     <if test="fields == null" >
-      id, product_id, product_name, factory_name, first_kind_id, first_kind_name, second_kind_id,
-      second_kind_name, product_nick, type, product_class, personal_unit, personal_value,
-      provider_group, warranty, list_price, cost_price, real_cost_price, amount_unit, product_describe,
-      responsible_person, register, register_time, checker, check_time, check_tag, changer,
-      change_time, change_tag, price_change_tag, file_change_amount, delete_tag, material_list
+        id, product_id, product_name, factory_name, first_kind_id, first_kind_name, second_kind_id,
+        second_kind_name, product_nick, type, product_class, personal_unit, personal_value,
+        provider_group, warranty, list_price, cost_price, real_cost_price, amount_unit, product_describe,
+        responsible_person, register, register_time, checker, check_time, check_tag, changer,
+        change_time, change_tag, price_change_tag, file_change_amount, delete_tag, material_list
     </if>
     <if test="fields != null" >
       ${fields}
@@ -121,10 +121,10 @@
     </if>
   </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select
-    id,product_id,product_name,factory_name,first_kind_id,first_kind_name,second_kind_id,second_kind_name,product_nick,type,product_class,personal_unit,personal_value,provider_group,warranty,list_price,cost_price,real_cost_price,amount_unit,product_describe,responsible_person,register,register_time,checker,check_time,check_tag,changer,change_time,change_tag,price_change_tag,file_change_amount,delete_tag,material_list
-    from product_design_record
-    where id = #{id,jdbcType=INTEGER}
+      select
+      id,product_id,product_name,factory_name,first_kind_id,first_kind_name,second_kind_id,second_kind_name,product_nick,type,product_class,personal_unit,personal_value,provider_group,warranty,list_price,cost_price,real_cost_price,amount_unit,product_describe,responsible_person,register,register_time,checker,check_time,check_tag,changer,change_time,change_tag,price_change_tag,file_change_amount,delete_tag,material_list
+      from product_design_record
+      where id = #{id,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from product_design_record
@@ -137,30 +137,30 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.rbac.design.pojo.design_record" >
-    insert into product_design_record (id, product_id, product_name,
-    factory_name, first_kind_id, first_kind_name,
-    second_kind_id, second_kind_name, product_nick,
-    type, product_class, personal_unit,
-    personal_value, provider_group, warranty,
-    list_price, cost_price, real_cost_price,
-    amount_unit, product_describe, responsible_person,
-    register, register_time, checker,
-    check_time, check_tag, changer,
-    change_time, change_tag, price_change_tag,
-    file_change_amount, delete_tag, material_list
-    )
-    values (#{id,jdbcType=INTEGER}, #{productId,jdbcType=VARCHAR}, #{productName,jdbcType=VARCHAR},
-    #{factoryName,jdbcType=VARCHAR}, #{firstKindId,jdbcType=VARCHAR}, #{firstKindName,jdbcType=VARCHAR},
-    #{secondKindId,jdbcType=VARCHAR}, #{secondKindName,jdbcType=VARCHAR}, #{productNick,jdbcType=VARCHAR},
-    #{type,jdbcType=VARCHAR}, #{productClass,jdbcType=VARCHAR}, #{personalUnit,jdbcType=VARCHAR},
-    #{personalValue,jdbcType=VARCHAR}, #{providerGroup,jdbcType=VARCHAR}, #{warranty,jdbcType=VARCHAR},
-    #{listPrice,jdbcType=INTEGER}, #{costPrice,jdbcType=INTEGER}, #{realCostPrice,jdbcType=INTEGER},
-    #{amountUnit,jdbcType=VARCHAR}, #{productDescribe,jdbcType=VARCHAR}, #{responsiblePerson,jdbcType=VARCHAR},
-    #{register,jdbcType=VARCHAR}, #{registerTime,jdbcType=VARCHAR}, #{checker,jdbcType=VARCHAR},
-    #{checkTime,jdbcType=VARCHAR}, #{checkTag,jdbcType=VARCHAR}, #{changer,jdbcType=VARCHAR},
-    #{changeTime,jdbcType=VARCHAR}, #{changeTag,jdbcType=VARCHAR}, #{priceChangeTag,jdbcType=VARCHAR},
-    #{fileChangeAmount,jdbcType=INTEGER}, #{deleteTag,jdbcType=VARCHAR}, #{materialList,jdbcType=VARCHAR}
-    )
+      insert into product_design_record (id, product_id, product_name,
+      factory_name, first_kind_id, first_kind_name,
+      second_kind_id, second_kind_name, product_nick,
+      type, product_class, personal_unit,
+      personal_value, provider_group, warranty,
+      list_price, cost_price, real_cost_price,
+      amount_unit, product_describe, responsible_person,
+      register, register_time, checker,
+      check_time, check_tag, changer,
+      change_time, change_tag, price_change_tag,
+      file_change_amount, delete_tag, material_list
+      )
+      values (#{id,jdbcType=INTEGER}, #{productId,jdbcType=VARCHAR}, #{productName,jdbcType=VARCHAR},
+      #{factoryName,jdbcType=VARCHAR}, #{firstKindId,jdbcType=VARCHAR}, #{firstKindName,jdbcType=VARCHAR},
+      #{secondKindId,jdbcType=VARCHAR}, #{secondKindName,jdbcType=VARCHAR}, #{productNick,jdbcType=VARCHAR},
+      #{type,jdbcType=VARCHAR}, #{productClass,jdbcType=VARCHAR}, #{personalUnit,jdbcType=VARCHAR},
+      #{personalValue,jdbcType=VARCHAR}, #{providerGroup,jdbcType=VARCHAR}, #{warranty,jdbcType=VARCHAR},
+      #{listPrice,jdbcType=DOUBLE}, #{costPrice,jdbcType=DOUBLE}, #{realCostPrice,jdbcType=DOUBLE},
+      #{amountUnit,jdbcType=VARCHAR}, #{productDescribe,jdbcType=VARCHAR}, #{responsiblePerson,jdbcType=VARCHAR},
+      #{register,jdbcType=VARCHAR}, #{registerTime,jdbcType=VARCHAR}, #{checker,jdbcType=VARCHAR},
+      #{checkTime,jdbcType=VARCHAR}, #{checkTag,jdbcType=VARCHAR}, #{changer,jdbcType=VARCHAR},
+      #{changeTime,jdbcType=VARCHAR}, #{changeTag,jdbcType=VARCHAR}, #{priceChangeTag,jdbcType=VARCHAR},
+      #{fileChangeAmount,jdbcType=INTEGER}, #{deleteTag,jdbcType=VARCHAR}, #{materialList,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.rbac.design.pojo.design_record" >
     insert into product_design_record
@@ -312,13 +312,13 @@
         #{warranty,jdbcType=VARCHAR},
       </if>
       <if test="listPrice != null" >
-        #{listPrice,jdbcType=INTEGER},
+          #{listPrice,jdbcType=DOUBLE},
       </if>
       <if test="costPrice != null" >
-        #{costPrice,jdbcType=INTEGER},
+          #{costPrice,jdbcType=DOUBLE},
       </if>
       <if test="realCostPrice != null" >
-        #{realCostPrice,jdbcType=INTEGER},
+          #{realCostPrice,jdbcType=DOUBLE},
       </if>
       <if test="amountUnit != null" >
         #{amountUnit,jdbcType=VARCHAR},
@@ -422,13 +422,13 @@
         warranty = #{record.warranty,jdbcType=VARCHAR},
       </if>
       <if test="record.listPrice != null" >
-        list_price = #{record.listPrice,jdbcType=INTEGER},
+          list_price = #{record.listPrice,jdbcType=DOUBLE},
       </if>
       <if test="record.costPrice != null" >
-        cost_price = #{record.costPrice,jdbcType=INTEGER},
+          cost_price = #{record.costPrice,jdbcType=DOUBLE},
       </if>
       <if test="record.realCostPrice != null" >
-        real_cost_price = #{record.realCostPrice,jdbcType=INTEGER},
+          real_cost_price = #{record.realCostPrice,jdbcType=DOUBLE},
       </if>
       <if test="record.amountUnit != null" >
         amount_unit = #{record.amountUnit,jdbcType=VARCHAR},
@@ -481,41 +481,41 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map" >
-    update product_design_record
-    set id = #{record.id,jdbcType=INTEGER},
-    product_id = #{record.productId,jdbcType=VARCHAR},
-    product_name = #{record.productName,jdbcType=VARCHAR},
-    factory_name = #{record.factoryName,jdbcType=VARCHAR},
-    first_kind_id = #{record.firstKindId,jdbcType=VARCHAR},
-    first_kind_name = #{record.firstKindName,jdbcType=VARCHAR},
-    second_kind_id = #{record.secondKindId,jdbcType=VARCHAR},
-    second_kind_name = #{record.secondKindName,jdbcType=VARCHAR},
-    product_nick = #{record.productNick,jdbcType=VARCHAR},
-    type = #{record.type,jdbcType=VARCHAR},
-    product_class = #{record.productClass,jdbcType=VARCHAR},
-    personal_unit = #{record.personalUnit,jdbcType=VARCHAR},
-    personal_value = #{record.personalValue,jdbcType=VARCHAR},
-    provider_group = #{record.providerGroup,jdbcType=VARCHAR},
-    warranty = #{record.warranty,jdbcType=VARCHAR},
-    list_price = #{record.listPrice,jdbcType=INTEGER},
-    cost_price = #{record.costPrice,jdbcType=INTEGER},
-    real_cost_price = #{record.realCostPrice,jdbcType=INTEGER},
-    amount_unit = #{record.amountUnit,jdbcType=VARCHAR},
-    product_describe = #{record.productDescribe,jdbcType=VARCHAR},
-    responsible_person = #{record.responsiblePerson,jdbcType=VARCHAR},
-    register = #{record.register,jdbcType=VARCHAR},
-    register_time = #{record.registerTime,jdbcType=VARCHAR},
-    checker = #{record.checker,jdbcType=VARCHAR},
-    check_time = #{record.checkTime,jdbcType=VARCHAR},
-    check_tag = #{record.checkTag,jdbcType=VARCHAR},
-    changer = #{record.changer,jdbcType=VARCHAR},
-    change_time = #{record.changeTime,jdbcType=VARCHAR},
-    change_tag = #{record.changeTag,jdbcType=VARCHAR},
-    price_change_tag = #{record.priceChangeTag,jdbcType=VARCHAR},
-    file_change_amount = #{record.fileChangeAmount,jdbcType=INTEGER},
-    delete_tag = #{record.deleteTag,jdbcType=VARCHAR},
-    material_list = #{record.materialList,jdbcType=VARCHAR}
-    <if test="_parameter != null" >
+      update product_design_record
+      set id = #{record.id,jdbcType=INTEGER},
+      product_id = #{record.productId,jdbcType=VARCHAR},
+      product_name = #{record.productName,jdbcType=VARCHAR},
+      factory_name = #{record.factoryName,jdbcType=VARCHAR},
+      first_kind_id = #{record.firstKindId,jdbcType=VARCHAR},
+      first_kind_name = #{record.firstKindName,jdbcType=VARCHAR},
+      second_kind_id = #{record.secondKindId,jdbcType=VARCHAR},
+      second_kind_name = #{record.secondKindName,jdbcType=VARCHAR},
+      product_nick = #{record.productNick,jdbcType=VARCHAR},
+      type = #{record.type,jdbcType=VARCHAR},
+      product_class = #{record.productClass,jdbcType=VARCHAR},
+      personal_unit = #{record.personalUnit,jdbcType=VARCHAR},
+      personal_value = #{record.personalValue,jdbcType=VARCHAR},
+      provider_group = #{record.providerGroup,jdbcType=VARCHAR},
+      warranty = #{record.warranty,jdbcType=VARCHAR},
+      list_price = #{record.listPrice,jdbcType=DOUBLE},
+      cost_price = #{record.costPrice,jdbcType=DOUBLE},
+      real_cost_price = #{record.realCostPrice,jdbcType=DOUBLE},
+      amount_unit = #{record.amountUnit,jdbcType=VARCHAR},
+      product_describe = #{record.productDescribe,jdbcType=VARCHAR},
+      responsible_person = #{record.responsiblePerson,jdbcType=VARCHAR},
+      register = #{record.register,jdbcType=VARCHAR},
+      register_time = #{record.registerTime,jdbcType=VARCHAR},
+      checker = #{record.checker,jdbcType=VARCHAR},
+      check_time = #{record.checkTime,jdbcType=VARCHAR},
+      check_tag = #{record.checkTag,jdbcType=VARCHAR},
+      changer = #{record.changer,jdbcType=VARCHAR},
+      change_time = #{record.changeTime,jdbcType=VARCHAR},
+      change_tag = #{record.changeTag,jdbcType=VARCHAR},
+      price_change_tag = #{record.priceChangeTag,jdbcType=VARCHAR},
+      file_change_amount = #{record.fileChangeAmount,jdbcType=INTEGER},
+      delete_tag = #{record.deleteTag,jdbcType=VARCHAR},
+      material_list = #{record.materialList,jdbcType=VARCHAR}
+      <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
@@ -565,13 +565,13 @@
         warranty = #{warranty,jdbcType=VARCHAR},
       </if>
       <if test="listPrice != null" >
-        list_price = #{listPrice,jdbcType=INTEGER},
+          list_price = #{listPrice,jdbcType=DOUBLE},
       </if>
       <if test="costPrice != null" >
-        cost_price = #{costPrice,jdbcType=INTEGER},
+          cost_price = #{costPrice,jdbcType=DOUBLE},
       </if>
       <if test="realCostPrice != null" >
-        real_cost_price = #{realCostPrice,jdbcType=INTEGER},
+          real_cost_price = #{realCostPrice,jdbcType=DOUBLE},
       </if>
       <if test="amountUnit != null" >
         amount_unit = #{amountUnit,jdbcType=VARCHAR},
@@ -622,39 +622,39 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.rbac.design.pojo.design_record" >
-    update product_design_record
-    set product_id = #{productId,jdbcType=VARCHAR},
-    product_name = #{productName,jdbcType=VARCHAR},
-    factory_name = #{factoryName,jdbcType=VARCHAR},
-    first_kind_id = #{firstKindId,jdbcType=VARCHAR},
-    first_kind_name = #{firstKindName,jdbcType=VARCHAR},
-    second_kind_id = #{secondKindId,jdbcType=VARCHAR},
-    second_kind_name = #{secondKindName,jdbcType=VARCHAR},
-    product_nick = #{productNick,jdbcType=VARCHAR},
-    type = #{type,jdbcType=VARCHAR},
-    product_class = #{productClass,jdbcType=VARCHAR},
-    personal_unit = #{personalUnit,jdbcType=VARCHAR},
-    personal_value = #{personalValue,jdbcType=VARCHAR},
-    provider_group = #{providerGroup,jdbcType=VARCHAR},
-    warranty = #{warranty,jdbcType=VARCHAR},
-    list_price = #{listPrice,jdbcType=INTEGER},
-    cost_price = #{costPrice,jdbcType=INTEGER},
-    real_cost_price = #{realCostPrice,jdbcType=INTEGER},
-    amount_unit = #{amountUnit,jdbcType=VARCHAR},
-    product_describe = #{productDescribe,jdbcType=VARCHAR},
-    responsible_person = #{responsiblePerson,jdbcType=VARCHAR},
-    register = #{register,jdbcType=VARCHAR},
-    register_time = #{registerTime,jdbcType=VARCHAR},
-    checker = #{checker,jdbcType=VARCHAR},
-    check_time = #{checkTime,jdbcType=VARCHAR},
-    check_tag = #{checkTag,jdbcType=VARCHAR},
-    changer = #{changer,jdbcType=VARCHAR},
-    change_time = #{changeTime,jdbcType=VARCHAR},
-    change_tag = #{changeTag,jdbcType=VARCHAR},
-    price_change_tag = #{priceChangeTag,jdbcType=VARCHAR},
-    file_change_amount = #{fileChangeAmount,jdbcType=INTEGER},
-    delete_tag = #{deleteTag,jdbcType=VARCHAR},
-    material_list = #{materialList,jdbcType=VARCHAR}
-    where id = #{id,jdbcType=INTEGER}
+      update product_design_record
+      set product_id = #{productId,jdbcType=VARCHAR},
+      product_name = #{productName,jdbcType=VARCHAR},
+      factory_name = #{factoryName,jdbcType=VARCHAR},
+      first_kind_id = #{firstKindId,jdbcType=VARCHAR},
+      first_kind_name = #{firstKindName,jdbcType=VARCHAR},
+      second_kind_id = #{secondKindId,jdbcType=VARCHAR},
+      second_kind_name = #{secondKindName,jdbcType=VARCHAR},
+      product_nick = #{productNick,jdbcType=VARCHAR},
+      type = #{type,jdbcType=VARCHAR},
+      product_class = #{productClass,jdbcType=VARCHAR},
+      personal_unit = #{personalUnit,jdbcType=VARCHAR},
+      personal_value = #{personalValue,jdbcType=VARCHAR},
+      provider_group = #{providerGroup,jdbcType=VARCHAR},
+      warranty = #{warranty,jdbcType=VARCHAR},
+      list_price = #{listPrice,jdbcType=DOUBLE},
+      cost_price = #{costPrice,jdbcType=DOUBLE},
+      real_cost_price = #{realCostPrice,jdbcType=DOUBLE},
+      amount_unit = #{amountUnit,jdbcType=VARCHAR},
+      product_describe = #{productDescribe,jdbcType=VARCHAR},
+      responsible_person = #{responsiblePerson,jdbcType=VARCHAR},
+      register = #{register,jdbcType=VARCHAR},
+      register_time = #{registerTime,jdbcType=VARCHAR},
+      checker = #{checker,jdbcType=VARCHAR},
+      check_time = #{checkTime,jdbcType=VARCHAR},
+      check_tag = #{checkTag,jdbcType=VARCHAR},
+      changer = #{changer,jdbcType=VARCHAR},
+      change_time = #{changeTime,jdbcType=VARCHAR},
+      change_tag = #{changeTag,jdbcType=VARCHAR},
+      price_change_tag = #{priceChangeTag,jdbcType=VARCHAR},
+      file_change_amount = #{fileChangeAmount,jdbcType=INTEGER},
+      delete_tag = #{deleteTag,jdbcType=VARCHAR},
+      material_list = #{materialList,jdbcType=VARCHAR}
+      where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

@@ -16,8 +16,11 @@ public interface ProductTypeService extends IService<ProductType> {
 
     /**
      * 查询所有类别信息
+     *
      * @param productTypeVo
      * @return
      */
     DataGridView ProductType(ProductTypeVo productTypeVo);
+
+    ProductType checkProductType(ProductType productType);
 }

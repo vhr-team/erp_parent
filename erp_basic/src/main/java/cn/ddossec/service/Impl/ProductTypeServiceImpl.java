@@ -11,9 +11,11 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -25,6 +27,8 @@ import java.util.List;
  * @date 2020-04-2310:49
  */
 @Service
+@Transactional
+@Slf4j
 public class ProductTypeServiceImpl extends ServiceImpl<ProductTypeMapper, ProductType> implements ProductTypeService {
 
     @Autowired
@@ -43,8 +47,10 @@ public class ProductTypeServiceImpl extends ServiceImpl<ProductTypeMapper, Produ
         qw.eq(null != productTypeVo.getSupperId(), "supper_id", productTypeVo.getSupperId());
         qw.like(StringUtils.isNotBlank(productTypeVo.getName()), "name", productTypeVo.getName());
 
+        // 排序
+        qw.orderByDesc("product_type_id");
+
         this.productTypeMapper.selectPage(page, qw);
-        System.out.println(page.getTotal());
         List<ProductType> typeList = page.getRecords();
 
         // 查询供应商
@@ -59,6 +65,6 @@ public class ProductTypeServiceImpl extends ServiceImpl<ProductTypeMapper, Produ
             }
         }
 
-        return new DataGridView(Long.valueOf(typeList.size()), typeList);
+        return new DataGridView(page.getTotal(),typeList);
     }
 }

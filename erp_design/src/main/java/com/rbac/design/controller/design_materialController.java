@@ -1,9 +1,6 @@
 package com.rbac.design.controller;
 
-import com.rbac.design.entity.PageResult;
-import com.rbac.design.entity.Response;
-import com.rbac.design.entity.material_detail;
-import com.rbac.design.entity.material_details;
+import com.rbac.design.entity.*;
 import com.rbac.design.pojo.design_classify;
 import com.rbac.design.pojo.design_material;
 import com.rbac.design.pojo.design_material_detail;
@@ -12,6 +9,7 @@ import com.rbac.design.service.design_materialService;
 import com.rbac.design.service.design_material_detailService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -90,7 +88,7 @@ public class design_materialController {
             return new Response(true, "修改成功");
         } catch (Exception e) {
             e.printStackTrace();
-            return new Response(true, "修改失败");
+            return new Response(false, "修改失败");
         }
     }
 
@@ -149,7 +147,7 @@ public class design_materialController {
             return new Response(true, "修改成功");
         } catch (Exception e) {
             e.printStackTrace();
-            return new Response(true, "修改失败");
+            return new Response(false, "修改失败");
         }
     }
 
@@ -163,7 +161,7 @@ public class design_materialController {
             return new Response(true, "删除成功");
         } catch (Exception e) {
             e.printStackTrace();
-            return new Response(true, "删除失败");
+            return new Response(false, "删除失败");
         }
     }
 
@@ -172,7 +170,6 @@ public class design_materialController {
     public material_detail selectAll() {
         material_details details = null;
         List<material_details> material_details = new ArrayList<>();
-
         List<design_material> design_material_details = service.selectAll();
         System.out.println(design_material_details);
         for (design_material design_material_detail : design_material_details) {
@@ -182,6 +179,35 @@ public class design_materialController {
             material_details.add(details);
         }
         return new material_detail("0", "success", material_details);
+    }
+
+
+    @ApiOperation("查询未审核的物料")
+    @RequestMapping("/design_materialcheck")
+    public PageResult design_materialcheck(Integer page, Integer pageSize, design_material material) {
+        return service.design_materialcheck(page, pageSize, material);
+    }
+
+    @RequestMapping("/check")
+    public Response check(design_material material) {
+        try {
+            service.check(material);
+            return new Response(true, "审核成功");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new Response(false, "审核失败");
+        }
+    }
+
+    @RequestMapping("/miuticheck")
+    public Response checkmiuti(@RequestBody miutichecker checkermiuti) {
+        try {
+            service.miuticheck(checkermiuti);
+            return new Response(true, "审核成功");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new Response(false, "审核失败");
+        }
     }
 }
 

@@ -1,6 +1,7 @@
 package com.rbac.design.service;
 
 import com.rbac.design.entity.PageResult;
+import com.rbac.design.entity.miutichecker;
 import com.rbac.design.pojo.design_record;
 
 import java.util.List;
@@ -54,4 +55,19 @@ public interface design_record_Service {
      * @param idx
      */
     void deletebatch(Integer[] idx);
+
+
+    /**
+     * 分页条件查询
+     *
+     * @param page     页码
+     * @param pageSize 行数
+     * @param record   传入的值
+     * @return 总记录数 数据
+     */
+    public PageResult reloadcheck(Integer page, Integer pageSize, design_record record);
+
+    void check(design_record record);
+
+    void miuticheck(miutichecker checker);
 }

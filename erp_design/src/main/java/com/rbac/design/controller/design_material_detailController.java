@@ -5,6 +5,7 @@ import com.rbac.design.entity.material_detail;
 import com.rbac.design.entity.material_details;
 import com.rbac.design.pojo.design_material_detail;
 import com.rbac.design.service.design_material_detailService;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,6 +23,7 @@ public class design_material_detailController {
     @Autowired
     design_material_detailService service;
 
+    @ApiOperation("根据物料id查询")
     @RequestMapping("/selectByproductId")
     public design_material_detailresult selectByproductId(String productId) {
         design_material_detail design_material_detail = service.selectByproductId(productId);
@@ -29,6 +31,12 @@ public class design_material_detailController {
         return new design_material_detailresult(design_material_detail);
     }
 
+    /**
+     * 查询所有物料
+     *
+     * @return
+     */
+    @ApiOperation("查询所有物料")
     @RequestMapping("/selectAll")
     public material_detail selectAll() {
         material_details details = null;

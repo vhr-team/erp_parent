@@ -3,6 +3,7 @@ package com.rbac.design.service.Impl;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.rbac.design.entity.PageResult;
+import com.rbac.design.entity.miutichecker;
 import com.rbac.design.mapper.design_materialmapper;
 import com.rbac.design.pojo.design_material;
 import com.rbac.design.pojo.design_materialQuery;
@@ -11,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -58,5 +61,32 @@ public class design_materialIServicempl implements design_materialService {
         design_materialQuery.Criteria criteria = query.createCriteria();
         criteria.andCheckTagEqualTo("审核通过");
         return mapper.selectByExample(query);
+    }
+
+    @Override
+    public PageResult design_materialcheck(Integer page, Integer pageSize, design_material material) {
+        PageHelper.startPage(page, pageSize);
+        design_materialQuery query = new design_materialQuery();
+        design_materialQuery.Criteria criteria = query.createCriteria();
+        criteria.andCheckTagEqualTo("等待审核");
+        Page<design_material> design_materials = (Page<design_material>) mapper.selectByExample(query);
+        return new PageResult(design_materials.getTotal(), design_materials.getResult());
+    }
+
+    @Override
+    public void check(design_material material) {
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
+        material.setCheckTime(df.format(new Date()));
+        mapper.updateByPrimaryKeySelective(material);
+    }
+
+    @Override
+    public void miuticheck(miutichecker checker) {
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
+        String checkTime = df.format(new Date());
+        for (Integer intid : checker.getId()) {
+            mapper.miuticheck(checker.getChecker(), checker.getCheckTag(), intid, checkTime);
+        }
+
     }
 }

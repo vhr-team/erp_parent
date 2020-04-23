@@ -3,15 +3,19 @@
 <mapper namespace="cn.ddossec.mapper.Basics_supperMapper">
 
     <select id="findAllBasics_supper" resultType="cn.ddossec.domain.Basics_supper">
-        SELECT * from basics_supper;
+        SELECT * from basics_supper  LIMIT #{page}, #{rows};
     </select>
 
     <delete id="delBasics_supperMapperById">
         DELETE FROM basics_supper WHERE id = #{id}
     </delete>
+    <delete id="deleteIds">
+
+            DELETE FROM basics_supper WHERE id = #{params}
+    </delete>
 
     <insert id="insertBasics_supper">
-        INSERT INTO basics_supper(id,address,contact,name,number,remarks) VALUES(#{id},#{address},#{contact},{name},#{number},#{remarks})
+        INSERT INTO basics_supper(address,contact,name,number,remarks) VALUES(#{address},#{contact},#{name},#{number},#{remarks})
     </insert>
 
     <update id="updateBasics_supper">
@@ -28,6 +32,15 @@
 
     <select id="selectById" resultType="cn.ddossec.domain.Basics_supper">
         SELECT * FROM basics_supper WHERE id = #{id}
+    </select>
+    <select id="sellName" resultType="cn.ddossec.domain.Basics_supper">
+
+              SELECT * FROM basics_supper WHERE name  like CONCAT('%',#{name},'%')
+              LIMIT #{page}, #{rows};
+    </select>
+    <select id="sellCount" resultType="java.lang.Integer">
+
+           SELECT count(1) FROM basics_supper
     </select>
 
 </mapper>

@@ -3,6 +3,7 @@ package com.rbac.design.service.Impl;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.rbac.design.entity.PageResult;
+import com.rbac.design.entity.miutichecker;
 import com.rbac.design.mapper.design_recordmapper;
 import com.rbac.design.pojo.design_record;
 import com.rbac.design.pojo.design_recordQuery;
@@ -120,5 +121,32 @@ public class design_record_ServiceImpl implements design_record_Service {
         criteria.andIdIn(Arrays.asList(idx));//根据id集合删除品牌
         mapper.deleteByExample(Query);
     }
+
+    @Override
+    public PageResult reloadcheck(Integer page, Integer pageSize, design_record record) {
+        PageHelper.startPage(page, pageSize);
+        design_recordQuery design_recordQuery = new design_recordQuery();
+        com.rbac.design.pojo.design_recordQuery.Criteria criteria = design_recordQuery.createCriteria();
+        criteria.andCheckTagEqualTo("等待审核");
+        Page<design_record> design_records = (Page<design_record>) mapper.selectByExample(design_recordQuery);
+        return new PageResult(design_records.getTotal(), design_records.getResult());
+    }
+
+    @Override
+    public void check(design_record record) {
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
+        record.setCheckTime(df.format(new Date()));
+        mapper.updateByPrimaryKeySelective(record);
+    }
+
+    @Override
+    public void miuticheck(miutichecker checker) {
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
+        String checkTime = df.format(new Date());
+        for (Integer intid : checker.getId()) {
+            mapper.miuticheck(checker.getChecker(), checker.getCheckTag(), intid, checkTime);
+        }
+    }
+
 
 }

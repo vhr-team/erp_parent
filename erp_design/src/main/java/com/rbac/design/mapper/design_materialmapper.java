@@ -5,6 +5,7 @@ import com.rbac.design.pojo.design_materialQuery;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Update;
 
 import java.util.List;
 @Mapper
@@ -33,4 +34,7 @@ public interface design_materialmapper {
 
     @Delete("delete from product_design_material where product_id=#{proid}")
     int deleteByProId(String proid);
+
+    @Update("update product_design_material  set check_time=#{checkTime},  checker=#{checker},check_tag=#{checkTag} where id=#{id} ")
+    int miuticheck(@Param("checker") String checker, @Param("checkTag") String checkTag, @Param("id") Integer id, @Param("checkTime") String checkTime);
 }

@@ -2,6 +2,7 @@ package com.rbac.design.controller;
 
 import com.rbac.design.entity.PageResult;
 import com.rbac.design.entity.Response;
+import com.rbac.design.entity.miutichecker;
 import com.rbac.design.pojo.design_classify;
 import com.rbac.design.pojo.design_record;
 import com.rbac.design.service.design_classifyService;
@@ -81,7 +82,7 @@ public class design_recordController {
             return new Response(true, "添加成功");
         } catch (Exception e) {
             e.printStackTrace();
-            return new Response(true, "添加失败");
+            return new Response(false, "添加失败");
         }
     }
 
@@ -106,7 +107,7 @@ public class design_recordController {
                 return new Response(true, "修改成功");
             } catch (Exception e) {
                 e.printStackTrace();
-                return new Response(true, "修改失败");
+                return new Response(false, "修改失败");
             }
         }
 
@@ -121,7 +122,7 @@ public class design_recordController {
             return new Response(true, "成功");
         } catch (Exception e) {
             e.printStackTrace();
-            return new Response(true, "失败");
+            return new Response(false, "失败");
         }
     }
 
@@ -136,5 +137,43 @@ public class design_recordController {
             return new Response(false, "删除失败");
         }
 
+    }
+
+
+    /**
+     * 查询未审核的产品
+     *
+     * @param page     页码
+     * @param pageSize 行数
+     * @param record   传入的查询值
+     * @return 总记录数 查询的数据
+     */
+    @RequestMapping("/reloadcheck")
+    @ApiOperation("查询未审核的产品")
+    public PageResult reloadcheck(Integer page, Integer pageSize, design_record record) {
+        PageResult list = service.reloadcheck(page, pageSize, record);
+        return list;
+    }
+
+    @RequestMapping("/check")
+    public Response check(design_record record) {
+        try {
+            service.check(record);
+            return new Response(false, "审核成功");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new Response(false, "审核失败");
+        }
+    }
+
+    @RequestMapping("/checkmiuti")
+    public Response checkmiuti(@RequestBody miutichecker checkermiuti) {
+        try {
+            service.miuticheck(checkermiuti);
+            return new Response(true, "审核成功");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new Response(false, "审核失败");
+        }
     }
 }

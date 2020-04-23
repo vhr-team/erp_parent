@@ -12,6 +12,8 @@ public interface    Basics_supperMapper {
 
     /*查询所有供货商**/
     public List<Basics_supper> findAllBasics_supper(Integer page,Integer rows);
+
+    public List<Basics_supper> findAll();
     /*根据供应商名称查询**/
     public List<Basics_supper> sellName(String  name,Integer page,Integer rows);
     /*根据id删除**/

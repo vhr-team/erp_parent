@@ -15,6 +15,11 @@ public class Basics_supperServiceImpl implements Basics_supperService {
     Basics_supperMapper basics_supperMapper;
 
     @Override
+    public List<Basics_supper> findAll() {
+        return basics_supperMapper.findAll();
+    }
+
+    @Override
     public List<Basics_supper> findAllBasics_supper(Integer page,Integer rows) {
 
         page = (page-1)*rows;

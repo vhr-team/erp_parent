@@ -42,5 +42,9 @@
 
            SELECT count(1) FROM basics_supper
     </select>
+    <select id="findAll" resultType="cn.ddossec.domain.Basics_supper">
+
+                SELECT * FROM basics_supper
+    </select>
 
 </mapper>

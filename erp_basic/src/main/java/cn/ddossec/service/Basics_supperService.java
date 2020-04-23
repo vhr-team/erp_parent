@@ -11,6 +11,7 @@ import java.util.List;
 
 public interface Basics_supperService {
 
+    public List<Basics_supper> findAll();
     /*查询所有供货商**/
     public List<Basics_supper> findAllBasics_supper(Integer page,Integer rows);
     /*查询多少供应商*/

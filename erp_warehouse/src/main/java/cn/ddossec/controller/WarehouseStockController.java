@@ -1,11 +1,14 @@
 package cn.ddossec.controller;
 
+import cn.ddossec.common.Response;
 import cn.ddossec.domain.WarehouseStock;
 import cn.ddossec.service.WarehouseStockService;
+import cn.hutool.core.date.DateUtil;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 
 
@@ -52,6 +55,61 @@ public class WarehouseStockController {
         }
         List<WarehouseStock> list = warehouseStockServiceImpl.queryAllByLimit(stockId,offset,limit);
         return list;
+    }
+
+    /**
+     *
+     * @param warehouseStock 安全库存配置单对象
+     * @return
+     */
+    @ApiOperation(value = "新增安全库存配置单")
+    @GetMapping(value = "insertSecuritySheet/{warehouseStock}")
+    public Response insertSecuritySheet(@PathVariable(value = "warehouseStock") WarehouseStock warehouseStock){
+        //获取当前时间
+        Date date = DateUtil.date();
+        warehouseStock.setRegisterTime(date);
+
+        int count = warehouseStockServiceImpl.insertSecuritySheet(warehouseStock);
+        if (count>0){
+            //如果执行成功，返回  提交成功,等待审核!
+            return new Response(true,"提交成功,等待审核!");
+        }
+        return new Response(false,"提交失败,请重试!");
+    }
+
+    /**
+     *
+     * @param check_tag 复核标志 0待审核 1通过
+     * @return
+     */
+    @ApiOperation(value = "查询安全库存配置单")
+    @GetMapping(value = "querySecuritySheet/{check_tag}")
+    public List<WarehouseStock> querySecuritySheet(@PathVariable(value = "check_tag") String check_tag){
+        List<WarehouseStock> list = warehouseStockServiceImpl.querySecuritySheet(check_tag);
+        return list;
+    }
+
+    /**
+     *
+     * @param product_id 产品编号
+     * @param checker 复核人
+     * @return
+     */
+    @ApiOperation(value = "库存安全配置单复核")
+    @GetMapping(value = "updateSecuritySheet/{product_id}/{checker}")
+    public Response updateSecuritySheet(@PathVariable(value = "product_id") String product_id,
+                                        @PathVariable(value = "checker") String checker){
+        //修改复核标志为1，表示复核通过
+        String check_tag = "1";
+        //获取当前时间为复核时间
+        Date check_time = DateUtil.date();
+
+        int count = warehouseStockServiceImpl.updateSecuritySheet(check_tag,check_time,product_id,checker);
+        if (count>0){
+            //如果执行成功，返回
+            return new Response(true,"复核成功!");
+        }
+        return new Response(false,"请稍后再试!");
     }
 
 

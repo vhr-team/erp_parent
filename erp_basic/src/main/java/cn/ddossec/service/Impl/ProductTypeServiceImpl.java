@@ -54,7 +54,7 @@ public class ProductTypeServiceImpl extends ServiceImpl<ProductTypeMapper, Produ
         List<ProductType> typeList = page.getRecords();
 
         // 查询供应商
-        List<Basics_supper> allBasics_supper = this.basics_supperMapper.findAllBasics_supper();
+        List<Basics_supper> allBasics_supper = this.basics_supperMapper.findAll();
 
         // 设置类别供应商的名称
         for (ProductType type : typeList) {

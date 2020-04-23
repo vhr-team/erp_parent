@@ -8,14 +8,18 @@ import java.util.List;
  * 供货商mapper
  */
 
-public interface Basics_supperMapper {
+public interface    Basics_supperMapper {
 
     /*查询所有供货商**/
-    public List<Basics_supper> findAllBasics_supper();
-
+    public List<Basics_supper> findAllBasics_supper(Integer page,Integer rows);
+    /*根据供应商名称查询**/
+    public List<Basics_supper> sellName(String  name,Integer page,Integer rows);
     /*根据id删除**/
     public int delBasics_supperMapperById(Integer id);
-
+    /*查询供应商多少个*/
+    public int sellCount();
+    /* 批量删除*/
+    public void deleteIds(String params);
     /*添加**/
     public void insertBasics_supper(Basics_supper basics_supper);
 

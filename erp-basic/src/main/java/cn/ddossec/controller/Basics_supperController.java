@@ -7,10 +7,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /*
  *供货商控制器
@@ -22,16 +25,44 @@ public class Basics_supperController {
     @Autowired
     Basics_supperService basics_supperService;
 
+
+
+    @RequestMapping("/deleteIds")
+    public  Map<String,Object> deleteIds(String[] params){
+        System.out.println("123");
+        for(int i=0;i<params.length;i++){
+            basics_supperService.deleteIds(params[i]);
+        }
+        Map<String,Object> rut = new HashMap<>();
+        rut.put("suc","OJBK");
+        return rut ;
+    }
+
+    @RequestMapping("/sellName")
+    public Map<String,Object> sellName( @RequestParam(value="name" ,defaultValue = "")String  name,@RequestParam(value="page" ,defaultValue = "1") Integer page,@RequestParam(value="rows" ,defaultValue = "10") Integer rows){
+
+        List<Basics_supper> basics_suppers = basics_supperService.sellName(name,page,rows);
+        Map<String,Object> rut = new HashMap<>();
+        rut.put("data",basics_suppers);
+        rut.put("code",0);
+        rut.put("msg","");
+        rut.put("count",basics_supperService.sellCount());
+        return rut ;
+    }
     /*
      * 查询所有供货商信息
      * @param model
      * @return
      */
     @RequestMapping("/getAllBasics_supper")
-    public List<Basics_supper> getAllBasics_supper(Model model){
-        List<Basics_supper> list = basics_supperService.findAllBasics_supper();
-        model.addAttribute("list",list);
-        return list;
+    public Map<String,Object> getAllBasics_supper(@RequestParam(value="page" ,defaultValue = "1") Integer page,@RequestParam(value="rows" ,defaultValue = "10") Integer rows){
+        Map<String,Object> rut = new HashMap<>();
+        List<Basics_supper> list = basics_supperService.findAllBasics_supper(page,rows);
+        rut.put("data",list);
+        rut.put("code",0);
+        rut.put("msg","");
+        rut.put("count",basics_supperService.sellCount());
+        return rut ;
     }
 
     /*
@@ -39,10 +70,11 @@ public class Basics_supperController {
      * @param id
      * @return
      */
-    @RequestMapping("/delsupperById/{id}")
-    public String delsupperById(@PathVariable("id") int id){
+    @RequestMapping("/delsupperById")
+    public String delsupperById(int id){
+        System.out.println("123");
         basics_supperService.delBasics_supperMapperById(id);
-        return "redirect:supper/getAllBasics_supper";
+        return "200";
     }
 
     /*
@@ -52,8 +84,11 @@ public class Basics_supperController {
      */
     @RequestMapping("/insertSupper")
     public String insertSupper(Basics_supper basics_supper){
+        System.out.println(basics_supper);
+        System.out.println(basics_supper);
+
         basics_supperService.insertBasics_supper(basics_supper);
-        return "redirect:supper/getAllBasics_supper";
+        return "添加成功";
     }
 
 
@@ -78,13 +113,13 @@ public class Basics_supperController {
      * @return
      */
     @RequestMapping("/updateSupperById")
-    public ModelAndView updateSupperById(Basics_supper basics_supper){
-        ModelAndView mv = new ModelAndView();
+    public String updateSupperById(Basics_supper basics_supper){
+        System.out.println(basics_supper);
         boolean b = basics_supperService.updateBasics_supper(basics_supper);
         if (b){
-            mv.setViewName("redirect:supper/getAllBasics_supper");
+          return "修改成功";
         }
-        return mv;
+        return "NO";
     }
 
 }

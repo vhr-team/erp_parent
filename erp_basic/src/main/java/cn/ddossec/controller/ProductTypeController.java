@@ -55,13 +55,32 @@ public class ProductTypeController {
             ProductType checkProductType = this.productTypeService.checkProductType(productType);
             if (null != checkProductType) {
                 map.put("msg", "当前的供应商下的类别已经存在!");
-                map.put("code", 200);
+                map.put("code", -1);
             }
         } catch (Exception e) {
-            map.put("msg", "类别名称不相同");
-            map.put("code", -1);
         }
+        map.put("msg", "类别名称不相同");
+        map.put("code", 200);
         return map;
     }
 
+    @PostMapping("updateProductType")
+    public ResultObj updateProductType(@RequestBody ProductType productType) {
+        try {
+            this.productTypeService.updateById(productType);
+            return ResultObj.UPDATE_SUCCESS;
+        } catch (Exception e) {
+            return ResultObj.UPDATE_ERROR;
+        }
+    }
+
+    @GetMapping("deleteProductType")
+    public ResultObj deleteProductType(Integer productTypeId) {
+        try {
+            this.productTypeService.removeById(productTypeId);
+            return ResultObj.DELETE_SUCCESS;
+        } catch (Exception e) {
+            return ResultObj.DELETE_ERROR;
+        }
+    }
 }

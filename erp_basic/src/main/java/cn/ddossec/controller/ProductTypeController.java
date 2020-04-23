@@ -49,12 +49,17 @@ public class ProductTypeController {
     }
 
     @PostMapping("checkProductType")
-    public Map<String, Object> checkProductType(ProductType productType) {
+    public Map<String, Object> checkProductType(@RequestBody ProductType productType) {
         Map<String, Object> map = new HashMap<>();
         try {
-            this.productTypeService.checkProductType(productType);
+            ProductType checkProductType = this.productTypeService.checkProductType(productType);
+            if (null != checkProductType) {
+                map.put("msg", "当前的供应商下的类别已经存在!");
+                map.put("code", 200);
+            }
         } catch (Exception e) {
-            map.put("msg", )
+            map.put("msg", "类别名称不相同");
+            map.put("code", -1);
         }
         return map;
     }

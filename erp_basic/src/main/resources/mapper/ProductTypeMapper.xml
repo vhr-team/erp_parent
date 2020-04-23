@@ -1,15 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.ddossec.mapper.ProductTypeMapper">
-  <resultMap id="BaseResultMap" type="cn.ddossec.domain.ProductType">
-    <!--@mbg.generated-->
-    <!--@Table bus_product_type-->
-    <id column="product_type_id" jdbcType="INTEGER" property="productTypeId" />
-    <result column="supper_id" jdbcType="INTEGER" property="supperId" />
-    <result column="name" jdbcType="VARCHAR" property="name" />
-  </resultMap>
-  <sql id="Base_Column_List">
-    <!--@mbg.generated-->
-    product_type_id, supper_id, `name`
-  </sql>
+    <resultMap id="BaseResultMap" type="cn.ddossec.domain.ProductType">
+        <!--@mbg.generated-->
+        <!--@Table bus_product_type-->
+        <id column="product_type_id" jdbcType="INTEGER" property="productTypeId"/>
+        <result column="supper_id" jdbcType="INTEGER" property="supperId"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        <!--@mbg.generated-->
+        product_type_id, supper_id, `name`
+    </sql>
+
+    <select id="checkProductType" resultType="cn.ddossec.domain.ProductType" parameterType="cn.ddossec.domain.ProductType">
+        select * from bus_product_type where supper_id = #{supperId} and `name` = #{name}
+    </select>
 </mapper>

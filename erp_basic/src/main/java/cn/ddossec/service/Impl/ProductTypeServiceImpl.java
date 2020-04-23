@@ -65,6 +65,12 @@ public class ProductTypeServiceImpl extends ServiceImpl<ProductTypeMapper, Produ
             }
         }
 
-        return new DataGridView(page.getTotal(),typeList);
+        return new DataGridView(page.getTotal(), typeList);
+    }
+
+    @Override
+    public ProductType checkProductType(ProductType productType) {
+        ProductType selectOne = this.productTypeMapper.checkProductType(productType);
+        return selectOne;
     }
 }

@@ -82,6 +82,12 @@ public class Goods implements Serializable {
     private Integer producttypeid;
 
     /**
+     * 商品类别名称
+     */
+    @TableField(exist = false)
+    private String productname;
+
+    /**
      * 生产厂家
      */
     @TableField(value = "producer")

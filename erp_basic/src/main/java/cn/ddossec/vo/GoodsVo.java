@@ -23,6 +23,7 @@ public class GoodsVo extends BaseVo {
      * 商品名称
      */
     private String goodsname;
+
     private String size;
     private String productcode;
     private String promitcode;

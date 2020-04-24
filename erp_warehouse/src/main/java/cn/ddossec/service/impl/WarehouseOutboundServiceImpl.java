@@ -65,7 +65,7 @@ public class WarehouseOutboundServiceImpl implements WarehouseOutboundService {
     @Override
     public WarehouseOutbound update(WarehouseOutbound warehouseOutbound) {
         this.warehouseOutboundMapper.update(warehouseOutbound);
-        return this.queryById(warehouseOutbound.getId());
+        return null;
     }
 
     /**

@@ -1,6 +1,5 @@
 package cn.ddossec.domain;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -14,7 +13,6 @@ import java.io.Serializable;
  * @since 2020-04-19 15:05:40
  */
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
 public class WarehouseStock implements Serializable {
     private static final long serialVersionUID = -25726372263747358L;

@@ -1,6 +1,7 @@
 package cn.ddossec.vo;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 /**
  * @author 30315
@@ -10,6 +11,7 @@ import lombok.Data;
  * @date 2020-04-2311:45
  */
 @Data
+@EqualsAndHashCode(callSuper=false)
 public class ProductTypeVo extends BaseVo {
 
     // 供应商ID

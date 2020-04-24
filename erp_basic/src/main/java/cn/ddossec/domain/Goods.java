@@ -64,6 +64,12 @@ public class Goods implements Serializable {
     private Integer available;
 
     /**
+     *  商品进货价
+     */
+    @TableField(value = "inprice")
+    private Double inprice;
+
+    /**
      * 供应商ID
      */
     @TableField(value = "providerid")

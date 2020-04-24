@@ -14,7 +14,6 @@ import java.io.Serializable;
  * @since 2020-04-22 14:34:41
  */
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
 public class WarehouseOutbound<AllArgsConstructor> implements Serializable {
     private static final long serialVersionUID = -35768159757263339L;

@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.ddossec.mapper.WarehouseInboundDetailedMapper">
+
+    <resultMap type="WarehouseInboundDetailed" id="WarehouseInboundDetailedMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="parentId" column="parent_id" jdbcType="INTEGER"/>
+        <result property="productId" column="product_id" jdbcType="VARCHAR"/>
+        <result property="productName" column="product_name" jdbcType="VARCHAR"/>
+        <result property="productDescribe" column="product_describe" jdbcType="VARCHAR"/>
+        <result property="amount" column="amount" jdbcType="INTEGER"/>
+        <result property="amountUnit" column="amount_unit" jdbcType="VARCHAR"/>
+        <result property="costPrice" column="cost_price" jdbcType="NUMERIC"/>
+        <result property="subtotal" column="subtotal" jdbcType="INTEGER"/>
+        <result property="gatheredAmount" column="gathered_amount" jdbcType="INTEGER"/>
+        <result property="gatherTag" column="gather_tag" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="WarehouseInboundDetailedMap">
+        select
+          id, parent_id, product_id, product_name, product_describe, amount, amount_unit, cost_price, subtotal, gathered_amount, gather_tag
+        from erp.Warehouse_inbound_detailed
+        where id = #{id}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="WarehouseInboundDetailedMap">
+        select
+          id, parent_id, product_id, product_name, product_describe, amount, amount_unit, cost_price, subtotal, gathered_amount, gather_tag
+        from erp.Warehouse_inbound_detailed
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="WarehouseInboundDetailedMap">
+        select
+          id, parent_id, product_id, product_name, product_describe, amount, amount_unit, cost_price, subtotal, gathered_amount, gather_tag
+        from erp.Warehouse_inbound_detailed
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="parentId != null">
+                and parent_id = #{parentId}
+            </if>
+            <if test="productId != null and productId != ''">
+                and product_id = #{productId}
+            </if>
+            <if test="productName != null and productName != ''">
+                and product_name = #{productName}
+            </if>
+            <if test="productDescribe != null and productDescribe != ''">
+                and product_describe = #{productDescribe}
+            </if>
+            <if test="amount != null">
+                and amount = #{amount}
+            </if>
+            <if test="amountUnit != null and amountUnit != ''">
+                and amount_unit = #{amountUnit}
+            </if>
+            <if test="costPrice != null">
+                and cost_price = #{costPrice}
+            </if>
+            <if test="subtotal != null">
+                and subtotal = #{subtotal}
+            </if>
+            <if test="gatheredAmount != null">
+                and gathered_amount = #{gatheredAmount}
+            </if>
+            <if test="gatherTag != null and gatherTag != ''">
+                and gather_tag = #{gatherTag}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into erp.Warehouse_inbound_detailed(parent_id, product_id, product_name, product_describe, amount, amount_unit, cost_price, subtotal, gathered_amount, gather_tag)
+        values (#{parentId}, #{productId}, #{productName}, #{productDescribe}, #{amount}, #{amountUnit}, #{costPrice}, #{subtotal}, #{gatheredAmount}, #{gatherTag})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update erp.Warehouse_inbound_detailed
+        <set>
+            <if test="parentId != null">
+                parent_id = #{parentId},
+            </if>
+            <if test="productId != null and productId != ''">
+                product_id = #{productId},
+            </if>
+            <if test="productName != null and productName != ''">
+                product_name = #{productName},
+            </if>
+            <if test="productDescribe != null and productDescribe != ''">
+                product_describe = #{productDescribe},
+            </if>
+            <if test="amount != null">
+                amount = #{amount},
+            </if>
+            <if test="amountUnit != null and amountUnit != ''">
+                amount_unit = #{amountUnit},
+            </if>
+            <if test="costPrice != null">
+                cost_price = #{costPrice},
+            </if>
+            <if test="subtotal != null">
+                subtotal = #{subtotal},
+            </if>
+            <if test="gatheredAmount != null">
+                gathered_amount = #{gatheredAmount},
+            </if>
+            <if test="gatherTag != null and gatherTag != ''">
+                gather_tag = #{gatherTag},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from erp.Warehouse_inbound_detailed where id = #{id}
+    </delete>
+
+</mapper>

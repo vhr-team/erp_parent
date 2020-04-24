@@ -28,17 +28,6 @@ public class WarehouseStockController {
     @Autowired
     private WarehouseStockService warehouseStockServiceImpl;
 
-    /**
-     * 通过主键查询单条数据
-     *
-     * @param id 主键
-     * @return 单条数据
-     */
-    @ApiOperation(value = "通过主键查询单条数据")
-    @GetMapping("selectOne")
-    public WarehouseStock selectOne(Integer id) {
-        return this.warehouseStockServiceImpl.queryById(id);
-    }
 
     /**
      *

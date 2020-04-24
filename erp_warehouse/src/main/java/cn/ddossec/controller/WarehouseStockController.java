@@ -1,5 +1,6 @@
 package cn.ddossec.controller;
 
+import cn.ddossec.common.DataGridView;
 import cn.ddossec.common.Response;
 import cn.ddossec.domain.WarehouseStock;
 import cn.ddossec.service.WarehouseStockService;
@@ -84,9 +85,9 @@ public class WarehouseStockController {
      */
     @ApiOperation(value = "查询安全库存配置单")
     @GetMapping(value = "querySecuritySheet/{check_tag}")
-    public List<WarehouseStock> querySecuritySheet(@PathVariable(value = "check_tag") String check_tag){
+    public DataGridView querySecuritySheet(@PathVariable(value = "check_tag") String check_tag){
         List<WarehouseStock> list = warehouseStockServiceImpl.querySecuritySheet(check_tag);
-        return list;
+        return new DataGridView(list);
     }
 
     /**

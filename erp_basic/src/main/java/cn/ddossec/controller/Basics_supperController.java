@@ -42,8 +42,8 @@ public class Basics_supperController {
      * 查询全部供应商
      * @return
      */
-    @RequestMapping("getAllBasics_supper")
-    public List<Basics_supper> getAllBasics_supper(){
+    @RequestMapping("/getAllSupper")
+    public List<Basics_supper> getAllSupper(){
 
         return basics_supperService.findAll();
     }

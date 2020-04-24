@@ -56,7 +56,7 @@ public class design_classifyController {
             service.adddesign_classify(classify);
             return new Response(true, "添加成功");
         } catch (Exception e) {
-            return new Response(true, "添加失败");
+            return new Response(false, "添加失败");
         }
     }
 
@@ -67,7 +67,7 @@ public class design_classifyController {
             service.deleteclassifyById(id, kindId);
             return new Response(true, "删除成功");
         } catch (Exception e) {
-            return new Response(true, "删除失败");
+            return new Response(false, "删除失败");
         }
     }
 
@@ -97,7 +97,7 @@ public class design_classifyController {
             return new Response(true, "修改成功");
         } catch (Exception e) {
             e.printStackTrace();
-            return new Response(true, "修改失败");
+            return new Response(false, "修改失败");
         }
     }
 

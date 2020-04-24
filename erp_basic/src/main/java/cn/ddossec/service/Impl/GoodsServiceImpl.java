@@ -90,6 +90,9 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsMapper, Goods> implements
                     goods.setProductname(type.getName());
                 }
             }
+
+            // 5.图片地址
+            goods.setGoodsimg("http://39.106.71.75:8888/" + goods.getGoodsimg());
         }
 
         return new DataGridView(page.getTotal(), goodsList);

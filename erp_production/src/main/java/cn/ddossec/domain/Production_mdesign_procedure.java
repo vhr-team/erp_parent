@@ -1,13 +1,16 @@
 package cn.ddossec.domain;
 
 
-import lombok.Data;
+
+import lombok.Getter;
+import lombok.Setter;
 import lombok.ToString;
 
 import java.io.Serializable;
 import java.util.Date;
 
-@Data
+@Getter
+@Setter
 @ToString
 public class Production_mdesign_procedure implements Serializable {
 
@@ -34,7 +37,7 @@ public class Production_mdesign_procedure implements Serializable {
     /**
      * 工序编号
      */
-    private String gprocedure_id;
+    private String procedure_id;
 
     /**
      * 工序名称
@@ -90,4 +93,24 @@ public class Production_mdesign_procedure implements Serializable {
      * 当前工序物料变更标志 D003-0: 未变更D003-0: 已变更
      */
     private String design_module_change_tag;
+
+
+    public Production_mdesign_procedure(Integer id, String design_id, String first_kind_id, String first_kind_name, String procedure_id, String procedure_name, Integer labour_hour_amount, String procedurce_describe, String amount_unit, Integer cost_price, Double subtotal, Double module_subtotal, String register, Date register_time, String design_module_tag, String design_module_change_tag) {
+        this.id = id;
+        this.design_id = design_id;
+        this.first_kind_id = first_kind_id;
+        this.first_kind_name = first_kind_name;
+        this.procedure_id = procedure_id;
+        this.procedure_name = procedure_name;
+        this.labour_hour_amount = labour_hour_amount;
+        this.procedurce_describe = procedurce_describe;
+        this.amount_unit = amount_unit;
+        this.cost_price = cost_price;
+        this.subtotal = subtotal;
+        this.module_subtotal = module_subtotal;
+        this.register = register;
+        this.register_time = register_time;
+        this.design_module_tag = design_module_tag;
+        this.design_module_change_tag = design_module_change_tag;
+    }
 }

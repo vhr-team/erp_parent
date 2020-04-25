@@ -2,7 +2,6 @@ package cn.ddossec.controller;
 
 import cn.ddossec.common.ActiveUser;
 import cn.ddossec.common.DataGridView;
-import cn.ddossec.common.upload.UploadProperties;
 import cn.ddossec.common.upload.UploadService;
 import cn.ddossec.domain.User;
 import cn.ddossec.service.UserService;
@@ -30,9 +29,6 @@ public class FileController {
     private UploadService uploadService;
 
     @Autowired
-    private UploadProperties uploadProperties;
-
-    @Autowired
     private UserService userService;
 
     /**
@@ -43,9 +39,8 @@ public class FileController {
 
         String path = this.uploadService.uploadImage(mf);
 
-        String baseUrl = uploadProperties.getBaseUrl();
         Map<String, String> map = new HashMap<>();
-        map.put("src", baseUrl + path);
+        map.put("src", path);
         //更新数据库
         ActiveUser activeUser = (ActiveUser) SecurityUtils.getSubject().getPrincipal();
         User user = activeUser.getUser();

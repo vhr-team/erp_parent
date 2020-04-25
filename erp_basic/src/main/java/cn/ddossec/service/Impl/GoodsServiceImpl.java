@@ -71,6 +71,8 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsMapper, Goods> implements
         qw.like(StringUtils.isNotBlank(goodsVo.getPromitcode()), "promitcode", goodsVo.getPromitcode());
         qw.like(StringUtils.isNotBlank(goodsVo.getDescription()), "description", goodsVo.getDescription());
 
+        qw.orderByDesc("id");
+
         this.baseMapper.selectPage(page, qw);
         List<Goods> goodsList = page.getRecords();
 

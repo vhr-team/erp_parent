@@ -53,6 +53,7 @@ public class GoodsController {
 
     /**
      * 修改商品
+     *
      * @return
      */
     @PostMapping("updateGoods")
@@ -62,6 +63,22 @@ public class GoodsController {
             return ResultObj.UPDATE_SUCCESS;
         } catch (Exception e) {
             return ResultObj.UPDATE_ERROR;
+        }
+    }
+
+    /**
+     * 删除商品
+     *
+     * @param id
+     * @return
+     */
+    @GetMapping("deleteGoods")
+    public ResultObj deleteGoods(Integer id) {
+        try {
+            this.goodsService.removeById(id);
+            return ResultObj.DELETE_SUCCESS;
+        } catch (Exception e) {
+            return ResultObj.DELETE_ERROR;
         }
     }
 

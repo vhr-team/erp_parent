@@ -20,6 +20,11 @@ public class Production_mdesign_procedureServiceImpl implements Production_mdesi
     }
 
     @Override
+    public List<Production_mdesign_procedure> findAllProduction_mdesign_procedure_sh() {
+        return production_mdesign_procedureMapper.findAllProduction_mdesign_procedure_sh();
+    }
+
+    @Override
     public int delProduction_mdesign_procedureById(Integer id) {
         return production_mdesign_procedureMapper.delProduction_mdesign_procedureById(id);
     }

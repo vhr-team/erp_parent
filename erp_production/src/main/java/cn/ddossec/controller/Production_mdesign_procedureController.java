@@ -33,6 +33,17 @@ public class Production_mdesign_procedureController {
         rut.put("count",100);
         return rut ;
     }
+    @RequestMapping("/getAllProductionsh")
+    public Map<String,Object>  getAllProductionsh(){
+        Map<String,Object> rut = new HashMap<>();
+        /*获取所有信息*/
+        List<Production_mdesign_procedure> list = production_mdesign_procedureService.findAllProduction_mdesign_procedure_sh();
+        rut.put("data",list);
+        rut.put("code",0);
+        rut.put("msg","");
+        rut.put("count",100);
+        return rut ;
+    }
 
     /*
      * 根据id删除

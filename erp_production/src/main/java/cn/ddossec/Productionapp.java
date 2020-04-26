@@ -3,6 +3,7 @@ package cn.ddossec;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 /**
  * @author 孙志贤 曾东东
@@ -12,6 +13,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @date 2020-04-17
  */
 @SpringBootApplication
+@EnableTransactionManagement //事务
 @MapperScan(basePackages = {"cn.ddossec.mapper"})
 public class Productionapp {
     public static void main(String[] args) {

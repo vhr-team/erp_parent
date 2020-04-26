@@ -42,14 +42,14 @@ public class Production_process_design_sheet {
     /*
      * 设计时间
      */
-    private Date design_date;
+    private String design_date;
 
     /**
      * 设计单号
      */
     private  String design_number;
 
-    public Production_process_design_sheet(Integer id, String product_name, String design_id, String product_designer, String product_registrant, String esign_require, Date design_date, String design_number) {
+    public Production_process_design_sheet(Integer id, String product_name, String design_id, String product_designer, String product_registrant, String esign_require, String design_date, String design_number) {
         this.id = id;
         this.product_name = product_name;
         this.design_id = design_id;

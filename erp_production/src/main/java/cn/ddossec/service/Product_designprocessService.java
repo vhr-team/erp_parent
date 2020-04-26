@@ -1,6 +1,7 @@
 package cn.ddossec.service;
 
 import cn.ddossec.domain.Product_designprocess;
+import cn.ddossec.domain.Production_mdesign_procedure;
 
 import java.util.List;
 
@@ -10,6 +11,8 @@ public interface Product_designprocessService {
 
     /*查询所有数据**/
     public List<Product_designprocess> findAllProduction_modesign_procedure();
+
+
 
 
     /**

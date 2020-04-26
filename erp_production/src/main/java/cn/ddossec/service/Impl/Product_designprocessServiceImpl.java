@@ -1,6 +1,7 @@
 package cn.ddossec.service.Impl;
 
 import cn.ddossec.domain.Product_designprocess;
+import cn.ddossec.domain.Production_mdesign_procedure;
 import cn.ddossec.mapper.Product_designprocessMapper;
 import cn.ddossec.service.Product_designprocessService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,8 @@ public class Product_designprocessServiceImpl implements Product_designprocessSe
     public List<Product_designprocess> findAllProduction_modesign_procedure() {
         return product_designprocessMapper.findAllProduction_modesign_procedure();
     }
+
+
 
     @Override
     public int insertProduction_modesign_procedure( Product_designprocess product_designprocess) {

@@ -3,7 +3,7 @@
 <mapper namespace="cn.ddossec.mapper.Production_mdesign_procedureMapper">
 
     <select id="findAllProduction_mdesign_procedure" resultType="cn.ddossec.domain.Production_mdesign_procedure">
-        SELECT * FROM production_mdesign_procedure;
+    SELECT * FROM production_mdesign_procedure WHERE design_module_tag NOT IN ('D002');
     </select>
 
     <delete id="delProduction_mdesign_procedureById">
@@ -40,6 +40,12 @@
 
     <select id="selectById" resultType="cn.ddossec.domain.Production_mdesign_procedure">
         SELECT * FROM production_mdesign_procedure WHERE id = #{id}
+    </select>
+    <select id="findAllProduction_mdesign_procedure_sh"
+            resultType="cn.ddossec.domain.Production_mdesign_procedure">
+
+
+          SELECT * FROM production_mdesign_procedure WHERE design_module_tag  IN ('D002');
     </select>
 
 </mapper>

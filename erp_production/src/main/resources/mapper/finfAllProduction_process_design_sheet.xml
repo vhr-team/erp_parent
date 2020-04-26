@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.ddossec.mapper.Production_process_design_sheetMapper">
+
+    <select id="finfAllProduction_process_design_sheet" resultType="cn.ddossec.domain.Production_process_design_sheet">
+        SELECT * from production_process_design_sheet
+    </select>
+
+    <delete id="delProduction_process_design_sheetById">
+        DELETE FROM production_process_design_sheet WHERE = #{id}
+    </delete>
+
+    <insert id="insertProduction_process_design_sheet">
+        insret into production_process_design_sheet(product_name,design_id,product_designer,product_registrant,esign_require,design_date) values(#{product_name},#{design_id},#{product_designer},#{product_registrant},#{esign_require},#{design_date})
+    </insert>
+
+    <update id="updateProduction_process_design_sheet">
+        update  production_process_design_sheet
+        <trim prefix="set" suffixOverrides=",">
+            <if test="product_name!=null">product_name=#{product_name},</if>
+            <if test="design_id!=null">design_id=#{design_id},</if>
+            <if test="product_designer!=null">product_designer=#{product_designer},</if>
+            <if test="product_registrant!=null">product_registrant=#{product_registrant},</if>
+            <if test="esign_require!=null">esign_require=#{esign_require},</if>
+            <if test="design_date!=null">design_date=#{design_date},</if>
+        </trim>
+        where id=#{id}
+    </update>
+
+    <select id="selectById" resultType="cn.ddossec.domain.Production_process_design_sheet">
+        SELECT * FROM production_process_design_sheet WHERE id = #{id}
+    </select>
+</mapper>

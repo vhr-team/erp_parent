@@ -15,32 +15,32 @@ public class Production_process_design_sheet {
     private Integer id;
 
     /*
-     *产品名称
+     * 产品名称
      */
     private String product_name;
 
     /*
-     *产品编号
+     * 产品编号
      */
     private String design_id;
 
     /*
-     *设计人
+     * 设计人
      */
     private String product_designer;
 
-    /*
-     *登记人
+    /**
+     * 登记人
      */
     private String product_registrant;
 
     /*
-     *设计要求
+     * 设计要求
      */
     private String esign_require;
 
     /*
-     *设计时间
+     * 设计时间
      */
     private Date design_date;
 

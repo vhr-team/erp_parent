@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.ddossec.mapper.OrderModelMapper">
+  <resultMap id="BaseResultMap" type="cn.ddossec.domain.OrderModel">
+    <!--@mbg.generated-->
+    <!--@Table bus_orderModel-->
+    <id column="order_id" jdbcType="INTEGER" property="orderId" />
+    <result column="order_num" jdbcType="VARCHAR" property="orderNum" />
+    <result column="creater" jdbcType="INTEGER" property="creater" />
+    <result column="creater_time" jdbcType="DATE" property="createrTime" />
+    <result column="checker" jdbcType="INTEGER" property="checker" />
+    <result column="check_time" jdbcType="DATE" property="checkTime" />
+    <result column="completer" jdbcType="INTEGER" property="completer" />
+    <result column="end_time" jdbcType="DATE" property="endTime" />
+    <result column="order_type" jdbcType="INTEGER" property="orderType" />
+    <result column="order_state" jdbcType="INTEGER" property="orderState" />
+    <result column="total_num" jdbcType="INTEGER" property="totalNum" />
+    <result column="total_price" jdbcType="DOUBLE" property="totalPrice" />
+    <result column="supplier_id" jdbcType="INTEGER" property="supplierId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    order_id, order_num, creater, creater_time, checker, check_time, completer, end_time, 
+    order_type, order_state, total_num, total_price, supplier_id
+  </sql>
+</mapper>

@@ -1,21 +1,23 @@
 package cn.ddossec;
 
-import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 
 /**
- * 孙志贤，唐疑豪
+ * 采购模块
+ * 唐疑豪
  */
+// 启动类注解
 @SpringBootApplication
-@MapperScan(basePackages = {"cn.ddossec.mapper"})
-@EnableFeignClients
+// 服务发现
 @EnableDiscoveryClient
-public class BasicApp {
+// 开启FeignAPI调用
+@EnableFeignClients
+public class ProcurementApp {
 
     public static void main(String[] args) {
-        SpringApplication.run(BasicApp.class, args);
+        SpringApplication.run(ProcurementApp.class, args);
     }
 }

@@ -9,6 +9,9 @@ import com.rbac.design.pojo.design_record;
 import com.rbac.design.pojo.design_recordQuery;
 import com.rbac.design.service.design_record_Service;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
+import org.springframework.data.redis.serializer.StringRedisSerializer;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -27,15 +30,31 @@ public class design_record_ServiceImpl implements design_record_Service {
 
     @Autowired
     design_recordmapper mapper;
+    @Autowired
+    RedisTemplate<String, Object> redisTemplate;
 
     /**
      * 查询全部档案
+     * 加入缓存
      *
      * @return List<design_record>
      */
     @Override
     public List<design_record> queryAll() {
-        return mapper.selectByExample(null);
+        //设置hash的key和value的序列化器
+        redisTemplate.setHashKeySerializer(new StringRedisSerializer());
+        redisTemplate.setHashValueSerializer(new Jackson2JsonRedisSerializer<design_record>(design_record.class));
+        List<design_record> design_recordAll = (List<design_record>) (Object) redisTemplate.opsForHash().values("design_recordAll");
+
+        if (design_recordAll.size() < 1) {//判断redis是否有值 没有就设置值
+            for (design_record record : mapper.selectByExample(null)) {
+                redisTemplate.opsForHash().put("design_recordAll", record.getProductId(), record);//注意  key必须为String类型 否注报错 小心踩坑
+            }
+            return mapper.selectByExample(null);
+
+        } else {
+            return design_recordAll;
+        }
     }
 
     /**
@@ -80,6 +99,7 @@ public class design_record_ServiceImpl implements design_record_Service {
         record.setPriceChangeTag("未变更");//初始化价格
         record.setDeleteTag("已下架"); //添加档案后默认上架
         record.setFileChangeAmount(0);//初始化变更次数
+        redisTemplate.delete("design_recordAll");
         mapper.insertSelective(record);
     }
 

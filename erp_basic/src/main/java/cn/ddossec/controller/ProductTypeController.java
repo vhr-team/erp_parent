@@ -38,6 +38,11 @@ public class ProductTypeController {
         return this.productTypeService.ProductType(productTypeVo);
     }
 
+    /**
+     * 添加商品类别
+     * @param productType
+     * @return
+     */
     @PostMapping("addProductType")
     public ResultObj addProductType(@RequestBody ProductType productType) {
         try {
@@ -48,6 +53,11 @@ public class ProductTypeController {
         }
     }
 
+    /**
+     * 校验该供应商的类别是否存在
+     * @param productType
+     * @return
+     */
     @PostMapping("checkProductType")
     public Map<String, Object> checkProductType(@RequestBody ProductType productType) {
         Map<String, Object> map = new HashMap<>();
@@ -64,6 +74,11 @@ public class ProductTypeController {
         return map;
     }
 
+    /**
+     * 修改商品类别
+     * @param productType
+     * @return
+     */
     @PostMapping("updateProductType")
     public ResultObj updateProductType(@RequestBody ProductType productType) {
         try {
@@ -74,6 +89,11 @@ public class ProductTypeController {
         }
     }
 
+    /**
+     * 删除商品类别
+     * @param productTypeId
+     * @return
+     */
     @GetMapping("deleteProductType")
     public ResultObj deleteProductType(Integer productTypeId) {
         try {
@@ -82,5 +102,15 @@ public class ProductTypeController {
         } catch (Exception e) {
             return ResultObj.DELETE_ERROR;
         }
+    }
+
+    /**
+     * 根据供应商ID查询商品类别
+     * @param providerid
+     * @return
+     */
+    @GetMapping("queryProductTypeByProviderid")
+    public Object queryProductTypeByProviderid(Integer providerid){
+        return this.productTypeService.queryProductTypeByProviderid(providerid);
     }
 }

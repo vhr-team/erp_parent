@@ -62,10 +62,11 @@ public interface WarehouseStockMapper {
      *
      * @param check_tag 复核标志
      * @param check_time 复核时间
+     * @param checker 复核人
      * @param product_id 产品编号
      * @return 影响行数
      */
-    int updateSecuritySheet(@Param("check_tag") String check_tag, @Param("check_time") Date check_time, @Param("product_id") String product_id, @Param("checker") String checker);
+    int updateSecuritySheet(@Param("check_tag") String check_tag, @Param("check_time") Date check_time, @Param("checker") String checker, @Param("product_id") String product_id);
 
     /**
      * 修改数据

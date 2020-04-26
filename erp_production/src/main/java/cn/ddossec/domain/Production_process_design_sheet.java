@@ -44,7 +44,12 @@ public class Production_process_design_sheet {
      */
     private Date design_date;
 
-    public Production_process_design_sheet(Integer id, String product_name, String design_id, String product_designer, String product_registrant, String esign_require, Date design_date) {
+    /**
+     * 设计单号
+     */
+    private  String design_number;
+
+    public Production_process_design_sheet(Integer id, String product_name, String design_id, String product_designer, String product_registrant, String esign_require, Date design_date, String design_number) {
         this.id = id;
         this.product_name = product_name;
         this.design_id = design_id;
@@ -52,5 +57,6 @@ public class Production_process_design_sheet {
         this.product_registrant = product_registrant;
         this.esign_require = esign_require;
         this.design_date = design_date;
+        this.design_number = design_number;
     }
 }

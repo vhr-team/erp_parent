@@ -13,11 +13,11 @@ import java.util.Date;
 @Setter
 @ToString
 public class Production_mdesign_procedure implements Serializable {
-
     /**
      * 主键
      */
     private Integer id;
+
 
     /**
      * 设计编号

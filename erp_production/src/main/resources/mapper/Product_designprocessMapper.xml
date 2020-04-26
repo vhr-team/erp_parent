@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.ddossec.mapper.Product_designprocessMapper">
+    <insert id="insertProduction_modesign_procedure">
+          INSERT INTO product_designprocess (process_name,process_id,process_describe,process_time_gs,process_time_unitdw,process_subtotal,design_id,process_time_cost)
+          values(#{process_name},#{process_id},#{process_describe},#{process_time_gs},#{process_time_gs},#{process_time_unitdw},#{process_subtotal},#{design_id},#{process_time_cost}})
+
+    </insert>
+
+
+    <select id="findAllProduction_modesign_procedure"
+            resultType="cn.ddossec.domain.Product_designprocess">
+
+select * from product_designprocess
+
+
+    </select>
+</mapper>

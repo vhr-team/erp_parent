@@ -18,6 +18,5 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 public class Productionapp {
     public static void main(String[] args) {
         SpringApplication.run(Productionapp.class, args);
-
     }
 }

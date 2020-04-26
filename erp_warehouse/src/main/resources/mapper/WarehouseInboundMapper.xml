@@ -98,7 +98,7 @@
     <!--新增入库申请登记-->
     <insert id="insertWarehousing">
         insert into erp.Warehouse_inbound(inbound_id,storer,reason,amount_sum,cost_price_sum,register,register_time,pemark)
-        values (#{inbound_id}, #{storer}, #{reason}, #{amount_sum}, #{cost_price_sum}, #{register}, #{register_time}, #{pemark})
+        values (#{inboundId}, #{storer}, #{reason}, #{amountSum}, #{costPriceSum}, #{register}, #{registerTime}, #{pemark})
     </insert>
 
     <!--入库申请审核-->

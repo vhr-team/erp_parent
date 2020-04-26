@@ -1,17 +1,14 @@
 package cn.ddossec.service.impl;
 
 import cn.ddossec.common.Constant;
-import cn.ddossec.common.DataGridView;
 import cn.ddossec.vo.RoleVo;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.hash.HashMapper;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;

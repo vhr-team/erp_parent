@@ -1,6 +1,5 @@
 package cn.ddossec.service.feign;
 
-import cn.ddossec.common.DataGridView;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.RequestMapping;
 

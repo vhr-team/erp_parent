@@ -2,8 +2,6 @@ package cn.ddossec.controller;
 
 import cn.ddossec.common.ActiveUser;
 import cn.ddossec.common.Constant;
-import cn.ddossec.common.DataGridView;
-import cn.ddossec.common.ResultObj;
 import cn.ddossec.domain.LeaveBill;
 import cn.ddossec.domain.User;
 import cn.ddossec.service.LeavebillService;

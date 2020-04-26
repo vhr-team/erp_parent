@@ -3,7 +3,6 @@ package cn.ddossec.controller;
 import cn.ddossec.common.ActiveUser;
 import cn.ddossec.common.Constant;
 import cn.ddossec.common.MenuTreeNode;
-import cn.ddossec.common.ResultObj;
 import cn.ddossec.domain.Loginfo;
 import cn.ddossec.domain.Menu;
 import cn.ddossec.domain.User;

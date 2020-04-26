@@ -1,8 +1,6 @@
 package cn.ddossec.controller;
 
 import cn.ddossec.common.Constant;
-import cn.ddossec.common.DataGridView;
-import cn.ddossec.common.ResultObj;
 import cn.ddossec.domain.Dept;
 import cn.ddossec.service.DeptService;
 import cn.ddossec.vo.DeptVo;

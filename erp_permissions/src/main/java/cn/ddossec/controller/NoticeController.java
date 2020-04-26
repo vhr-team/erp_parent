@@ -1,7 +1,6 @@
 package cn.ddossec.controller;
 
 import cn.ddossec.common.ActiveUser;
-import cn.ddossec.common.ResultObj;
 import cn.ddossec.domain.Notice;
 import cn.ddossec.service.NoticeService;
 import cn.ddossec.vo.NoticeVo;

@@ -95,63 +95,16 @@
         </where>
     </select>
 
-    <!--新增所有列-->
-    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
-        insert into erp.Warehouse_inbound(inbound_id, storer, reason, amount_sum, cost_price_sum, gathered_amount_sum, pemark, register, register_time, checker, check_time, check_tag, attemper, attemper_time, store_tag)
-        values (#{inboundId}, #{storer}, #{reason}, #{amountSum}, #{costPriceSum}, #{gatheredAmountSum}, #{pemark}, #{register}, #{registerTime}, #{checker}, #{checkTime}, #{checkTag}, #{attemper}, #{attemperTime}, #{storeTag})
+    <!--新增入库申请登记-->
+    <insert id="insertWarehousing">
+        insert into erp.Warehouse_inbound(inbound_id,storer,reason,amount_sum,cost_price_sum,register,register_time,pemark)
+        values (#{inbound_id}, #{storer}, #{reason}, #{amount_sum}, #{cost_price_sum}, #{register}, #{register_time}, #{pemark})
     </insert>
 
-    <!--通过主键修改数据-->
-    <update id="update">
-        update erp.Warehouse_inbound
-        <set>
-            <if test="inboundId != null and inboundId != ''">
-                inbound_id = #{inboundId},
-            </if>
-            <if test="storer != null and storer != ''">
-                storer = #{storer},
-            </if>
-            <if test="reason != null and reason != ''">
-                reason = #{reason},
-            </if>
-            <if test="amountSum != null">
-                amount_sum = #{amountSum},
-            </if>
-            <if test="costPriceSum != null">
-                cost_price_sum = #{costPriceSum},
-            </if>
-            <if test="gatheredAmountSum != null">
-                gathered_amount_sum = #{gatheredAmountSum},
-            </if>
-            <if test="pemark != null and pemark != ''">
-                pemark = #{pemark},
-            </if>
-            <if test="register != null and register != ''">
-                register = #{register},
-            </if>
-            <if test="registerTime != null">
-                register_time = #{registerTime},
-            </if>
-            <if test="checker != null and checker != ''">
-                checker = #{checker},
-            </if>
-            <if test="checkTime != null">
-                check_time = #{checkTime},
-            </if>
-            <if test="checkTag != null and checkTag != ''">
-                check_tag = #{checkTag},
-            </if>
-            <if test="attemper != null and attemper != ''">
-                attemper = #{attemper},
-            </if>
-            <if test="attemperTime != null">
-                attemper_time = #{attemperTime},
-            </if>
-            <if test="storeTag != null and storeTag != ''">
-                store_tag = #{storeTag},
-            </if>
-        </set>
-        where id = #{id}
+    <!--入库申请审核-->
+    <update id="updateWarehousing">
+        update erp.Warehouse_inbound set check_tag = #{check_tag},check_time = #{check_time},checker = #{checker}
+        where inbound_id = #{inbound_id}
     </update>
 
     <!--通过主键删除-->

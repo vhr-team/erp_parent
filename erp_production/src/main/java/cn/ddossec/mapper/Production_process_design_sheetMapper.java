@@ -7,13 +7,9 @@ import java.util.List;
 public interface Production_process_design_sheetMapper {
 
 
-    public List<Production_process_design_sheet> findAllProductionSheet();
+    public List<Production_process_design_sheet> findAll();
 
-    public int delProductionSheetById(Integer id);
+    public int addProduction_process_design_sheet(Production_process_design_sheet production_process_design_sheet);
 
-    public void insertProductionSheet(Production_process_design_sheet production_process_design_sheet);
 
-    public boolean updateProductionSheet(Production_process_design_sheet production_process_design_sheet);
-
-    public Production_process_design_sheet selectById(Integer id);
 }

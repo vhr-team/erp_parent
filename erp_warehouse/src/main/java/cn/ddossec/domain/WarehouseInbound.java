@@ -1,6 +1,5 @@
 package cn.ddossec.domain;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -8,29 +7,29 @@ import java.util.Date;
 import java.io.Serializable;
 
 /**
- * (WarehouseOutbound)实体类
+ * (WarehouseInbound)实体类
  *
  * @author 谷辉
- * @since 2020-04-22 14:34:41
+ * @since 2020-04-24 17:06:41
  */
 @Data
 @NoArgsConstructor
-public class WarehouseOutbound<AllArgsConstructor> implements Serializable {
-    private static final long serialVersionUID = -35768159757263339L;
+public class WarehouseInbound implements Serializable {
+    private static final long serialVersionUID = -51353765254939309L;
     /**
     * 序号
     */
     private Integer id;
     /**
-    * 出库单编号
+    * 入库单编号
     */
-    private String outboundId;
+    private String inboundId;
     /**
-    * 出库人
+    * 入库人
     */
     private String storer;
     /**
-    * 出库理由
+    * 入库理由
     */
     private String reason;
     /**
@@ -42,9 +41,9 @@ public class WarehouseOutbound<AllArgsConstructor> implements Serializable {
     */
     private Double costPriceSum;
     /**
-    * 确认出库总件数
+    * 确认入库总件数
     */
-    private Integer paidAmountSum;
+    private Integer gatheredAmountSum;
     /**
     * 备注
     */

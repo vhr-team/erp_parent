@@ -6,15 +6,15 @@ import lombok.NoArgsConstructor;
 import java.io.Serializable;
 
 /**
- * (WarehouseOutboundDetailed)实体类
+ * (WarehouseInboundDetailed)实体类
  *
  * @author 谷辉
- * @since 2020-04-22 15:33:29
+ * @since 2020-04-24 17:08:29
  */
 @Data
 @NoArgsConstructor
-public class WarehouseOutboundDetailed implements Serializable {
-    private static final long serialVersionUID = 411946510552235167L;
+public class WarehouseInboundDetailed implements Serializable {
+    private static final long serialVersionUID = -75766736646811826L;
     /**
     * 序号
     */
@@ -52,17 +52,12 @@ public class WarehouseOutboundDetailed implements Serializable {
     */
     private Integer subtotal;
     /**
-    * 确认出库件数
+    * 确认入库件数
     */
-    private Integer paidAmount;
+    private Integer gatheredAmount;
     /**
-    * 出库标志
+    * 入库标志
     */
-    private String payTag;
-
-    /**
-     * 出库表
-     */
-    private WarehouseOutbound warehouseOutbound;
+    private String gatherTag;
 
 }

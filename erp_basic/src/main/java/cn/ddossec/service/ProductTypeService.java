@@ -23,4 +23,11 @@ public interface ProductTypeService extends IService<ProductType> {
     DataGridView ProductType(ProductTypeVo productTypeVo);
 
     ProductType checkProductType(ProductType productType);
+
+    /**
+     * 根据供应商ID查询商品类别
+     * @param providerid
+     * @return
+     */
+    Object queryProductTypeByProviderid(Integer providerid);
 }

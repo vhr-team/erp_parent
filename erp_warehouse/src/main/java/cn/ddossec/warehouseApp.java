@@ -10,7 +10,7 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
  */
 
 @SpringBootApplication
-@EnableDiscoveryClient
+@EnableDiscoveryClient //nacos服务
 @MapperScan("cn.ddossec.mapper")
 public class warehouseApp {
     public static void main(String[] args) {

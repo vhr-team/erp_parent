@@ -38,6 +38,15 @@ public class Basics_supperController {
         return rut ;
     }
 
+    /**
+     * 查询全部供应商
+     * @return
+     */
+    @RequestMapping("/getAllSupper")
+    public List<Basics_supper> getAllSupper(){
+
+        return basics_supperService.findAll();
+    }
     @RequestMapping("/sellName")
     public Map<String,Object> sellName( @RequestParam(value="name" ,defaultValue = "")String  name,@RequestParam(value="page" ,defaultValue = "1") Integer page,@RequestParam(value="rows" ,defaultValue = "10") Integer rows){
 

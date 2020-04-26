@@ -20,6 +20,8 @@ public class Production_mdesign_procedureController {
     @Autowired
     Production_mdesign_procedureService production_mdesign_procedureService;
 
+
+
     @RequestMapping("/getAllProduction")
     public Map<String,Object>  getAllProduction(){
         Map<String,Object> rut = new HashMap<>();

@@ -94,8 +94,32 @@ public class Production_mdesign_procedure implements Serializable {
      */
     private String design_module_change_tag;
 
+    /**
+     * 产品名称
+     */
+    private String product_name;
+    /**
+     * 一级
+     */
+    private String product_stair_classify;
 
-    public Production_mdesign_procedure(Integer id, String design_id, String first_kind_id, String first_kind_name, String procedure_id, String procedure_name, Integer labour_hour_amount, String procedurce_describe, String amount_unit, Integer cost_price, Double subtotal, Double module_subtotal, String register, Date register_time, String design_module_tag, String design_module_change_tag) {
+
+    /**
+     * 二级
+     */
+    private String product_second_classify;
+
+    /**
+     * 三级
+     *
+     */
+    private String product_tertiary_classify;
+    /**
+     * 设计人
+     */
+    private String product_designer;
+
+    public Production_mdesign_procedure(Integer id, String design_id, String first_kind_id, String first_kind_name, String procedure_id, String procedure_name, Integer labour_hour_amount, String procedurce_describe, String amount_unit, Integer cost_price, Double subtotal, Double module_subtotal, String register, Date register_time, String design_module_tag, String design_module_change_tag, String product_name, String product_stair_classify, String product_second_classify, String product_tertiary_classify, String product_designer) {
         this.id = id;
         this.design_id = design_id;
         this.first_kind_id = first_kind_id;
@@ -112,5 +136,10 @@ public class Production_mdesign_procedure implements Serializable {
         this.register_time = register_time;
         this.design_module_tag = design_module_tag;
         this.design_module_change_tag = design_module_change_tag;
+        this.product_name = product_name;
+        this.product_stair_classify = product_stair_classify;
+        this.product_second_classify = product_second_classify;
+        this.product_tertiary_classify = product_tertiary_classify;
+        this.product_designer = product_designer;
     }
 }

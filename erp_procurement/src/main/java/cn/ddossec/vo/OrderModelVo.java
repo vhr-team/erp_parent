@@ -13,5 +13,14 @@ import lombok.*;
 public class OrderModelVo extends BaseVo {
 
     // 订单创建人
-    private String createrName;
+    private Integer creater;
+
+    private Integer minTotalNum;
+    private Integer maxTotalNum;
+
+    private Integer minCreateTime;
+    private Integer maxCreateTime;
+
+    private Integer minTotalPrice;
+    private Integer maxTotalPrice;
 }

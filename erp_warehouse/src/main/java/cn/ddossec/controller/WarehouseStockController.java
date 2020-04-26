@@ -48,6 +48,7 @@ public class WarehouseStockController {
     }
 
     /**
+     * 新增安全库存配置单
      *
      * @param warehouseStock 安全库存配置单对象
      * @return
@@ -63,11 +64,13 @@ public class WarehouseStockController {
         if (count>0){
             //如果执行成功，返回  提交成功,等待审核!
             return new Response(true,"提交成功,等待审核!");
+        }else {
+            return new Response(false,"提交失败,请重试!");
         }
-        return new Response(false,"提交失败,请重试!");
     }
 
     /**
+     * 查询安全库存配置单
      *
      * @param check_tag 复核标志 0待审核 1通过
      * @return
@@ -98,8 +101,9 @@ public class WarehouseStockController {
         if (count>0){
             //如果执行成功，返回
             return new Response(true,"复核成功!");
+        }else {
+            return new Response(false,"请稍后再试!");
         }
-        return new Response(false,"请稍后再试!");
     }
 
 

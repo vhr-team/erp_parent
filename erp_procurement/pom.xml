@@ -11,5 +11,11 @@
 
     <artifactId>erp_procurement</artifactId>
 
-
+    <dependencies>
+        <dependency>
+            <groupId>cn.ddossec</groupId>
+            <artifactId>erp_permissions</artifactId>
+            <version>1.0</version>
+        </dependency>
+    </dependencies>
 </project>

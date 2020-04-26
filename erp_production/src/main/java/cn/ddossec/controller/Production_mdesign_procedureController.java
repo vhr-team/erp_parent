@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/production")
@@ -19,11 +21,15 @@ public class Production_mdesign_procedureController {
     Production_mdesign_procedureService production_mdesign_procedureService;
 
     @RequestMapping("/getAllProduction")
-    public   List<Production_mdesign_procedure> getAllProduction(Model model){
+    public Map<String,Object>  getAllProduction(){
+        Map<String,Object> rut = new HashMap<>();
         /*获取所有信息*/
         List<Production_mdesign_procedure> list = production_mdesign_procedureService.findAllProduction_mdesign_procedure();
-        model.addAttribute("list",list);
-        return list;
+        rut.put("data",list);
+        rut.put("code",0);
+        rut.put("msg","");
+        rut.put("count",100);
+        return rut ;
     }
 
     /*

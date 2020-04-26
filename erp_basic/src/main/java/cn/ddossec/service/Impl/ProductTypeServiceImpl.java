@@ -73,4 +73,17 @@ public class ProductTypeServiceImpl extends ServiceImpl<ProductTypeMapper, Produ
         ProductType selectOne = this.productTypeMapper.checkProductType(productType);
         return selectOne;
     }
+
+    /**
+     * 根据供应商ID查询商品类别
+     *
+     * @param providerid
+     * @return
+     */
+    @Override
+    public Object queryProductTypeByProviderid(Integer providerid) {
+        QueryWrapper<ProductType> qw = new QueryWrapper<>();
+        qw.eq(null != providerid, "supper_id", providerid);
+        return this.productTypeMapper.selectList(qw);
+    }
 }

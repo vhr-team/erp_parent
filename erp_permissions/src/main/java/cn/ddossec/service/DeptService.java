@@ -1,5 +1,6 @@
 package cn.ddossec.service;
 
+import cn.ddossec.common.DataGridView;
 import cn.ddossec.domain.Dept;
 import cn.ddossec.vo.DeptVo;
 import com.baomidou.mybatisplus.extension.service.IService;

@@ -1,11 +1,9 @@
 package cn.ddossec.service.impl;
 
+import cn.ddossec.common.DataGridView;
 import cn.ddossec.domain.OrderModel;
-import cn.ddossec.domain.User;
 import cn.ddossec.mapper.OrderModelMapper;
-import cn.ddossec.mapper.UserMapper;
 import cn.ddossec.service.OrderModelService;
-import cn.ddossec.service.feign.UserFeignClient;
 import cn.ddossec.vo.OrderModelVo;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
@@ -24,12 +22,6 @@ public class OrderModelServiceImpl extends ServiceImpl<OrderModelMapper, OrderMo
     @Autowired
     private OrderModelMapper orderModelMapper;
 
-    @Autowired
-    private UserMapper userMapper;
-
-    @Autowired
-    private UserFeignClient userFeignClient;
-
     /**
      * 查询所有订单，可以带条件，分页查询
      *
@@ -43,14 +35,8 @@ public class OrderModelServiceImpl extends ServiceImpl<OrderModelMapper, OrderMo
 
         QueryWrapper<OrderModel> qw = new QueryWrapper<>();
 
-
         // 2.根据创建人ID查询创建人信息
-        if (null != orderModelVo.getCreater()) {
-            DataGridView dataGridView = this.userFeignClient.loadUserByUserId(orderModelVo.getCreater());
-            User user = (User) dataGridView.getData();
-            log.debug("创建人=" + user);
-            qw.eq(null != user.getId(), "creater", user.getId());
-        }
+        qw.eq(null != orderModelVo.getCreater(), "creater", orderModelVo.getCreater());
 
         qw.ge(null != orderModelVo.getMinTotalNum(), "total_num", orderModelVo.getMinTotalNum());
         qw.le(null != orderModelVo.getMaxTotalNum(), "total_num", orderModelVo.getMaxTotalNum());

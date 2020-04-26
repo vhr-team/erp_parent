@@ -1,5 +1,6 @@
 package cn.ddossec.service.impl;
 
+import cn.ddossec.common.DataGridView;
 import cn.ddossec.domain.Dept;
 import cn.ddossec.mapper.DeptMapper;
 import cn.ddossec.service.DeptService;

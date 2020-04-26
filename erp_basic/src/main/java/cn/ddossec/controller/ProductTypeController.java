@@ -1,5 +1,7 @@
 package cn.ddossec.controller;
 
+import cn.ddossec.common.DataGridView;
+import cn.ddossec.common.ResultObj;
 import cn.ddossec.domain.ProductType;
 import cn.ddossec.service.ProductTypeService;
 import cn.ddossec.vo.ProductTypeVo;

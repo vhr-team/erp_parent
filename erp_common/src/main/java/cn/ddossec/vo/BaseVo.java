@@ -12,5 +12,6 @@ public class BaseVo implements Serializable {
 
     // 显示条数
     private Integer pageSize;
+    private Integer limit;
 
 }

@@ -4,9 +4,27 @@ logging:
 server:
   port: 8002
 spring:
+  application:
+    name: erp_design
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 121.43.145.142:8849
   # 数据源配置
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://xhh.ddos-sec.cn:3306/erp?useUnicode=true&characterEncoding=utf8&serverTimezone=GMT%2B8&useSSL=false
     username: root
     password: 1234
+
+  # redis
+  redis:
+    host: xhh.ddos-sec.cn
+    password: 1234
+    port: 6400
+    jedis:
+      pool:
+        max-active: 20
+        max-idle: 8
+        min-idle: 0
+        max-wait: 2000

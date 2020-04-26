@@ -17,6 +17,7 @@ public interface design_record_Service {
      */
     List<design_record> queryAll();
 
+
     /**
      * 分页条件查询
      * @param page 页码

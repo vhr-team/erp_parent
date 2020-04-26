@@ -23,6 +23,7 @@ public class Production_process_design_sheetController {
     public Map<String,Object> getAllProductionProcess(){
         Map<String,Object> rut = new HashMap<>();
         List<Production_process_design_sheet> list = production_process_design_sheetService.finfAllProduction_process_design_sheet();
+        rut.put("data",list);
         return rut;
     }
 

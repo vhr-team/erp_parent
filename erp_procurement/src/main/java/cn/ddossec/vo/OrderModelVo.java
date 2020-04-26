@@ -11,4 +11,7 @@ import lombok.*;
 @NoArgsConstructor
 @Builder
 public class OrderModelVo extends BaseVo {
+
+    // 订单创建人
+    private String createrName;
 }

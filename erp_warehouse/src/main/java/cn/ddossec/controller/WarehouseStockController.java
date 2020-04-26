@@ -54,17 +54,16 @@ public class WarehouseStockController {
      * @return
      */
     @ApiOperation(value = "新增安全库存配置单")
-    @GetMapping(value = "insertSecuritySheet/{warehouseStock}")
-    public Response insertSecuritySheet(@PathVariable(value = "warehouseStock") WarehouseStock warehouseStock){
+    @PostMapping(value = "insertSecuritySheet")
+    public Response insertSecuritySheet(WarehouseStock warehouseStock){
         //获取当前时间
         Date date = DateUtil.date();
         warehouseStock.setRegisterTime(date);
-
-        int count = warehouseStockServiceImpl.insertSecuritySheet(warehouseStock);
-        if (count>0){
-            //如果执行成功，返回  提交成功,等待审核!
+        try{
+            warehouseStockServiceImpl.insertSecuritySheet(warehouseStock);
             return new Response(true,"提交成功,等待审核!");
-        }else {
+        }catch (Exception e){
+            e.printStackTrace();
             return new Response(false,"提交失败,请重试!");
         }
     }
@@ -96,12 +95,11 @@ public class WarehouseStockController {
         String check_tag = "1";
         //获取当前时间为复核时间
         Date check_time = DateUtil.date();
-
-        int count = warehouseStockServiceImpl.updateSecuritySheet(check_tag,check_time,product_id,checker);
-        if (count>0){
-            //如果执行成功，返回
+        try{
+            warehouseStockServiceImpl.updateSecuritySheet(check_tag,check_time,product_id,checker);
             return new Response(true,"复核成功!");
-        }else {
+        }catch (Exception e){
+            e.printStackTrace();
             return new Response(false,"请稍后再试!");
         }
     }

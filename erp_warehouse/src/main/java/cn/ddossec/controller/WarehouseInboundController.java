@@ -45,16 +45,16 @@ public class WarehouseInboundController {
      * @return 实例对象
      */
     @ApiOperation(value = "入库申请登记")
-    @RequestMapping("insertWarehousing/{warehouseInbound}")
-    public Response insertWarehousing(@PathVariable(value = "warehouseInbound") WarehouseInbound warehouseInbound){
+    @RequestMapping("insertWarehousing")
+    public Response insertWarehousing(WarehouseInbound warehouseInbound){
         String id = ObjectId.next(); //生成随机入库单编号
         warehouseInbound.setInboundId(id);
-
-        int count = warehouseInboundServiceImpl.insertWarehousing(warehouseInbound);
-        if (count>0){
-            return new Response(true,"申请成功,等待复核!");
-        }else {
-            return new Response(false,"申请失败，请重试!");
+        try{
+            warehouseInboundServiceImpl.insertWarehousing(warehouseInbound);
+            return new Response(true,"提交成功,等待审核!");
+        }catch (Exception e){
+            e.printStackTrace();
+            return new Response(false,"提交失败,请重试!");
         }
     }
 
@@ -72,12 +72,12 @@ public class WarehouseInboundController {
     @RequestMapping("updateWarehousing/{check_tag}/{checker}/{inbound_id}")
     public Response updateWarehousing(@PathVariable(value = "check_tag") String check_tag,@PathVariable(value = "checker") String checker,@PathVariable(value = "inbound_id") String inbound_id) {
         Date check_time = DateUtil.date();
-
-        int count = warehouseInboundServiceImpl.updateWarehousing(check_tag,check_time,checker,inbound_id);
-        if (count>0){
+        try{
+            warehouseInboundServiceImpl.updateWarehousing(check_tag,check_time,checker,inbound_id);
             return new Response(true,"审核成功!");
-        }else {
-            return new Response(false,"审核失败,请重试!");
+        }catch (Exception e){
+            e.printStackTrace();
+            return new Response(false,"请稍后再试!");
         }
     }
 

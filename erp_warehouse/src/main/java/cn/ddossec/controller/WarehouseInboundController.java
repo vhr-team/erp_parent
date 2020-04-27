@@ -2,10 +2,13 @@ package cn.ddossec.controller;
 
 import cn.ddossec.common.Response;
 import cn.ddossec.domain.WarehouseInbound;
+import cn.ddossec.domain.WarehouseInboundDetailed;
+import cn.ddossec.service.WarehouseInboundDetailedService;
 import cn.ddossec.service.WarehouseInboundService;
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.lang.ObjectId;
 import io.swagger.annotations.ApiOperation;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,6 +30,8 @@ public class WarehouseInboundController {
     @Autowired
     private WarehouseInboundService warehouseInboundServiceImpl;
 
+    @Autowired
+    private WarehouseInboundDetailedService warehouseInboundDetailedServiceImpl;
     /**
      * 通过主键查询单条数据
      *
@@ -40,17 +45,49 @@ public class WarehouseInboundController {
 
     /**
      * 入库申请登记
-     *
-     * @param warehouseInbound 实例对象
-     * @return 实例对象
+     * @return
      */
     @ApiOperation(value = "入库申请登记")
     @RequestMapping("insertWarehousing")
-    public Response insertWarehousing(WarehouseInbound warehouseInbound){
-        String id = ObjectId.next(); //生成随机入库单编号
-        warehouseInbound.setInboundId(id);
+    public Response insertWarehousing(@Param("storer") String storer,
+                                      @Param("reason") String reason,
+                                      @Param("amountSum") Integer amountSum,
+                                      @Param("costPriceSum") Double costPriceSum,
+                                      @Param("register") String register,
+                                      @Param("pemark") String pemark,
+                                      @Param("productName") String productName,
+                                      @Param("productId") String productId,
+                                      @Param("productDescribe") String productDescribe,
+                                      @Param("amount") Integer amount,
+                                      @Param("amountUnit") String amountUnit,
+                                      @Param("costPrice") Double costPrice,
+                                      @Param("subtotal") Integer subtotal){
+        String inboundId = ObjectId.next(); //生成随机入库单编号
+        Date registerTime = DateUtil.date(); //登记时间
+        WarehouseInbound warehouseInbound = new WarehouseInbound();
+        warehouseInbound.setInboundId(inboundId); //入库单编号
+        warehouseInbound.setStorer(storer); //入库人
+        warehouseInbound.setReason(reason); //入库理由
+        warehouseInbound.setAmountSum(amountSum); //总件数
+        warehouseInbound.setCostPriceSum(costPriceSum); //总金额
+        warehouseInbound.setRegister(register); //登记人
+        warehouseInbound.setRegisterTime(registerTime); //登记时间
+        warehouseInbound.setPemark(pemark); //备注
+        WarehouseInboundDetailed warehouseInboundDetailed = new WarehouseInboundDetailed();
+        warehouseInboundDetailed.setProductName(productName); //产品名称
+        warehouseInboundDetailed.setProductId(productId); //产品编号
+        warehouseInboundDetailed.setProductDescribe(productDescribe); //描述
+        warehouseInboundDetailed.setAmount(amount); //数量
+        warehouseInboundDetailed.setAmountUnit(amountUnit); //单位
+        warehouseInboundDetailed.setCostPrice(costPrice); //单价
+        warehouseInboundDetailed.setSubtotal(subtotal); //小计
         try{
-            warehouseInboundServiceImpl.insertWarehousing(warehouseInbound);
+            int count = warehouseInboundServiceImpl.insertWarehousing(warehouseInbound);
+            if (count>0){
+                Integer ParentId = warehouseInboundServiceImpl.queryId(inboundId); //获取到父级编号
+                warehouseInboundDetailed.setParentId(ParentId); //父级编号
+            }
+            warehouseInboundDetailedServiceImpl.insertWarehouseDetailed(warehouseInboundDetailed);
             return new Response(true,"提交成功,等待审核!");
         }catch (Exception e){
             e.printStackTrace();

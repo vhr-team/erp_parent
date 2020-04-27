@@ -39,60 +39,8 @@
     </select>
 
     <!--通过实体作为筛选条件查询-->
-    <select id="queryAll" resultMap="WarehouseInboundMap">
-        select
-          id, inbound_id, storer, reason, amount_sum, cost_price_sum, gathered_amount_sum, pemark, register, register_time, checker, check_time, check_tag, attemper, attemper_time, store_tag
-        from erp.Warehouse_inbound
-        <where>
-            <if test="id != null">
-                and id = #{id}
-            </if>
-            <if test="inboundId != null and inboundId != ''">
-                and inbound_id = #{inboundId}
-            </if>
-            <if test="storer != null and storer != ''">
-                and storer = #{storer}
-            </if>
-            <if test="reason != null and reason != ''">
-                and reason = #{reason}
-            </if>
-            <if test="amountSum != null">
-                and amount_sum = #{amountSum}
-            </if>
-            <if test="costPriceSum != null">
-                and cost_price_sum = #{costPriceSum}
-            </if>
-            <if test="gatheredAmountSum != null">
-                and gathered_amount_sum = #{gatheredAmountSum}
-            </if>
-            <if test="pemark != null and pemark != ''">
-                and pemark = #{pemark}
-            </if>
-            <if test="register != null and register != ''">
-                and register = #{register}
-            </if>
-            <if test="registerTime != null">
-                and register_time = #{registerTime}
-            </if>
-            <if test="checker != null and checker != ''">
-                and checker = #{checker}
-            </if>
-            <if test="checkTime != null">
-                and check_time = #{checkTime}
-            </if>
-            <if test="checkTag != null and checkTag != ''">
-                and check_tag = #{checkTag}
-            </if>
-            <if test="attemper != null and attemper != ''">
-                and attemper = #{attemper}
-            </if>
-            <if test="attemperTime != null">
-                and attemper_time = #{attemperTime}
-            </if>
-            <if test="storeTag != null and storeTag != ''">
-                and store_tag = #{storeTag}
-            </if>
-        </where>
+    <select id="queryId" resultType="Integer">
+        select id from erp.Warehouse_inbound where inbound_id = #{inboundId}
     </select>
 
     <!--新增入库申请登记-->

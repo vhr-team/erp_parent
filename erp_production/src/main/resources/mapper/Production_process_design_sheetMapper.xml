@@ -1,13 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.ddossec.mapper.Production_process_design_sheetMapper">
-    <insert id="addProduction_process_design_sheet">
-          INSERT into production_process_design_sheet(product_name,design_id,product_designer,product_registrant,esign_require,design_date,design_number) values(#{product_name},#{design_id},#{product_designer},#{product_registrant},#{esign_require},#{design_date},#{design_number})
+    <insert id="addProduction_process_design_sheet" useGeneratedKeys="true" keyProperty="id" parameterType="cn.ddossec.domain.Production_mdesign_procedure">
+          INSERT into production_process_design_sheet(product_name,design_idB,product_designer,product_registrant,esign_require,design_date,design_number) values(#{product_name},#{design_idB},#{product_designer},#{product_registrant},#{esign_require},#{design_date},#{design_number})
 
     </insert>
+    <update id="updateProduction_process">
+        update  production_process_design_sheet
+        <trim prefix="set" suffixOverrides=",">
+            <if test="audit_date!=null">audit_date=#{audit_date},</if>
+
+
+        </trim>
+        where id=#{id}
+
+    </update>
 
     <select id="findAll" resultType="cn.ddossec.domain.Production_process_design_sheet">
 
           SELECT * from production_process_design_sheet
     </select>
+
+
 </mapper>

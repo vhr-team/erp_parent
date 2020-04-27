@@ -15,4 +15,7 @@ select * from product_designprocess
 
 
     </select>
+    <select id="findDId" resultType="cn.ddossec.domain.Product_designprocess">
+        select * from  product_designprocess where  design_id = #{design_id}
+    </select>
 </mapper>

@@ -11,5 +11,9 @@ public interface Production_process_design_sheetMapper {
 
     public int addProduction_process_design_sheet(Production_process_design_sheet production_process_design_sheet);
 
-
+    /**
+     * 修改
+     *
+     */
+    public void updateProduction_process(String audit_date,Integer id);
 }

@@ -5,6 +5,8 @@ import cn.ddossec.domain.ProductType;
 import cn.ddossec.vo.ProductTypeVo;
 import com.baomidou.mybatisplus.extension.service.IService;
 
+import java.util.List;
+
 /**
  * @author 30315
  * @title: ProductTypeService
@@ -30,4 +32,10 @@ public interface ProductTypeService extends IService<ProductType> {
      * @return
      */
     Object queryProductTypeByProviderid(Integer providerid);
+
+    /**
+     * 查询所有类别
+     * @return
+     */
+    List<ProductType> loadAllProductType();
 }

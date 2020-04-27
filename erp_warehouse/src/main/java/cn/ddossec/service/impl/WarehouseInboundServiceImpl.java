@@ -5,7 +5,9 @@ import cn.ddossec.mapper.WarehouseInboundMapper;
 import cn.ddossec.service.WarehouseInboundService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -32,6 +34,16 @@ public class WarehouseInboundServiceImpl implements WarehouseInboundService {
     }
 
     /**
+     * 根据入库单编号查询序号
+     * @param inboundId 入库单编号
+     * @return
+     */
+    @Override
+    public int queryId(String inboundId) {
+        return this.warehouseInboundMapper.queryId(inboundId);
+    }
+
+    /**
      * 查询多条数据
      *
      * @param offset 查询起始位置
@@ -44,27 +56,29 @@ public class WarehouseInboundServiceImpl implements WarehouseInboundService {
     }
 
     /**
-     * 新增数据
+     * 入库申请登记
      *
      * @param warehouseInbound 实例对象
      * @return 实例对象
      */
+    @Transactional
     @Override
-    public WarehouseInbound insert(WarehouseInbound warehouseInbound) {
-        this.warehouseInboundMapper.insert(warehouseInbound);
-        return warehouseInbound;
+    public int insertWarehousing(WarehouseInbound warehouseInbound) {
+        return this.warehouseInboundMapper.insertWarehousing(warehouseInbound);
     }
 
     /**
-     * 修改数据
+     * 入库申请审核
      *
-     * @param warehouseInbound 实例对象
-     * @return 实例对象
+     * @param check_tag 入库标志 0待审核 1复核不通过 2复核通过
+     * @param check_time 复核时间
+     * @param checker 复核人
+     * @param inbound_id 入库单编号 (随机生成)
+     * @return
      */
     @Override
-    public WarehouseInbound update(WarehouseInbound warehouseInbound) {
-        this.warehouseInboundMapper.update(warehouseInbound);
-        return this.queryById(warehouseInbound.getId());
+    public int updateWarehousing(String check_tag, Date check_time, String checker, String inbound_id) {
+        return this.warehouseInboundMapper.updateWarehousing(check_tag,check_time,checker,inbound_id);
     }
 
     /**

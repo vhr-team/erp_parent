@@ -20,11 +20,24 @@ public class Production_mdesign_procedureController {
     @Autowired
     Production_mdesign_procedureService production_mdesign_procedureService;
 
+
+
     @RequestMapping("/getAllProduction")
     public Map<String,Object>  getAllProduction(){
         Map<String,Object> rut = new HashMap<>();
         /*获取所有信息*/
         List<Production_mdesign_procedure> list = production_mdesign_procedureService.findAllProduction_mdesign_procedure();
+        rut.put("data",list);
+        rut.put("code",0);
+        rut.put("msg","");
+        rut.put("count",100);
+        return rut ;
+    }
+    @RequestMapping("/getAllProductionsh")
+    public Map<String,Object>  getAllProductionsh(){
+        Map<String,Object> rut = new HashMap<>();
+        /*获取所有信息*/
+        List<Production_mdesign_procedure> list = production_mdesign_procedureService.findAllProduction_mdesign_procedure_sh();
         rut.put("data",list);
         rut.put("code",0);
         rut.put("msg","");

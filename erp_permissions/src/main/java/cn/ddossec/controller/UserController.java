@@ -9,6 +9,8 @@ import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 /**
  * @author 30315
  * @title: UserController
@@ -26,6 +28,11 @@ public class UserController {
     @RequestMapping("/loadAllUser")
     public Object loadAllUser(UserVo userVo) {
         return this.userService.loadAllUser(userVo);
+    }
+
+    @RequestMapping("/loadAllUserNoQuery")
+    public List<User> loadAllUser() {
+        return this.userService.loadAllUser();
     }
 
     /**

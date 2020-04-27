@@ -13,11 +13,11 @@ import java.util.Date;
 @Setter
 @ToString
 public class Production_mdesign_procedure implements Serializable {
-
     /**
      * 主键
      */
     private Integer id;
+
 
     /**
      * 设计编号
@@ -119,6 +119,8 @@ public class Production_mdesign_procedure implements Serializable {
      */
     private String product_designer;
 
+
+
     public Production_mdesign_procedure(Integer id, String design_id, String first_kind_id, String first_kind_name, String procedure_id, String procedure_name, Integer labour_hour_amount, String procedurce_describe, String amount_unit, Integer cost_price, Double subtotal, Double module_subtotal, String register, Date register_time, String design_module_tag, String design_module_change_tag, String product_name, String product_stair_classify, String product_second_classify, String product_tertiary_classify, String product_designer) {
         this.id = id;
         this.design_id = design_id;
@@ -142,4 +144,12 @@ public class Production_mdesign_procedure implements Serializable {
         this.product_tertiary_classify = product_tertiary_classify;
         this.product_designer = product_designer;
     }
+
+    public Production_mdesign_procedure(Integer id, String design_module_tag) {
+        this.id = id;
+
+        this.design_module_tag = design_module_tag;
+
+    }
+
 }

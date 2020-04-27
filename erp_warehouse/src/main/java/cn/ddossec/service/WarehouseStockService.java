@@ -59,12 +59,14 @@ public interface WarehouseStockService {
     int updateSecuritySheet(String check_tag, Date check_time, String product_id, String checker);
 
     /**
-     * 修改数据
-     *
-     * @param warehouseStock 实例对象
-     * @return 实例对象
+     * 通过库存编号修改安全库存配置
+     * @param minAmount 库存报警下限
+     * @param maxAmount 库存报警上限
+     * @param maxCapacityAmount 最大存储量
+     * @param stockId 库存编号
      */
-    int update(WarehouseStock warehouseStock);
+    void updateAmount(Integer minAmount,Integer maxAmount,Integer maxCapacityAmount,String stockId);
+
 
     /**
      * 通过主键删除数据

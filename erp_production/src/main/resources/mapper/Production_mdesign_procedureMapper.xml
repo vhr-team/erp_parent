@@ -3,7 +3,7 @@
 <mapper namespace="cn.ddossec.mapper.Production_mdesign_procedureMapper">
 
     <select id="findAllProduction_mdesign_procedure" resultType="cn.ddossec.domain.Production_mdesign_procedure">
-        SELECT * FROM production_mdesign_procedure;
+    SELECT * FROM production_mdesign_procedure WHERE design_module_tag NOT IN ('D002');
     </select>
 
     <delete id="delProduction_mdesign_procedureById">
@@ -12,6 +12,8 @@
 
     <insert id="insertProduction_mdesign_procedure">
         INSERT INTO production_mdesign_procedure (id,design_id,first_kind_id,first_kind_name,procedure_id,procedure_name,labour_hour_amount,procedurce_describe,amount_unit,cost_price,subtotal,module_subtotal,register,register_time,design_module_tag,design_module_change_tag) values(#{id},#{design_id},#{first_kind_id},#{first_kind_name},#{procedure_id},#{procedure_name},#{labour_hour_amount},#{procedurce_describe},#{amount_unit},#{cost_price},#{subtotal},#{module_subtotal},#{register},#{register_time},#{design_module_tag},#{design_module_change_tag})
+
+
     </insert>
 
     <update id="updateProduction_mdesign_procedure">
@@ -38,6 +40,12 @@
 
     <select id="selectById" resultType="cn.ddossec.domain.Production_mdesign_procedure">
         SELECT * FROM production_mdesign_procedure WHERE id = #{id}
+    </select>
+    <select id="findAllProduction_mdesign_procedure_sh"
+            resultType="cn.ddossec.domain.Production_mdesign_procedure">
+
+
+          SELECT * FROM production_mdesign_procedure WHERE design_module_tag  IN ('D002');
     </select>
 
 </mapper>

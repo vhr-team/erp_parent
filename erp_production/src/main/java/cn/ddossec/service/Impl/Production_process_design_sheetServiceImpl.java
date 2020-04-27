@@ -1,10 +1,17 @@
 package cn.ddossec.service.Impl;
 
+import cn.ddossec.domain.Product_auditTable;
+import cn.ddossec.domain.Product_designprocess;
+import cn.ddossec.domain.Production_mdesign_procedure;
 import cn.ddossec.domain.Production_process_design_sheet;
+import cn.ddossec.mapper.Product_auditTableMapper;
+import cn.ddossec.mapper.Production_mdesign_procedureMapper;
 import cn.ddossec.mapper.Production_process_design_sheetMapper;
+import cn.ddossec.service.Product_designprocessService;
 import cn.ddossec.service.Production_process_design_sheetService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -12,31 +19,41 @@ import java.util.List;
 public class Production_process_design_sheetServiceImpl implements Production_process_design_sheetService {
 
     @Autowired
-    Production_process_design_sheetMapper production_process_design_sheetMapper;
+    private   Production_process_design_sheetMapper production_process_design_sheetMapper;
+
+    @Autowired
+    private Production_mdesign_procedureMapper production_mdesign_procedureMapper;
+
+    @Autowired
+    private Product_designprocessService product_designprocessService;
+
+    @Autowired
+    private Product_auditTableMapper product_auditTableMapper;
 
     @Override
-    public List<Production_process_design_sheet> finfAllProduction_process_design_sheet() {
-        return production_process_design_sheetMapper.finfAllProduction_process_design_sheet();
+    public List<Production_process_design_sheet> findAll() {
+        return production_process_design_sheetMapper.findAll();
     }
 
-    @Override
-    public int delProduction_process_design_sheetById(Integer id) {
-        return production_process_design_sheetMapper.delProduction_process_design_sheetById(id);
-    }
+    @Transactional
+    public void addProduction_process_design_sheet(Production_process_design_sheet production_process_design_sheet, Integer prdouctId, List<Product_designprocess> product_designprocessesLis) {
+      Production_mdesign_procedure p1 = new Production_mdesign_procedure(prdouctId,"D002");
+        production_process_design_sheetMapper.addProduction_process_design_sheet(production_process_design_sheet);
+      production_mdesign_procedureMapper.updateProduction_mdesign_procedure(p1);
+        float zcbPrice ;
+        float zcbPrice1 =0;
+        for (Product_designprocess product_designprocessesLi : product_designprocessesLis) {
+            product_designprocessesLi.setDesign_id(production_process_design_sheet.getDesign_idB());
+            float sveePurchasingPrice  = (  product_designprocessesLi.getProcess_time_gs()*product_designprocessesLi.getProcess_time_cost());
+            zcbPrice = zcbPrice1+sveePurchasingPrice;
+            product_designprocessesLi.setProcess_subtotal(sveePurchasingPrice);
 
-    @Override
-    public void insertProduction_mdesign_procedure(Production_process_design_sheet production_process_design_sheet) {
-        production_process_design_sheetMapper.insertProduction_process_design_sheet(production_process_design_sheet);
-    }
+           product_designprocessService.insertProduction_modesign_procedure(product_designprocessesLi);
+            System.out.println(product_designprocessesLi);
 
-
-    @Override
-    public boolean updateProduction_process_design_sheet(Production_process_design_sheet production_process_design_sheet) {
-        return production_process_design_sheetMapper.updateProduction_process_design_sheet(production_process_design_sheet);
-    }
-
-    @Override
-    public Production_process_design_sheet selectById(Integer id) {
-        return production_process_design_sheetMapper.selectById(id);
+        }
+        System.out.println("总计"+zcbPrice1+"ID"+production_process_design_sheet.getId());
+        Product_auditTable table = new Product_auditTable(0,production_process_design_sheet.getId(),"完成","未审核",zcbPrice1);
+        product_auditTableMapper.insertProduct_auditTable(table);
     }
 }

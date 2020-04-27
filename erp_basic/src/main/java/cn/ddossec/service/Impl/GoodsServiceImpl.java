@@ -2,9 +2,9 @@ package cn.ddossec.service.Impl;
 
 import cn.ddossec.common.Constant;
 import cn.ddossec.common.DataGridView;
+import cn.ddossec.domain.ProductType;
 import cn.ddossec.domain.Basics_supper;
 import cn.ddossec.domain.Goods;
-import cn.ddossec.domain.ProductType;
 import cn.ddossec.mapper.Basics_supperMapper;
 import cn.ddossec.mapper.GoodsMapper;
 import cn.ddossec.mapper.ProductTypeMapper;

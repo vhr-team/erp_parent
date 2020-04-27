@@ -1,6 +1,9 @@
 package cn.ddossec.service;
 
 import cn.ddossec.domain.WarehouseInbound;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -20,6 +23,13 @@ public interface WarehouseInboundService {
     WarehouseInbound queryById(Integer id);
 
     /**
+     * 根据入库单编号查询序号
+     * @param inboundId 入库单编号
+     * @return
+     */
+    int queryId(String inboundId);
+
+    /**
      * 查询多条数据
      *
      * @param offset 查询起始位置
@@ -29,20 +39,24 @@ public interface WarehouseInboundService {
     List<WarehouseInbound> queryAllByLimit(int offset, int limit);
 
     /**
-     * 新增数据
+     * 入库申请登记
      *
      * @param warehouseInbound 实例对象
      * @return 实例对象
      */
-    WarehouseInbound insert(WarehouseInbound warehouseInbound);
+    int insertWarehousing(WarehouseInbound warehouseInbound);
 
     /**
-     * 修改数据
+     * 入库申请审核
      *
-     * @param warehouseInbound 实例对象
-     * @return 实例对象
+     * @param check_tag 入库标志 0待审核 1复核不通过 2复核通过
+     * @param check_time 复核时间
+     * @param checker 复核人
+     * @param inbound_id 入库单编号 (随机生成)
+     * @return
      */
-    WarehouseInbound update(WarehouseInbound warehouseInbound);
+    int updateWarehousing(String check_tag,Date check_time,String checker,String inbound_id);
+
 
     /**
      * 通过主键删除数据

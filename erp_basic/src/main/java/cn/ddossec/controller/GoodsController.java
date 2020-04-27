@@ -82,4 +82,9 @@ public class GoodsController {
         }
     }
 
+    @GetMapping("queryGoodsById")
+    public Goods queryGoodsById(@RequestParam Integer product_id) {
+        return this.goodsService.getById(product_id);
+    }
+
 }

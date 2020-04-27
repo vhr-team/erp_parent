@@ -1,7 +1,6 @@
 package cn.ddossec.service;
 
 import cn.ddossec.domain.Basics_supper;
-import cn.ddossec.mapper.Basics_supperMapper;
 
 import java.util.List;
 
@@ -13,7 +12,7 @@ public interface Basics_supperService {
 
     public List<Basics_supper> findAll();
     /*查询所有供货商**/
-    public List<Basics_supper> findAllBasics_supper(Integer page,Integer rows);
+    public List<Basics_supper> findAllBasics_supper(Integer page, Integer rows);
     /*查询多少供应商*/
     public int sellCount();
     /*根据id删除**/

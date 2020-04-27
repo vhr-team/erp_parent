@@ -31,6 +31,8 @@ public interface UserService extends IService<User> {
 
     public List<User> queryUserByDeptId(Integer deptid);
 
+    List<User> loadAllUser();
+
     /**
      * 查询领导信息
      * @param mgr

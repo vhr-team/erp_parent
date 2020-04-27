@@ -20,7 +20,7 @@ public class Basics_supperServiceImpl implements Basics_supperService {
     }
 
     @Override
-    public List<Basics_supper> findAllBasics_supper(Integer page,Integer rows) {
+    public List<Basics_supper> findAllBasics_supper(Integer page, Integer rows) {
 
         page = (page-1)*rows;
         return basics_supperMapper.findAllBasics_supper(page,rows);

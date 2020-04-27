@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 /**
  * 订单表
@@ -104,6 +105,10 @@ public class OrderModel implements Serializable {
 
     @TableField(exist = false)
     private String checkerName;
+
+    // 订单明细
+    @TableField(exist = false)
+    private List<OrderDetail> details;
 
     private static final long serialVersionUID = 1L;
 

@@ -1,8 +1,8 @@
 package cn.ddossec.service.Impl;
 
 import cn.ddossec.common.DataGridView;
-import cn.ddossec.domain.Basics_supper;
 import cn.ddossec.domain.ProductType;
+import cn.ddossec.domain.Basics_supper;
 import cn.ddossec.mapper.Basics_supperMapper;
 import cn.ddossec.mapper.ProductTypeMapper;
 import cn.ddossec.service.ProductTypeService;
@@ -85,5 +85,15 @@ public class ProductTypeServiceImpl extends ServiceImpl<ProductTypeMapper, Produ
         QueryWrapper<ProductType> qw = new QueryWrapper<>();
         qw.eq(null != providerid, "supper_id", providerid);
         return this.productTypeMapper.selectList(qw);
+    }
+
+    /**
+     * 查询所有类别
+     *
+     * @return
+     */
+    @Override
+    public List<ProductType> loadAllProductType() {
+        return this.productTypeMapper.selectList(null);
     }
 }

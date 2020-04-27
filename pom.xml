@@ -15,6 +15,7 @@
         <module>erp_production</module>
         <module>erp_procurement</module>
         <module>erp_common</module>
+        <module>erp_sales</module>
     </modules>
 
     <packaging>pom</packaging>

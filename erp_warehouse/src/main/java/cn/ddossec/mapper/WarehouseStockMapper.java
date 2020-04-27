@@ -69,12 +69,13 @@ public interface WarehouseStockMapper {
     int updateSecuritySheet(@Param("check_tag") String check_tag, @Param("check_time") Date check_time, @Param("checker") String checker, @Param("product_id") String product_id);
 
     /**
-     * 修改数据
-     *
-     * @param warehouseStock 实例对象
-     * @return 影响行数
+     * 通过库存编号修改安全库存配置
+     * @param minAmount 库存报警下限
+     * @param maxAmount 库存报警上限
+     * @param maxCapacityAmount 最大存储量
+     * @param stockId 库存编号
      */
-    int update(WarehouseStock warehouseStock);
+    void updateAmount(@Param("minAmount") Integer minAmount,@Param("maxAmount") Integer maxAmount,@Param("maxCapacityAmount") Integer maxCapacityAmount,@Param("stockId") String stockId);
 
     /**
      * 通过主键删除数据

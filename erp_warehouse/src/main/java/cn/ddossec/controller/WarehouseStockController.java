@@ -54,17 +54,16 @@ public class WarehouseStockController {
      * @return
      */
     @ApiOperation(value = "新增安全库存配置单")
-    @GetMapping(value = "insertSecuritySheet/{warehouseStock}")
-    public Response insertSecuritySheet(@PathVariable(value = "warehouseStock") WarehouseStock warehouseStock){
+    @PostMapping(value = "insertSecuritySheet")
+    public Response insertSecuritySheet(WarehouseStock warehouseStock){
         //获取当前时间
         Date date = DateUtil.date();
         warehouseStock.setRegisterTime(date);
-
-        int count = warehouseStockServiceImpl.insertSecuritySheet(warehouseStock);
-        if (count>0){
-            //如果执行成功，返回  提交成功,等待审核!
+        try{
+            warehouseStockServiceImpl.insertSecuritySheet(warehouseStock);
             return new Response(true,"提交成功,等待审核!");
-        }else {
+        }catch (Exception e){
+            e.printStackTrace();
             return new Response(false,"提交失败,请重试!");
         }
     }
@@ -83,6 +82,7 @@ public class WarehouseStockController {
     }
 
     /**
+     * 库存安全配置单复核
      *
      * @param product_id 产品编号
      * @param checker 复核人
@@ -96,13 +96,38 @@ public class WarehouseStockController {
         String check_tag = "1";
         //获取当前时间为复核时间
         Date check_time = DateUtil.date();
-
-        int count = warehouseStockServiceImpl.updateSecuritySheet(check_tag,check_time,product_id,checker);
-        if (count>0){
-            //如果执行成功，返回
+        try{
+            warehouseStockServiceImpl.updateSecuritySheet(check_tag,check_time,product_id,checker);
             return new Response(true,"复核成功!");
-        }else {
+        }catch (Exception e){
+            e.printStackTrace();
             return new Response(false,"请稍后再试!");
+        }
+    }
+
+    /**
+     * 通过库存编号修改安全库存配置
+     * @param minAmount 库存报警下限
+     * @param maxAmount 库存报警上限
+     * @param maxCapacityAmount 最大存储量
+     * @param stockId 库存编号
+     */
+    @ApiOperation(value = "修改安全库存")
+    @RequestMapping("updateAmount")
+    public Response updateAmount(@RequestParam(value = "minAmount") Integer minAmount,
+                                 @RequestParam(value = "maxAmount") Integer maxAmount,
+                                 @RequestParam(value = "maxCapacityAmount") Integer maxCapacityAmount,
+                                 @RequestParam("stockId") String stockId){
+        try {
+            if (minAmount<=0||maxAmount<=50||maxCapacityAmount<500||maxAmount>maxCapacityAmount||minAmount>=maxCapacityAmount||minAmount>=maxAmount){
+                return new Response(false,"修改失败,请按照正常逻辑修改!");
+            }else {
+                warehouseStockServiceImpl.updateAmount(minAmount, maxAmount, maxCapacityAmount, stockId);
+                return new Response(true,"修改成功!");
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+            return new Response(true,"修改失败,请重试!");
         }
     }
 

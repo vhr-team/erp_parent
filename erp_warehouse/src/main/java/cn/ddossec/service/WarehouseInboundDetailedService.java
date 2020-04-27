@@ -29,12 +29,11 @@ public interface WarehouseInboundDetailedService {
     List<WarehouseInboundDetailed> queryAllByLimit(int offset, int limit);
 
     /**
-     * 新增数据
+     * 新增入库详细单
      *
      * @param warehouseInboundDetailed 实例对象
-     * @return 实例对象
      */
-    WarehouseInboundDetailed insert(WarehouseInboundDetailed warehouseInboundDetailed);
+    void insertWarehouseDetailed(WarehouseInboundDetailed warehouseInboundDetailed);
 
     /**
      * 修改数据

@@ -33,12 +33,11 @@ public interface WarehouseInboundMapper {
 
 
     /**
-     * 通过实体作为筛选条件查询
-     *
-     * @param warehouseInbound 实例对象
-     * @return 对象列表
+     * 根据入库单编号查询序号
+     * @param inboundId 入库单编号
+     * @return
      */
-    List<WarehouseInbound> queryAll(WarehouseInbound warehouseInbound);
+    int queryId(String inboundId);
 
     /**
      * 入库申请登记

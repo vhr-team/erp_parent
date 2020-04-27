@@ -1,5 +1,6 @@
 package cn.ddossec;
 
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
@@ -11,6 +12,8 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
  */
 // 启动类注解
 @SpringBootApplication
+// mapper接口的扫描
+@MapperScan(basePackages = {"cn.ddossec.mapper"})
 // 服务发现
 @EnableDiscoveryClient
 // 开启FeignAPI调用

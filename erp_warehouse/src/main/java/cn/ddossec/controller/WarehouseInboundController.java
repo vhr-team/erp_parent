@@ -86,6 +86,8 @@ public class WarehouseInboundController {
             if (count>0){
                 Integer ParentId = warehouseInboundServiceImpl.queryId(inboundId); //获取到父级编号
                 warehouseInboundDetailed.setParentId(ParentId); //父级编号
+            }else{
+                return new Response(false,"提交失败!");
             }
             warehouseInboundDetailedServiceImpl.insertWarehouseDetailed(warehouseInboundDetailed);
             return new Response(true,"提交成功,等待审核!");
@@ -111,7 +113,7 @@ public class WarehouseInboundController {
         Date check_time = DateUtil.date();
         try{
             warehouseInboundServiceImpl.updateWarehousing(check_tag,check_time,checker,inbound_id);
-            return new Response(true,"审核成功!");
+            return new Response(true,"审核完成!");
         }catch (Exception e){
             e.printStackTrace();
             return new Response(false,"请稍后再试!");

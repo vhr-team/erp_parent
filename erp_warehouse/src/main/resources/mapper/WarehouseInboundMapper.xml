@@ -31,10 +31,11 @@
     </select>
 
     <!--查询指定行数据-->
-    <select id="queryAllByLimit" resultMap="WarehouseInboundMap">
+    <select id="queryInboundLimit" resultMap="WarehouseInboundMap">
         select
-          id, inbound_id, storer, reason, amount_sum, cost_price_sum, gathered_amount_sum, pemark, register, register_time, checker, check_time, check_tag, attemper, attemper_time, store_tag
+          inbound_id,reason,register_time,amount_sum,cost_price_sum
         from erp.Warehouse_inbound
+        where check_tag = #{checkTag}
         limit #{offset}, #{limit}
     </select>
 

@@ -40,20 +40,20 @@ public class Production_process_design_sheetServiceImpl implements Production_pr
       Production_mdesign_procedure p1 = new Production_mdesign_procedure(prdouctId,"D002");
         production_process_design_sheetMapper.addProduction_process_design_sheet(production_process_design_sheet);
       production_mdesign_procedureMapper.updateProduction_mdesign_procedure(p1);
-        float zcbPrice ;
-        float zcbPrice1 =0;
+        float zcbPrice =0 ;
         for (Product_designprocess product_designprocessesLi : product_designprocessesLis) {
             product_designprocessesLi.setDesign_id(production_process_design_sheet.getDesign_idB());
             float sveePurchasingPrice  = (  product_designprocessesLi.getProcess_time_gs()*product_designprocessesLi.getProcess_time_cost());
-            zcbPrice = zcbPrice1+sveePurchasingPrice;
-            product_designprocessesLi.setProcess_subtotal(sveePurchasingPrice);
 
+            product_designprocessesLi.setProcess_subtotal(sveePurchasingPrice);
+            System.out.println("循环"+sveePurchasingPrice);
+            zcbPrice = zcbPrice+sveePurchasingPrice;
            product_designprocessService.insertProduction_modesign_procedure(product_designprocessesLi);
             System.out.println(product_designprocessesLi);
 
         }
-        System.out.println("总计"+zcbPrice1+"ID"+production_process_design_sheet.getId());
-        Product_auditTable table = new Product_auditTable(0,production_process_design_sheet.getId(),"完成","未审核",zcbPrice1);
+        System.out.println("总计"+zcbPrice+"ID"+production_process_design_sheet.getId());
+        Product_auditTable table = new Product_auditTable(0,production_process_design_sheet.getId(),"完成","未审核",zcbPrice);
         product_auditTableMapper.insertProduct_auditTable(table);
     }
 }

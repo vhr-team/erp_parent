@@ -1,9 +1,11 @@
 package cn.ddossec.service.Impl;
 
 import cn.ddossec.common.DataGridView;
+import cn.ddossec.domain.Goods;
 import cn.ddossec.domain.ProductType;
 import cn.ddossec.domain.Basics_supper;
 import cn.ddossec.mapper.Basics_supperMapper;
+import cn.ddossec.mapper.GoodsMapper;
 import cn.ddossec.mapper.ProductTypeMapper;
 import cn.ddossec.service.ProductTypeService;
 import cn.ddossec.vo.ProductTypeVo;
@@ -17,6 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -36,6 +39,9 @@ public class ProductTypeServiceImpl extends ServiceImpl<ProductTypeMapper, Produ
 
     @Autowired
     private Basics_supperMapper basics_supperMapper;
+
+    @Autowired
+    private GoodsMapper goodsMapper;
 
     @Override
     public DataGridView ProductType(ProductTypeVo productTypeVo) {
@@ -83,8 +89,21 @@ public class ProductTypeServiceImpl extends ServiceImpl<ProductTypeMapper, Produ
     @Override
     public Object queryProductTypeByProviderid(Integer providerid) {
         QueryWrapper<ProductType> qw = new QueryWrapper<>();
+        QueryWrapper<Goods> goodsQw = new QueryWrapper<>();
+
         qw.eq(null != providerid, "supper_id", providerid);
-        return this.productTypeMapper.selectList(qw);
+
+        List<ProductType> productTypeList = this.productTypeMapper.selectList(qw);
+
+        List<ProductType> newArr = new ArrayList<>();
+
+        for (ProductType type : productTypeList) {
+            goodsQw.eq(null != type.getProductTypeId(),"productTypeId",type.getProductTypeId());
+            Goods goods = this.goodsMapper.selectOne(goodsQw);
+            //type.set
+        }
+
+        return null;
     }
 
     /**

@@ -7,6 +7,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.*;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * @author 30315
@@ -42,6 +43,12 @@ public class ProductType implements Serializable {
 
     @TableField(exist = false)
     private String supperName;
+
+    /**
+     * 该商品类别下的所有商品
+     */
+    @TableField(exist = false)
+    private List<Goods> goodsList;
 
     private static final long serialVersionUID = 1L;
 

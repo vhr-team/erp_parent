@@ -39,13 +39,9 @@
         limit #{offset}, #{limit}
     </select>
 
-    <!--通过实体作为筛选条件查询-->
-    <select id="queryId" resultType="Integer">
-        select id from erp.Warehouse_inbound where inbound_id = #{inboundId}
-    </select>
 
     <!--新增入库申请登记-->
-    <insert id="insertWarehousing">
+    <insert id="insertWarehousing" useGeneratedKeys="true" keyProperty="id" parameterType="WarehouseInbound">
         insert into erp.Warehouse_inbound(inbound_id,storer,reason,amount_sum,cost_price_sum,register,register_time,pemark)
         values (#{inboundId}, #{storer}, #{reason}, #{amountSum}, #{costPriceSum}, #{register}, #{registerTime}, #{pemark})
     </insert>

@@ -33,15 +33,6 @@ public class WarehouseInboundServiceImpl implements WarehouseInboundService {
         return this.warehouseInboundMapper.queryById(id);
     }
 
-    /**
-     * 根据入库单编号查询序号
-     * @param inboundId 入库单编号
-     * @return
-     */
-    @Override
-    public int queryId(String inboundId) {
-        return this.warehouseInboundMapper.queryId(inboundId);
-    }
 
     /**
      * 查询入库单

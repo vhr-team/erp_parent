@@ -34,17 +34,10 @@ public interface WarehouseInboundMapper {
 
 
     /**
-     * 根据入库单编号查询序号
-     * @param inboundId 入库单编号
-     * @return
-     */
-    int queryId(String inboundId);
-
-    /**
      * 入库申请登记
      *
      * @param warehouseInbound 实例对象
-     * @return 影响行数
+     * @return 主键id
      */
     int insertWarehousing(WarehouseInbound warehouseInbound);
 

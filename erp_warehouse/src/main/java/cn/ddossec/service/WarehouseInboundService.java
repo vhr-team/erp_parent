@@ -22,12 +22,6 @@ public interface WarehouseInboundService {
      */
     WarehouseInbound queryById(Integer id);
 
-    /**
-     * 根据入库单编号查询序号
-     * @param inboundId 入库单编号
-     * @return
-     */
-    int queryId(String inboundId);
 
     /**
      * 查询入库单
@@ -43,7 +37,7 @@ public interface WarehouseInboundService {
      * 入库申请登记
      *
      * @param warehouseInbound 实例对象
-     * @return 实例对象
+     * @return 主键id
      */
     int insertWarehousing(WarehouseInbound warehouseInbound);
 

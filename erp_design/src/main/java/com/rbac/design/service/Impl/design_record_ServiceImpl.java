@@ -118,16 +118,6 @@ public class design_record_ServiceImpl implements design_record_Service {
     }
 
 
-    /**
-     * 商品上下架
-     *
-     * @param record
-     */
-    @Override
-    public void putawayrecord(design_record record) {
-        mapper.updateByPrimaryKeySelective(record);
-    }
-
     @Override
     public design_record selectById(design_record record) {
         return mapper.selectByPrimaryKey(record.getId());

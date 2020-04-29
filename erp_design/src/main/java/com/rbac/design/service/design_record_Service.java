@@ -41,11 +41,6 @@ public interface design_record_Service {
 
 
     /**
-     * 上下架商品
-     */
-    void putawayrecord(design_record record);
-
-    /**
      * 根据主键查询
      */
     design_record selectById(design_record record);

@@ -5,6 +5,7 @@ import cn.ddossec.common.Response;
 import cn.ddossec.domain.WarehouseStock;
 import cn.ddossec.service.WarehouseStockService;
 import cn.hutool.core.date.DateUtil;
+import cn.hutool.core.lang.ObjectId;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -56,6 +57,8 @@ public class WarehouseStockController {
     @ApiOperation(value = "新增安全库存配置单")
     @PostMapping(value = "insertSecuritySheet")
     public Response insertSecuritySheet(WarehouseStock warehouseStock){
+        //生成库存编号
+        warehouseStock.setStockId(ObjectId.next());
         //获取当前时间
         Date date = DateUtil.date();
         warehouseStock.setRegisterTime(date);
@@ -128,6 +131,22 @@ public class WarehouseStockController {
         }catch (Exception e){
             e.printStackTrace();
             return new Response(true,"修改失败,请重试!");
+        }
+    }
+
+    @ApiOperation(value = "根据产品编号删除数据")
+    @RequestMapping("deleteByProductId")
+    public Response deleteByProductId(String productId){
+        try {
+            int count = warehouseStockServiceImpl.deleteByProductId(productId);
+            if (count>0){
+                return new Response(true,"删除成功!");
+            }else {
+                return new Response(false,"删除失败,没有找到当前产品编号!");
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+            return new Response(false,"删除失败,请重试!");
         }
     }
 

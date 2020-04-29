@@ -78,11 +78,10 @@ public interface WarehouseStockMapper {
     void updateAmount(@Param("minAmount") Integer minAmount,@Param("maxAmount") Integer maxAmount,@Param("maxCapacityAmount") Integer maxCapacityAmount,@Param("stockId") String stockId);
 
     /**
-     * 通过主键删除数据
+     * 通过产品编号删除数据
      *
-     * @param id 主键
-     * @return 影响行数
+     * @param productId 产品编号
      */
-    int deleteById(Integer id);
+    int deleteByProductId(String productId);
 
 }

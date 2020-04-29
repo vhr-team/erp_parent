@@ -1,10 +1,16 @@
 package cn.ddossec.controller;
 
+import cn.ddossec.common.DataGridView;
+import cn.ddossec.domain.WarehouseInbound;
 import cn.ddossec.domain.WarehouseInboundDetailed;
 import cn.ddossec.service.WarehouseInboundDetailedService;
+import cn.ddossec.service.WarehouseInboundService;
+import io.swagger.annotations.ApiOperation;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 
 
 /**
@@ -22,6 +28,8 @@ public class WarehouseInboundDetailedController {
     @Autowired
     private WarehouseInboundDetailedService warehouseInboundDetailedServiceImpl;
 
+    @Autowired
+    private WarehouseInboundService warehouseInboundServiceImpl;
     /**
      * 通过主键查询单条数据
      *
@@ -31,6 +39,23 @@ public class WarehouseInboundDetailedController {
     @GetMapping("selectOne")
     public WarehouseInboundDetailed selectOne(Integer id) {
         return this.warehouseInboundDetailedServiceImpl.queryById(id);
+    }
+
+    /**
+     * 查询待入库调度数据
+     *
+     * @param checkTag 入库审核状态
+     * @param offset 查询起始位置
+     * @param limit 查询条数
+     * @return 对象列表
+     */
+    @ApiOperation(value = "查询待调度入库数据")
+    @RequestMapping("queryInboundLimit")
+    public DataGridView queryInboundLimit(@Param("checkTag") String checkTag,
+                                          @Param("offset") int offset,
+                                          @Param("limit") int limit){
+        List<WarehouseInbound> list = warehouseInboundServiceImpl.queryInboundLimit(checkTag, offset, limit);
+        return new DataGridView(list);
     }
 
 }

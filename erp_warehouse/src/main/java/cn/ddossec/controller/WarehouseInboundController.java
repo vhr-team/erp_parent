@@ -55,39 +55,43 @@ public class WarehouseInboundController {
                                       @Param("costPriceSum") Double costPriceSum,
                                       @Param("register") String register,
                                       @Param("pemark") String pemark,
-                                      @Param("productName") String productName,
-                                      @Param("productId") String productId,
-                                      @Param("productDescribe") String productDescribe,
-                                      @Param("amount") Integer amount,
-                                      @Param("amountUnit") String amountUnit,
-                                      @Param("costPrice") Double costPrice,
-                                      @Param("subtotal") Integer subtotal){
-        String inboundId = ObjectId.next(); //生成随机入库单编号
-        Date registerTime = DateUtil.date(); //登记时间
-        WarehouseInbound warehouseInbound = new WarehouseInbound();
-        warehouseInbound.setInboundId(inboundId); //入库单编号
-        warehouseInbound.setStorer(storer); //入库人
-        warehouseInbound.setReason(reason); //入库理由
-        warehouseInbound.setAmountSum(amountSum); //总件数
-        warehouseInbound.setCostPriceSum(costPriceSum); //总金额
-        warehouseInbound.setRegister(register); //登记人
-        warehouseInbound.setRegisterTime(registerTime); //登记时间
-        warehouseInbound.setPemark(pemark); //备注
-        WarehouseInboundDetailed warehouseInboundDetailed = new WarehouseInboundDetailed();
-        warehouseInboundDetailed.setProductName(productName); //产品名称
-        warehouseInboundDetailed.setProductId(productId); //产品编号
-        warehouseInboundDetailed.setProductDescribe(productDescribe); //描述
-        warehouseInboundDetailed.setAmount(amount); //数量
-        warehouseInboundDetailed.setAmountUnit(amountUnit); //单位
-        warehouseInboundDetailed.setCostPrice(costPrice); //单价
-        warehouseInboundDetailed.setSubtotal(subtotal); //小计
+                                      @Param("productName") String[] productName,
+                                      @Param("productId") String[] productId,
+                                      @Param("productDescribe") String[] productDescribe,
+                                      @Param("amount") Integer[] amount,
+                                      @Param("amountUnit") String[] amountUnit,
+                                      @Param("costPrice") Double[] costPrice,
+                                      @Param("subtotal") Integer[] subtotal){
         try{
-            int count = warehouseInboundServiceImpl.insertWarehousing(warehouseInbound);
-            if (count>0){
-                Integer ParentId = warehouseInboundServiceImpl.queryId(inboundId); //获取到父级编号
-                warehouseInboundDetailed.setParentId(ParentId); //父级编号
+            String inboundId = ObjectId.next(); //生成随机入库单编号
+            Date registerTime = DateUtil.date(); //登记时间
+            WarehouseInbound warehouseInbound = new WarehouseInbound();
+            warehouseInbound.setInboundId(inboundId); //入库单编号
+            warehouseInbound.setStorer(storer); //入库人
+            warehouseInbound.setReason(reason); //入库理由
+            warehouseInbound.setAmountSum(amountSum); //总件数
+            warehouseInbound.setCostPriceSum(costPriceSum); //总金额
+            warehouseInbound.setRegister(register); //登记人
+            warehouseInbound.setRegisterTime(registerTime); //登记时间
+            warehouseInbound.setPemark(pemark); //备注
+            int ParentId = warehouseInboundServiceImpl.insertWarehousing(warehouseInbound); //返回主键id
+            if (ParentId>0){
+                WarehouseInboundDetailed warehouseInboundDetailed = null;
+                for (int i = 0; i < productId.length ; i++) {
+                    warehouseInboundDetailed = new WarehouseInboundDetailed();
+                    warehouseInboundDetailed.setParentId(ParentId); //父级编号
+                    warehouseInboundDetailed.setProductName(productName[i]); //产品名称
+                    warehouseInboundDetailed.setProductId(productId[i]); //产品编号
+                    warehouseInboundDetailed.setProductDescribe(productDescribe[i]); //描述
+                    warehouseInboundDetailed.setAmount(amount[i]); //数量
+                    warehouseInboundDetailed.setAmountUnit(amountUnit[i]); //单位
+                    warehouseInboundDetailed.setCostPrice(costPrice[i]); //单价
+                    warehouseInboundDetailed.setSubtotal(subtotal[i]); //小计
+                    warehouseInboundDetailedServiceImpl.insertWarehouseDetailed(warehouseInboundDetailed);
+                }
+            }else{
+                return new Response(false,"提交失败!");
             }
-            warehouseInboundDetailedServiceImpl.insertWarehouseDetailed(warehouseInboundDetailed);
             return new Response(true,"提交成功,等待审核!");
         }catch (Exception e){
             e.printStackTrace();
@@ -111,7 +115,7 @@ public class WarehouseInboundController {
         Date check_time = DateUtil.date();
         try{
             warehouseInboundServiceImpl.updateWarehousing(check_tag,check_time,checker,inbound_id);
-            return new Response(true,"审核成功!");
+            return new Response(true,"审核完成!");
         }catch (Exception e){
             e.printStackTrace();
             return new Response(false,"请稍后再试!");

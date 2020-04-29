@@ -31,20 +31,17 @@
     </select>
 
     <!--查询指定行数据-->
-    <select id="queryAllByLimit" resultMap="WarehouseInboundMap">
+    <select id="queryInboundLimit" resultMap="WarehouseInboundMap">
         select
-          id, inbound_id, storer, reason, amount_sum, cost_price_sum, gathered_amount_sum, pemark, register, register_time, checker, check_time, check_tag, attemper, attemper_time, store_tag
+          inbound_id,reason,register_time,amount_sum,cost_price_sum
         from erp.Warehouse_inbound
+        where check_tag = #{checkTag}
         limit #{offset}, #{limit}
     </select>
 
-    <!--通过实体作为筛选条件查询-->
-    <select id="queryId" resultType="Integer">
-        select id from erp.Warehouse_inbound where inbound_id = #{inboundId}
-    </select>
 
     <!--新增入库申请登记-->
-    <insert id="insertWarehousing">
+    <insert id="insertWarehousing" useGeneratedKeys="true" keyProperty="id" parameterType="WarehouseInbound">
         insert into erp.Warehouse_inbound(inbound_id,storer,reason,amount_sum,cost_price_sum,register,register_time,pemark)
         values (#{inboundId}, #{storer}, #{reason}, #{amountSum}, #{costPriceSum}, #{register}, #{registerTime}, #{pemark})
     </insert>

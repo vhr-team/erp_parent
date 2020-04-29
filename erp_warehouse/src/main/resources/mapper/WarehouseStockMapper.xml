@@ -106,8 +106,8 @@
 
     <!--新增安全库存配置单-->
     <insert id="insertSecuritySheet">
-        insert into erp.Warehouse_stock(product_name,product_id,min_amount,max_amount,register,register_time,config,max_capacity_amount)
-        values (#{productName}, #{productId}, #{minAmount}, #{maxAmount}, #{register}, #{registerTime}, #{config}, #{maxCapacityAmount})
+        insert into erp.Warehouse_stock(stock_id,product_name,product_id,min_amount,max_amount,register,register_time,config,max_capacity_amount)
+        values (#{stockId}, #{productName}, #{productId}, #{minAmount}, #{maxAmount}, #{register}, #{registerTime}, #{config}, #{maxCapacityAmount})
     </insert>
 
     <!--查询库存安全配置单-->
@@ -142,8 +142,8 @@
     </update>
 
     <!--通过主键删除-->
-    <delete id="deleteById">
-        delete from erp.Warehouse_stock where id = #{id}
+    <delete id="deleteByProductId">
+        delete from erp.Warehouse_stock where product_id = #{productId}
     </delete>
 
 </mapper>

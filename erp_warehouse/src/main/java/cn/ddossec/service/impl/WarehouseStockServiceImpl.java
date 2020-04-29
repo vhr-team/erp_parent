@@ -91,13 +91,12 @@ public class WarehouseStockServiceImpl implements WarehouseStockService {
     }
 
     /**
-     * 通过主键删除数据
+     * 通过产品编号删除数据
      *
-     * @param id 主键
-     * @return 是否成功
+     * @param productId 产品编号
      */
     @Override
-    public boolean deleteById(Integer id) {
-        return this.warehouseStockMapper.deleteById(id) > 0;
+    public int deleteByProductId(String productId){
+        return warehouseStockMapper.deleteByProductId(productId);
     }
 }

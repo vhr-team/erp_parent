@@ -3,39 +3,47 @@ package cn.ddosec.design.pojo;
 import java.io.Serializable;
 
 public class product_material_archives implements Serializable {
-    private static final long serialVersionUID = 1L;
     /**
      * 序号
      */
     private Integer id;
+
     /**
      * 物料id
      */
     private String materialid;
+
     /**
      * 产品档案ID
      */
     private String productid;
+
     /**
      * 物料名称
      */
     private String materialname;
+
     /**
      * 所需数量
      */
     private Integer materialnum;
+
     /**
      * 单位
      */
     private String materialunit;
+
     /**
      * 描述
      */
     private String materialremark;
+
     /**
      * 审核信息
      */
     private String checkremark;
+
+    private static final long serialVersionUID = 1L;
 
     public Integer getId() {
         return id;

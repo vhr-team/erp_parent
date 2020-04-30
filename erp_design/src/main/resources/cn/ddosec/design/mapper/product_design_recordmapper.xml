@@ -9,7 +9,6 @@
         <result column="product_class" property="productClass" jdbcType="VARCHAR"/>
         <result column="warranty" property="warranty" jdbcType="VARCHAR"/>
         <result column="list_price" property="listPrice" jdbcType="DOUBLE"/>
-        <result column="cost_price" property="costPrice" jdbcType="DOUBLE"/>
         <result column="real_cost_price" property="realCostPrice" jdbcType="DOUBLE"/>
         <result column="amount_unit" property="amountUnit" jdbcType="VARCHAR"/>
         <result column="product_describe" property="productDescribe" jdbcType="VARCHAR"/>
@@ -25,7 +24,7 @@
         <result column="price_change_tag" property="priceChangeTag" jdbcType="VARCHAR"/>
         <result column="file_change_amount" property="fileChangeAmount" jdbcType="INTEGER"/>
         <result column="delete_tag" property="deleteTag" jdbcType="VARCHAR"/>
-        <result column="materiel_archives_id" property="materielArchivesId" jdbcType="INTEGER"/>
+        <result column="materiel_archives_id" property="materielArchivesId" jdbcType="VARCHAR"/>
     </resultMap>
     <sql id="Example_Where_Clause">
         <where>
@@ -90,9 +89,9 @@
     <sql id="Base_Column_List">
         <if test="fields == null">
             id, product_id, product_name, factory_name, product_class, warranty, list_price,
-            cost_price, real_cost_price, amount_unit, product_describe, responsible_person, register,
-            register_time, checker, check_time, check_tag, changer, change_time, change_tag,
-            price_change_tag, file_change_amount, delete_tag, materiel_archives_id
+            real_cost_price, amount_unit, product_describe, responsible_person, register, register_time,
+            checker, check_time, check_tag, changer, change_time, change_tag, price_change_tag,
+            file_change_amount, delete_tag, materiel_archives_id
         </if>
         <if test="fields != null">
             ${fields}
@@ -115,7 +114,7 @@
     </select>
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
         select
-        id,product_id,product_name,factory_name,product_class,warranty,list_price,cost_price,real_cost_price,amount_unit,product_describe,responsible_person,register,register_time,checker,check_time,check_tag,changer,change_time,change_tag,price_change_tag,file_change_amount,delete_tag,materiel_archives_id
+        id,product_id,product_name,factory_name,product_class,warranty,list_price,real_cost_price,amount_unit,product_describe,responsible_person,register,register_time,checker,check_time,check_tag,changer,change_time,change_tag,price_change_tag,file_change_amount,delete_tag,materiel_archives_id
         from product_design_record
         where id = #{id,jdbcType=INTEGER}
     </select>
@@ -132,22 +131,20 @@
     <insert id="insert" parameterType="cn.ddosec.design.pojo.product_design_record">
         insert into product_design_record (id, product_id, product_name,
         factory_name, product_class, warranty,
-        list_price, cost_price, real_cost_price,
-        amount_unit, product_describe, responsible_person,
-        register, register_time, checker,
-        check_time, check_tag, changer,
-        change_time, change_tag, price_change_tag,
-        file_change_amount, delete_tag, materiel_archives_id
-        )
+        list_price, real_cost_price, amount_unit,
+        product_describe, responsible_person, register,
+        register_time, checker, check_time,
+        check_tag, changer, change_time,
+        change_tag, price_change_tag, file_change_amount,
+        delete_tag, materiel_archives_id)
         values (#{id,jdbcType=INTEGER}, #{productId,jdbcType=VARCHAR}, #{productName,jdbcType=VARCHAR},
         #{factoryName,jdbcType=VARCHAR}, #{productClass,jdbcType=VARCHAR}, #{warranty,jdbcType=VARCHAR},
-        #{listPrice,jdbcType=DOUBLE}, #{costPrice,jdbcType=DOUBLE}, #{realCostPrice,jdbcType=DOUBLE},
-        #{amountUnit,jdbcType=VARCHAR}, #{productDescribe,jdbcType=VARCHAR}, #{responsiblePerson,jdbcType=VARCHAR},
-        #{register,jdbcType=VARCHAR}, #{registerTime,jdbcType=VARCHAR}, #{checker,jdbcType=VARCHAR},
-        #{checkTime,jdbcType=VARCHAR}, #{checkTag,jdbcType=VARCHAR}, #{changer,jdbcType=VARCHAR},
-        #{changeTime,jdbcType=VARCHAR}, #{changeTag,jdbcType=VARCHAR}, #{priceChangeTag,jdbcType=VARCHAR},
-        #{fileChangeAmount,jdbcType=INTEGER}, #{deleteTag,jdbcType=VARCHAR}, #{materielArchivesId,jdbcType=INTEGER}
-        )
+        #{listPrice,jdbcType=DOUBLE}, #{realCostPrice,jdbcType=DOUBLE}, #{amountUnit,jdbcType=VARCHAR},
+        #{productDescribe,jdbcType=VARCHAR}, #{responsiblePerson,jdbcType=VARCHAR}, #{register,jdbcType=VARCHAR},
+        #{registerTime,jdbcType=VARCHAR}, #{checker,jdbcType=VARCHAR}, #{checkTime,jdbcType=VARCHAR},
+        #{checkTag,jdbcType=VARCHAR}, #{changer,jdbcType=VARCHAR}, #{changeTime,jdbcType=VARCHAR},
+        #{changeTag,jdbcType=VARCHAR}, #{priceChangeTag,jdbcType=VARCHAR}, #{fileChangeAmount,jdbcType=INTEGER},
+        #{deleteTag,jdbcType=VARCHAR}, #{materielArchivesId,jdbcType=VARCHAR})
     </insert>
     <insert id="insertSelective" parameterType="cn.ddosec.design.pojo.product_design_record">
         insert into product_design_record
@@ -172,9 +169,6 @@
             </if>
             <if test="listPrice != null">
                 list_price,
-            </if>
-            <if test="costPrice != null">
-                cost_price,
             </if>
             <if test="realCostPrice != null">
                 real_cost_price,
@@ -247,9 +241,6 @@
             <if test="listPrice != null">
                 #{listPrice,jdbcType=DOUBLE},
             </if>
-            <if test="costPrice != null">
-                #{costPrice,jdbcType=DOUBLE},
-            </if>
             <if test="realCostPrice != null">
                 #{realCostPrice,jdbcType=DOUBLE},
             </if>
@@ -296,7 +287,7 @@
                 #{deleteTag,jdbcType=VARCHAR},
             </if>
             <if test="materielArchivesId != null">
-                #{materielArchivesId,jdbcType=INTEGER},
+                #{materielArchivesId,jdbcType=VARCHAR},
             </if>
         </trim>
     </insert>
@@ -330,9 +321,6 @@
             </if>
             <if test="record.listPrice != null">
                 list_price = #{record.listPrice,jdbcType=DOUBLE},
-            </if>
-            <if test="record.costPrice != null">
-                cost_price = #{record.costPrice,jdbcType=DOUBLE},
             </if>
             <if test="record.realCostPrice != null">
                 real_cost_price = #{record.realCostPrice,jdbcType=DOUBLE},
@@ -380,7 +368,7 @@
                 delete_tag = #{record.deleteTag,jdbcType=VARCHAR},
             </if>
             <if test="record.materielArchivesId != null">
-                materiel_archives_id = #{record.materielArchivesId,jdbcType=INTEGER},
+                materiel_archives_id = #{record.materielArchivesId,jdbcType=VARCHAR},
             </if>
         </set>
         <if test="_parameter != null">
@@ -396,7 +384,6 @@
         product_class = #{record.productClass,jdbcType=VARCHAR},
         warranty = #{record.warranty,jdbcType=VARCHAR},
         list_price = #{record.listPrice,jdbcType=DOUBLE},
-        cost_price = #{record.costPrice,jdbcType=DOUBLE},
         real_cost_price = #{record.realCostPrice,jdbcType=DOUBLE},
         amount_unit = #{record.amountUnit,jdbcType=VARCHAR},
         product_describe = #{record.productDescribe,jdbcType=VARCHAR},
@@ -412,7 +399,7 @@
         price_change_tag = #{record.priceChangeTag,jdbcType=VARCHAR},
         file_change_amount = #{record.fileChangeAmount,jdbcType=INTEGER},
         delete_tag = #{record.deleteTag,jdbcType=VARCHAR},
-        materiel_archives_id = #{record.materielArchivesId,jdbcType=INTEGER}
+        materiel_archives_id = #{record.materielArchivesId,jdbcType=VARCHAR}
         <if test="_parameter != null">
             <include refid="Update_By_Example_Where_Clause"/>
         </if>
@@ -437,9 +424,6 @@
             </if>
             <if test="listPrice != null">
                 list_price = #{listPrice,jdbcType=DOUBLE},
-            </if>
-            <if test="costPrice != null">
-                cost_price = #{costPrice,jdbcType=DOUBLE},
             </if>
             <if test="realCostPrice != null">
                 real_cost_price = #{realCostPrice,jdbcType=DOUBLE},
@@ -487,7 +471,7 @@
                 delete_tag = #{deleteTag,jdbcType=VARCHAR},
             </if>
             <if test="materielArchivesId != null">
-                materiel_archives_id = #{materielArchivesId,jdbcType=INTEGER},
+                materiel_archives_id = #{materielArchivesId,jdbcType=VARCHAR},
             </if>
         </set>
         where id = #{id,jdbcType=INTEGER}
@@ -500,7 +484,6 @@
         product_class = #{productClass,jdbcType=VARCHAR},
         warranty = #{warranty,jdbcType=VARCHAR},
         list_price = #{listPrice,jdbcType=DOUBLE},
-        cost_price = #{costPrice,jdbcType=DOUBLE},
         real_cost_price = #{realCostPrice,jdbcType=DOUBLE},
         amount_unit = #{amountUnit,jdbcType=VARCHAR},
         product_describe = #{productDescribe,jdbcType=VARCHAR},
@@ -516,7 +499,7 @@
         price_change_tag = #{priceChangeTag,jdbcType=VARCHAR},
         file_change_amount = #{fileChangeAmount,jdbcType=INTEGER},
         delete_tag = #{deleteTag,jdbcType=VARCHAR},
-        materiel_archives_id = #{materielArchivesId,jdbcType=INTEGER}
+        materiel_archives_id = #{materielArchivesId,jdbcType=VARCHAR}
         where id = #{id,jdbcType=INTEGER}
     </update>
 </mapper>

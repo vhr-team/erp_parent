@@ -16,20 +16,20 @@ public class product_design_recordQuery {
         oredCriteria = new ArrayList<Criteria>();
     }
 
-    public String getOrderByClause() {
-        return orderByClause;
-    }
-
     public void setOrderByClause(String orderByClause) {
         this.orderByClause = orderByClause;
     }
 
-    public boolean isDistinct() {
-        return distinct;
+    public String getOrderByClause() {
+        return orderByClause;
     }
 
     public void setDistinct(boolean distinct) {
         this.distinct = distinct;
+    }
+
+    public boolean isDistinct() {
+        return distinct;
     }
 
     public List<Criteria> getOredCriteria() {
@@ -581,66 +581,6 @@ public class product_design_recordQuery {
 
         public Criteria andListPriceNotBetween(Double value1, Double value2) {
             addCriterion("list_price not between", value1, value2, "listPrice");
-            return (Criteria) this;
-        }
-
-        public Criteria andCostPriceIsNull() {
-            addCriterion("cost_price is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andCostPriceIsNotNull() {
-            addCriterion("cost_price is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andCostPriceEqualTo(Double value) {
-            addCriterion("cost_price =", value, "costPrice");
-            return (Criteria) this;
-        }
-
-        public Criteria andCostPriceNotEqualTo(Double value) {
-            addCriterion("cost_price <>", value, "costPrice");
-            return (Criteria) this;
-        }
-
-        public Criteria andCostPriceGreaterThan(Double value) {
-            addCriterion("cost_price >", value, "costPrice");
-            return (Criteria) this;
-        }
-
-        public Criteria andCostPriceGreaterThanOrEqualTo(Double value) {
-            addCriterion("cost_price >=", value, "costPrice");
-            return (Criteria) this;
-        }
-
-        public Criteria andCostPriceLessThan(Double value) {
-            addCriterion("cost_price <", value, "costPrice");
-            return (Criteria) this;
-        }
-
-        public Criteria andCostPriceLessThanOrEqualTo(Double value) {
-            addCriterion("cost_price <=", value, "costPrice");
-            return (Criteria) this;
-        }
-
-        public Criteria andCostPriceIn(List<Double> values) {
-            addCriterion("cost_price in", values, "costPrice");
-            return (Criteria) this;
-        }
-
-        public Criteria andCostPriceNotIn(List<Double> values) {
-            addCriterion("cost_price not in", values, "costPrice");
-            return (Criteria) this;
-        }
-
-        public Criteria andCostPriceBetween(Double value1, Double value2) {
-            addCriterion("cost_price between", value1, value2, "costPrice");
-            return (Criteria) this;
-        }
-
-        public Criteria andCostPriceNotBetween(Double value1, Double value2) {
-            addCriterion("cost_price not between", value1, value2, "costPrice");
             return (Criteria) this;
         }
 
@@ -1684,52 +1624,62 @@ public class product_design_recordQuery {
             return (Criteria) this;
         }
 
-        public Criteria andMaterielArchivesIdEqualTo(Integer value) {
+        public Criteria andMaterielArchivesIdEqualTo(String value) {
             addCriterion("materiel_archives_id =", value, "materielArchivesId");
             return (Criteria) this;
         }
 
-        public Criteria andMaterielArchivesIdNotEqualTo(Integer value) {
+        public Criteria andMaterielArchivesIdNotEqualTo(String value) {
             addCriterion("materiel_archives_id <>", value, "materielArchivesId");
             return (Criteria) this;
         }
 
-        public Criteria andMaterielArchivesIdGreaterThan(Integer value) {
+        public Criteria andMaterielArchivesIdGreaterThan(String value) {
             addCriterion("materiel_archives_id >", value, "materielArchivesId");
             return (Criteria) this;
         }
 
-        public Criteria andMaterielArchivesIdGreaterThanOrEqualTo(Integer value) {
+        public Criteria andMaterielArchivesIdGreaterThanOrEqualTo(String value) {
             addCriterion("materiel_archives_id >=", value, "materielArchivesId");
             return (Criteria) this;
         }
 
-        public Criteria andMaterielArchivesIdLessThan(Integer value) {
+        public Criteria andMaterielArchivesIdLessThan(String value) {
             addCriterion("materiel_archives_id <", value, "materielArchivesId");
             return (Criteria) this;
         }
 
-        public Criteria andMaterielArchivesIdLessThanOrEqualTo(Integer value) {
+        public Criteria andMaterielArchivesIdLessThanOrEqualTo(String value) {
             addCriterion("materiel_archives_id <=", value, "materielArchivesId");
             return (Criteria) this;
         }
 
-        public Criteria andMaterielArchivesIdIn(List<Integer> values) {
+        public Criteria andMaterielArchivesIdLike(String value) {
+            addCriterion("materiel_archives_id like", value, "materielArchivesId");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaterielArchivesIdNotLike(String value) {
+            addCriterion("materiel_archives_id not like", value, "materielArchivesId");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaterielArchivesIdIn(List<String> values) {
             addCriterion("materiel_archives_id in", values, "materielArchivesId");
             return (Criteria) this;
         }
 
-        public Criteria andMaterielArchivesIdNotIn(List<Integer> values) {
+        public Criteria andMaterielArchivesIdNotIn(List<String> values) {
             addCriterion("materiel_archives_id not in", values, "materielArchivesId");
             return (Criteria) this;
         }
 
-        public Criteria andMaterielArchivesIdBetween(Integer value1, Integer value2) {
+        public Criteria andMaterielArchivesIdBetween(String value1, String value2) {
             addCriterion("materiel_archives_id between", value1, value2, "materielArchivesId");
             return (Criteria) this;
         }
 
-        public Criteria andMaterielArchivesIdNotBetween(Integer value1, Integer value2) {
+        public Criteria andMaterielArchivesIdNotBetween(String value1, String value2) {
             addCriterion("materiel_archives_id not between", value1, value2, "materielArchivesId");
             return (Criteria) this;
         }
@@ -1758,6 +1708,38 @@ public class product_design_recordQuery {
         private boolean listValue;
 
         private String typeHandler;
+
+        public String getCondition() {
+            return condition;
+        }
+
+        public Object getValue() {
+            return value;
+        }
+
+        public Object getSecondValue() {
+            return secondValue;
+        }
+
+        public boolean isNoValue() {
+            return noValue;
+        }
+
+        public boolean isSingleValue() {
+            return singleValue;
+        }
+
+        public boolean isBetweenValue() {
+            return betweenValue;
+        }
+
+        public boolean isListValue() {
+            return listValue;
+        }
+
+        public String getTypeHandler() {
+            return typeHandler;
+        }
 
         protected Criterion(String condition) {
             super();
@@ -1793,38 +1775,6 @@ public class product_design_recordQuery {
 
         protected Criterion(String condition, Object value, Object secondValue) {
             this(condition, value, secondValue, null);
-        }
-
-        public String getCondition() {
-            return condition;
-        }
-
-        public Object getValue() {
-            return value;
-        }
-
-        public Object getSecondValue() {
-            return secondValue;
-        }
-
-        public boolean isNoValue() {
-            return noValue;
-        }
-
-        public boolean isSingleValue() {
-            return singleValue;
-        }
-
-        public boolean isBetweenValue() {
-            return betweenValue;
-        }
-
-        public boolean isListValue() {
-            return listValue;
-        }
-
-        public String getTypeHandler() {
-            return typeHandler;
         }
     }
 }

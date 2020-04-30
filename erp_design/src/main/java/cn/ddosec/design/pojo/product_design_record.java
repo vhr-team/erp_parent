@@ -3,103 +3,121 @@ package cn.ddosec.design.pojo;
 import java.io.Serializable;
 
 public class product_design_record implements Serializable {
-    private static final long serialVersionUID = 1L;
     /**
      * 序号
      */
     private Integer id;
+
     /**
      * 产品编号
      */
     private String productId;
+
     /**
      * 产品名称
      */
     private String productName;
+
     /**
      * 制造商
      */
     private String factoryName;
+
     /**
      * 档次级别(高档/中档/低档)
      */
     private String productClass;
+
     /**
      * 保修期
      */
     private String warranty;
+
     /**
      * 市场单价
      */
     private Double listPrice;
-    /**
-     * 计划成本单价
-     */
-    private Double costPrice;
+
     /**
      * 成本单价
      */
     private Double realCostPrice;
+
     /**
      * 单位
      */
     private String amountUnit;
+
     /**
      * 产品描述
      */
     private String productDescribe;
+
     /**
      * 产品经理
      */
     private String responsiblePerson;
+
     /**
      * 登记人
      */
     private String register;
+
     /**
      * 建档时间
      */
     private String registerTime;
+
     /**
      * 复核人
      */
     private String checker;
+
     /**
      * 复核时间
      */
     private String checkTime;
+
     /**
      * 审核标志(等待审核/审核通过/审核不通过)
      */
     private String checkTag;
+
     /**
      * 变更人
      */
     private String changer;
+
     /**
      * 变更时间
      */
     private String changeTime;
+
     /**
      * 档案变更标志(未变更/已变更)
      */
     private String changeTag;
+
     /**
      * 价格变更标志(未变更/已变更)
      */
     private String priceChangeTag;
+
     /**
      * 档案变更累计
      */
     private Integer fileChangeAmount;
+
     /**
      * 产品删除标志(未删除/已删除)
      */
     private String deleteTag;
+
+    private static final long serialVersionUID = 1L;
     /**
      * 物料编号
      */
-    private Integer materielArchivesId;
+    private String materielArchivesId;
 
     public Integer getId() {
         return id;
@@ -155,14 +173,6 @@ public class product_design_record implements Serializable {
 
     public void setListPrice(Double listPrice) {
         this.listPrice = listPrice;
-    }
-
-    public Double getCostPrice() {
-        return costPrice;
-    }
-
-    public void setCostPrice(Double costPrice) {
-        this.costPrice = costPrice;
     }
 
     public Double getRealCostPrice() {
@@ -285,12 +295,12 @@ public class product_design_record implements Serializable {
         this.deleteTag = deleteTag == null ? null : deleteTag.trim();
     }
 
-    public Integer getMaterielArchivesId() {
+    public String getMaterielArchivesId() {
         return materielArchivesId;
     }
 
-    public void setMaterielArchivesId(Integer materielArchivesId) {
-        this.materielArchivesId = materielArchivesId;
+    public void setMaterielArchivesId(String materielArchivesId) {
+        this.materielArchivesId = materielArchivesId == null ? null : materielArchivesId.trim();
     }
 
     @Override
@@ -306,7 +316,6 @@ public class product_design_record implements Serializable {
         sb.append(", productClass=").append(productClass);
         sb.append(", warranty=").append(warranty);
         sb.append(", listPrice=").append(listPrice);
-        sb.append(", costPrice=").append(costPrice);
         sb.append(", realCostPrice=").append(realCostPrice);
         sb.append(", amountUnit=").append(amountUnit);
         sb.append(", productDescribe=").append(productDescribe);
@@ -347,7 +356,6 @@ public class product_design_record implements Serializable {
                 && (this.getProductClass() == null ? other.getProductClass() == null : this.getProductClass().equals(other.getProductClass()))
                 && (this.getWarranty() == null ? other.getWarranty() == null : this.getWarranty().equals(other.getWarranty()))
                 && (this.getListPrice() == null ? other.getListPrice() == null : this.getListPrice().equals(other.getListPrice()))
-                && (this.getCostPrice() == null ? other.getCostPrice() == null : this.getCostPrice().equals(other.getCostPrice()))
                 && (this.getRealCostPrice() == null ? other.getRealCostPrice() == null : this.getRealCostPrice().equals(other.getRealCostPrice()))
                 && (this.getAmountUnit() == null ? other.getAmountUnit() == null : this.getAmountUnit().equals(other.getAmountUnit()))
                 && (this.getProductDescribe() == null ? other.getProductDescribe() == null : this.getProductDescribe().equals(other.getProductDescribe()))
@@ -377,7 +385,6 @@ public class product_design_record implements Serializable {
         result = prime * result + ((getProductClass() == null) ? 0 : getProductClass().hashCode());
         result = prime * result + ((getWarranty() == null) ? 0 : getWarranty().hashCode());
         result = prime * result + ((getListPrice() == null) ? 0 : getListPrice().hashCode());
-        result = prime * result + ((getCostPrice() == null) ? 0 : getCostPrice().hashCode());
         result = prime * result + ((getRealCostPrice() == null) ? 0 : getRealCostPrice().hashCode());
         result = prime * result + ((getAmountUnit() == null) ? 0 : getAmountUnit().hashCode());
         result = prime * result + ((getProductDescribe() == null) ? 0 : getProductDescribe().hashCode());

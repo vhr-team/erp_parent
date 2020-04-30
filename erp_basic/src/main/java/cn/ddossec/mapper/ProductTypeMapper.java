@@ -11,5 +11,4 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * @date 2020-04-2310:49
  */
 public interface ProductTypeMapper extends BaseMapper<ProductType> {
-    ProductType checkProductType(ProductType productType);
 }

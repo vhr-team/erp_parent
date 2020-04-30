@@ -23,27 +23,21 @@ public interface WarehouseInboundMapper {
     WarehouseInbound queryById(Integer id);
 
     /**
-     * 查询指定行数据
+     * 查询入库单
      *
+     * @param checkTag 入库审核状态
      * @param offset 查询起始位置
      * @param limit 查询条数
      * @return 对象列表
      */
-    List<WarehouseInbound> queryAllByLimit(@Param("offset") int offset, @Param("limit") int limit);
+    List<WarehouseInbound> queryInboundLimit(@Param("checkTag") String checkTag, @Param("offset") int offset, @Param("limit") int limit);
 
-
-    /**
-     * 根据入库单编号查询序号
-     * @param inboundId 入库单编号
-     * @return
-     */
-    int queryId(String inboundId);
 
     /**
      * 入库申请登记
      *
      * @param warehouseInbound 实例对象
-     * @return 影响行数
+     * @return 主键id
      */
     int insertWarehousing(WarehouseInbound warehouseInbound);
 

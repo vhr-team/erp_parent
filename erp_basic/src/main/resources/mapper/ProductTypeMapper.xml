@@ -13,7 +13,4 @@
         product_type_id, supper_id, `name`
     </sql>
 
-    <select id="checkProductType" resultType="cn.ddossec.domain.ProductType" parameterType="cn.ddossec.domain.ProductType">
-        select * from bus_product_type where supper_id = #{supperId} and `name` = #{name}
-    </select>
 </mapper>

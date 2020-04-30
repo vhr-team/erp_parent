@@ -33,26 +33,18 @@ public class WarehouseInboundServiceImpl implements WarehouseInboundService {
         return this.warehouseInboundMapper.queryById(id);
     }
 
-    /**
-     * 根据入库单编号查询序号
-     * @param inboundId 入库单编号
-     * @return
-     */
-    @Override
-    public int queryId(String inboundId) {
-        return this.warehouseInboundMapper.queryId(inboundId);
-    }
 
     /**
-     * 查询多条数据
+     * 查询入库单
      *
+     * @param checkTag 入库审核状态
      * @param offset 查询起始位置
      * @param limit 查询条数
      * @return 对象列表
      */
     @Override
-    public List<WarehouseInbound> queryAllByLimit(int offset, int limit) {
-        return this.warehouseInboundMapper.queryAllByLimit(offset, limit);
+    public List<WarehouseInbound> queryInboundLimit(String checkTag,int offset,int limit){
+        return this.warehouseInboundMapper.queryInboundLimit(checkTag, offset, limit);
     }
 
     /**

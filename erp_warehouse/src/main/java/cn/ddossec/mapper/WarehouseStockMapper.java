@@ -1,6 +1,7 @@
 package cn.ddossec.mapper;
 
 import cn.ddossec.domain.WarehouseStock;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.Date;
@@ -12,7 +13,7 @@ import java.util.List;
  * @author 谷辉
  * @since 2020-04-19 15:05:40
  */
-public interface WarehouseStockMapper {
+public interface WarehouseStockMapper extends BaseMapper<WarehouseStock> {
 
     /**
      * 通过ID查询单条数据
@@ -49,13 +50,6 @@ public interface WarehouseStockMapper {
      */
     int insertSecuritySheet(WarehouseStock warehouseStock);
 
-    /**
-     *查询安全库存配置
-     *
-     * @param check_tag 复核标志
-     * @return 安全库存数据
-     */
-    List<WarehouseStock> querySecuritySheet(String check_tag);
 
     /**
      * 复核成功
@@ -73,16 +67,15 @@ public interface WarehouseStockMapper {
      * @param minAmount 库存报警下限
      * @param maxAmount 库存报警上限
      * @param maxCapacityAmount 最大存储量
-     * @param stockId 库存编号
+     * @param Id 序号
      */
-    void updateAmount(@Param("minAmount") Integer minAmount,@Param("maxAmount") Integer maxAmount,@Param("maxCapacityAmount") Integer maxCapacityAmount,@Param("stockId") String stockId);
+    void updateAmount(@Param("minAmount") Integer minAmount,@Param("maxAmount") Integer maxAmount,@Param("maxCapacityAmount") Integer maxCapacityAmount,@Param("Id") Integer Id);
 
     /**
-     * 通过主键删除数据
+     * 通过序号删除数据
      *
-     * @param id 主键
-     * @return 影响行数
+     * @param id 序号
      */
-    int deleteById(Integer id);
+    int deleteByProductId(Integer id);
 
 }

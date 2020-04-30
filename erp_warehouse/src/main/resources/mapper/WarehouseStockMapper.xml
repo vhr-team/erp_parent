@@ -106,17 +106,9 @@
 
     <!--新增安全库存配置单-->
     <insert id="insertSecuritySheet">
-        insert into erp.Warehouse_stock(product_name,product_id,min_amount,max_amount,register,register_time,config,max_capacity_amount)
-        values (#{productName}, #{productId}, #{minAmount}, #{maxAmount}, #{register}, #{registerTime}, #{config}, #{maxCapacityAmount})
+        insert into erp.Warehouse_stock(stock_id,product_name,product_id,min_amount,max_amount,register,register_time,config,max_capacity_amount)
+        values (#{stockId}, #{productName}, #{productId}, #{minAmount}, #{maxAmount}, #{register}, #{registerTime}, #{config}, #{maxCapacityAmount})
     </insert>
-
-    <!--查询库存安全配置单-->
-    <select id="querySecuritySheet" resultMap="WarehouseStockMap">
-        select
-           product_name,product_id,min_amount,max_amount,register,register_time,config,max_capacity_amount
-        from erp.Warehouse_stock
-        where check_tag = #{check_tag}
-    </select>
 
     <!--复核成功-->
     <update id="updateSecuritySheet">
@@ -124,7 +116,7 @@
        where product_id = #{product_id}
     </update>
 
-    <!--通过库存编号修改安全库存配置-->
+    <!--通过序号修改安全库存配置-->
     <update id="updateAmount">
         update erp.Warehouse_stock
         <set>
@@ -138,11 +130,11 @@
                 max_capacity_amount = #{maxCapacityAmount},
             </if>
         </set>
-        where stock_id = #{stockId}
+        where id = #{Id}
     </update>
 
     <!--通过主键删除-->
-    <delete id="deleteById">
+    <delete id="deleteByProductId">
         delete from erp.Warehouse_stock where id = #{id}
     </delete>
 

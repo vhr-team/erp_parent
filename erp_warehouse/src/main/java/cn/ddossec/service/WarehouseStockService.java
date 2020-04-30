@@ -1,5 +1,6 @@
 package cn.ddossec.service;
 
+import cn.ddossec.common.DataGridView;
 import cn.ddossec.domain.WarehouseStock;
 import org.apache.ibatis.annotations.Param;
 
@@ -46,7 +47,7 @@ public interface WarehouseStockService {
      * @param check_tag 复核标志
      * @return 安全库存数据
      */
-    List<WarehouseStock> querySecuritySheet(String check_tag);
+    DataGridView querySecuritySheet(String check_tag, int page, int limit);
 
     /**
      * 复核成功
@@ -59,21 +60,20 @@ public interface WarehouseStockService {
     int updateSecuritySheet(String check_tag, Date check_time, String product_id, String checker);
 
     /**
-     * 通过库存编号修改安全库存配置
+     * 通过序号修改安全库存配置
      * @param minAmount 库存报警下限
      * @param maxAmount 库存报警上限
      * @param maxCapacityAmount 最大存储量
-     * @param stockId 库存编号
+     * @param Id 序号
      */
-    void updateAmount(Integer minAmount,Integer maxAmount,Integer maxCapacityAmount,String stockId);
+    void updateAmount(Integer minAmount,Integer maxAmount,Integer maxCapacityAmount,Integer Id);
 
 
     /**
-     * 通过主键删除数据
+     * 通过产品编号删除数据
      *
-     * @param id 主键
-     * @return 是否成功
+     * @param id 序号
      */
-    boolean deleteById(Integer id);
+    int deleteByProductId(Integer id);
 
 }

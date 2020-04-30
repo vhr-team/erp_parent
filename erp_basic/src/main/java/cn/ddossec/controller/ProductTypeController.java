@@ -41,15 +41,17 @@ public class ProductTypeController {
 
     /**
      * 查询所有类别
+     *
      * @return
      */
     @GetMapping("loadAllProductType")
-    public List<ProductType> loadAllProductType(){
+    public List<ProductType> loadAllProductType() {
         return this.productTypeService.loadAllProductType();
     }
 
     /**
      * 添加商品类别
+     *
      * @param productType
      * @return
      */
@@ -65,6 +67,7 @@ public class ProductTypeController {
 
     /**
      * 校验该供应商的类别是否存在
+     *
      * @param productType
      * @return
      */
@@ -76,16 +79,19 @@ public class ProductTypeController {
             if (null != checkProductType) {
                 map.put("msg", "当前的供应商下的类别已经存在!");
                 map.put("code", -1);
+            } else {
+                map.put("msg", "类别名称不相同");
+                map.put("code", 200);
             }
         } catch (Exception e) {
+            log.debug("校验异常");
         }
-        map.put("msg", "类别名称不相同");
-        map.put("code", 200);
         return map;
     }
 
     /**
      * 修改商品类别
+     *
      * @param productType
      * @return
      */
@@ -101,6 +107,7 @@ public class ProductTypeController {
 
     /**
      * 删除商品类别
+     *
      * @param productTypeId
      * @return
      */
@@ -116,11 +123,12 @@ public class ProductTypeController {
 
     /**
      * 根据供应商ID查询商品类别
+     *
      * @param providerid
      * @return
      */
     @GetMapping("queryProductTypeByProviderid")
-    public Object queryProductTypeByProviderid(Integer providerid){
+    public Object queryProductTypeByProviderid(Integer providerid) {
         return this.productTypeService.queryProductTypeByProviderid(providerid);
     }
 }

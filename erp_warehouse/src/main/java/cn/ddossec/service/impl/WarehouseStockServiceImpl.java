@@ -1,8 +1,12 @@
 package cn.ddossec.service.impl;
 
+import cn.ddossec.common.DataGridView;
 import cn.ddossec.domain.WarehouseStock;
 import cn.ddossec.mapper.WarehouseStockMapper;
 import cn.ddossec.service.WarehouseStockService;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -62,8 +66,14 @@ public class WarehouseStockServiceImpl implements WarehouseStockService {
      * @param check_tag 复核标志
      * @return 安全库存数据
      */
-    public List<WarehouseStock> querySecuritySheet(String check_tag){
-        return this.warehouseStockMapper.querySecuritySheet(check_tag);
+    public DataGridView querySecuritySheet(String check_tag,int page,int limit){
+        QueryWrapper<WarehouseStock> queryWrapper = new QueryWrapper<>();
+        //product_name,product_id,min_amount,max_amount,register,register_time,config,max_capacity_amount
+        queryWrapper.eq("check_tag",check_tag).select("id","product_name","product_id","min_amount","max_amount","register","register_time","config","max_capacity_amount");
+        Page<WarehouseStock> pages = new Page<>(page,limit);
+        IPage<WarehouseStock> iPage = this.warehouseStockMapper.selectPage(pages,queryWrapper);
+        //iPage.getTotal() 总共多少页   iPage.getRecords()查询出来的所以数据
+        return new DataGridView(iPage.getTotal(),iPage.getRecords());
     }
 
     /**
@@ -79,25 +89,24 @@ public class WarehouseStockServiceImpl implements WarehouseStockService {
     }
 
     /**
-     * 通过库存编号修改安全库存配置
+     * 通过序号修改安全库存配置
      * @param minAmount 库存报警下限
      * @param maxAmount 库存报警上限
      * @param maxCapacityAmount 最大存储量
-     * @param stockId 库存编号
+     * @param Id 序号
      */
     @Override
-    public void updateAmount(Integer minAmount,Integer maxAmount,Integer maxCapacityAmount,String stockId){
-        this.warehouseStockMapper.updateAmount(minAmount, maxAmount, maxCapacityAmount, stockId);
+    public void updateAmount(Integer minAmount,Integer maxAmount,Integer maxCapacityAmount,Integer Id){
+        this.warehouseStockMapper.updateAmount(minAmount, maxAmount, maxCapacityAmount, Id);
     }
 
     /**
-     * 通过主键删除数据
+     * 通过序号删除数据
      *
-     * @param id 主键
-     * @return 是否成功
+     * @param id 序号
      */
     @Override
-    public boolean deleteById(Integer id) {
-        return this.warehouseStockMapper.deleteById(id) > 0;
+    public int deleteByProductId(Integer id){
+        return warehouseStockMapper.deleteByProductId(id);
     }
 }

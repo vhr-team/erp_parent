@@ -13,4 +13,10 @@ public interface OrderModelService extends IService<OrderModel> {
      * @return
      */
     DataGridView queryAllOrderModel(OrderModelVo orderModelVo);
+
+    /**
+     * 添加采购单
+     * @param orderModel
+     */
+    void addOrder(OrderModel orderModel);
 }

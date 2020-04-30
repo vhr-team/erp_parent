@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <artifactId>erp_parent</artifactId>
@@ -21,10 +21,10 @@
             <artifactId>mybatis-spring-boot-starter</artifactId>
             <version>1.3.2</version>
         </dependency>
-        <dependency>
-            <groupId>com.alibaba.cloud</groupId>
-            <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
-        </dependency>
+        <!--   <dependency>
+               <groupId>com.alibaba.cloud</groupId>
+               <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+           </dependency>-->
         <dependency>
             <groupId>org.mybatis</groupId>
             <artifactId>mybatis</artifactId>
@@ -77,26 +77,26 @@
         </dependency>
 
 
-        <!-- redis启动器坐标 -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-redis</artifactId>
-            <exclusions>
-                <exclusion>
-                    <groupId>io.lettuce</groupId>
-                    <artifactId>lettuce-core</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <!-- jedis坐标 -->
-        <dependency>
-            <groupId>redis.clients</groupId>
-            <artifactId>jedis</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.data</groupId>
-            <artifactId>spring-data-redis</artifactId>
-        </dependency>
+        <!--  &lt;!&ndash; redis启动器坐标 &ndash;&gt;
+          <dependency>
+              <groupId>org.springframework.boot</groupId>
+              <artifactId>spring-boot-starter-data-redis</artifactId>
+              <exclusions>
+                  <exclusion>
+                      <groupId>io.lettuce</groupId>
+                      <artifactId>lettuce-core</artifactId>
+                  </exclusion>
+              </exclusions>
+          </dependency>-->
+        <!--  &lt;!&ndash; jedis坐标 &ndash;&gt;
+          <dependency>
+              <groupId>redis.clients</groupId>
+              <artifactId>jedis</artifactId>
+          </dependency>
+          <dependency>
+              <groupId>org.springframework.data</groupId>
+              <artifactId>spring-data-redis</artifactId>
+          </dependency>-->
     </dependencies>
 
 </project>

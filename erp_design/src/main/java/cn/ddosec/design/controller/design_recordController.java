@@ -20,6 +20,10 @@ public class design_recordController {
     @Autowired
     design_recordService service;
 
+    public product_design_record selectById(Integer Id) {
+        return service.selectById(Id);
+    }
+
     @ApiOperation("分页&&条件查询")
     @RequestMapping("/findPage")
     public PageResult findPage(Integer page, Integer pageSize, @RequestBody product_design_record record) {
@@ -30,11 +34,25 @@ public class design_recordController {
     @RequestMapping("/updaterecord")
     public Response updaterecord(@RequestBody product_design_record record) {
         try {
+            product_design_record product_design_record = selectById(record.getId());//根据id获取当前商品信息
+            record.setFileChangeAmount(product_design_record.getFileChangeAmount() + 1);//增加修改次数
             service.updaterecord(record);
             return new Response(true, "修改成功");
         } catch (Exception e) {
             e.printStackTrace();
             return new Response(false, "修改失败");
+        }
+    }
+
+    @ApiOperation("添加产品档案")
+    @RequestMapping("/addrecord")
+    public Response addrecord(@RequestBody product_design_record record) {
+        try {
+            service.addrecord(record);
+            return new Response(true, "添加成功");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new Response(false, "添加失败");
         }
     }
 

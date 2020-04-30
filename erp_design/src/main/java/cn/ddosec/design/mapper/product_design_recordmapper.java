@@ -28,4 +28,6 @@ public interface product_design_recordmapper {
     int updateByPrimaryKeySelective(product_design_record record);
 
     int updateByPrimaryKey(product_design_record record);
+
+
 }

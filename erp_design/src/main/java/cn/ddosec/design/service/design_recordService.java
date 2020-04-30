@@ -11,6 +11,8 @@ public interface design_recordService {
 
     PageResult findPage(Integer page, Integer pageSize, product_design_record record);
 
+    product_design_record selectById(Integer Id);
+
     void updaterecord(product_design_record record);
 
     void addrecord(product_design_record record);

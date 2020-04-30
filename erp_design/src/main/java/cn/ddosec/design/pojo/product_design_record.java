@@ -99,11 +99,6 @@ public class product_design_record implements Serializable {
     private String changeTag;
 
     /**
-     * 价格变更标志(未变更/已变更)
-     */
-    private String priceChangeTag;
-
-    /**
      * 档案变更累计
      */
     private Integer fileChangeAmount;
@@ -113,11 +108,12 @@ public class product_design_record implements Serializable {
      */
     private String deleteTag;
 
-    private static final long serialVersionUID = 1L;
     /**
      * 物料编号
      */
     private String materielArchivesId;
+
+    private static final long serialVersionUID = 1L;
 
     public Integer getId() {
         return id;
@@ -271,14 +267,6 @@ public class product_design_record implements Serializable {
         this.changeTag = changeTag == null ? null : changeTag.trim();
     }
 
-    public String getPriceChangeTag() {
-        return priceChangeTag;
-    }
-
-    public void setPriceChangeTag(String priceChangeTag) {
-        this.priceChangeTag = priceChangeTag == null ? null : priceChangeTag.trim();
-    }
-
     public Integer getFileChangeAmount() {
         return fileChangeAmount;
     }
@@ -328,7 +316,6 @@ public class product_design_record implements Serializable {
         sb.append(", changer=").append(changer);
         sb.append(", changeTime=").append(changeTime);
         sb.append(", changeTag=").append(changeTag);
-        sb.append(", priceChangeTag=").append(priceChangeTag);
         sb.append(", fileChangeAmount=").append(fileChangeAmount);
         sb.append(", deleteTag=").append(deleteTag);
         sb.append(", materielArchivesId=").append(materielArchivesId);
@@ -368,7 +355,6 @@ public class product_design_record implements Serializable {
                 && (this.getChanger() == null ? other.getChanger() == null : this.getChanger().equals(other.getChanger()))
                 && (this.getChangeTime() == null ? other.getChangeTime() == null : this.getChangeTime().equals(other.getChangeTime()))
                 && (this.getChangeTag() == null ? other.getChangeTag() == null : this.getChangeTag().equals(other.getChangeTag()))
-                && (this.getPriceChangeTag() == null ? other.getPriceChangeTag() == null : this.getPriceChangeTag().equals(other.getPriceChangeTag()))
                 && (this.getFileChangeAmount() == null ? other.getFileChangeAmount() == null : this.getFileChangeAmount().equals(other.getFileChangeAmount()))
                 && (this.getDeleteTag() == null ? other.getDeleteTag() == null : this.getDeleteTag().equals(other.getDeleteTag()))
                 && (this.getMaterielArchivesId() == null ? other.getMaterielArchivesId() == null : this.getMaterielArchivesId().equals(other.getMaterielArchivesId()));
@@ -397,7 +383,6 @@ public class product_design_record implements Serializable {
         result = prime * result + ((getChanger() == null) ? 0 : getChanger().hashCode());
         result = prime * result + ((getChangeTime() == null) ? 0 : getChangeTime().hashCode());
         result = prime * result + ((getChangeTag() == null) ? 0 : getChangeTag().hashCode());
-        result = prime * result + ((getPriceChangeTag() == null) ? 0 : getPriceChangeTag().hashCode());
         result = prime * result + ((getFileChangeAmount() == null) ? 0 : getFileChangeAmount().hashCode());
         result = prime * result + ((getDeleteTag() == null) ? 0 : getDeleteTag().hashCode());
         result = prime * result + ((getMaterielArchivesId() == null) ? 0 : getMaterielArchivesId().hashCode());

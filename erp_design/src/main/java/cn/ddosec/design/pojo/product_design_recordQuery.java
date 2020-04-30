@@ -65,12 +65,12 @@ public class product_design_recordQuery {
         distinct = false;
     }
 
-    public String getFields() {
-        return fields;
-    }
-
     public void setFields(String fields) {
         this.fields = fields;
+    }
+
+    public String getFields() {
+        return fields;
     }
 
     protected abstract static class GeneratedCriteria {
@@ -1411,76 +1411,6 @@ public class product_design_recordQuery {
 
         public Criteria andChangeTagNotBetween(String value1, String value2) {
             addCriterion("change_tag not between", value1, value2, "changeTag");
-            return (Criteria) this;
-        }
-
-        public Criteria andPriceChangeTagIsNull() {
-            addCriterion("price_change_tag is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andPriceChangeTagIsNotNull() {
-            addCriterion("price_change_tag is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andPriceChangeTagEqualTo(String value) {
-            addCriterion("price_change_tag =", value, "priceChangeTag");
-            return (Criteria) this;
-        }
-
-        public Criteria andPriceChangeTagNotEqualTo(String value) {
-            addCriterion("price_change_tag <>", value, "priceChangeTag");
-            return (Criteria) this;
-        }
-
-        public Criteria andPriceChangeTagGreaterThan(String value) {
-            addCriterion("price_change_tag >", value, "priceChangeTag");
-            return (Criteria) this;
-        }
-
-        public Criteria andPriceChangeTagGreaterThanOrEqualTo(String value) {
-            addCriterion("price_change_tag >=", value, "priceChangeTag");
-            return (Criteria) this;
-        }
-
-        public Criteria andPriceChangeTagLessThan(String value) {
-            addCriterion("price_change_tag <", value, "priceChangeTag");
-            return (Criteria) this;
-        }
-
-        public Criteria andPriceChangeTagLessThanOrEqualTo(String value) {
-            addCriterion("price_change_tag <=", value, "priceChangeTag");
-            return (Criteria) this;
-        }
-
-        public Criteria andPriceChangeTagLike(String value) {
-            addCriterion("price_change_tag like", value, "priceChangeTag");
-            return (Criteria) this;
-        }
-
-        public Criteria andPriceChangeTagNotLike(String value) {
-            addCriterion("price_change_tag not like", value, "priceChangeTag");
-            return (Criteria) this;
-        }
-
-        public Criteria andPriceChangeTagIn(List<String> values) {
-            addCriterion("price_change_tag in", values, "priceChangeTag");
-            return (Criteria) this;
-        }
-
-        public Criteria andPriceChangeTagNotIn(List<String> values) {
-            addCriterion("price_change_tag not in", values, "priceChangeTag");
-            return (Criteria) this;
-        }
-
-        public Criteria andPriceChangeTagBetween(String value1, String value2) {
-            addCriterion("price_change_tag between", value1, value2, "priceChangeTag");
-            return (Criteria) this;
-        }
-
-        public Criteria andPriceChangeTagNotBetween(String value1, String value2) {
-            addCriterion("price_change_tag not between", value1, value2, "priceChangeTag");
             return (Criteria) this;
         }
 

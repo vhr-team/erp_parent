@@ -19,4 +19,10 @@ public interface OrderModelService extends IService<OrderModel> {
      * @param orderModel
      */
     void addOrder(OrderModel orderModel);
+
+    /**
+     * 审核订单
+     * @param orderModel
+     */
+    void auditOrder(OrderModel orderModel);
 }

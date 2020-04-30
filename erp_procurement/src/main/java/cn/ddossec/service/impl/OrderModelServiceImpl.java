@@ -2,10 +2,8 @@ package cn.ddossec.service.impl;
 
 import cn.ddossec.common.Constants;
 import cn.ddossec.common.DataGridView;
-import cn.ddossec.domain.Basics_supper;
-import cn.ddossec.domain.OrderDetail;
-import cn.ddossec.domain.OrderModel;
-import cn.ddossec.domain.User;
+import cn.ddossec.domain.*;
+import cn.ddossec.mapper.ConsoleLogMapper;
 import cn.ddossec.mapper.OrderDetailMapper;
 import cn.ddossec.mapper.OrderModelMapper;
 import cn.ddossec.service.OrderModelService;
@@ -42,6 +40,9 @@ public class OrderModelServiceImpl extends ServiceImpl<OrderModelMapper, OrderMo
     @Autowired
     private OrderDetailMapper orderDetailMapper;
 
+    @Autowired
+    private ConsoleLogMapper consoleLogMapper;
+
     /**
      * 查询所有订单，可以带条件，分页查询
      *
@@ -68,6 +69,8 @@ public class OrderModelServiceImpl extends ServiceImpl<OrderModelMapper, OrderMo
 
         qw.ge(null != orderModelVo.getMinTotalPrice(), "total_price", orderModelVo.getMinTotalPrice());
         qw.le(null != orderModelVo.getMaxTotalPrice(), "total_price", orderModelVo.getMaxTotalPrice());
+
+        qw.orderByDesc("creater_time");
 
         this.baseMapper.selectPage(page, qw);
         List<OrderModel> modelList = page.getRecords();
@@ -145,6 +148,33 @@ public class OrderModelServiceImpl extends ServiceImpl<OrderModelMapper, OrderMo
         // 保存订单明细
         saveOrderDetail(newOrderDetails);
         log.debug("保存订单明细成功");
+    }
+
+    /**
+     * 审核订单
+     * @param orderModel
+     */
+    @Override
+    public void auditOrder(OrderModel orderModel) {
+        OrderModel order = this.orderModelMapper.selectById(orderModel.getOrderId());
+        // 订单状态
+        order.setOrderState(orderModel.getOrderState());
+        // 审核人
+        order.setChecker(orderModel.getChecker());
+        // 审核时间
+        order.setCheckTime(new Date());
+
+        // ---------- 创建一个日志对象
+        ConsoleLog c1 = new ConsoleLog();
+        c1.setEmpId(orderModel.getChecker());
+        c1.setEntityId(orderModel.getOrderId());
+        c1.setNote(orderModel.getNote());
+        c1.setOptTime(new Date());
+        c1.setOptType("审核订单");
+        c1.setTableName("bus_orderModel");
+
+        this.consoleLogMapper.insert(c1);
+        this.orderModelMapper.updateById(order);
     }
 
     public void saveOrderDetail(List<OrderDetail> orderDetails) {

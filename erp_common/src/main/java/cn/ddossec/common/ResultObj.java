@@ -42,8 +42,14 @@ public class ResultObj {
     /**
      * 任务信息
      */
-    public static final ResultObj TASK_START_SUCCESS = new ResultObj(-1, "任务完成成功");
+    public static final ResultObj TASK_START_SUCCESS = new ResultObj(200, "任务完成成功");
     public static final ResultObj TASK_START_ERROR = new ResultObj(-1, "任务完成失败");
+
+    /**
+     * 审核信息
+     */
+    public static final ResultObj AUDIT_SUCCESS = new ResultObj(200, "审核成功");
+    public static final ResultObj AUDIT_ERROR = new ResultObj(-1, "审核失败");
 
     private Integer code = 200;
     private String msg = "";

@@ -120,6 +120,9 @@ public class OrderModel implements Serializable {
     @TableField(exist = false)
     private Double[] detailPrice;
 
+    @TableField(exist = false)
+    private String note;
+
     private static final long serialVersionUID = 1L;
 
     public static final String COL_ORDER_ID = "order_id";

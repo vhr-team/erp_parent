@@ -3,8 +3,10 @@ package cn.ddossec.service.impl;
 import cn.ddossec.common.Constants;
 import cn.ddossec.common.DataGridView;
 import cn.ddossec.domain.Basics_supper;
+import cn.ddossec.domain.OrderDetail;
 import cn.ddossec.domain.OrderModel;
 import cn.ddossec.domain.User;
+import cn.ddossec.mapper.OrderDetailMapper;
 import cn.ddossec.mapper.OrderModelMapper;
 import cn.ddossec.service.OrderModelService;
 import cn.ddossec.service.feign.BasicsSupperFeign;
@@ -19,6 +21,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -33,6 +38,9 @@ public class OrderModelServiceImpl extends ServiceImpl<OrderModelMapper, OrderMo
     private BasicsSupperFeign basicsSupperFeign;
     @Autowired
     private UserFeign userFeign;
+
+    @Autowired
+    private OrderDetailMapper orderDetailMapper;
 
     /**
      * 查询所有订单，可以带条件，分页查询
@@ -63,16 +71,17 @@ public class OrderModelServiceImpl extends ServiceImpl<OrderModelMapper, OrderMo
 
         this.baseMapper.selectPage(page, qw);
         List<OrderModel> modelList = page.getRecords();
+        List<User> userList = this.userFeign.loadAllUser();
+        // 3.翻译供应商
+        List<Basics_supper> allSupper = this.basicsSupperFeign.getAllSupper();
+
         for (OrderModel model : modelList) {
-            // 3.翻译供应商
-            List<Basics_supper> allSupper = this.basicsSupperFeign.getAllSupper();
             for (Basics_supper supper : allSupper) {
                 if (null != model.getSupplierId() && model.getSupplierId().equals(supper.getId())) {
                     model.setSupplierName(supper.getName());
                 }
             }
 
-            List<User> userList = this.userFeign.loadAllUser();
             for (User user : userList) {
                 if (null != model.getCreater() && model.getCreater().equals(user.getId())) {
                     model.setCheckerName(user.getName());
@@ -80,6 +89,67 @@ public class OrderModelServiceImpl extends ServiceImpl<OrderModelMapper, OrderMo
             }
         }
 
-        return new DataGridView(page.getTotal(), page.getRecords());
+        System.out.println(modelList);
+        return new DataGridView(page.getTotal(), modelList);
+    }
+
+    /**
+     * 添加采购单
+     *
+     * @param orderModel
+     */
+    @Override
+    public void addOrder(OrderModel orderModel) {
+        int totalNum = 0;
+        double totalPrice = 0;
+
+        // 1.设置订单号
+        orderModel.setOrderNum(new SimpleDateFormat("yyyyMMddHHmmssSSS").format(new Date()));
+        // 3.采购时间
+        orderModel.setCreaterTime(new Date());
+        // 4.订单类型
+        orderModel.setOrderType(new Integer(Constants.ORDER_TYPE_BUY));
+        // 5.订单状态
+        orderModel.setOrderState(new Integer(Constants.ORDER_TYPE_BUY_AUDIT));
+
+        List<OrderDetail> orderDetails = new ArrayList<>();
+
+        for (int i = 0; i < orderModel.getProductTypeId().length; i++) {
+            // 订单明细
+            OrderDetail detail = new OrderDetail();
+            detail.setDetailNum(orderModel.getDetailNum()[i]);// 数量
+            detail.setDetailPrice(orderModel.getDetailPrice()[i]);// 单价价格
+            detail.setProductId(orderModel.getGoodsId()[i]);// 商品
+            // 剩余数量
+            detail.setSurplus(orderModel.getDetailNum()[i]);
+
+            totalNum = totalNum + orderModel.getDetailNum()[i];
+            totalPrice = totalPrice + orderModel.getDetailNum()[i] * orderModel.getDetailPrice()[i];
+
+            orderDetails.add(detail);
+        }
+
+        orderModel.setTotalNum(totalNum);
+        orderModel.setTotalPrice(totalPrice);
+        orderModel.setDetails(orderDetails);
+
+        this.orderModelMapper.insert(orderModel);
+        log.debug("保存订单成功！");
+
+        List<OrderDetail> newOrderDetails = new ArrayList<>();
+        for (OrderDetail detail : orderDetails) {
+            detail.setOrderId(orderModel.getOrderId());
+            newOrderDetails.add(detail);
+        }
+
+        // 保存订单明细
+        saveOrderDetail(newOrderDetails);
+        log.debug("保存订单明细成功");
+    }
+
+    public void saveOrderDetail(List<OrderDetail> orderDetails) {
+        for (OrderDetail detail : orderDetails) {
+            this.orderDetailMapper.insert(detail);
+        }
     }
 }

@@ -20,4 +20,11 @@ public interface GoodsService extends IService<Goods> {
      * @return
      */
     DataGridView queryAllGoods(GoodsVo goodsVo);
+
+    /**
+     * 根据商品类别ID，查询商品
+     * @param producttypeid
+     * @return
+     */
+    Object queryGoodsByProductTypeId(Integer producttypeid);
 }

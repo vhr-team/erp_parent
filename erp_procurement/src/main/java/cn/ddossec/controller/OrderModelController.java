@@ -62,4 +62,21 @@ public class OrderModelController {
             return ResultObj.ADD_ERROR;
         }
     }
+
+    /**
+     * 审核订单
+     *
+     * @param orderModel
+     * @return
+     */
+    @PostMapping("auditOrder")
+    public ResultObj auditOrder(@RequestBody OrderModel orderModel) {
+        try {
+            System.out.println("审核订单" + orderModel);
+            this.orderModelService.auditOrder(orderModel);
+            return ResultObj.AUDIT_SUCCESS;
+        } catch (Exception e) {
+            return ResultObj.AUDIT_ERROR;
+        }
+    }
 }

@@ -9,74 +9,44 @@ public class product_design_material implements Serializable {
     private Integer id;
 
     /**
-     * 设计编号
-     */
-    private String designId;
-
-    /**
-     * 产品编号
+     * 物料编号
      */
     private String productId;
 
     /**
-     * 产品名称
+     * 物料名称
      */
     private String productName;
 
     /**
-     * 设计人
+     * 用途类型
      */
-    private String designer;
+    private String type;
 
     /**
-     * 设计要求
+     * 描述
      */
-    private String moduleDescribe;
+    private String productDescribe;
 
     /**
-     * 物料总成本
+     * 单位
      */
-    private Double costPriceSum;
+    private String amountUnit;
 
     /**
-     * 登记人
+     * 价格
      */
-    private String register;
+    private Double costPrice;
 
     /**
      * 登记时间
      */
-    private String registerTime;
+    private String date;
 
     /**
-     * 复核人
+     * 登记人
      */
-    private String checker;
-
-    /**
-     * 复核时间
-     */
-    private String checkTime;
-
-    /**
-     * 变更人
-     */
-    private String changer;
-
-    /**
-     * 变更时间
-     */
-    private String changeTime;
-
-    /**
-     * 审核标志(等待审核/审核通过/审核不通过)
-     */
-    private String checkTag;
-
-    /**
-     * 变更标志(未变更/已变更)
-     */
-    private String changeTag;
+    private String marterialPerson;
 
     private static final long serialVersionUID = 1L;
 
@@ -86,14 +56,6 @@ public class product_design_material implements Serializable {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public String getDesignId() {
-        return designId;
-    }
-
-    public void setDesignId(String designId) {
-        this.designId = designId == null ? null : designId.trim();
     }
 
     public String getProductId() {
@@ -112,92 +74,52 @@ public class product_design_material implements Serializable {
         this.productName = productName == null ? null : productName.trim();
     }
 
-    public String getDesigner() {
-        return designer;
+    public String getType() {
+        return type;
     }
 
-    public void setDesigner(String designer) {
-        this.designer = designer == null ? null : designer.trim();
+    public void setType(String type) {
+        this.type = type == null ? null : type.trim();
     }
 
-    public String getModuleDescribe() {
-        return moduleDescribe;
+    public String getProductDescribe() {
+        return productDescribe;
     }
 
-    public void setModuleDescribe(String moduleDescribe) {
-        this.moduleDescribe = moduleDescribe == null ? null : moduleDescribe.trim();
+    public void setProductDescribe(String productDescribe) {
+        this.productDescribe = productDescribe == null ? null : productDescribe.trim();
     }
 
-    public Double getCostPriceSum() {
-        return costPriceSum;
+    public String getAmountUnit() {
+        return amountUnit;
     }
 
-    public void setCostPriceSum(Double costPriceSum) {
-        this.costPriceSum = costPriceSum;
+    public void setAmountUnit(String amountUnit) {
+        this.amountUnit = amountUnit == null ? null : amountUnit.trim();
     }
 
-    public String getRegister() {
-        return register;
+    public Double getCostPrice() {
+        return costPrice;
     }
 
-    public void setRegister(String register) {
-        this.register = register == null ? null : register.trim();
+    public void setCostPrice(Double costPrice) {
+        this.costPrice = costPrice;
     }
 
-    public String getRegisterTime() {
-        return registerTime;
+    public String getDate() {
+        return date;
     }
 
-    public void setRegisterTime(String registerTime) {
-        this.registerTime = registerTime == null ? null : registerTime.trim();
+    public void setDate(String date) {
+        this.date = date == null ? null : date.trim();
     }
 
-    public String getChecker() {
-        return checker;
+    public String getMarterialPerson() {
+        return marterialPerson;
     }
 
-    public void setChecker(String checker) {
-        this.checker = checker == null ? null : checker.trim();
-    }
-
-    public String getCheckTime() {
-        return checkTime;
-    }
-
-    public void setCheckTime(String checkTime) {
-        this.checkTime = checkTime == null ? null : checkTime.trim();
-    }
-
-    public String getChanger() {
-        return changer;
-    }
-
-    public void setChanger(String changer) {
-        this.changer = changer == null ? null : changer.trim();
-    }
-
-    public String getChangeTime() {
-        return changeTime;
-    }
-
-    public void setChangeTime(String changeTime) {
-        this.changeTime = changeTime == null ? null : changeTime.trim();
-    }
-
-    public String getCheckTag() {
-        return checkTag;
-    }
-
-    public void setCheckTag(String checkTag) {
-        this.checkTag = checkTag == null ? null : checkTag.trim();
-    }
-
-    public String getChangeTag() {
-        return changeTag;
-    }
-
-    public void setChangeTag(String changeTag) {
-        this.changeTag = changeTag == null ? null : changeTag.trim();
+    public void setMarterialPerson(String marterialPerson) {
+        this.marterialPerson = marterialPerson == null ? null : marterialPerson.trim();
     }
 
     @Override
@@ -207,20 +129,14 @@ public class product_design_material implements Serializable {
         sb.append(" [");
         sb.append("Hash = ").append(hashCode());
         sb.append(", id=").append(id);
-        sb.append(", designId=").append(designId);
         sb.append(", productId=").append(productId);
         sb.append(", productName=").append(productName);
-        sb.append(", designer=").append(designer);
-        sb.append(", moduleDescribe=").append(moduleDescribe);
-        sb.append(", costPriceSum=").append(costPriceSum);
-        sb.append(", register=").append(register);
-        sb.append(", registerTime=").append(registerTime);
-        sb.append(", checker=").append(checker);
-        sb.append(", checkTime=").append(checkTime);
-        sb.append(", changer=").append(changer);
-        sb.append(", changeTime=").append(changeTime);
-        sb.append(", checkTag=").append(checkTag);
-        sb.append(", changeTag=").append(changeTag);
+        sb.append(", type=").append(type);
+        sb.append(", productDescribe=").append(productDescribe);
+        sb.append(", amountUnit=").append(amountUnit);
+        sb.append(", costPrice=").append(costPrice);
+        sb.append(", date=").append(date);
+        sb.append(", marterialPerson=").append(marterialPerson);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();
@@ -239,20 +155,14 @@ public class product_design_material implements Serializable {
         }
         product_design_material other = (product_design_material) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
-                && (this.getDesignId() == null ? other.getDesignId() == null : this.getDesignId().equals(other.getDesignId()))
                 && (this.getProductId() == null ? other.getProductId() == null : this.getProductId().equals(other.getProductId()))
                 && (this.getProductName() == null ? other.getProductName() == null : this.getProductName().equals(other.getProductName()))
-                && (this.getDesigner() == null ? other.getDesigner() == null : this.getDesigner().equals(other.getDesigner()))
-                && (this.getModuleDescribe() == null ? other.getModuleDescribe() == null : this.getModuleDescribe().equals(other.getModuleDescribe()))
-                && (this.getCostPriceSum() == null ? other.getCostPriceSum() == null : this.getCostPriceSum().equals(other.getCostPriceSum()))
-                && (this.getRegister() == null ? other.getRegister() == null : this.getRegister().equals(other.getRegister()))
-                && (this.getRegisterTime() == null ? other.getRegisterTime() == null : this.getRegisterTime().equals(other.getRegisterTime()))
-                && (this.getChecker() == null ? other.getChecker() == null : this.getChecker().equals(other.getChecker()))
-                && (this.getCheckTime() == null ? other.getCheckTime() == null : this.getCheckTime().equals(other.getCheckTime()))
-                && (this.getChanger() == null ? other.getChanger() == null : this.getChanger().equals(other.getChanger()))
-                && (this.getChangeTime() == null ? other.getChangeTime() == null : this.getChangeTime().equals(other.getChangeTime()))
-                && (this.getCheckTag() == null ? other.getCheckTag() == null : this.getCheckTag().equals(other.getCheckTag()))
-                && (this.getChangeTag() == null ? other.getChangeTag() == null : this.getChangeTag().equals(other.getChangeTag()));
+                && (this.getType() == null ? other.getType() == null : this.getType().equals(other.getType()))
+                && (this.getProductDescribe() == null ? other.getProductDescribe() == null : this.getProductDescribe().equals(other.getProductDescribe()))
+                && (this.getAmountUnit() == null ? other.getAmountUnit() == null : this.getAmountUnit().equals(other.getAmountUnit()))
+                && (this.getCostPrice() == null ? other.getCostPrice() == null : this.getCostPrice().equals(other.getCostPrice()))
+                && (this.getDate() == null ? other.getDate() == null : this.getDate().equals(other.getDate()))
+                && (this.getMarterialPerson() == null ? other.getMarterialPerson() == null : this.getMarterialPerson().equals(other.getMarterialPerson()));
     }
 
     @Override
@@ -260,20 +170,14 @@ public class product_design_material implements Serializable {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
-        result = prime * result + ((getDesignId() == null) ? 0 : getDesignId().hashCode());
         result = prime * result + ((getProductId() == null) ? 0 : getProductId().hashCode());
         result = prime * result + ((getProductName() == null) ? 0 : getProductName().hashCode());
-        result = prime * result + ((getDesigner() == null) ? 0 : getDesigner().hashCode());
-        result = prime * result + ((getModuleDescribe() == null) ? 0 : getModuleDescribe().hashCode());
-        result = prime * result + ((getCostPriceSum() == null) ? 0 : getCostPriceSum().hashCode());
-        result = prime * result + ((getRegister() == null) ? 0 : getRegister().hashCode());
-        result = prime * result + ((getRegisterTime() == null) ? 0 : getRegisterTime().hashCode());
-        result = prime * result + ((getChecker() == null) ? 0 : getChecker().hashCode());
-        result = prime * result + ((getCheckTime() == null) ? 0 : getCheckTime().hashCode());
-        result = prime * result + ((getChanger() == null) ? 0 : getChanger().hashCode());
-        result = prime * result + ((getChangeTime() == null) ? 0 : getChangeTime().hashCode());
-        result = prime * result + ((getCheckTag() == null) ? 0 : getCheckTag().hashCode());
-        result = prime * result + ((getChangeTag() == null) ? 0 : getChangeTag().hashCode());
+        result = prime * result + ((getType() == null) ? 0 : getType().hashCode());
+        result = prime * result + ((getProductDescribe() == null) ? 0 : getProductDescribe().hashCode());
+        result = prime * result + ((getAmountUnit() == null) ? 0 : getAmountUnit().hashCode());
+        result = prime * result + ((getCostPrice() == null) ? 0 : getCostPrice().hashCode());
+        result = prime * result + ((getDate() == null) ? 0 : getDate().hashCode());
+        result = prime * result + ((getMarterialPerson() == null) ? 0 : getMarterialPerson().hashCode());
         return result;
     }
 }

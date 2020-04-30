@@ -48,12 +48,12 @@ public class design_recordServiceImpl implements design_recordService {
         return serial;
     }
 
-
     @Autowired
     product_design_recordmapper mapper;
 
     /**
      * 分页查询
+     * 查询
      *
      * @param page
      * @param pageSize
@@ -64,8 +64,9 @@ public class design_recordServiceImpl implements design_recordService {
     public PageResult findPage(Integer page, Integer pageSize, product_design_record record) {
         PageHelper.startPage(page, pageSize);
         product_design_recordQuery query = new product_design_recordQuery();
+        product_design_recordQuery.Criteria criteria = query.createCriteria();
+        criteria.andDeleteTagEqualTo("未回收");
         if (record != null) {
-            product_design_recordQuery.Criteria criteria = query.createCriteria();
             if (record.getProductName() != null) {
                 criteria.andProductNameLike("%" + record.getProductName() + "%");
             }
@@ -83,6 +84,11 @@ public class design_recordServiceImpl implements design_recordService {
         return mapper.selectByPrimaryKey(Id);
     }
 
+    /**
+     * 修改档案
+     *
+     * @param record
+     */
     @Override
     public void updaterecord(product_design_record record) {
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
@@ -94,7 +100,6 @@ public class design_recordServiceImpl implements design_recordService {
 
     /**
      * 添加档案
-     *
      * @param record
      */
     @Override
@@ -103,8 +108,59 @@ public class design_recordServiceImpl implements design_recordService {
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
         record.setRegisterTime(df.format(new Date()));//登记时间
         record.setProductId(Getnum());//产品ID
-        record.setChangeTag("未删除");//默认未删除
-        record.setCheckTag("等待审核");
+        record.setDeleteTag("未回收");//默认未回收
+        record.setChangeTag("未更改");//默认未更改
+        record.setCheckTag("等待审核");//默认等待审核
         mapper.insertSelective(record);
+    }
+
+    /**
+     * 档案回收
+     *
+     * @param record
+     */
+    @Override
+    public void deleterecord(product_design_record record) {
+        record.setDeleteTag("已回收");
+        mapper.updateByPrimaryKeySelective(record);
+    }
+
+
+    /**
+     * 查询已回收的档案
+     *
+     * @param page
+     * @param pageSize
+     * @param record
+     * @return
+     */
+    @Override
+    public PageResult findPagerecycle(Integer page, Integer pageSize, product_design_record record) {
+        PageHelper.startPage(page, pageSize);
+        product_design_recordQuery query = new product_design_recordQuery();
+        product_design_recordQuery.Criteria criteria = query.createCriteria();
+        criteria.andDeleteTagEqualTo("已回收");
+        if (record != null) {
+            if (record.getProductName() != null) {
+                criteria.andProductNameLike("%" + record.getProductName() + "%");
+            }
+            if (record.getRegisterTime() != null) {
+                criteria.andRegisterTimeLike("%" + record.getRegisterTime() + "%");
+            }
+        }
+        Page<product_design_record> product_design_records = (Page<product_design_record>) mapper.selectByExample(query);
+        PageResult pageResult = new PageResult(product_design_records.getTotal(), product_design_records.getResult());
+        return pageResult;
+    }
+
+    /**
+     * 档案恢复
+     *
+     * @param record
+     */
+    @Override
+    public void recordrecover(product_design_record record) {
+        record.setDeleteTag("未回收");
+        mapper.updateByPrimaryKeySelective(record);
     }
 }

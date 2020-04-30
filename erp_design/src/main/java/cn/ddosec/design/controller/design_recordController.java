@@ -20,6 +20,14 @@ public class design_recordController {
     @Autowired
     design_recordService service;
 
+    /**
+     * 根据ID查询档案
+     *
+     * @param Id
+     * @return
+     */
+    @ApiOperation("根据ID查询档案")
+    @RequestMapping("/selectById")
     public product_design_record selectById(Integer Id) {
         return service.selectById(Id);
     }
@@ -55,5 +63,46 @@ public class design_recordController {
             return new Response(false, "添加失败");
         }
     }
+
+    @ApiOperation("分页&&条件查询已回收的档案")
+    @RequestMapping("/findPagerecycle")
+    public PageResult findPagerecycle(Integer page, Integer pageSize, @RequestBody product_design_record record) {
+        return service.findPagerecycle(page, pageSize, record);
+    }
+
+    /**
+     * 档案回收
+     *
+     * @param record
+     * @return
+     */
+    @RequestMapping("/deleterecord")
+    public Response deleterecord(@RequestBody product_design_record record) {
+        try {
+            service.deleterecord(record);
+            return new Response(true, "回收成功");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new Response(false, "回收失败");
+        }
+    }
+
+    /**
+     * 档案恢复
+     *
+     * @param record
+     */
+    @ApiOperation("档案恢复")
+    @RequestMapping("/recordrecover")
+    public Response recordrecover(@RequestBody product_design_record record) {
+        try {
+            service.recordrecover(record);
+            return new Response(true, "恢复成功");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new Response(false, "恢复失败");
+        }
+    }
+
 
 }

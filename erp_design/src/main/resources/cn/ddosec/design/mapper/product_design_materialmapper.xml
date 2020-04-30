@@ -3,20 +3,14 @@
 <mapper namespace="cn.ddosec.design.mapper.product_design_materialmapper">
     <resultMap id="BaseResultMap" type="cn.ddosec.design.pojo.product_design_material">
         <id column="id" property="id" jdbcType="INTEGER"/>
-        <result column="design_id" property="designId" jdbcType="VARCHAR"/>
         <result column="product_id" property="productId" jdbcType="VARCHAR"/>
         <result column="product_name" property="productName" jdbcType="VARCHAR"/>
-        <result column="designer" property="designer" jdbcType="VARCHAR"/>
-        <result column="module_describe" property="moduleDescribe" jdbcType="VARCHAR"/>
-        <result column="cost_price_sum" property="costPriceSum" jdbcType="DOUBLE"/>
-        <result column="register" property="register" jdbcType="VARCHAR"/>
-        <result column="register_time" property="registerTime" jdbcType="VARCHAR"/>
-        <result column="checker" property="checker" jdbcType="VARCHAR"/>
-        <result column="check_time" property="checkTime" jdbcType="VARCHAR"/>
-        <result column="changer" property="changer" jdbcType="VARCHAR"/>
-        <result column="change_time" property="changeTime" jdbcType="VARCHAR"/>
-        <result column="check_tag" property="checkTag" jdbcType="VARCHAR"/>
-        <result column="change_tag" property="changeTag" jdbcType="VARCHAR"/>
+        <result column="type" property="type" jdbcType="VARCHAR"/>
+        <result column="product_describe" property="productDescribe" jdbcType="VARCHAR"/>
+        <result column="amount_unit" property="amountUnit" jdbcType="VARCHAR"/>
+        <result column="cost_price" property="costPrice" jdbcType="DOUBLE"/>
+        <result column="date" property="date" jdbcType="VARCHAR"/>
+        <result column="marterial_person" property="marterialPerson" jdbcType="VARCHAR"/>
     </resultMap>
     <sql id="Example_Where_Clause">
         <where>
@@ -80,8 +74,8 @@
     </sql>
     <sql id="Base_Column_List">
         <if test="fields == null">
-            id, design_id, product_id, product_name, designer, module_describe, cost_price_sum,
-            register, register_time, checker, check_time, changer, change_time, check_tag, change_tag
+            id, product_id, product_name, type, product_describe, amount_unit, cost_price, date,
+            marterial_person
         </if>
         <if test="fields != null">
             ${fields}
@@ -104,7 +98,7 @@
     </select>
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
         select
-        id,design_id,product_id,product_name,designer,module_describe,cost_price_sum,register,register_time,checker,check_time,changer,change_time,check_tag,change_tag
+        id,product_id,product_name,type,product_describe,amount_unit,cost_price,date,marterial_person
         from product_design_material
         where id = #{id,jdbcType=INTEGER}
     </select>
@@ -119,17 +113,13 @@
         </if>
     </delete>
     <insert id="insert" parameterType="cn.ddosec.design.pojo.product_design_material">
-        insert into product_design_material (id, design_id, product_id,
-        product_name, designer, module_describe,
-        cost_price_sum, register, register_time,
-        checker, check_time, changer,
-        change_time, check_tag, change_tag
+        insert into product_design_material (id, product_id, product_name,
+        type, product_describe, amount_unit,
+        cost_price, date, marterial_person
         )
-        values (#{id,jdbcType=INTEGER}, #{designId,jdbcType=VARCHAR}, #{productId,jdbcType=VARCHAR},
-        #{productName,jdbcType=VARCHAR}, #{designer,jdbcType=VARCHAR}, #{moduleDescribe,jdbcType=VARCHAR},
-        #{costPriceSum,jdbcType=DOUBLE}, #{register,jdbcType=VARCHAR}, #{registerTime,jdbcType=VARCHAR},
-        #{checker,jdbcType=VARCHAR}, #{checkTime,jdbcType=VARCHAR}, #{changer,jdbcType=VARCHAR},
-        #{changeTime,jdbcType=VARCHAR}, #{checkTag,jdbcType=VARCHAR}, #{changeTag,jdbcType=VARCHAR}
+        values (#{id,jdbcType=INTEGER}, #{productId,jdbcType=VARCHAR}, #{productName,jdbcType=VARCHAR},
+        #{type,jdbcType=VARCHAR}, #{productDescribe,jdbcType=VARCHAR}, #{amountUnit,jdbcType=VARCHAR},
+        #{costPrice,jdbcType=DOUBLE}, #{date,jdbcType=VARCHAR}, #{marterialPerson,jdbcType=VARCHAR}
         )
     </insert>
     <insert id="insertSelective" parameterType="cn.ddosec.design.pojo.product_design_material">
@@ -138,55 +128,34 @@
             <if test="id != null">
                 id,
             </if>
-            <if test="designId != null">
-                design_id,
-            </if>
             <if test="productId != null">
                 product_id,
             </if>
             <if test="productName != null">
                 product_name,
             </if>
-            <if test="designer != null">
-                designer,
+            <if test="type != null">
+                type,
             </if>
-            <if test="moduleDescribe != null">
-                module_describe,
+            <if test="productDescribe != null">
+                product_describe,
             </if>
-            <if test="costPriceSum != null">
-                cost_price_sum,
+            <if test="amountUnit != null">
+                amount_unit,
             </if>
-            <if test="register != null">
-                register,
+            <if test="costPrice != null">
+                cost_price,
             </if>
-            <if test="registerTime != null">
-                register_time,
+            <if test="date != null">
+                date,
             </if>
-            <if test="checker != null">
-                checker,
-            </if>
-            <if test="checkTime != null">
-                check_time,
-            </if>
-            <if test="changer != null">
-                changer,
-            </if>
-            <if test="changeTime != null">
-                change_time,
-            </if>
-            <if test="checkTag != null">
-                check_tag,
-            </if>
-            <if test="changeTag != null">
-                change_tag,
+            <if test="marterialPerson != null">
+                marterial_person,
             </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id != null">
                 #{id,jdbcType=INTEGER},
-            </if>
-            <if test="designId != null">
-                #{designId,jdbcType=VARCHAR},
             </if>
             <if test="productId != null">
                 #{productId,jdbcType=VARCHAR},
@@ -194,38 +163,23 @@
             <if test="productName != null">
                 #{productName,jdbcType=VARCHAR},
             </if>
-            <if test="designer != null">
-                #{designer,jdbcType=VARCHAR},
+            <if test="type != null">
+                #{type,jdbcType=VARCHAR},
             </if>
-            <if test="moduleDescribe != null">
-                #{moduleDescribe,jdbcType=VARCHAR},
+            <if test="productDescribe != null">
+                #{productDescribe,jdbcType=VARCHAR},
             </if>
-            <if test="costPriceSum != null">
-                #{costPriceSum,jdbcType=DOUBLE},
+            <if test="amountUnit != null">
+                #{amountUnit,jdbcType=VARCHAR},
             </if>
-            <if test="register != null">
-                #{register,jdbcType=VARCHAR},
+            <if test="costPrice != null">
+                #{costPrice,jdbcType=DOUBLE},
             </if>
-            <if test="registerTime != null">
-                #{registerTime,jdbcType=VARCHAR},
+            <if test="date != null">
+                #{date,jdbcType=VARCHAR},
             </if>
-            <if test="checker != null">
-                #{checker,jdbcType=VARCHAR},
-            </if>
-            <if test="checkTime != null">
-                #{checkTime,jdbcType=VARCHAR},
-            </if>
-            <if test="changer != null">
-                #{changer,jdbcType=VARCHAR},
-            </if>
-            <if test="changeTime != null">
-                #{changeTime,jdbcType=VARCHAR},
-            </if>
-            <if test="checkTag != null">
-                #{checkTag,jdbcType=VARCHAR},
-            </if>
-            <if test="changeTag != null">
-                #{changeTag,jdbcType=VARCHAR},
+            <if test="marterialPerson != null">
+                #{marterialPerson,jdbcType=VARCHAR},
             </if>
         </trim>
     </insert>
@@ -242,47 +196,29 @@
             <if test="record.id != null">
                 id = #{record.id,jdbcType=INTEGER},
             </if>
-            <if test="record.designId != null">
-                design_id = #{record.designId,jdbcType=VARCHAR},
-            </if>
             <if test="record.productId != null">
                 product_id = #{record.productId,jdbcType=VARCHAR},
             </if>
             <if test="record.productName != null">
                 product_name = #{record.productName,jdbcType=VARCHAR},
             </if>
-            <if test="record.designer != null">
-                designer = #{record.designer,jdbcType=VARCHAR},
+            <if test="record.type != null">
+                type = #{record.type,jdbcType=VARCHAR},
             </if>
-            <if test="record.moduleDescribe != null">
-                module_describe = #{record.moduleDescribe,jdbcType=VARCHAR},
+            <if test="record.productDescribe != null">
+                product_describe = #{record.productDescribe,jdbcType=VARCHAR},
             </if>
-            <if test="record.costPriceSum != null">
-                cost_price_sum = #{record.costPriceSum,jdbcType=DOUBLE},
+            <if test="record.amountUnit != null">
+                amount_unit = #{record.amountUnit,jdbcType=VARCHAR},
             </if>
-            <if test="record.register != null">
-                register = #{record.register,jdbcType=VARCHAR},
+            <if test="record.costPrice != null">
+                cost_price = #{record.costPrice,jdbcType=DOUBLE},
             </if>
-            <if test="record.registerTime != null">
-                register_time = #{record.registerTime,jdbcType=VARCHAR},
+            <if test="record.date != null">
+                date = #{record.date,jdbcType=VARCHAR},
             </if>
-            <if test="record.checker != null">
-                checker = #{record.checker,jdbcType=VARCHAR},
-            </if>
-            <if test="record.checkTime != null">
-                check_time = #{record.checkTime,jdbcType=VARCHAR},
-            </if>
-            <if test="record.changer != null">
-                changer = #{record.changer,jdbcType=VARCHAR},
-            </if>
-            <if test="record.changeTime != null">
-                change_time = #{record.changeTime,jdbcType=VARCHAR},
-            </if>
-            <if test="record.checkTag != null">
-                check_tag = #{record.checkTag,jdbcType=VARCHAR},
-            </if>
-            <if test="record.changeTag != null">
-                change_tag = #{record.changeTag,jdbcType=VARCHAR},
+            <if test="record.marterialPerson != null">
+                marterial_person = #{record.marterialPerson,jdbcType=VARCHAR},
             </if>
         </set>
         <if test="_parameter != null">
@@ -292,20 +228,14 @@
     <update id="updateByExample" parameterType="map">
         update product_design_material
         set id = #{record.id,jdbcType=INTEGER},
-        design_id = #{record.designId,jdbcType=VARCHAR},
         product_id = #{record.productId,jdbcType=VARCHAR},
         product_name = #{record.productName,jdbcType=VARCHAR},
-        designer = #{record.designer,jdbcType=VARCHAR},
-        module_describe = #{record.moduleDescribe,jdbcType=VARCHAR},
-        cost_price_sum = #{record.costPriceSum,jdbcType=DOUBLE},
-        register = #{record.register,jdbcType=VARCHAR},
-        register_time = #{record.registerTime,jdbcType=VARCHAR},
-        checker = #{record.checker,jdbcType=VARCHAR},
-        check_time = #{record.checkTime,jdbcType=VARCHAR},
-        changer = #{record.changer,jdbcType=VARCHAR},
-        change_time = #{record.changeTime,jdbcType=VARCHAR},
-        check_tag = #{record.checkTag,jdbcType=VARCHAR},
-        change_tag = #{record.changeTag,jdbcType=VARCHAR}
+        type = #{record.type,jdbcType=VARCHAR},
+        product_describe = #{record.productDescribe,jdbcType=VARCHAR},
+        amount_unit = #{record.amountUnit,jdbcType=VARCHAR},
+        cost_price = #{record.costPrice,jdbcType=DOUBLE},
+        date = #{record.date,jdbcType=VARCHAR},
+        marterial_person = #{record.marterialPerson,jdbcType=VARCHAR}
         <if test="_parameter != null">
             <include refid="Update_By_Example_Where_Clause"/>
         </if>
@@ -313,67 +243,43 @@
     <update id="updateByPrimaryKeySelective" parameterType="cn.ddosec.design.pojo.product_design_material">
         update product_design_material
         <set>
-            <if test="designId != null">
-                design_id = #{designId,jdbcType=VARCHAR},
-            </if>
             <if test="productId != null">
                 product_id = #{productId,jdbcType=VARCHAR},
             </if>
             <if test="productName != null">
                 product_name = #{productName,jdbcType=VARCHAR},
             </if>
-            <if test="designer != null">
-                designer = #{designer,jdbcType=VARCHAR},
+            <if test="type != null">
+                type = #{type,jdbcType=VARCHAR},
             </if>
-            <if test="moduleDescribe != null">
-                module_describe = #{moduleDescribe,jdbcType=VARCHAR},
+            <if test="productDescribe != null">
+                product_describe = #{productDescribe,jdbcType=VARCHAR},
             </if>
-            <if test="costPriceSum != null">
-                cost_price_sum = #{costPriceSum,jdbcType=DOUBLE},
+            <if test="amountUnit != null">
+                amount_unit = #{amountUnit,jdbcType=VARCHAR},
             </if>
-            <if test="register != null">
-                register = #{register,jdbcType=VARCHAR},
+            <if test="costPrice != null">
+                cost_price = #{costPrice,jdbcType=DOUBLE},
             </if>
-            <if test="registerTime != null">
-                register_time = #{registerTime,jdbcType=VARCHAR},
+            <if test="date != null">
+                date = #{date,jdbcType=VARCHAR},
             </if>
-            <if test="checker != null">
-                checker = #{checker,jdbcType=VARCHAR},
-            </if>
-            <if test="checkTime != null">
-                check_time = #{checkTime,jdbcType=VARCHAR},
-            </if>
-            <if test="changer != null">
-                changer = #{changer,jdbcType=VARCHAR},
-            </if>
-            <if test="changeTime != null">
-                change_time = #{changeTime,jdbcType=VARCHAR},
-            </if>
-            <if test="checkTag != null">
-                check_tag = #{checkTag,jdbcType=VARCHAR},
-            </if>
-            <if test="changeTag != null">
-                change_tag = #{changeTag,jdbcType=VARCHAR},
+            <if test="marterialPerson != null">
+                marterial_person = #{marterialPerson,jdbcType=VARCHAR},
             </if>
         </set>
         where id = #{id,jdbcType=INTEGER}
     </update>
     <update id="updateByPrimaryKey" parameterType="cn.ddosec.design.pojo.product_design_material">
         update product_design_material
-        set design_id = #{designId,jdbcType=VARCHAR},
-        product_id = #{productId,jdbcType=VARCHAR},
+        set product_id = #{productId,jdbcType=VARCHAR},
         product_name = #{productName,jdbcType=VARCHAR},
-        designer = #{designer,jdbcType=VARCHAR},
-        module_describe = #{moduleDescribe,jdbcType=VARCHAR},
-        cost_price_sum = #{costPriceSum,jdbcType=DOUBLE},
-        register = #{register,jdbcType=VARCHAR},
-        register_time = #{registerTime,jdbcType=VARCHAR},
-        checker = #{checker,jdbcType=VARCHAR},
-        check_time = #{checkTime,jdbcType=VARCHAR},
-        changer = #{changer,jdbcType=VARCHAR},
-        change_time = #{changeTime,jdbcType=VARCHAR},
-        check_tag = #{checkTag,jdbcType=VARCHAR},
-        change_tag = #{changeTag,jdbcType=VARCHAR}
+        type = #{type,jdbcType=VARCHAR},
+        product_describe = #{productDescribe,jdbcType=VARCHAR},
+        amount_unit = #{amountUnit,jdbcType=VARCHAR},
+        cost_price = #{costPrice,jdbcType=DOUBLE},
+        date = #{date,jdbcType=VARCHAR},
+        marterial_person = #{marterialPerson,jdbcType=VARCHAR}
         where id = #{id,jdbcType=INTEGER}
     </update>
 </mapper>

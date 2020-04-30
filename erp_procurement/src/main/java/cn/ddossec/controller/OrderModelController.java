@@ -1,14 +1,14 @@
 package cn.ddossec.controller;
 
 import cn.ddossec.common.DataGridView;
+import cn.ddossec.common.ResultObj;
+import cn.ddossec.domain.OrderModel;
 import cn.ddossec.domain.User;
 import cn.ddossec.service.OrderModelService;
 import cn.ddossec.service.feign.UserFeign;
 import cn.ddossec.vo.OrderModelVo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -38,10 +38,28 @@ public class OrderModelController {
 
     /**
      * 查询所有用户
+     *
      * @return
      */
     @GetMapping("queryAllUser")
     public List<User> queryAllUser() {
         return userFeign.loadAllUser();
+    }
+
+    /**
+     * 添加采购单
+     *
+     * @return
+     */
+    @PostMapping("addOrder")
+    public ResultObj addOrder(@RequestBody OrderModel orderModel) {
+        try {
+            System.out.println(orderModel);
+            this.orderModelService.addOrder(orderModel);
+            return ResultObj.ADD_SUCCESS;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return ResultObj.ADD_ERROR;
+        }
     }
 }

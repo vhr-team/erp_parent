@@ -4,10 +4,7 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -20,6 +17,7 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString
 @TableName(value = "bus_orderModel")
 public class OrderModel implements Serializable {
     /**
@@ -109,6 +107,18 @@ public class OrderModel implements Serializable {
     // 订单明细
     @TableField(exist = false)
     private List<OrderDetail> details;
+
+    @TableField(exist = false)
+    private Integer[] productTypeId;
+
+    @TableField(exist = false)
+    private Integer[] goodsId;
+
+    @TableField(exist = false)
+    private Integer[] detailNum;
+
+    @TableField(exist = false)
+    private Double[] detailPrice;
 
     private static final long serialVersionUID = 1L;
 

@@ -99,4 +99,19 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsMapper, Goods> implements
 
         return new DataGridView(page.getTotal(), goodsList);
     }
+
+    /**
+     * 根据商品类别ID，查询商品
+     *
+     * @param producttypeid
+     * @return
+     */
+    @Override
+    public Object queryGoodsByProductTypeId(Integer producttypeid) {
+
+        QueryWrapper<Goods> qw = new QueryWrapper<>();
+        qw.eq(null != producttypeid, "productTypeId", producttypeid);
+
+        return this.baseMapper.selectList(qw);
+    }
 }

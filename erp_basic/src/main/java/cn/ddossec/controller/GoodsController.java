@@ -87,4 +87,13 @@ public class GoodsController {
         return this.goodsService.getById(product_id);
     }
 
+    /**
+     * 根据商品类别ID，查询商品
+     * @param producttypeid
+     * @return
+     */
+    @GetMapping("queryGoodsByProductTypeId")
+    public Object queryGoodsByProductTypeId(Integer producttypeid){
+        return this.goodsService.queryGoodsByProductTypeId(producttypeid);
+    }
 }

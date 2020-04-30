@@ -22,20 +22,22 @@ public interface WarehouseInboundService {
      */
     WarehouseInbound queryById(Integer id);
 
+
     /**
-     * 查询多条数据
+     * 查询入库单
      *
+     * @param checkTag 入库审核状态
      * @param offset 查询起始位置
      * @param limit 查询条数
      * @return 对象列表
      */
-    List<WarehouseInbound> queryAllByLimit(int offset, int limit);
+    List<WarehouseInbound> queryInboundLimit(String checkTag,int offset,int limit);
 
     /**
      * 入库申请登记
      *
      * @param warehouseInbound 实例对象
-     * @return 实例对象
+     * @return 主键id
      */
     int insertWarehousing(WarehouseInbound warehouseInbound);
 

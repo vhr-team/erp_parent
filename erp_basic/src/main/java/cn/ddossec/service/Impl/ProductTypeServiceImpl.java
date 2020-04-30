@@ -2,8 +2,10 @@ package cn.ddossec.service.Impl;
 
 import cn.ddossec.common.DataGridView;
 import cn.ddossec.domain.Basics_supper;
+import cn.ddossec.domain.Goods;
 import cn.ddossec.domain.ProductType;
 import cn.ddossec.mapper.Basics_supperMapper;
+import cn.ddossec.mapper.GoodsMapper;
 import cn.ddossec.mapper.ProductTypeMapper;
 import cn.ddossec.service.ProductTypeService;
 import cn.ddossec.vo.ProductTypeVo;
@@ -36,6 +38,9 @@ public class ProductTypeServiceImpl extends ServiceImpl<ProductTypeMapper, Produ
 
     @Autowired
     private Basics_supperMapper basics_supperMapper;
+
+    @Autowired
+    private GoodsMapper goodsMapper;
 
     @Override
     public DataGridView ProductType(ProductTypeVo productTypeVo) {
@@ -70,8 +75,9 @@ public class ProductTypeServiceImpl extends ServiceImpl<ProductTypeMapper, Produ
 
     @Override
     public ProductType checkProductType(ProductType productType) {
-        ProductType selectOne = this.productTypeMapper.checkProductType(productType);
-        return selectOne;
+        QueryWrapper<ProductType> qw = new QueryWrapper<>();
+        qw.eq(null != productType.getName(), "name", productType.getName());
+        return this.productTypeMapper.selectOne(qw);
     }
 
     /**
@@ -83,7 +89,18 @@ public class ProductTypeServiceImpl extends ServiceImpl<ProductTypeMapper, Produ
     @Override
     public Object queryProductTypeByProviderid(Integer providerid) {
         QueryWrapper<ProductType> qw = new QueryWrapper<>();
+        QueryWrapper<Goods> goodsQw = new QueryWrapper<>();
         qw.eq(null != providerid, "supper_id", providerid);
         return this.productTypeMapper.selectList(qw);
+    }
+
+    /**
+     * 查询所有类别
+     *
+     * @return
+     */
+    @Override
+    public List<ProductType> loadAllProductType() {
+        return this.productTypeMapper.selectList(null);
     }
 }

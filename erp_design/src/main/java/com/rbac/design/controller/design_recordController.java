@@ -114,17 +114,6 @@ public class design_recordController {
     }
 
 
-    @ApiOperation("上下架商品")
-    @PostMapping("/putawayrecord")
-    public Response putawayrecord(@RequestBody design_record record) {
-        try {
-            service.putawayrecord(record);
-            return new Response(true, "成功");
-        } catch (Exception e) {
-            e.printStackTrace();
-            return new Response(false, "失败");
-        }
-    }
 
     @RequestMapping("/deletebatch")
     public Response deletebatch(@RequestBody Integer[] idx) {

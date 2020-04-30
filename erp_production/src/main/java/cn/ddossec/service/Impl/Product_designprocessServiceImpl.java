@@ -18,6 +18,10 @@ public class Product_designprocessServiceImpl implements Product_designprocessSe
         return product_designprocessMapper.findAllProduction_modesign_procedure();
     }
 
+    @Override
+    public List<Product_designprocess> findDId(String design_id) {
+        return product_designprocessMapper.findDId(design_id);
+    }
 
 
     @Override

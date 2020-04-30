@@ -79,25 +79,24 @@ public class WarehouseStockServiceImpl implements WarehouseStockService {
     }
 
     /**
-     * 修改数据
-     *
-     * @param warehouseStock 实例对象
-     * @return 实例对象
+     * 通过库存编号修改安全库存配置
+     * @param minAmount 库存报警下限
+     * @param maxAmount 库存报警上限
+     * @param maxCapacityAmount 最大存储量
+     * @param stockId 库存编号
      */
     @Override
-    public int update(WarehouseStock warehouseStock) {
-        this.warehouseStockMapper.update(warehouseStock);
-        return this.warehouseStockMapper.update(warehouseStock);
+    public void updateAmount(Integer minAmount,Integer maxAmount,Integer maxCapacityAmount,String stockId){
+        this.warehouseStockMapper.updateAmount(minAmount, maxAmount, maxCapacityAmount, stockId);
     }
 
     /**
-     * 通过主键删除数据
+     * 通过产品编号删除数据
      *
-     * @param id 主键
-     * @return 是否成功
+     * @param productId 产品编号
      */
     @Override
-    public boolean deleteById(Integer id) {
-        return this.warehouseStockMapper.deleteById(id) > 0;
+    public int deleteByProductId(String productId){
+        return warehouseStockMapper.deleteByProductId(productId);
     }
 }

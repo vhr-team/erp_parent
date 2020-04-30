@@ -5,6 +5,7 @@ import cn.ddossec.mapper.WarehouseInboundMapper;
 import cn.ddossec.service.WarehouseInboundService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 import java.util.List;
@@ -32,16 +33,18 @@ public class WarehouseInboundServiceImpl implements WarehouseInboundService {
         return this.warehouseInboundMapper.queryById(id);
     }
 
+
     /**
-     * 查询多条数据
+     * 查询入库单
      *
+     * @param checkTag 入库审核状态
      * @param offset 查询起始位置
      * @param limit 查询条数
      * @return 对象列表
      */
     @Override
-    public List<WarehouseInbound> queryAllByLimit(int offset, int limit) {
-        return this.warehouseInboundMapper.queryAllByLimit(offset, limit);
+    public List<WarehouseInbound> queryInboundLimit(String checkTag,int offset,int limit){
+        return this.warehouseInboundMapper.queryInboundLimit(checkTag, offset, limit);
     }
 
     /**
@@ -50,6 +53,7 @@ public class WarehouseInboundServiceImpl implements WarehouseInboundService {
      * @param warehouseInbound 实例对象
      * @return 实例对象
      */
+    @Transactional
     @Override
     public int insertWarehousing(WarehouseInbound warehouseInbound) {
         return this.warehouseInboundMapper.insertWarehousing(warehouseInbound);

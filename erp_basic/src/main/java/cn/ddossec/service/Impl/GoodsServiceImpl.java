@@ -2,9 +2,9 @@ package cn.ddossec.service.Impl;
 
 import cn.ddossec.common.Constant;
 import cn.ddossec.common.DataGridView;
+import cn.ddossec.domain.ProductType;
 import cn.ddossec.domain.Basics_supper;
 import cn.ddossec.domain.Goods;
-import cn.ddossec.domain.ProductType;
 import cn.ddossec.mapper.Basics_supperMapper;
 import cn.ddossec.mapper.GoodsMapper;
 import cn.ddossec.mapper.ProductTypeMapper;
@@ -98,5 +98,20 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsMapper, Goods> implements
         }
 
         return new DataGridView(page.getTotal(), goodsList);
+    }
+
+    /**
+     * 根据商品类别ID，查询商品
+     *
+     * @param producttypeid
+     * @return
+     */
+    @Override
+    public Object queryGoodsByProductTypeId(Integer producttypeid) {
+
+        QueryWrapper<Goods> qw = new QueryWrapper<>();
+        qw.eq(null != producttypeid, "productTypeId", producttypeid);
+
+        return this.baseMapper.selectList(qw);
     }
 }

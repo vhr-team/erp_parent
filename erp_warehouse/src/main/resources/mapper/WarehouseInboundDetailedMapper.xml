@@ -75,10 +75,10 @@
         </where>
     </select>
 
-    <!--新增所有列-->
-    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
-        insert into erp.Warehouse_inbound_detailed(parent_id, product_id, product_name, product_describe, amount, amount_unit, cost_price, subtotal, gathered_amount, gather_tag)
-        values (#{parentId}, #{productId}, #{productName}, #{productDescribe}, #{amount}, #{amountUnit}, #{costPrice}, #{subtotal}, #{gatheredAmount}, #{gatherTag})
+    <!--新增入库详细单-->
+    <insert id="insertWarehouseDetailed">
+        insert into erp.Warehouse_inbound_detailed(parent_id, product_name, product_id, product_describe, amount, amount_unit, cost_price, subtotal)
+        values (#{parentId}, #{productName}, #{productId}, #{productDescribe}, #{amount}, #{amountUnit}, #{costPrice}, #{subtotal})
     </insert>
 
     <!--通过主键修改数据-->

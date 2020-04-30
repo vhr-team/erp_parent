@@ -15,6 +15,12 @@ public interface Product_designprocessMapper {
     /*查询所有数据**/
     public List<Product_designprocess> findAllProduction_modesign_procedure();
 
+    /**
+     * 根据产品编号查询单中的工序
+     * @param design_id
+     * @return
+     */
+    public  List<Product_designprocess>   findDId(String  design_id);
 
     /**
      * 添加

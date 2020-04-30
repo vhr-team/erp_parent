@@ -32,6 +32,19 @@ public class Product_designprocessController {
         rut.put("count",100);
         return rut ;
     }
+    @RequestMapping("/getAllDid")
+    public Map<String,Object> getAllDid(String design_id){
+        Map<String,Object> rut = new HashMap<>();
+        /*获取所有信息*/
+        List<Product_designprocess> list = product_designprocessService.findDId(design_id);
+        rut.put("data",list);
+        rut.put("code",0);
+        rut.put("msg","");
+        rut.put("count",100);
+        return rut ;
+    }
+
+
     /*
      * 添加
      * @param Product_designprocess

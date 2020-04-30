@@ -39,12 +39,12 @@ public interface WarehouseInboundDetailedMapper {
     List<WarehouseInboundDetailed> queryAll(WarehouseInboundDetailed warehouseInboundDetailed);
 
     /**
-     * 新增数据
+     * 新增入库详细单
      *
      * @param warehouseInboundDetailed 实例对象
      * @return 影响行数
      */
-    int insert(WarehouseInboundDetailed warehouseInboundDetailed);
+    int insertWarehouseDetailed(WarehouseInboundDetailed warehouseInboundDetailed);
 
     /**
      * 修改数据

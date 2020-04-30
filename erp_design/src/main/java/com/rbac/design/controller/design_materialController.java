@@ -144,10 +144,10 @@ public class design_materialController {
         try {
             detailService.add_detail(detail);
             service.adddesign_material(material);
-            return new Response(true, "修改成功");
+            return new Response(true, "添加成功");
         } catch (Exception e) {
             e.printStackTrace();
-            return new Response(false, "修改失败");
+            return new Response(false, "添加失败");
         }
     }
 

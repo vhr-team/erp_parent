@@ -5,6 +5,7 @@ import cn.ddossec.mapper.WarehouseInboundDetailedMapper;
 import cn.ddossec.service.WarehouseInboundDetailedService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -44,15 +45,15 @@ public class WarehouseInboundDetailedServiceImpl implements WarehouseInboundDeta
     }
 
     /**
-     * 新增数据
+     * 新增入库详细单
      *
      * @param warehouseInboundDetailed 实例对象
      * @return 实例对象
      */
+    @Transactional
     @Override
-    public WarehouseInboundDetailed insert(WarehouseInboundDetailed warehouseInboundDetailed) {
-        this.warehouseInboundDetailedMapper.insert(warehouseInboundDetailed);
-        return warehouseInboundDetailed;
+    public void insertWarehouseDetailed(WarehouseInboundDetailed warehouseInboundDetailed) {
+        this.warehouseInboundDetailedMapper.insertWarehouseDetailed(warehouseInboundDetailed);
     }
 
     /**

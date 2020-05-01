@@ -54,6 +54,9 @@ public class ConsoleLog implements Serializable {
     @TableField(value = "emp_id")
     private Integer empId;
 
+    @TableField(exist = false)
+    private String userName;
+
     /**
      * 备注
      */

@@ -152,6 +152,7 @@ public class OrderModelServiceImpl extends ServiceImpl<OrderModelMapper, OrderMo
 
     /**
      * 审核订单
+     *
      * @param orderModel
      */
     @Override
@@ -175,6 +176,60 @@ public class OrderModelServiceImpl extends ServiceImpl<OrderModelMapper, OrderMo
 
         this.consoleLogMapper.insert(c1);
         this.orderModelMapper.updateById(order);
+    }
+
+    /**
+     * 修改采购单
+     *
+     * @param orderModel
+     */
+    @Override
+    public void updateOrder(OrderModel orderModel) {
+        int totalNum = 0;
+        double totalPrice = 0;
+
+        QueryWrapper<OrderDetail> qw = new QueryWrapper<>();
+        qw.eq(null != orderModel.getOrderId(), "order_id", orderModel.getOrderId());
+        this.orderDetailMapper.delete(qw);
+
+        // 4.订单类型
+        orderModel.setOrderType(new Integer(Constants.ORDER_TYPE_BUY));
+        // 5.订单状态
+        orderModel.setOrderState(new Integer(Constants.ORDER_TYPE_BUY_AUDIT));
+
+        List<OrderDetail> orderDetails = new ArrayList<>();
+
+        for (int i = 0; i < orderModel.getProductTypeId().length; i++) {
+            // 订单明细
+            OrderDetail detail = new OrderDetail();
+            detail.setDetailNum(orderModel.getDetailNum()[i]);// 数量
+            detail.setDetailPrice(orderModel.getDetailPrice()[i]);// 单价价格
+            detail.setProductId(orderModel.getGoodsId()[i]);// 商品
+            // 剩余数量
+            detail.setSurplus(orderModel.getDetailNum()[i]);
+
+            totalNum = totalNum + orderModel.getDetailNum()[i];
+            totalPrice = totalPrice + orderModel.getDetailNum()[i] * orderModel.getDetailPrice()[i];
+
+            orderDetails.add(detail);
+        }
+
+        orderModel.setTotalNum(totalNum);
+        orderModel.setTotalPrice(totalPrice);
+        orderModel.setDetails(orderDetails);
+
+        this.orderModelMapper.updateById(orderModel);
+        log.debug("保存订单成功！");
+
+        List<OrderDetail> newOrderDetails = new ArrayList<>();
+        for (OrderDetail detail : orderDetails) {
+            detail.setOrderId(orderModel.getOrderId());
+            newOrderDetails.add(detail);
+        }
+
+        // 保存订单明细
+        saveOrderDetail(newOrderDetails);
+        log.debug("保存订单明细成功");
     }
 
     public void saveOrderDetail(List<OrderDetail> orderDetails) {

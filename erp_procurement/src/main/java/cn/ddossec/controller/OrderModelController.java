@@ -54,11 +54,9 @@ public class OrderModelController {
     @PostMapping("addOrder")
     public ResultObj addOrder(@RequestBody OrderModel orderModel) {
         try {
-            System.out.println(orderModel);
             this.orderModelService.addOrder(orderModel);
             return ResultObj.ADD_SUCCESS;
         } catch (Exception e) {
-            System.out.println(e.getMessage());
             return ResultObj.ADD_ERROR;
         }
     }
@@ -72,11 +70,25 @@ public class OrderModelController {
     @PostMapping("auditOrder")
     public ResultObj auditOrder(@RequestBody OrderModel orderModel) {
         try {
-            System.out.println("审核订单" + orderModel);
             this.orderModelService.auditOrder(orderModel);
             return ResultObj.AUDIT_SUCCESS;
         } catch (Exception e) {
             return ResultObj.AUDIT_ERROR;
+        }
+    }
+
+    /**
+     * 修改采购单
+     * @param orderModel
+     * @return
+     */
+    @PostMapping("updateOrder")
+    public ResultObj updateOrder(@RequestBody OrderModel orderModel){
+        try {
+            this.orderModelService.updateOrder(orderModel);
+            return ResultObj.UPDATE_SUCCESS;
+        } catch (Exception e) {
+            return ResultObj.UPDATE_ERROR;
         }
     }
 }

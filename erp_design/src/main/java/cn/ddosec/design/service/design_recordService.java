@@ -60,4 +60,10 @@ public interface design_recordService {
 
     /*档案恢复*/
     void recordrecover(product_design_record record);
+
+    /*查询已回收的数量*/
+    int recovernum();
+
+    /*审核查询*/
+    PageResult findPagecheck(Integer page, Integer pageSize, product_design_record record);
 }

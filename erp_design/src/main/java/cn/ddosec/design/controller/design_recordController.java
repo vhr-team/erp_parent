@@ -104,5 +104,17 @@ public class design_recordController {
         }
     }
 
+    @ApiOperation("查询已回收的数量")
+    @RequestMapping("/recovernum")
+    public int recovernum() {
+        return service.recovernum();
+    }
+
+
+    @ApiOperation("查询审核状态")
+    @RequestMapping("/findPagecheck")
+    public PageResult findPagecheck(Integer page, Integer pageSize, @RequestBody product_design_record record) {
+        return service.findPagecheck(page, pageSize, record);
+    }
 
 }

@@ -1,5 +1,6 @@
 package cn.ddossec.domain;
 
+import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -14,6 +15,7 @@ import java.io.Serializable;
  */
 @Data
 @NoArgsConstructor
+@TableName(value = "Warehouse_inbound")
 public class WarehouseInbound implements Serializable {
     private static final long serialVersionUID = -51353765254939309L;
     /**

@@ -1,6 +1,7 @@
 package cn.ddossec.mapper;
 
 import cn.ddossec.domain.WarehouseInbound;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.Date;
@@ -12,7 +13,7 @@ import java.util.List;
  * @author 谷辉
  * @since 2020-04-24 17:06:41
  */
-public interface WarehouseInboundMapper {
+public interface WarehouseInboundMapper extends BaseMapper<WarehouseInbound> {
 
     /**
      * 通过ID查询单条数据
@@ -21,17 +22,6 @@ public interface WarehouseInboundMapper {
      * @return 实例对象
      */
     WarehouseInbound queryById(Integer id);
-
-    /**
-     * 查询入库单
-     *
-     * @param checkTag 入库审核状态
-     * @param offset 查询起始位置
-     * @param limit 查询条数
-     * @return 对象列表
-     */
-    List<WarehouseInbound> queryInboundLimit(@Param("checkTag") String checkTag, @Param("offset") int offset, @Param("limit") int limit);
-
 
     /**
      * 入库申请登记

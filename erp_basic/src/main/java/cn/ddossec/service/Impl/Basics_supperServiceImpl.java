@@ -2,9 +2,11 @@ package cn.ddossec.service.Impl;
 
 import cn.ddossec.domain.Basics_supper;
 import cn.ddossec.mapper.Basics_supperMapper;
+import cn.ddossec.mapper.GoodsMapper;
 import cn.ddossec.service.Basics_supperService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -14,9 +16,13 @@ public class Basics_supperServiceImpl implements Basics_supperService {
     @Autowired
     Basics_supperMapper basics_supperMapper;
 
+    @Autowired
+    GoodsMapper goodsMapper;
+
     @Override
     public List<Basics_supper> findAll() {
         return basics_supperMapper.findAll();
+
     }
 
     @Override
@@ -31,9 +37,12 @@ public class Basics_supperServiceImpl implements Basics_supperService {
         return basics_supperMapper.sellCount();
     }
 
-    @Override
-    public int delBasics_supperMapperById(Integer id) {
-        return basics_supperMapper.delBasics_supperMapperById(id);
+    @Transactional
+    public void delBasics_supperMapperById(Integer id) {
+
+         basics_supperMapper.delBasics_supperMapperById(id);
+        goodsMapper.delsId(id);
+
     }
 
     @Override
@@ -61,5 +70,7 @@ public class Basics_supperServiceImpl implements Basics_supperService {
     public Basics_supper selectById(Integer id) {
         return basics_supperMapper.selectById(id);
     }
+
+
 
 }

@@ -28,4 +28,11 @@
     price, `number`, dangernum, goodsimg, available, providerid, productTypeId, producer, 
     unit
   </sql>
+  <delete id="delsId">
+
+    DELETE FROM bus_goods WHERE providerid = #{providerid}
+
+  </delete>
+
+
 </mapper>

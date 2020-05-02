@@ -11,4 +11,10 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * @date 2020-04-2410:14
  */
 public interface GoodsMapper extends BaseMapper<Goods> {
+
+    /**
+     * 根据供应商ID删除商品
+     *
+     */
+    void delsId(Integer providerid);
 }

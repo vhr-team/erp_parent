@@ -2,10 +2,8 @@ package cn.ddossec.service.impl;
 
 import cn.ddossec.common.Constants;
 import cn.ddossec.common.DataGridView;
-import cn.ddossec.domain.Basics_supper;
-import cn.ddossec.domain.OrderDetail;
-import cn.ddossec.domain.OrderModel;
-import cn.ddossec.domain.User;
+import cn.ddossec.domain.*;
+import cn.ddossec.mapper.ConsoleLogMapper;
 import cn.ddossec.mapper.OrderDetailMapper;
 import cn.ddossec.mapper.OrderModelMapper;
 import cn.ddossec.service.OrderModelService;
@@ -42,6 +40,9 @@ public class OrderModelServiceImpl extends ServiceImpl<OrderModelMapper, OrderMo
     @Autowired
     private OrderDetailMapper orderDetailMapper;
 
+    @Autowired
+    private ConsoleLogMapper consoleLogMapper;
+
     /**
      * 查询所有订单，可以带条件，分页查询
      *
@@ -68,6 +69,8 @@ public class OrderModelServiceImpl extends ServiceImpl<OrderModelMapper, OrderMo
 
         qw.ge(null != orderModelVo.getMinTotalPrice(), "total_price", orderModelVo.getMinTotalPrice());
         qw.le(null != orderModelVo.getMaxTotalPrice(), "total_price", orderModelVo.getMaxTotalPrice());
+
+        qw.orderByDesc("creater_time");
 
         this.baseMapper.selectPage(page, qw);
         List<OrderModel> modelList = page.getRecords();
@@ -134,6 +137,88 @@ public class OrderModelServiceImpl extends ServiceImpl<OrderModelMapper, OrderMo
         orderModel.setDetails(orderDetails);
 
         this.orderModelMapper.insert(orderModel);
+        log.debug("保存订单成功！");
+
+        List<OrderDetail> newOrderDetails = new ArrayList<>();
+        for (OrderDetail detail : orderDetails) {
+            detail.setOrderId(orderModel.getOrderId());
+            newOrderDetails.add(detail);
+        }
+
+        // 保存订单明细
+        saveOrderDetail(newOrderDetails);
+        log.debug("保存订单明细成功");
+    }
+
+    /**
+     * 审核订单
+     *
+     * @param orderModel
+     */
+    @Override
+    public void auditOrder(OrderModel orderModel) {
+        OrderModel order = this.orderModelMapper.selectById(orderModel.getOrderId());
+        // 订单状态
+        order.setOrderState(orderModel.getOrderState());
+        // 审核人
+        order.setChecker(orderModel.getChecker());
+        // 审核时间
+        order.setCheckTime(new Date());
+
+        // ---------- 创建一个日志对象
+        ConsoleLog c1 = new ConsoleLog();
+        c1.setEmpId(orderModel.getChecker());
+        c1.setEntityId(orderModel.getOrderId());
+        c1.setNote(orderModel.getNote());
+        c1.setOptTime(new Date());
+        c1.setOptType("审核订单");
+        c1.setTableName("bus_orderModel");
+
+        this.consoleLogMapper.insert(c1);
+        this.orderModelMapper.updateById(order);
+    }
+
+    /**
+     * 修改采购单
+     *
+     * @param orderModel
+     */
+    @Override
+    public void updateOrder(OrderModel orderModel) {
+        int totalNum = 0;
+        double totalPrice = 0;
+
+        QueryWrapper<OrderDetail> qw = new QueryWrapper<>();
+        qw.eq(null != orderModel.getOrderId(), "order_id", orderModel.getOrderId());
+        this.orderDetailMapper.delete(qw);
+
+        // 4.订单类型
+        orderModel.setOrderType(new Integer(Constants.ORDER_TYPE_BUY));
+        // 5.订单状态
+        orderModel.setOrderState(new Integer(Constants.ORDER_TYPE_BUY_AUDIT));
+
+        List<OrderDetail> orderDetails = new ArrayList<>();
+
+        for (int i = 0; i < orderModel.getProductTypeId().length; i++) {
+            // 订单明细
+            OrderDetail detail = new OrderDetail();
+            detail.setDetailNum(orderModel.getDetailNum()[i]);// 数量
+            detail.setDetailPrice(orderModel.getDetailPrice()[i]);// 单价价格
+            detail.setProductId(orderModel.getGoodsId()[i]);// 商品
+            // 剩余数量
+            detail.setSurplus(orderModel.getDetailNum()[i]);
+
+            totalNum = totalNum + orderModel.getDetailNum()[i];
+            totalPrice = totalPrice + orderModel.getDetailNum()[i] * orderModel.getDetailPrice()[i];
+
+            orderDetails.add(detail);
+        }
+
+        orderModel.setTotalNum(totalNum);
+        orderModel.setTotalPrice(totalPrice);
+        orderModel.setDetails(orderDetails);
+
+        this.orderModelMapper.updateById(orderModel);
         log.debug("保存订单成功！");
 
         List<OrderDetail> newOrderDetails = new ArrayList<>();

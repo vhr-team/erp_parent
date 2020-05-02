@@ -29,5 +29,4 @@ public class OrderDetailController {
     public List<OrderDetail> getDetailByOrderId(Integer orderId) {
         return this.orderDetailService.getDetailByOrderId(orderId);
     }
-
 }

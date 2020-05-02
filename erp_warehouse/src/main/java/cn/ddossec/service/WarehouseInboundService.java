@@ -1,5 +1,6 @@
 package cn.ddossec.service;
 
+import cn.ddossec.common.DataGridView;
 import cn.ddossec.domain.WarehouseInbound;
 import org.apache.ibatis.annotations.Param;
 
@@ -31,7 +32,7 @@ public interface WarehouseInboundService {
      * @param limit 查询条数
      * @return 对象列表
      */
-    List<WarehouseInbound> queryInboundLimit(String checkTag,int offset,int limit);
+    DataGridView queryInboundLimit(String checkTag, int offset, int limit);
 
     /**
      * 入库申请登记

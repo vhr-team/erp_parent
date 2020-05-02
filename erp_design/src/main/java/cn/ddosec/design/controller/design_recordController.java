@@ -138,6 +138,17 @@ public class design_recordController {
     @RequestMapping("/selectBymaterielArchivesId")
     public List<product_material_archives> selectBymaterielArchivesId(String materielArchivesId) {
         return material_archivesservice.selectBymaterielArchivesId(materielArchivesId);
+    }
 
+    @ApiOperation("档案审核")
+    @RequestMapping("/updatecheck")
+    public Response updatecheck(@RequestBody product_design_record record) {
+        try {
+            service.updatechecker(record);
+            return new Response(true, "审核成功");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new Response(false, "审核失败");
+        }
     }
 }

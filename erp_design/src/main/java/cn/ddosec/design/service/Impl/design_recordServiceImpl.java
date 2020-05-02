@@ -31,7 +31,6 @@ public class design_recordServiceImpl implements design_recordService {
         Date currentTime = new Date();
         SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMddHHmmss");
         String dateString = formatter.format(currentTime);
-        System.out.println("TIME:::" + dateString);
         return dateString;
     }
 
@@ -218,6 +217,13 @@ public class design_recordServiceImpl implements design_recordService {
         product_design_recordQuery.Criteria criteria = query.createCriteria();
         criteria.andProductIdEqualTo(record.getProductId());
         mapper.updateByExampleSelective(record, query);
+    }
+
+    @Override
+    public void updatechecker(product_design_record record) {
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
+        record.setCheckTime(df.format(new Date()));
+        mapper.updateByPrimaryKeySelective(record);
     }
 
 

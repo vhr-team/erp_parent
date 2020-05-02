@@ -61,7 +61,6 @@ public class design_materialController {
     @RequestMapping("/selectById")
     public product_design_material selectById(String ID) {
         product_design_material product_design_material = service.selectById(ID);
-        System.out.println(product_design_material);
         return product_design_material;
     }
 }

@@ -71,4 +71,7 @@ public interface design_recordService {
     PageResult notconstitute(Integer page, Integer pageSize, product_design_record record);
 
     void updateByproID(product_design_record record);
+
+    /*档案审核*/
+    void updatechecker(product_design_record record);
 }

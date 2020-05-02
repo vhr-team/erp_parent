@@ -34,7 +34,6 @@ public class design_materialServiceImpl implements design_materialService {
         Date currentTime = new Date();
         SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMddHHmmss");
         String dateString = formatter.format(currentTime);
-        System.out.println("TIME:::" + dateString);
         return dateString;
     }
 

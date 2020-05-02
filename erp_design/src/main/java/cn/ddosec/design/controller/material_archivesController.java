@@ -41,7 +41,6 @@ public class material_archivesController {
         Date currentTime = new Date();
         SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMddHHmmss");
         String dateString = formatter.format(currentTime);
-        System.out.println("TIME:::" + dateString);
         return dateString;
     }
 

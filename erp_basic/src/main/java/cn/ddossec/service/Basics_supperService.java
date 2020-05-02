@@ -1,6 +1,7 @@
 package cn.ddossec.service;
 
 import cn.ddossec.domain.Basics_supper;
+import io.swagger.models.auth.In;
 
 import java.util.List;
 
@@ -15,8 +16,8 @@ public interface Basics_supperService {
     public List<Basics_supper> findAllBasics_supper(Integer page, Integer rows);
     /*查询多少供应商*/
     public int sellCount();
-    /*根据id删除**/
-    public int delBasics_supperMapperById(Integer id);
+    /*根据id 删除供应商的时候 同时删除供应商下的商品**/
+    public void delBasics_supperMapperById(Integer id);
     /* 批量删除*/
     public void deleteIds(String params);
     /*添加**/
@@ -28,4 +29,7 @@ public interface Basics_supperService {
 
     /*根据id查询再修改**/
     public Basics_supper selectById(Integer id);
+
+
+
 }

@@ -18,7 +18,7 @@ public interface Basics_supperMapper {
     /*根据供应商名称查询**/
     public List<Basics_supper> sellName(String name, Integer page, Integer rows);
 
-    /*根据id删除**/
+    /*根据id删除供应商**/
     public int delBasics_supperMapperById(Integer id);
 
     /*查询供应商多少个*/
@@ -35,5 +35,10 @@ public interface Basics_supperMapper {
 
     /*根据id查询再修改**/
     public Basics_supper selectById(Integer id);
+
+
+
+
+
 
 }

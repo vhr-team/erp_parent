@@ -72,7 +72,7 @@ public class WarehouseStockServiceImpl implements WarehouseStockService {
         queryWrapper.eq("check_tag",check_tag).select("id","product_name","product_id","min_amount","max_amount","register","register_time","config","max_capacity_amount");
         Page<WarehouseStock> pages = new Page<>(page,limit);
         IPage<WarehouseStock> iPage = this.warehouseStockMapper.selectPage(pages,queryWrapper);
-        //iPage.getTotal() 总共多少页   iPage.getRecords()查询出来的所以数据
+        //iPage.getTotal() 总共多少页   iPage.getRecords()查询出来的所有数据
         return new DataGridView(iPage.getTotal(),iPage.getRecords());
     }
 

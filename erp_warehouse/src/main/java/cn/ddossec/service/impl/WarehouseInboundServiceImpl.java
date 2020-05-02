@@ -1,8 +1,12 @@
 package cn.ddossec.service.impl;
 
+import cn.ddossec.common.DataGridView;
 import cn.ddossec.domain.WarehouseInbound;
 import cn.ddossec.mapper.WarehouseInboundMapper;
 import cn.ddossec.service.WarehouseInboundService;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -43,8 +47,12 @@ public class WarehouseInboundServiceImpl implements WarehouseInboundService {
      * @return 对象列表
      */
     @Override
-    public List<WarehouseInbound> queryInboundLimit(String checkTag,int offset,int limit){
-        return this.warehouseInboundMapper.queryInboundLimit(checkTag, offset, limit);
+    public DataGridView queryInboundLimit(String checkTag, int page, int limit){
+        QueryWrapper<WarehouseInbound> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("check_tag",checkTag).select("inbound_id","reason","register_time","amount_sum","cost_price_sum");
+        Page<WarehouseInbound> pages = new Page<>(page,limit);
+        IPage iPage = warehouseInboundMapper.selectPage(pages,queryWrapper);
+        return new DataGridView(iPage.getTotal(),iPage.getRecords());
     }
 
     /**

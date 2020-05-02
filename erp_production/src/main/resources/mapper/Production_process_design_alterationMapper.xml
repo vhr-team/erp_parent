@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.ddossec.mapper.Production_process_design_alterationMapper">
+    <select id="findAllProductionAlteration" resultType="cn.ddossec.domain.Production_process_design_alteration">
+        SELECT * from production_process_design_alteration
+    </select>
+
+    <delete id="delProductionAlterationById">
+        DELETE FROM production_process_design_alteration WHERE id = #{id}
+    </delete>
+
+    <insert id="insertProductionAlteration">
+        INSERT INTO production_process_design_alteration(sjdId,shdId,edit_date,edit_count) VALUES(#{sjdId},#{shdId},#{edit_date},#{edit_count})
+    </insert>
+
+    <update id="updateProductionAlteration">
+        update  production_process_design_alteration
+        <trim prefix="set" suffixOverrides=",">
+            <if test="sjdId!=null">sjdId=#{sjdId},</if>
+            <if test="shdId!=null">shdId=#{shdId},</if>
+            <if test="edit_date!=null">edit_date=#{edit_date},</if>
+            <if test="edit_count!=null">edit_count=#{edit_count},</if>
+        </trim>
+        where id=#{id}
+    </update>
+
+    <select id="selectById" resultType="cn.ddossec.domain.Production_process_design_alteration">
+        SELECT * FROM production_process_design_alteration WHERE id = #{id}
+    </select>
+</mapper>

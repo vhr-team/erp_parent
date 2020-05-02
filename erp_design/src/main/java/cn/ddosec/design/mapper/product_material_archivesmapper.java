@@ -3,6 +3,7 @@ package cn.ddosec.design.mapper;
 import cn.ddosec.design.pojo.product_material_archives;
 import cn.ddosec.design.pojo.product_material_archivesQuery;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 
@@ -28,4 +29,12 @@ public interface product_material_archivesmapper {
     int updateByPrimaryKeySelective(product_material_archives record);
 
     int updateByPrimaryKey(product_material_archives record);
+
+    @Select("select * from product_material_archives where productid=#{Id} ")
+    List<product_material_archives> selectByID(String Id);
+
+    @Select("select count(*) from product_material_archives where productid=#{ID}  ")
+    int selectcount(String ID);
+
+
 }

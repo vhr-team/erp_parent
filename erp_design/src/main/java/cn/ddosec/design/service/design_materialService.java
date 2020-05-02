@@ -3,6 +3,8 @@ package cn.ddosec.design.service;
 import cn.ddosec.design.entity.PageResult;
 import cn.ddosec.design.pojo.product_design_material;
 
+import java.util.List;
+
 /**
  * 物料档案
  *
@@ -23,4 +25,8 @@ public interface design_materialService {
     void addmaterial(product_design_material material);
 
     void updatematerial(product_design_material material);
+
+    List<product_design_material> selectAll();
+
+    product_design_material selectById(String Id);
 }

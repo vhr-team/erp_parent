@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author joker_dj
@@ -96,5 +97,16 @@ public class design_materialServiceImpl implements design_materialService {
     @Override
     public void updatematerial(product_design_material material) {
         mapper.updateByPrimaryKeySelective(material);
+    }
+
+    @Override
+    public List<product_design_material> selectAll() {
+        return mapper.selectByExample(null);
+    }
+
+    @Override
+    public product_design_material selectById(String Id) {
+        product_design_material product_design_material = mapper.selectByproId(Id);
+        return product_design_material;
     }
 }

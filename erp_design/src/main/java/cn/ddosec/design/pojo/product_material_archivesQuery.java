@@ -584,73 +584,73 @@ public class product_material_archivesQuery {
             return (Criteria) this;
         }
 
-        public Criteria andCheckremarkIsNull() {
-            addCriterion("checkremark is null");
+        public Criteria andAssembleidIsNull() {
+            addCriterion("assembleId is null");
             return (Criteria) this;
         }
 
-        public Criteria andCheckremarkIsNotNull() {
-            addCriterion("checkremark is not null");
+        public Criteria andAssembleidIsNotNull() {
+            addCriterion("assembleId is not null");
             return (Criteria) this;
         }
 
-        public Criteria andCheckremarkEqualTo(String value) {
-            addCriterion("checkremark =", value, "checkremark");
+        public Criteria andAssembleidEqualTo(String value) {
+            addCriterion("assembleId =", value, "assembleid");
             return (Criteria) this;
         }
 
-        public Criteria andCheckremarkNotEqualTo(String value) {
-            addCriterion("checkremark <>", value, "checkremark");
+        public Criteria andAssembleidNotEqualTo(String value) {
+            addCriterion("assembleId <>", value, "assembleid");
             return (Criteria) this;
         }
 
-        public Criteria andCheckremarkGreaterThan(String value) {
-            addCriterion("checkremark >", value, "checkremark");
+        public Criteria andAssembleidGreaterThan(String value) {
+            addCriterion("assembleId >", value, "assembleid");
             return (Criteria) this;
         }
 
-        public Criteria andCheckremarkGreaterThanOrEqualTo(String value) {
-            addCriterion("checkremark >=", value, "checkremark");
+        public Criteria andAssembleidGreaterThanOrEqualTo(String value) {
+            addCriterion("assembleId >=", value, "assembleid");
             return (Criteria) this;
         }
 
-        public Criteria andCheckremarkLessThan(String value) {
-            addCriterion("checkremark <", value, "checkremark");
+        public Criteria andAssembleidLessThan(String value) {
+            addCriterion("assembleId <", value, "assembleid");
             return (Criteria) this;
         }
 
-        public Criteria andCheckremarkLessThanOrEqualTo(String value) {
-            addCriterion("checkremark <=", value, "checkremark");
+        public Criteria andAssembleidLessThanOrEqualTo(String value) {
+            addCriterion("assembleId <=", value, "assembleid");
             return (Criteria) this;
         }
 
-        public Criteria andCheckremarkLike(String value) {
-            addCriterion("checkremark like", value, "checkremark");
+        public Criteria andAssembleidLike(String value) {
+            addCriterion("assembleId like", value, "assembleid");
             return (Criteria) this;
         }
 
-        public Criteria andCheckremarkNotLike(String value) {
-            addCriterion("checkremark not like", value, "checkremark");
+        public Criteria andAssembleidNotLike(String value) {
+            addCriterion("assembleId not like", value, "assembleid");
             return (Criteria) this;
         }
 
-        public Criteria andCheckremarkIn(List<String> values) {
-            addCriterion("checkremark in", values, "checkremark");
+        public Criteria andAssembleidIn(List<String> values) {
+            addCriterion("assembleId in", values, "assembleid");
             return (Criteria) this;
         }
 
-        public Criteria andCheckremarkNotIn(List<String> values) {
-            addCriterion("checkremark not in", values, "checkremark");
+        public Criteria andAssembleidNotIn(List<String> values) {
+            addCriterion("assembleId not in", values, "assembleid");
             return (Criteria) this;
         }
 
-        public Criteria andCheckremarkBetween(String value1, String value2) {
-            addCriterion("checkremark between", value1, value2, "checkremark");
+        public Criteria andAssembleidBetween(String value1, String value2) {
+            addCriterion("assembleId between", value1, value2, "assembleid");
             return (Criteria) this;
         }
 
-        public Criteria andCheckremarkNotBetween(String value1, String value2) {
-            addCriterion("checkremark not between", value1, value2, "checkremark");
+        public Criteria andAssembleidNotBetween(String value1, String value2) {
+            addCriterion("assembleId not between", value1, value2, "assembleid");
             return (Criteria) this;
         }
     }

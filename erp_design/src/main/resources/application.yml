@@ -12,4 +12,6 @@ spring:
     url: jdbc:mysql://xhh.ddos-sec.cn:3306/erp?useUnicode=true&characterEncoding=utf8&serverTimezone=GMT%2B8&useSSL=false
     username: root
     password: 1234
-
+#mybatis: #配置mybatis sql打印
+#  configuration:
+#    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl

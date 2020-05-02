@@ -39,9 +39,9 @@ public class product_material_archives implements Serializable {
     private String materialremark;
 
     /**
-     * 审核信息
+     * 组装设计ID
      */
-    private String checkremark;
+    private String assembleid;
 
     private static final long serialVersionUID = 1L;
 
@@ -101,12 +101,12 @@ public class product_material_archives implements Serializable {
         this.materialremark = materialremark == null ? null : materialremark.trim();
     }
 
-    public String getCheckremark() {
-        return checkremark;
+    public String getAssembleid() {
+        return assembleid;
     }
 
-    public void setCheckremark(String checkremark) {
-        this.checkremark = checkremark == null ? null : checkremark.trim();
+    public void setAssembleid(String assembleid) {
+        this.assembleid = assembleid == null ? null : assembleid.trim();
     }
 
     @Override
@@ -122,7 +122,7 @@ public class product_material_archives implements Serializable {
         sb.append(", materialnum=").append(materialnum);
         sb.append(", materialunit=").append(materialunit);
         sb.append(", materialremark=").append(materialremark);
-        sb.append(", checkremark=").append(checkremark);
+        sb.append(", assembleid=").append(assembleid);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();
@@ -147,7 +147,7 @@ public class product_material_archives implements Serializable {
                 && (this.getMaterialnum() == null ? other.getMaterialnum() == null : this.getMaterialnum().equals(other.getMaterialnum()))
                 && (this.getMaterialunit() == null ? other.getMaterialunit() == null : this.getMaterialunit().equals(other.getMaterialunit()))
                 && (this.getMaterialremark() == null ? other.getMaterialremark() == null : this.getMaterialremark().equals(other.getMaterialremark()))
-                && (this.getCheckremark() == null ? other.getCheckremark() == null : this.getCheckremark().equals(other.getCheckremark()));
+                && (this.getAssembleid() == null ? other.getAssembleid() == null : this.getAssembleid().equals(other.getAssembleid()));
     }
 
     @Override
@@ -161,7 +161,7 @@ public class product_material_archives implements Serializable {
         result = prime * result + ((getMaterialnum() == null) ? 0 : getMaterialnum().hashCode());
         result = prime * result + ((getMaterialunit() == null) ? 0 : getMaterialunit().hashCode());
         result = prime * result + ((getMaterialremark() == null) ? 0 : getMaterialremark().hashCode());
-        result = prime * result + ((getCheckremark() == null) ? 0 : getCheckremark().hashCode());
+        result = prime * result + ((getAssembleid() == null) ? 0 : getAssembleid().hashCode());
         return result;
     }
 }

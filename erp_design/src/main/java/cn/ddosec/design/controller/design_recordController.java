@@ -3,12 +3,16 @@ package cn.ddosec.design.controller;
 import cn.ddosec.design.entity.PageResult;
 import cn.ddosec.design.entity.Response;
 import cn.ddosec.design.pojo.product_design_record;
+import cn.ddosec.design.pojo.product_material_archives;
 import cn.ddosec.design.service.design_recordService;
+import cn.ddosec.design.service.material_archivesService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 /**
  * @author joker_dj
@@ -19,6 +23,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class design_recordController {
     @Autowired
     design_recordService service;
+    @Autowired
+    material_archivesService material_archivesservice;
 
     /**
      * 根据ID查询档案
@@ -117,4 +123,21 @@ public class design_recordController {
         return service.findPagecheck(page, pageSize, record);
     }
 
+    @ApiOperation("查询没有物料组成id的档案")
+    @RequestMapping("/notconstitute")
+    public PageResult notconstitute(Integer page, Integer pageSize, @RequestBody product_design_record record) {
+        return service.notconstitute(page, pageSize, record);
+    }
+
+    /**
+     * 查询物料组成
+     *
+     * @param materielArchivesId
+     * @return
+     */
+    @RequestMapping("/selectBymaterielArchivesId")
+    public List<product_material_archives> selectBymaterielArchivesId(String materielArchivesId) {
+        return material_archivesservice.selectBymaterielArchivesId(materielArchivesId);
+
+    }
 }

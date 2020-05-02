@@ -66,4 +66,9 @@ public interface design_recordService {
 
     /*审核查询*/
     PageResult findPagecheck(Integer page, Integer pageSize, product_design_record record);
+
+    /*查询未物料组成的档案*/
+    PageResult notconstitute(Integer page, Integer pageSize, product_design_record record);
+
+    void updateByproID(product_design_record record);
 }

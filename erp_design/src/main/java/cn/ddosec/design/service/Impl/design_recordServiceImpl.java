@@ -193,4 +193,32 @@ public class design_recordServiceImpl implements design_recordService {
         Page<product_design_record> product_design_records = (Page<product_design_record>) mapper.selectByExample(query);
         return new PageResult(product_design_records.getTotal(), product_design_records.getResult());
     }
+
+    @Override
+    public PageResult notconstitute(Integer page, Integer pageSize, product_design_record record) {
+        PageHelper.startPage(page, pageSize);
+        product_design_recordQuery query = new product_design_recordQuery();
+        product_design_recordQuery.Criteria criteria = query.createCriteria();
+        if (record != null) {
+            if (record.getProductName() != null) {
+                criteria.andProductNameLike("%" + record.getProductName() + "%");
+            }
+            if (record.getRegisterTime() != null) {
+                criteria.andRegisterTimeLike("%" + record.getRegisterTime() + "%");
+            }
+        }
+        // criteria.andMaterielArchivesIdIsNull();
+        Page<product_design_record> product_design_records = (Page<product_design_record>) mapper.selectByExample(query);
+        return new PageResult(product_design_records.getTotal(), product_design_records.getResult());
+    }
+
+    @Override
+    public void updateByproID(product_design_record record) {
+        product_design_recordQuery query = new product_design_recordQuery();
+        product_design_recordQuery.Criteria criteria = query.createCriteria();
+        criteria.andProductIdEqualTo(record.getProductId());
+        mapper.updateByExampleSelective(record, query);
+    }
+
+
 }

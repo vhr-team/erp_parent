@@ -9,7 +9,7 @@
         <result column="materialnum" property="materialnum" jdbcType="INTEGER"/>
         <result column="materialunit" property="materialunit" jdbcType="VARCHAR"/>
         <result column="materialremark" property="materialremark" jdbcType="VARCHAR"/>
-        <result column="checkremark" property="checkremark" jdbcType="VARCHAR"/>
+        <result column="assembleId" property="assembleid" jdbcType="VARCHAR"/>
     </resultMap>
     <sql id="Example_Where_Clause">
         <where>
@@ -74,7 +74,7 @@
     <sql id="Base_Column_List">
         <if test="fields == null">
             id, materialid, productid, materialname, materialnum, materialunit, materialremark,
-            checkremark
+            assembleId
         </if>
         <if test="fields != null">
             ${fields}
@@ -97,7 +97,7 @@
     </select>
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
         select
-        id,materialid,productid,materialname,materialnum,materialunit,materialremark,checkremark
+        id,materialid,productid,materialname,materialnum,materialunit,materialremark,assembleId
         from product_material_archives
         where id = #{id,jdbcType=INTEGER}
     </select>
@@ -114,10 +114,10 @@
     <insert id="insert" parameterType="cn.ddosec.design.pojo.product_material_archives">
         insert into product_material_archives (id, materialid, productid,
         materialname, materialnum, materialunit,
-        materialremark, checkremark)
+        materialremark, assembleId)
         values (#{id,jdbcType=INTEGER}, #{materialid,jdbcType=VARCHAR}, #{productid,jdbcType=VARCHAR},
         #{materialname,jdbcType=VARCHAR}, #{materialnum,jdbcType=INTEGER}, #{materialunit,jdbcType=VARCHAR},
-        #{materialremark,jdbcType=VARCHAR}, #{checkremark,jdbcType=VARCHAR})
+        #{materialremark,jdbcType=VARCHAR}, #{assembleid,jdbcType=VARCHAR})
     </insert>
     <insert id="insertSelective" parameterType="cn.ddosec.design.pojo.product_material_archives">
         insert into product_material_archives
@@ -143,8 +143,8 @@
             <if test="materialremark != null">
                 materialremark,
             </if>
-            <if test="checkremark != null">
-                checkremark,
+            <if test="assembleid != null">
+                assembleId,
             </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -169,8 +169,8 @@
             <if test="materialremark != null">
                 #{materialremark,jdbcType=VARCHAR},
             </if>
-            <if test="checkremark != null">
-                #{checkremark,jdbcType=VARCHAR},
+            <if test="assembleid != null">
+                #{assembleid,jdbcType=VARCHAR},
             </if>
         </trim>
     </insert>
@@ -205,8 +205,8 @@
             <if test="record.materialremark != null">
                 materialremark = #{record.materialremark,jdbcType=VARCHAR},
             </if>
-            <if test="record.checkremark != null">
-                checkremark = #{record.checkremark,jdbcType=VARCHAR},
+            <if test="record.assembleid != null">
+                assembleId = #{record.assembleid,jdbcType=VARCHAR},
             </if>
         </set>
         <if test="_parameter != null">
@@ -222,7 +222,7 @@
         materialnum = #{record.materialnum,jdbcType=INTEGER},
         materialunit = #{record.materialunit,jdbcType=VARCHAR},
         materialremark = #{record.materialremark,jdbcType=VARCHAR},
-        checkremark = #{record.checkremark,jdbcType=VARCHAR}
+        assembleId = #{record.assembleid,jdbcType=VARCHAR}
         <if test="_parameter != null">
             <include refid="Update_By_Example_Where_Clause"/>
         </if>
@@ -248,8 +248,8 @@
             <if test="materialremark != null">
                 materialremark = #{materialremark,jdbcType=VARCHAR},
             </if>
-            <if test="checkremark != null">
-                checkremark = #{checkremark,jdbcType=VARCHAR},
+            <if test="assembleid != null">
+                assembleId = #{assembleid,jdbcType=VARCHAR},
             </if>
         </set>
         where id = #{id,jdbcType=INTEGER}
@@ -262,7 +262,7 @@
         materialnum = #{materialnum,jdbcType=INTEGER},
         materialunit = #{materialunit,jdbcType=VARCHAR},
         materialremark = #{materialremark,jdbcType=VARCHAR},
-        checkremark = #{checkremark,jdbcType=VARCHAR}
+        assembleId = #{assembleid,jdbcType=VARCHAR}
         where id = #{id,jdbcType=INTEGER}
     </update>
 </mapper>

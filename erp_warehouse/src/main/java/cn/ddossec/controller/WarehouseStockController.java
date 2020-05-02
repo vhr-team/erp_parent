@@ -74,17 +74,16 @@ public class WarehouseStockController {
     /**
      * 查询安全库存配置单
      *
-     * @param check_tag 复核标志 0待审核 1通过
+     * @param check_tag 复核标志 0待审核 1审核通过 2审核未通过
      * @param page 从多少页开始
      * @param limit 每页显示数
      * @return
      */
     @ApiOperation(value = "查询安全库存配置单")
-    @GetMapping(value = "querySecuritySheet/{check_tag}")
-    public DataGridView querySecuritySheet(@PathVariable(value = "check_tag") String check_tag,
+    @GetMapping(value = "querySecuritySheet")
+    public DataGridView querySecuritySheet(@RequestParam("check_tag") String check_tag,
                                            @RequestParam("page") int page,
                                            @RequestParam("limit") int limit){
-        System.out.println(check_tag+"-----"+page+"------"+limit);
         return warehouseStockServiceImpl.querySecuritySheet(check_tag,page,limit);
     }
 

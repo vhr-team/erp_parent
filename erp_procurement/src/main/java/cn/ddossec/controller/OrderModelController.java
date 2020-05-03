@@ -98,7 +98,7 @@ public class OrderModelController {
      * @return
      */
     @GetMapping("queryAllTaskList")
-    public List<OrderModel> queryAllTaskList(OrderModelVo vo){
+    public DataGridView queryAllTaskList(OrderModelVo vo){
         return this.orderModelService.queryAllTaskList(vo);
     }
 }

@@ -5,8 +5,6 @@ import cn.ddossec.domain.OrderModel;
 import cn.ddossec.vo.OrderModelVo;
 import com.baomidou.mybatisplus.extension.service.IService;
 
-import java.util.List;
-
 public interface OrderModelService extends IService<OrderModel> {
 
     /**
@@ -39,5 +37,5 @@ public interface OrderModelService extends IService<OrderModel> {
      * @param vo
      * @return
      */
-    List<OrderModel> queryAllTaskList(OrderModelVo vo);
+    DataGridView queryAllTaskList(OrderModelVo vo);
 }

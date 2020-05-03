@@ -46,4 +46,9 @@ public class Basics_supper implements Serializable {
      * 备注
      */
     private String remarks;
+
+    /**
+     * 送货状态  1 送货  2 自提
+     */
+    private Integer ndeeds;
 }

@@ -91,8 +91,6 @@ public class OrderModelServiceImpl extends ServiceImpl<OrderModelMapper, OrderMo
                 }
             }
         }
-
-        System.out.println(modelList);
         return new DataGridView(page.getTotal(), modelList);
     }
 
@@ -230,6 +228,83 @@ public class OrderModelServiceImpl extends ServiceImpl<OrderModelMapper, OrderMo
         // 保存订单明细
         saveOrderDetail(newOrderDetails);
         log.debug("保存订单明细成功");
+    }
+
+    /**
+     * 查询，所有审核通过的运输单
+     *
+     * @param vo
+     * @return
+     */
+    @Override
+    public DataGridView queryAllTaskList(OrderModelVo vo) {
+
+        // 分页查询
+        IPage<OrderModel> page = new Page<>(vo.getPage(), vo.getPageSize());
+
+        // 设置查询条件
+        QueryWrapper<OrderModel> qw = new QueryWrapper<>();
+        // 订单类型
+        qw.eq(null != vo.getOrderType(), "order_type", vo.getOrderType());
+        // 订单状态
+        qw.eq(null != vo.getOrderState(), "order_state", vo.getOrderState());
+
+        // 下单时间 开始时间
+        qw.ge(null != vo.getStartTime(), "creater_time", vo.getStartTime());
+        // 下单时间 结束时间
+        qw.le(null != vo.getEndTime(), "creater_time", vo.getEndTime());
+
+        // 供应商
+        qw.eq(null != vo.getSupplierId(), "supplier_id", vo.getSupplierId());
+
+        // 下单人
+        qw.eq(null != vo.getCreater(), "creater", vo.getCreater());
+
+        // 审核时间
+        qw.ge(null != vo.getAuditStartTime(), "check_time", vo.getAuditStartTime());
+        qw.le(null != vo.getAuditEndTime(), "check_time", vo.getAuditEndTime());
+
+        // 发货方式
+
+        // 审核人
+        qw.eq(null != vo.getChecker(), "checker", vo.getChecker());
+
+        // 跟单人
+        qw.eq(null != vo.getCompleter(), "completer", vo.getCompleter());
+
+        this.orderModelMapper.selectPage(page, qw);
+        List<OrderModel> orderModelList = page.getRecords();
+
+        // 查询所有用户
+        List<User> userList = this.userFeign.loadAllUser();
+
+        // 查询供应商
+        List<Basics_supper> allSupper = this.basicsSupperFeign.getAllSupper();
+
+        List<OrderModel> newOrderModelList = new ArrayList<>();
+
+        for (OrderModel model : orderModelList) {
+            // 翻译制单人
+            for (User user : userList) {
+                if (null != model.getCreater() && model.getCreater().equals(user.getId())) {
+                    model.setUser(user);
+                }
+                // 审核人
+                if (null != model.getChecker() && model.getChecker().equals(user.getId())) {
+                    model.setCheckerName(user.getName());
+                }
+            }
+
+            // 翻译供应商
+            for (Basics_supper supper : allSupper) {
+                if (null != model.getSupplierId() && model.getSupplierId().equals(supper.getId())) {
+                    model.setBasicsSupper(supper);
+                }
+            }
+            newOrderModelList.add(model);
+        }
+
+        return new DataGridView(page.getTotal(), newOrderModelList);
     }
 
     public void saveOrderDetail(List<OrderDetail> orderDetails) {

@@ -16,14 +16,6 @@ import java.util.List;
 public interface WarehouseInboundMapper extends BaseMapper<WarehouseInbound> {
 
     /**
-     * 通过ID查询单条数据
-     *
-     * @param id 主键
-     * @return 实例对象
-     */
-    WarehouseInbound queryById(Integer id);
-
-    /**
      * 入库申请登记
      *
      * @param warehouseInbound 实例对象
@@ -42,12 +34,5 @@ public interface WarehouseInboundMapper extends BaseMapper<WarehouseInbound> {
      */
     int updateWarehousing(@Param("check_tag") String check_tag,@Param("check_time") Date check_time,@Param("checker") String checker,@Param("inbound_id") String inbound_id);
 
-    /**
-     * 通过主键删除数据
-     *
-     * @param id 主键
-     * @return 影响行数
-     */
-    int deleteById(Integer id);
 
 }

@@ -32,16 +32,6 @@ public class WarehouseInboundController {
 
     @Autowired
     private WarehouseInboundDetailedService warehouseInboundDetailedServiceImpl;
-    /**
-     * 通过主键查询单条数据
-     *
-     * @param id 主键
-     * @return 单条数据
-     */
-    @GetMapping("selectOne")
-    public WarehouseInbound selectOne(Integer id) {
-        return this.warehouseInboundServiceImpl.queryById(id);
-    }
 
     /**
      * 入库申请登记

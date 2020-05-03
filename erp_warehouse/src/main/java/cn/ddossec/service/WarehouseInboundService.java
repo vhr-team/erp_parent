@@ -16,15 +16,6 @@ import java.util.List;
 public interface WarehouseInboundService {
 
     /**
-     * 通过ID查询单条数据
-     *
-     * @param id 主键
-     * @return 实例对象
-     */
-    WarehouseInbound queryById(Integer id);
-
-
-    /**
      * 查询入库单
      *
      * @param checkTag 入库审核状态
@@ -53,13 +44,5 @@ public interface WarehouseInboundService {
      */
     int updateWarehousing(String check_tag,Date check_time,String checker,String inbound_id);
 
-
-    /**
-     * 通过主键删除数据
-     *
-     * @param id 主键
-     * @return 是否成功
-     */
-    boolean deleteById(Integer id);
 
 }

@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
-import java.util.List;
 
 
 /**
@@ -30,23 +29,6 @@ public class WarehouseStockController {
     private WarehouseStockService warehouseStockServiceImpl;
 
 
-    /**
-     *
-     * @param offset 查询起始位置
-     * @param limit 查询条数
-     * @return
-     */
-    @ApiOperation(value = "按库存编号模糊查询+分页查询所有数据")
-    @GetMapping(value = {"queryAllByLimit/{offset}/{limit}/{stockId}","queryAllByLimit/{offset}/{limit}"})
-    public List<WarehouseStock> queryAllByLimit(@PathVariable("offset") Integer offset,
-                                                @PathVariable("limit") Integer limit,
-                                                @PathVariable(value = "stockId",required = false) String stockId){
-        if (stockId==null){
-            stockId="";
-        }
-        List<WarehouseStock> list = warehouseStockServiceImpl.queryAllByLimit(stockId,offset,limit);
-        return list;
-    }
 
     /**
      * 新增安全库存配置单
@@ -76,17 +58,22 @@ public class WarehouseStockController {
     /**
      * 查询安全库存配置单
      *
-     * @param check_tag 复核标志 0待审核 1审核通过 2审核未通过
+     * @param checkTag 复核标志 0待审核 1审核通过 2审核未通过
+     * @param productName 按照产品名称模糊查询
      * @param page 从多少页开始
      * @param limit 每页显示数
      * @return
      */
     @ApiOperation(value = "查询安全库存配置单")
     @GetMapping(value = "querySecuritySheet")
-    public DataGridView querySecuritySheet(@RequestParam("check_tag") String check_tag,
+    public DataGridView querySecuritySheet(@RequestParam("checkTag") String checkTag,
+                                           @RequestParam("productName") String productName,
                                            @RequestParam("page") int page,
                                            @RequestParam("limit") int limit){
-        return warehouseStockServiceImpl.querySecuritySheet(check_tag,page,limit);
+        if (productName==null){
+            productName="";
+        }
+        return warehouseStockServiceImpl.querySecuritySheet(checkTag,productName,page,limit);
     }
 
     /**

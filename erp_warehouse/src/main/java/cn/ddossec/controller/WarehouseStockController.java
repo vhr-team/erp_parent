@@ -63,7 +63,9 @@ public class WarehouseStockController {
         Date date = DateUtil.date();
         warehouseStock.setRegisterTime(date);
         try{
+            System.out.println(warehouseStock);
             warehouseStockServiceImpl.insertSecuritySheet(warehouseStock);
+            System.out.println(warehouseStock.getId());
             return new Response(true,"提交成功,等待审核!");
         }catch (Exception e){
             e.printStackTrace();

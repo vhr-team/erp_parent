@@ -17,6 +17,7 @@ public class OrderModelVo extends BaseVo {
 
     // 订单创建人
     private Integer creater;
+    private String createrName;
 
     private Integer minTotalNum;
     private Integer maxTotalNum;
@@ -36,4 +37,29 @@ public class OrderModelVo extends BaseVo {
 
     // 订单状态
     private Integer orderState;
+
+    /**
+     * 供应商ID
+     */
+    private Integer supplierId;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date auditEndTime;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date auditStartTime;
+
+    // 审核人
+    private Integer checker;
+    private String checkerName;
+
+    /**
+     * 订单负责人(ID）
+     */
+    private Integer completer;
+    private String completerName;
+
+    /**
+     * 发货方式
+     */
+    private Integer ndeeds;
 }

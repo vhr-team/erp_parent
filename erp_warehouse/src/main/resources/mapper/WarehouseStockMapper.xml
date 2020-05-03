@@ -105,10 +105,10 @@
     </select>
 
     <!--新增安全库存配置单-->
-    <insert id="insertSecuritySheet">
+   <!-- <insert id="insertSecuritySheet">
         insert into erp.Warehouse_stock(stock_id,product_name,product_id,min_amount,max_amount,register,register_time,config,max_capacity_amount)
         values (#{stockId}, #{productName}, #{productId}, #{minAmount}, #{maxAmount}, #{register}, #{registerTime}, #{config}, #{maxCapacityAmount})
-    </insert>
+    </insert>-->
 
     <!--复核成功-->
     <update id="updateSecuritySheet">

@@ -1,11 +1,13 @@
 package cn.ddossec.domain;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Date;
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * (WarehouseStock)实体类
@@ -21,6 +23,7 @@ public class WarehouseStock implements Serializable {
     /**
     * 序号
     */
+    @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
     /**
     * 库存编号

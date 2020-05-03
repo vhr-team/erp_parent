@@ -91,4 +91,14 @@ public class OrderModelController {
             return ResultObj.UPDATE_ERROR;
         }
     }
+
+    /**
+     * 查询，所有审核通过的运输单
+     * @param vo
+     * @return
+     */
+    @GetMapping("queryAllTaskList")
+    public DataGridView queryAllTaskList(OrderModelVo vo){
+        return this.orderModelService.queryAllTaskList(vo);
+    }
 }

@@ -15,6 +15,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -91,8 +92,6 @@ public class OrderModelServiceImpl extends ServiceImpl<OrderModelMapper, OrderMo
                 }
             }
         }
-
-        System.out.println(modelList);
         return new DataGridView(page.getTotal(), modelList);
     }
 
@@ -230,6 +229,101 @@ public class OrderModelServiceImpl extends ServiceImpl<OrderModelMapper, OrderMo
         // 保存订单明细
         saveOrderDetail(newOrderDetails);
         log.debug("保存订单明细成功");
+    }
+
+    /**
+     * 查询，所有审核通过的运输单
+     *
+     * @param vo
+     * @return
+     */
+    @Override
+    public DataGridView queryAllTaskList(OrderModelVo vo) {
+        List<OrderModel> endArr = new ArrayList<>();
+
+        // 查询所有用户
+        List<User> userList = this.userFeign.loadAllUser();
+        // 查询供应商
+        List<Basics_supper> allSupper = this.basicsSupperFeign.getAllSupper();
+
+        // 分页查询
+        IPage<OrderModel> page = new Page<>(vo.getPage(), vo.getPageSize());
+
+        // 设置查询条件
+        QueryWrapper<OrderModel> qw = new QueryWrapper<>();
+        // 订单类型
+        qw.eq(null != vo.getOrderType(), "order_type", vo.getOrderType());
+        // 订单状态
+        qw.eq(null != vo.getOrderState(), "order_state", vo.getOrderState());
+
+        // 下单时间 开始时间
+        qw.ge(null != vo.getStartTime(), "creater_time", vo.getStartTime());
+        // 下单时间 结束时间
+        qw.le(null != vo.getEndTime(), "creater_time", vo.getEndTime());
+
+        // 审核时间
+        qw.ge(null != vo.getAuditStartTime(), "check_time", vo.getAuditStartTime());
+        qw.le(null != vo.getAuditEndTime(), "check_time", vo.getAuditEndTime());
+
+        // 供应商
+        qw.eq(null != vo.getSupplierId(), "supplier_id", vo.getSupplierId());
+        for (User user : userList) {
+            if (null != vo.getCreaterName() && StringUtils.equalsIgnoreCase(user.getName(), vo.getCreaterName())) {
+                // 下单人
+                qw.eq(null != user.getId(), "creater", user.getId());
+            }
+
+            if (null != vo.getCheckerName() && vo.getCheckerName().equals(user.getName())) {
+                // 审核人
+                qw.eq(null != user.getId(), "checker", user.getId());
+            }
+
+            if (null != vo.getCompleterName() && vo.getCompleterName().equals(user.getName())) {
+                // 跟单人
+                qw.eq(null != user.getId(), "completer", user.getId());
+            }
+        }
+
+
+        this.orderModelMapper.selectPage(page, qw);
+        List<OrderModel> orderModelList = page.getRecords();
+
+        List<OrderModel> newOrderModelList = new ArrayList<>();
+
+        for (OrderModel model : orderModelList) {
+            // 翻译制单人
+            for (User user : userList) {
+                if (null != model.getCreater() && model.getCreater().equals(user.getId())) {
+                    model.setUser(user);
+                }
+                // 审核人
+                if (null != model.getChecker() && model.getChecker().equals(user.getId())) {
+                    model.setCheckerName(user.getName());
+                }
+            }
+
+            // 翻译供应商
+            for (Basics_supper supper : allSupper) {
+                if (null != model.getSupplierId() && model.getSupplierId().equals(supper.getId())) {
+                    model.setBasicsSupper(supper);
+                }
+            }
+
+            newOrderModelList.add(model);
+        }
+
+        for (OrderModel model : newOrderModelList) {
+            if (null != vo.getNdeeds() && vo.getNdeeds() == model.getBasicsSupper().getNdeeds()) {
+                endArr.add(model);
+            }
+        }
+
+        // 发货方式
+        if (null != endArr && endArr.size() > 0) {
+            return new DataGridView(Long.valueOf(endArr.size()), endArr);
+        } else {
+            return new DataGridView(Long.valueOf(newOrderModelList.size()), newOrderModelList);
+        }
     }
 
     public void saveOrderDetail(List<OrderDetail> orderDetails) {

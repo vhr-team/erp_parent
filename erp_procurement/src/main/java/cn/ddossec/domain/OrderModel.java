@@ -123,6 +123,12 @@ public class OrderModel implements Serializable {
     @TableField(exist = false)
     private String note;
 
+    @TableField(exist = false)
+    private Basics_supper basicsSupper;
+
+    @TableField(exist = false)
+    private User user;
+
     private static final long serialVersionUID = 1L;
 
     public static final String COL_ORDER_ID = "order_id";

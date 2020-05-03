@@ -48,7 +48,7 @@ public interface WarehouseStockMapper extends BaseMapper<WarehouseStock> {
      * @param warehouseStock 实例对象
      * @return 影响行数
      */
-    int insertSecuritySheet(WarehouseStock warehouseStock);
+    //int insertSecuritySheet(WarehouseStock warehouseStock);
 
 
     /**

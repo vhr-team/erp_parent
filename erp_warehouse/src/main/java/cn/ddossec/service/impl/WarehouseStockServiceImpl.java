@@ -57,7 +57,7 @@ public class WarehouseStockServiceImpl implements WarehouseStockService {
      */
     @Override
     public int insertSecuritySheet(WarehouseStock warehouseStock) {
-        return this.warehouseStockMapper.insertSecuritySheet(warehouseStock);
+        return this.warehouseStockMapper.insert(warehouseStock);
     }
 
     /**

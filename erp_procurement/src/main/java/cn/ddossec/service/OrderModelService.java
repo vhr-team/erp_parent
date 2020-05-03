@@ -5,6 +5,8 @@ import cn.ddossec.domain.OrderModel;
 import cn.ddossec.vo.OrderModelVo;
 import com.baomidou.mybatisplus.extension.service.IService;
 
+import java.util.List;
+
 public interface OrderModelService extends IService<OrderModel> {
 
     /**
@@ -31,4 +33,11 @@ public interface OrderModelService extends IService<OrderModel> {
      * @param orderModel
      */
     void updateOrder(OrderModel orderModel);
+
+    /**
+     * 查询，所有审核通过的运输单
+     * @param vo
+     * @return
+     */
+    List<OrderModel> queryAllTaskList(OrderModelVo vo);
 }

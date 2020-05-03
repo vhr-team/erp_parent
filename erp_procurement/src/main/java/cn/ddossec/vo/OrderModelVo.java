@@ -22,9 +22,9 @@ public class OrderModelVo extends BaseVo {
     private Integer minTotalNum;
     private Integer maxTotalNum;
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date endTime;
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date startTime;
 
     private Integer minTotalPrice;
@@ -43,9 +43,9 @@ public class OrderModelVo extends BaseVo {
      */
     private Integer supplierId;
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date auditEndTime;
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date auditStartTime;
 
     // 审核人

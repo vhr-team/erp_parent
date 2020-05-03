@@ -15,6 +15,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -238,6 +239,12 @@ public class OrderModelServiceImpl extends ServiceImpl<OrderModelMapper, OrderMo
      */
     @Override
     public DataGridView queryAllTaskList(OrderModelVo vo) {
+        List<OrderModel> endArr = new ArrayList<>();
+
+        // 查询所有用户
+        List<User> userList = this.userFeign.loadAllUser();
+        // 查询供应商
+        List<Basics_supper> allSupper = this.basicsSupperFeign.getAllSupper();
 
         // 分页查询
         IPage<OrderModel> page = new Page<>(vo.getPage(), vo.getPageSize());
@@ -254,32 +261,32 @@ public class OrderModelServiceImpl extends ServiceImpl<OrderModelMapper, OrderMo
         // 下单时间 结束时间
         qw.le(null != vo.getEndTime(), "creater_time", vo.getEndTime());
 
-        // 供应商
-        qw.eq(null != vo.getSupplierId(), "supplier_id", vo.getSupplierId());
-
-        // 下单人
-        qw.eq(null != vo.getCreater(), "creater", vo.getCreater());
-
         // 审核时间
         qw.ge(null != vo.getAuditStartTime(), "check_time", vo.getAuditStartTime());
         qw.le(null != vo.getAuditEndTime(), "check_time", vo.getAuditEndTime());
 
-        // 发货方式
+        // 供应商
+        qw.eq(null != vo.getSupplierId(), "supplier_id", vo.getSupplierId());
+        for (User user : userList) {
+            if (null != vo.getCreaterName() && StringUtils.equalsIgnoreCase(user.getName(), vo.getCreaterName())) {
+                // 下单人
+                qw.eq(null != user.getId(), "creater", user.getId());
+            }
 
-        // 审核人
-        qw.eq(null != vo.getChecker(), "checker", vo.getChecker());
+            if (null != vo.getCheckerName() && vo.getCheckerName().equals(user.getName())) {
+                // 审核人
+                qw.eq(null != user.getId(), "checker", user.getId());
+            }
 
-        // 跟单人
-        qw.eq(null != vo.getCompleter(), "completer", vo.getCompleter());
+            if (null != vo.getCompleterName() && vo.getCompleterName().equals(user.getName())) {
+                // 跟单人
+                qw.eq(null != user.getId(), "completer", user.getId());
+            }
+        }
+
 
         this.orderModelMapper.selectPage(page, qw);
         List<OrderModel> orderModelList = page.getRecords();
-
-        // 查询所有用户
-        List<User> userList = this.userFeign.loadAllUser();
-
-        // 查询供应商
-        List<Basics_supper> allSupper = this.basicsSupperFeign.getAllSupper();
 
         List<OrderModel> newOrderModelList = new ArrayList<>();
 
@@ -301,10 +308,22 @@ public class OrderModelServiceImpl extends ServiceImpl<OrderModelMapper, OrderMo
                     model.setBasicsSupper(supper);
                 }
             }
+
             newOrderModelList.add(model);
         }
 
-        return new DataGridView(page.getTotal(), newOrderModelList);
+        for (OrderModel model : newOrderModelList) {
+            if (null != vo.getNdeeds() && vo.getNdeeds() == model.getBasicsSupper().getNdeeds()) {
+                endArr.add(model);
+            }
+        }
+
+        // 发货方式
+        if (null != endArr && endArr.size() > 0) {
+            return new DataGridView(Long.valueOf(endArr.size()), endArr);
+        } else {
+            return new DataGridView(Long.valueOf(newOrderModelList.size()), newOrderModelList);
+        }
     }
 
     public void saveOrderDetail(List<OrderDetail> orderDetails) {

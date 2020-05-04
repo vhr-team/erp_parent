@@ -326,6 +326,15 @@ public class OrderModelServiceImpl extends ServiceImpl<OrderModelMapper, OrderMo
         }
     }
 
+    /**
+     * 任务指派
+     * @param orderModel
+     */
+    @Override
+    public void tranOrderAssginOrder(OrderModel orderModel) {
+
+    }
+
     public void saveOrderDetail(List<OrderDetail> orderDetails) {
         for (OrderDetail detail : orderDetails) {
             this.orderDetailMapper.insert(detail);

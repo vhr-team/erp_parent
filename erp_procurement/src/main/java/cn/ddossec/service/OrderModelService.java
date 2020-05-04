@@ -38,4 +38,10 @@ public interface OrderModelService extends IService<OrderModel> {
      * @return
      */
     DataGridView queryAllTaskList(OrderModelVo vo);
+
+    /**
+     * 任务指派
+     * @param orderModel
+     */
+    void tranOrderAssginOrder(OrderModel orderModel);
 }

@@ -101,4 +101,28 @@ public class OrderModelController {
     public DataGridView queryAllTaskList(OrderModelVo vo){
         return this.orderModelService.queryAllTaskList(vo);
     }
+
+    /**
+     * 加载运输部人员
+     * @return
+     */
+    @GetMapping("loadTransportUsers")
+    public DataGridView loadTransportUsers(){
+        return this.userFeign.queryUserByDeptId(7);
+    }
+
+    /**
+     * 任务指派
+     * @param orderModel
+     * @return
+     */
+    @PostMapping("tranOrderAssginOrder")
+    public ResultObj tranOrderAssginOrder(@RequestBody OrderModel orderModel){
+        try{
+            this.orderModelService.tranOrderAssginOrder(orderModel);
+            return ResultObj.ASSIGNED_SUCCESS;
+        }catch (Exception e){
+            return ResultObj.ASSIGNED_ERROR;
+        }
+    }
 }

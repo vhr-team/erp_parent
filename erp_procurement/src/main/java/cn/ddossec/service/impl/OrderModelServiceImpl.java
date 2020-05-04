@@ -332,7 +332,14 @@ public class OrderModelServiceImpl extends ServiceImpl<OrderModelMapper, OrderMo
      */
     @Override
     public void tranOrderAssginOrder(OrderModel orderModel) {
+        OrderModel model = this.orderModelMapper.selectById(orderModel);
+        // 订单负责人
+        model.setCompleter(orderModel.getCompleter());
+        // 订单状态改为运输单
+        model.setOrderType(new Integer(Constants.ORDER_TYPE_TRANS));
+        model.setOrderState(new Integer(Constants.ORDER_TYPE_TRANS_BUYING));
 
+        this.orderModelMapper.updateById(model);
     }
 
     public void saveOrderDetail(List<OrderDetail> orderDetails) {

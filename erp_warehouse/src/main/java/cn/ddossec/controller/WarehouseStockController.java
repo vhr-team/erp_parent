@@ -1,9 +1,12 @@
 package cn.ddossec.controller;
 
+import cn.ddosec.design.entity.PageResult;
+import cn.ddosec.design.pojo.product_design_record;
 import cn.ddossec.common.DataGridView;
 import cn.ddossec.common.Response;
 import cn.ddossec.domain.WarehouseStock;
 import cn.ddossec.service.WarehouseStockService;
+import cn.ddossec.service.designRecordFeignService;
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.lang.ObjectId;
 import io.swagger.annotations.ApiOperation;
@@ -28,6 +31,24 @@ public class WarehouseStockController {
     @Autowired
     private WarehouseStockService warehouseStockServiceImpl;
 
+    @Autowired
+    private designRecordFeignService designRecordFeignService;
+
+
+    /**
+     *   根据设计审核通过查询出制定安全库存配置单
+     * @param page
+     * @param pageSize
+     * @param record
+     * @return
+     */
+    @ApiOperation(value = "根据设计审核通过查询出制定安全库存配置单")
+    @RequestMapping(value = "findPagecheck")
+    public PageResult findPagecheck(@RequestParam("page") Integer page,
+                                    @RequestParam("limit") Integer pageSize,
+                                    @RequestBody product_design_record record){
+        return designRecordFeignService.findPagecheck(page, pageSize, record);
+    }
 
 
     /**
@@ -66,8 +87,8 @@ public class WarehouseStockController {
      */
     @ApiOperation(value = "查询安全库存配置单")
     @GetMapping(value = "querySecuritySheet")
-    public DataGridView querySecuritySheet(@RequestParam("checkTag") String checkTag,
-                                           @RequestParam("productName") String productName,
+    public DataGridView querySecuritySheet(@RequestParam("check_tag") String checkTag,
+                                           @RequestParam("product_name") String productName,
                                            @RequestParam("page") int page,
                                            @RequestParam("limit") int limit){
         if (productName==null){

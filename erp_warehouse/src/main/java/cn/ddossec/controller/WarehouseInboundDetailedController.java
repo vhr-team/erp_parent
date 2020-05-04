@@ -30,31 +30,22 @@ public class WarehouseInboundDetailedController {
 
     @Autowired
     private WarehouseInboundService warehouseInboundServiceImpl;
-    /**
-     * 通过主键查询单条数据
-     *
-     * @param id 主键
-     * @return 单条数据
-     */
-    @GetMapping("selectOne")
-    public WarehouseInboundDetailed selectOne(Integer id) {
-        return this.warehouseInboundDetailedServiceImpl.queryById(id);
-    }
 
     /**
-     * 查询待入库调度数据
+     * 入库调度表的调度查询
      *
-     * @param checkTag 入库审核状态
-     * @param page 查询起始位置
-     * @param limit 查询条数
-     * @return 对象列表
+     * @param id 父级序号
+     * @param page
+     * @param limit
+     * @return
      */
-    @ApiOperation(value = "查询待调度入库数据")
-    @RequestMapping("queryInboundLimit")
-    public DataGridView queryInboundLimit(@Param("checkTag") String checkTag,
-                                          @Param("page") int page,
-                                          @Param("limit") int limit){
-        return warehouseInboundServiceImpl.queryInboundLimit(checkTag, page, limit);
+    @ApiOperation(value = "入库调度表的调度查询")
+    @RequestMapping("queryInboundDetailed")
+    public DataGridView queryInboundDetailed(@RequestParam("id") Integer id,
+                                             @RequestParam("page") int page,
+                                             @RequestParam("limit") int limit) {
+
+       return warehouseInboundDetailedServiceImpl.queryInboundDetailed(id, page, limit);
     }
 
 }

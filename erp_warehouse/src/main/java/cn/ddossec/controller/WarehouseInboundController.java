@@ -1,5 +1,6 @@
 package cn.ddossec.controller;
 
+import cn.ddossec.common.DataGridView;
 import cn.ddossec.common.Response;
 import cn.ddossec.domain.WarehouseInbound;
 import cn.ddossec.domain.WarehouseInboundDetailed;
@@ -32,6 +33,23 @@ public class WarehouseInboundController {
 
     @Autowired
     private WarehouseInboundDetailedService warehouseInboundDetailedServiceImpl;
+
+    /**
+     * 查询可调度入库数据
+     *
+     * @param checkTag 入库审核状态
+     * @param page 查询起始位置
+     * @param limit 查询条数
+     * @return 对象列表
+     */
+    @ApiOperation(value = "查询待调度入库数据")
+    @RequestMapping("queryInboundLimit")
+    public DataGridView queryInboundLimit(@Param("check_tag") String checkTag,
+                                          @Param("page") int page,
+                                          @Param("limit") int limit){
+        return warehouseInboundServiceImpl.queryInboundLimit(checkTag, page, limit);
+    }
+
 
     /**
      * 入库申请登记

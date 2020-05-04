@@ -16,14 +16,24 @@ import java.util.List;
 public interface WarehouseInboundService {
 
     /**
-     * 查询入库单
+     * 入库管理
+     * @param storeTag 入库标志
+     * @param page
+     * @param limit
+     * @return
+     */
+    DataGridView queryInbound(String storeTag, int page, int limit);
+
+
+    /**
+     * 查询可调度入库数据
      *
      * @param checkTag 入库审核状态
-     * @param offset 查询起始位置
+     * @param page 查询起始位置
      * @param limit 查询条数
      * @return 对象列表
      */
-    DataGridView queryInboundLimit(String checkTag, int offset, int limit);
+    DataGridView queryInboundLimit(String checkTag, int page, int limit);
 
     /**
      * 入库申请登记

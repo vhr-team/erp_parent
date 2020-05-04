@@ -174,12 +174,13 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     @Override
     public List<User> loadAllUser() {
         QueryWrapper<User> qw = new QueryWrapper<>();
-        qw.eq("type",Constant.USER_TYPE_NORMAL);
+        qw.eq("type", Constant.USER_TYPE_NORMAL);
         return this.userMapper.selectList(qw);
     }
 
     /**
      * 查询领导信息
+     *
      * @param mgr
      * @return
      */

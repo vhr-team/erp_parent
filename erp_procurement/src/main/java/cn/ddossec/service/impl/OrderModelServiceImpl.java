@@ -326,6 +326,46 @@ public class OrderModelServiceImpl extends ServiceImpl<OrderModelMapper, OrderMo
         }
     }
 
+    /**
+     * 任务指派
+     * @param orderModel
+     */
+    @Override
+    public void tranOrderAssginOrder(OrderModel orderModel) {
+        OrderModel model = this.orderModelMapper.selectById(orderModel);
+        // 订单负责人
+        model.setCompleter(orderModel.getCompleter());
+        // 订单状态改为运输单
+        model.setOrderType(new Integer(Constants.ORDER_TYPE_TRANS));
+        model.setOrderState(new Integer(Constants.ORDER_TYPE_TRANS_BUYING));
+
+        this.orderModelMapper.updateById(model);
+    }
+
+    /**
+     * 确认取货
+     */
+    @Override
+    public void taskOrderPickGoods(OrderModel orderModel) {
+        OrderModel model = this.orderModelMapper.selectById(orderModel);
+        model.setOrderState(3);
+        this.orderModelMapper.updateById(model);
+    }
+
+    /**
+     * 结单
+     * @param orderModel
+     */
+    @Override
+    public void finishTranOrder(OrderModel orderModel) {
+        OrderModel model = this.orderModelMapper.selectById(orderModel);
+
+        model.setOrderType(3);// 入库单
+        model.setOrderState(1);
+
+        this.orderModelMapper.updateById(model);
+    }
+
     public void saveOrderDetail(List<OrderDetail> orderDetails) {
         for (OrderDetail detail : orderDetails) {
             this.orderDetailMapper.insert(detail);

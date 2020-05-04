@@ -352,6 +352,20 @@ public class OrderModelServiceImpl extends ServiceImpl<OrderModelMapper, OrderMo
         this.orderModelMapper.updateById(model);
     }
 
+    /**
+     * 结单
+     * @param orderModel
+     */
+    @Override
+    public void finishTranOrder(OrderModel orderModel) {
+        OrderModel model = this.orderModelMapper.selectById(orderModel);
+
+        model.setOrderType(3);// 入库单
+        model.setOrderState(1);
+
+        this.orderModelMapper.updateById(model);
+    }
+
     public void saveOrderDetail(List<OrderDetail> orderDetails) {
         for (OrderDetail detail : orderDetails) {
             this.orderDetailMapper.insert(detail);

@@ -132,6 +132,7 @@ public class OrderModelController {
 
     /**
      * 确认取货
+     *
      * @param orderModel
      * @return
      */
@@ -142,6 +143,22 @@ public class OrderModelController {
             return ResultObj.PICKCARGO_SUCCESS;
         } catch (Exception e) {
             return ResultObj.PICKCARGO_ERROR;
+        }
+    }
+
+    /**
+     * 结单
+     *
+     * @param orderModel
+     * @return
+     */
+    @PostMapping("finishTranOrder")
+    public ResultObj finishTranOrder(@RequestBody OrderModel orderModel) {
+        try {
+            this.orderModelService.finishTranOrder(orderModel);
+            return ResultObj.TRANORDER_SUCCESS;
+        } catch (Exception e) {
+            return ResultObj.TRANORDER_ERROR;
         }
     }
 }

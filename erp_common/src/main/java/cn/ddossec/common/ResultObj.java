@@ -63,6 +63,12 @@ public class ResultObj {
     public static final ResultObj PICKCARGO_SUCCESS = new ResultObj(200,"确认成功");
     public static final ResultObj PICKCARGO_ERROR = new ResultObj(-1,"确认失败");
 
+    /**
+     * 结单信息
+     */
+    public static final ResultObj TRANORDER_SUCCESS = new ResultObj(200,"结单成功");
+    public static final ResultObj TRANORDER_ERROR = new ResultObj(-1,"结单失败");
+
     private Integer code = 200;
     private String msg = "";
     private Object token = "";

@@ -49,4 +49,10 @@ public interface OrderModelService extends IService<OrderModel> {
      * 确认取货
      */
     void taskOrderPickGoods(OrderModel orderModel);
+
+    /**
+     * 结单
+     * @param orderModel
+     */
+    void finishTranOrder(OrderModel orderModel);
 }

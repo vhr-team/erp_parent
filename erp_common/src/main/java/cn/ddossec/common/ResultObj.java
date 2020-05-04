@@ -57,6 +57,12 @@ public class ResultObj {
     public static final ResultObj ASSIGNED_SUCCESS = new ResultObj(200,"指派成功");
     public static final ResultObj ASSIGNED_ERROR = new ResultObj(-1,"指派失败");
 
+    /**
+     * 取货信息
+     */
+    public static final ResultObj PICKCARGO_SUCCESS = new ResultObj(200,"确认成功");
+    public static final ResultObj PICKCARGO_ERROR = new ResultObj(-1,"确认失败");
+
     private Integer code = 200;
     private String msg = "";
     private Object token = "";

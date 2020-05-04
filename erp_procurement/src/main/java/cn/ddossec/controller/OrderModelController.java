@@ -79,11 +79,12 @@ public class OrderModelController {
 
     /**
      * 修改采购单
+     *
      * @param orderModel
      * @return
      */
     @PostMapping("updateOrder")
-    public ResultObj updateOrder(@RequestBody OrderModel orderModel){
+    public ResultObj updateOrder(@RequestBody OrderModel orderModel) {
         try {
             this.orderModelService.updateOrder(orderModel);
             return ResultObj.UPDATE_SUCCESS;
@@ -94,35 +95,53 @@ public class OrderModelController {
 
     /**
      * 查询，所有审核通过的运输单
+     *
      * @param vo
      * @return
      */
     @GetMapping("queryAllTaskList")
-    public DataGridView queryAllTaskList(OrderModelVo vo){
+    public DataGridView queryAllTaskList(OrderModelVo vo) {
         return this.orderModelService.queryAllTaskList(vo);
     }
 
     /**
      * 加载运输部人员
+     *
      * @return
      */
     @GetMapping("loadTransportUsers")
-    public DataGridView loadTransportUsers(){
+    public DataGridView loadTransportUsers() {
         return this.userFeign.queryUserByDeptId(7);
     }
 
     /**
      * 任务指派
+     *
      * @param orderModel
      * @return
      */
     @PostMapping("tranOrderAssginOrder")
-    public ResultObj tranOrderAssginOrder(@RequestBody OrderModel orderModel){
-        try{
+    public ResultObj tranOrderAssginOrder(@RequestBody OrderModel orderModel) {
+        try {
             this.orderModelService.tranOrderAssginOrder(orderModel);
             return ResultObj.ASSIGNED_SUCCESS;
-        }catch (Exception e){
+        } catch (Exception e) {
             return ResultObj.ASSIGNED_ERROR;
+        }
+    }
+
+    /**
+     * 确认取货
+     * @param orderModel
+     * @return
+     */
+    @PostMapping("taskOrderPickGoods")
+    public ResultObj taskOrderPickGoods(@RequestBody OrderModel orderModel) {
+        try {
+            this.orderModelService.taskOrderPickGoods(orderModel);
+            return ResultObj.PICKCARGO_SUCCESS;
+        } catch (Exception e) {
+            return ResultObj.PICKCARGO_ERROR;
         }
     }
 }

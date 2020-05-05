@@ -18,7 +18,7 @@ public interface Product_designprocessService {
      */
     public  List<Product_designprocess>   findDId(String  design_id);
 
-    public void updateProduct_designprocess(List<Product_designprocess> product_designprocessesLis,Integer sjdId ,Integer shdId,String edie_date);
+    public void updateProduct_designprocess(List<Product_designprocess> product_designprocessesLis,Integer sjdId ,Integer shdId,String edie_date,String userName);
 
     /**
      * 添加

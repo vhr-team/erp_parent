@@ -17,6 +17,10 @@ public class Production_process_design_alteration {
      */
     private Integer sjdId;
 
+
+    private  Product_auditTable product_auditTable;
+
+    private Production_process_design_sheet production_process_design_sheet;
     /**
      *审核单ID
      */
@@ -32,11 +36,14 @@ public class Production_process_design_alteration {
      */
     private Integer edit_count;
 
-    public Production_process_design_alteration(Integer id, Integer sjdId, Integer shdId, String edit_date, Integer edit_count) {
+    private String userName;
+
+    public Production_process_design_alteration(Integer id, Integer sjdId, Integer shdId, String edit_date, Integer edit_count, String userName) {
         this.id = id;
         this.sjdId = sjdId;
         this.shdId = shdId;
         this.edit_date = edit_date;
         this.edit_count = edit_count;
+        this.userName = userName;
     }
 }

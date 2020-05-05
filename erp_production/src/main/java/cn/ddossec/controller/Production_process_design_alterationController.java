@@ -50,8 +50,8 @@ public class Production_process_design_alterationController {
 
     @RequestMapping("/editItemsProduct_alteration")
     public String editItemsProduct_alteration(@PathVariable("id") Integer id, Model model){
-        Production_process_design_sheet production_process_design_sheet = production_process_design_alterationService.selectById(id);
-        model.addAttribute("production_process_design_sheet",production_process_design_sheet);
+       // Production_process_design_sheet production_process_design_sheet = production_process_design_alterationService.selectById(id);
+     //   model.addAttribute("production_process_design_sheet",production_process_design_sheet);
         return "update";
     }
 

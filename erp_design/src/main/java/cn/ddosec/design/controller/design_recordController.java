@@ -143,6 +143,7 @@ public class design_recordController {
     @ApiOperation("档案审核")
     @RequestMapping("/updatecheck")
     public Response updatecheck(@RequestBody product_design_record record) {
+        System.out.println(record);
         try {
             service.updatechecker(record);
             return new Response(true, "审核成功");

@@ -15,5 +15,5 @@ public interface Production_process_design_alterationService {
 
     public boolean updateProductionAlteration(Production_process_design_alteration production_process_design_alteration);
 
-    public Production_process_design_sheet selectById(Integer id);
+    public Production_process_design_alteration selectById(Integer id);
 }

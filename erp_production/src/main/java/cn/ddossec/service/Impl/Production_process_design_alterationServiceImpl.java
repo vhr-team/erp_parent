@@ -16,6 +16,7 @@ public class Production_process_design_alterationServiceImpl implements Producti
     Production_process_design_alterationMapper production_process_design_alterationMapper;
 
 
+
     @Override
     public List<Production_process_design_alteration> findAllProductionAlteration() {
         return production_process_design_alterationMapper.findAllProductionAlteration();
@@ -37,7 +38,7 @@ public class Production_process_design_alterationServiceImpl implements Producti
     }
 
     @Override
-    public Production_process_design_sheet selectById(Integer id) {
-        return production_process_design_alterationMapper.selectById(id);
+    public Production_process_design_alteration selectById(Integer id) {
+        return null;
     }
 }

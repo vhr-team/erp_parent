@@ -53,10 +53,10 @@ public class Product_auditTableController {
         return "OK";
     }
     @RequestMapping("/edittSjdShb")
-    public String edittSjdShb(Production_process_design_sheet production_process_design_sheet , Integer prdouctId , String  gprocuJson1,Integer sjdId ,Integer shdId,String edie_date){
+    public String edittSjdShb(Production_process_design_sheet production_process_design_sheet , Integer prdouctId , String  gprocuJson1,Integer sjdId ,Integer shdId,String edie_date,String userName){
         Gson gson = new Gson();
         List<Product_designprocess> plgList=   gson.fromJson(gprocuJson1,new TypeToken<List<Product_designprocess>>(){}.getType());
-       product_designprocessService.updateProduct_designprocess(plgList,sjdId,shdId,edie_date);
+       product_designprocessService.updateProduct_designprocess(plgList,sjdId,shdId,edie_date,userName);
         return "OK";
     }
 

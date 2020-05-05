@@ -1,9 +1,12 @@
 package cn.ddossec.controller;
 
+import cn.ddosec.design.entity.PageResult;
+import cn.ddosec.design.pojo.product_design_record;
 import cn.ddossec.common.DataGridView;
 import cn.ddossec.common.Response;
 import cn.ddossec.domain.WarehouseStock;
 import cn.ddossec.service.WarehouseStockService;
+import cn.ddossec.service.designRecordFeignService;
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.lang.ObjectId;
 import io.swagger.annotations.ApiOperation;
@@ -11,7 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
-import java.util.List;
 
 
 /**
@@ -29,24 +31,25 @@ public class WarehouseStockController {
     @Autowired
     private WarehouseStockService warehouseStockServiceImpl;
 
+    @Autowired
+    private designRecordFeignService designRecordFeignService;
+
 
     /**
-     *
-     * @param offset 查询起始位置
-     * @param limit 查询条数
+     *   根据设计审核通过查询出制定安全库存配置单
+     * @param page
+     * @param pageSize
+     * @param record
      * @return
      */
-    @ApiOperation(value = "按库存编号模糊查询+分页查询所有数据")
-    @GetMapping(value = {"queryAllByLimit/{offset}/{limit}/{stockId}","queryAllByLimit/{offset}/{limit}"})
-    public List<WarehouseStock> queryAllByLimit(@PathVariable("offset") Integer offset,
-                                                @PathVariable("limit") Integer limit,
-                                                @PathVariable(value = "stockId",required = false) String stockId){
-        if (stockId==null){
-            stockId="";
-        }
-        List<WarehouseStock> list = warehouseStockServiceImpl.queryAllByLimit(stockId,offset,limit);
-        return list;
+    @ApiOperation(value = "根据设计审核通过查询出制定安全库存配置单")
+    @RequestMapping(value = "findPagecheck")
+    public PageResult findPagecheck(@RequestParam("page") Integer page,
+                                    @RequestParam("limit") Integer pageSize,
+                                    @RequestBody product_design_record record){
+        return designRecordFeignService.findPagecheck(page, pageSize, record);
     }
+
 
     /**
      * 新增安全库存配置单
@@ -63,7 +66,9 @@ public class WarehouseStockController {
         Date date = DateUtil.date();
         warehouseStock.setRegisterTime(date);
         try{
+            System.out.println(warehouseStock);
             warehouseStockServiceImpl.insertSecuritySheet(warehouseStock);
+            System.out.println(warehouseStock.getId());
             return new Response(true,"提交成功,等待审核!");
         }catch (Exception e){
             e.printStackTrace();
@@ -74,17 +79,22 @@ public class WarehouseStockController {
     /**
      * 查询安全库存配置单
      *
-     * @param check_tag 复核标志 0待审核 1审核通过 2审核未通过
+     * @param checkTag 复核标志 0待审核 1审核通过 2审核未通过
+     * @param productName 按照产品名称模糊查询
      * @param page 从多少页开始
      * @param limit 每页显示数
      * @return
      */
     @ApiOperation(value = "查询安全库存配置单")
     @GetMapping(value = "querySecuritySheet")
-    public DataGridView querySecuritySheet(@RequestParam("check_tag") String check_tag,
+    public DataGridView querySecuritySheet(@RequestParam("check_tag") String checkTag,
+                                           @RequestParam("product_name") String productName,
                                            @RequestParam("page") int page,
                                            @RequestParam("limit") int limit){
-        return warehouseStockServiceImpl.querySecuritySheet(check_tag,page,limit);
+        if (productName==null){
+            productName="";
+        }
+        return warehouseStockServiceImpl.querySecuritySheet(checkTag,productName,page,limit);
     }
 
     /**

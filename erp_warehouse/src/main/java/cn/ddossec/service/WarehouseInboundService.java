@@ -16,23 +16,24 @@ import java.util.List;
 public interface WarehouseInboundService {
 
     /**
-     * 通过ID查询单条数据
-     *
-     * @param id 主键
-     * @return 实例对象
+     * 入库管理
+     * @param storeTag 入库标志
+     * @param page
+     * @param limit
+     * @return
      */
-    WarehouseInbound queryById(Integer id);
+    DataGridView queryInbound(String storeTag, int page, int limit);
 
 
     /**
-     * 查询入库单
+     * 查询可调度入库数据
      *
      * @param checkTag 入库审核状态
-     * @param offset 查询起始位置
+     * @param page 查询起始位置
      * @param limit 查询条数
      * @return 对象列表
      */
-    DataGridView queryInboundLimit(String checkTag, int offset, int limit);
+    DataGridView queryInboundLimit(String checkTag, int page, int limit);
 
     /**
      * 入库申请登记
@@ -53,13 +54,5 @@ public interface WarehouseInboundService {
      */
     int updateWarehousing(String check_tag,Date check_time,String checker,String inbound_id);
 
-
-    /**
-     * 通过主键删除数据
-     *
-     * @param id 主键
-     * @return 是否成功
-     */
-    boolean deleteById(Integer id);
 
 }

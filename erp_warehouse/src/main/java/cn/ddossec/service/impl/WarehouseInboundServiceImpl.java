@@ -26,20 +26,16 @@ public class WarehouseInboundServiceImpl implements WarehouseInboundService {
     @Autowired
     private WarehouseInboundMapper warehouseInboundMapper;
 
-    /**
-     * 通过ID查询单条数据
-     *
-     * @param id 主键
-     * @return 实例对象
-     */
+
     @Override
-    public WarehouseInbound queryById(Integer id) {
-        return this.warehouseInboundMapper.queryById(id);
+    public DataGridView queryInbound(String storeTag, int page, int limit) {
+        QueryWrapper<WarehouseInbound> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("store_tag",storeTag).select("","","","","","");
+        return null;
     }
 
-
     /**
-     * 查询入库单
+     * 查询可调度入库数据
      *
      * @param checkTag 入库审核状态
      * @param offset 查询起始位置
@@ -49,7 +45,7 @@ public class WarehouseInboundServiceImpl implements WarehouseInboundService {
     @Override
     public DataGridView queryInboundLimit(String checkTag, int page, int limit){
         QueryWrapper<WarehouseInbound> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("check_tag",checkTag).select("inbound_id","reason","register_time","amount_sum","cost_price_sum");
+        queryWrapper.eq("check_tag",checkTag).select("id","inbound_id","reason","register_time","amount_sum","cost_price_sum");
         Page<WarehouseInbound> pages = new Page<>(page,limit);
         IPage iPage = warehouseInboundMapper.selectPage(pages,queryWrapper);
         return new DataGridView(iPage.getTotal(),iPage.getRecords());
@@ -81,14 +77,4 @@ public class WarehouseInboundServiceImpl implements WarehouseInboundService {
         return this.warehouseInboundMapper.updateWarehousing(check_tag,check_time,checker,inbound_id);
     }
 
-    /**
-     * 通过主键删除数据
-     *
-     * @param id 主键
-     * @return 是否成功
-     */
-    @Override
-    public boolean deleteById(Integer id) {
-        return this.warehouseInboundMapper.deleteById(id) > 0;
-    }
 }

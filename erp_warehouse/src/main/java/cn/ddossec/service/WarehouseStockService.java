@@ -15,23 +15,6 @@ import java.util.List;
  */
 public interface WarehouseStockService {
 
-    /**
-     * 通过ID查询单条数据
-     *
-     * @param id 主键
-     * @return 实例对象
-     */
-    WarehouseStock queryById(Integer id);
-
-    /**
-     * 查询多条数据
-     *
-     * @param stockId 根据库存编号模糊查询
-     * @param offset 查询起始位置
-     * @param limit 查询条数
-     * @return 对象列表
-     */
-    List<WarehouseStock> queryAllByLimit(String stockId, int offset, int limit);
 
     /**
      * 新增数据
@@ -44,10 +27,10 @@ public interface WarehouseStockService {
     /**
      *查询安全库存配置
      *
-     * @param check_tag 复核标志
+     * @param checkTag 复核标志
      * @return 安全库存数据
      */
-    DataGridView querySecuritySheet(String check_tag, int page, int limit);
+    DataGridView querySecuritySheet(String checkTag, String productName, int page, int limit);
 
     /**
      * 复核成功

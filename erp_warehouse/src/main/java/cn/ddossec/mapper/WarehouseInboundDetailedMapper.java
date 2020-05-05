@@ -1,6 +1,7 @@
 package cn.ddossec.mapper;
 
 import cn.ddossec.domain.WarehouseInboundDetailed;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
@@ -10,7 +11,7 @@ import java.util.List;
  * @author 谷辉
  * @since 2020-04-24 17:08:29
  */
-public interface WarehouseInboundDetailedMapper {
+public interface WarehouseInboundDetailedMapper extends BaseMapper<WarehouseInboundDetailed> {
 
     /**
      * 通过ID查询单条数据

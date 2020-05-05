@@ -1,0 +1,14 @@
+spring:
+  profiles:
+    active: dev  #${spring.profile.active}
+  application:
+    name: production-provider
+
+
+  cloud:
+    nacos:
+      config:
+        server-addr: 121.43.145.142:8849,121.43.145.142:8851
+        file-extension: yaml  #${file-extension}
+        group: PRODUCTION
+        namespace: 09994238-1052-4bc8-98c3-5dcfc413ceee

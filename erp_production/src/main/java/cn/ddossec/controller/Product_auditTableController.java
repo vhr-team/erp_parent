@@ -1,5 +1,6 @@
 package cn.ddossec.controller;
 
+
 import cn.ddossec.domain.Product_auditTable;
 import cn.ddossec.domain.Product_designprocess;
 import cn.ddossec.domain.Production_process_design_sheet;
@@ -8,6 +9,7 @@ import cn.ddossec.service.Product_designprocessService;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -22,8 +24,13 @@ public class Product_auditTableController {
     @Autowired
     private Product_auditTableService product_auditTableService;
 
+
+
+
     @Autowired
     private Product_designprocessService  product_designprocessService;
+
+
     @RequestMapping("/getAllProduct_auditTable")
     public Map<String,Object> getAllProduct_auditTable(){
         Map<String,Object> rut = new HashMap<>();

@@ -18,7 +18,7 @@ public interface Production_mdesign_procedureMapper {
     public int delProduction_mdesign_procedureById(Integer id);
 
     /*添加**/
-    public void insertProduction_mdesign_procedure(Production_mdesign_procedure production_mdesign_procedure);
+    public void insertProduction_mdesign_procedure(Production_mdesign_procedure procedure);
 
     /*修改**/
     public boolean updateProduction_mdesign_procedure(Production_mdesign_procedure production_mdesign_procedure);

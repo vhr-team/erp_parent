@@ -51,7 +51,7 @@ public class design_materialController {
         }
     }
 
-    @ApiOperation("查询所有物料")
+   // @ApiOperation("查询所有物料")
     @RequestMapping("/selectAll")
     public List<product_design_material> selectAll() {
         return service.selectAll();

@@ -11,7 +11,8 @@
     </delete>
 
     <insert id="insertProduction_mdesign_procedure">
-        INSERT INTO production_mdesign_procedure (id,design_id,first_kind_id,first_kind_name,procedure_id,procedure_name,labour_hour_amount,procedurce_describe,amount_unit,cost_price,subtotal,module_subtotal,register,register_time,design_module_tag,design_module_change_tag) values(#{id},#{design_id},#{first_kind_id},#{first_kind_name},#{procedure_id},#{procedure_name},#{labour_hour_amount},#{procedurce_describe},#{amount_unit},#{cost_price},#{subtotal},#{module_subtotal},#{register},#{register_time},#{design_module_tag},#{design_module_change_tag})
+        INSERT INTO production_mdesign_procedure (design_id,product_name,product_stair_classify,register,register_time,product_designer,design_module_tag)
+        values(#{design_id},#{product_name},#{product_stair_classify},#{register},#{register_time},#{product_designer},'D001')
 
 
     </insert>

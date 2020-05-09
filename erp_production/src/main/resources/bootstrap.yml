@@ -2,8 +2,7 @@ spring:
   profiles:
     active: dev  #${spring.profile.active}
   application:
-    name: production-provider
-
+    name: erpproduction
 
   cloud:
     nacos:
@@ -12,3 +11,4 @@ spring:
         file-extension: yaml  #${file-extension}
         group: PRODUCTION
         namespace: 09994238-1052-4bc8-98c3-5dcfc413ceee
+

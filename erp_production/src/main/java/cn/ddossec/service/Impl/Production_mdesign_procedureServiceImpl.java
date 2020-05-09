@@ -30,7 +30,7 @@ public class Production_mdesign_procedureServiceImpl implements Production_mdesi
     }
 
     @Override
-    public void insertProduction_mdesign_procedure(Production_mdesign_procedure production_mdesign_procedure) {
+    public void insertProduction_mdesign_procedure(Production_mdesign_procedure production_mdesign_procedure ) {
         production_mdesign_procedureMapper.insertProduction_mdesign_procedure(production_mdesign_procedure);
     }
 

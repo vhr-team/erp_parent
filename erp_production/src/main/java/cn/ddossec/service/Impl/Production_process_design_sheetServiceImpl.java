@@ -4,10 +4,7 @@ import cn.ddossec.domain.Product_auditTable;
 import cn.ddossec.domain.Product_designprocess;
 import cn.ddossec.domain.Production_mdesign_procedure;
 import cn.ddossec.domain.Production_process_design_sheet;
-import cn.ddossec.mapper.Product_auditTableMapper;
-import cn.ddossec.mapper.Production_mdesign_procedureMapper;
-import cn.ddossec.mapper.Production_process_design_alterationMapper;
-import cn.ddossec.mapper.Production_process_design_sheetMapper;
+import cn.ddossec.mapper.*;
 import cn.ddossec.service.Product_designprocessService;
 import cn.ddossec.service.Production_process_design_sheetService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +23,7 @@ public class Production_process_design_sheetServiceImpl implements Production_pr
     private Production_mdesign_procedureMapper production_mdesign_procedureMapper;
 
     @Autowired
-    private Product_designprocessService product_designprocessService;
+    private Product_designprocessMapper product_designprocessMapper;
 
     @Autowired
     private Product_auditTableMapper product_auditTableMapper;
@@ -51,7 +48,9 @@ public class Production_process_design_sheetServiceImpl implements Production_pr
             product_designprocessesLi.setProcess_subtotal(sveePurchasingPrice);
             System.out.println("循环"+sveePurchasingPrice);
             zcbPrice = zcbPrice+sveePurchasingPrice;
-           product_designprocessService.insertProduction_modesign_procedure(product_designprocessesLi);
+            System.out.println(product_designprocessesLi);
+            product_designprocessesLi.setId(0);
+            product_designprocessMapper.insertProduction_modesign_procedure(product_designprocessesLi);
             System.out.println(product_designprocessesLi);
 
         }

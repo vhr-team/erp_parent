@@ -4,9 +4,7 @@ import cn.ddossec.domain.Production_mdesign_procedure;
 import cn.ddossec.service.Production_mdesign_procedureService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.HashMap;
@@ -56,15 +54,23 @@ public class Production_mdesign_procedureController {
         return "redirect:/production/getAllproduction";
     }
 
-    /*
-     * 添加
-     * @param production_mdesign_procedure
+    /**
+     * 产品设计通过后 添加到生产模块
+     * @param productId
+     * @param productName
+     * @param productClass
+     * @param register
+     * @param registerTime
+     * @param checker
      * @return
      */
-    @RequestMapping("/insertProduction")
-    public String insertProduction(Production_mdesign_procedure production_mdesign_procedure){
-        production_mdesign_procedureService.insertProduction_mdesign_procedure(production_mdesign_procedure);
-        return "redirect:/production/getAllproduction";
+    @RequestMapping(value = "/insertProduction2",method = RequestMethod.POST)
+    public String insertProduction_mdesign_procedure(@RequestParam("productId") String  productId, @RequestParam("productName") String  productName, @RequestParam("productClass") String  productClass, @RequestParam("register") String  register, @RequestParam("registerTime") String  registerTime, @RequestParam("checker") String  checker){
+        Production_mdesign_procedure procedure = new Production_mdesign_procedure(productId,productName,productClass,checker,register,registerTime);
+
+        production_mdesign_procedureService.insertProduction_mdesign_procedure(procedure);
+
+        return "添加成功";
     }
 
 

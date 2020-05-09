@@ -33,6 +33,9 @@ public class Product_designprocessServiceImpl implements Product_designprocessSe
 
     @Transactional
     public void updateProduct_designprocess(List<Product_designprocess> product_designprocessesLis ,Integer sjdId ,Integer shdId,String edie_date,String userName) {
+        System.out.println(sjdId);
+        System.out.println(shdId);
+        System.out.println(userName);
         float zcbPrice =0 ;
         for (Product_designprocess product_designprocessesLi : product_designprocessesLis) {
             float sveePurchasingPrice  = (  product_designprocessesLi.getProcess_time_gs()*product_designprocessesLi.getProcess_time_cost());
@@ -45,15 +48,20 @@ public class Product_designprocessServiceImpl implements Product_designprocessSe
 
         }
         Production_process_design_alteration Production_process_design_alteration2 = production_process_design_alterationMapper.selectById(shdId);
-        if (Production_process_design_alteration2.getShdId()!=null){
+        System.out.println(Production_process_design_alteration2);
+        if (Production_process_design_alteration2!=null){
+            System.out.println("12345678写");
             float count =1 ;
             Production_process_design_alteration Production_process_design_alteration3 = new Production_process_design_alteration(Production_process_design_alteration2.getId(),Production_process_design_alteration2.getSjdId(),Production_process_design_alteration2.getShdId(),Production_process_design_alteration2.getEdit_date(),Production_process_design_alteration2.getEdit_count()+1,Production_process_design_alteration2.getUserName());
             production_process_design_alterationMapper.updateProductionAlteration(Production_process_design_alteration3);
-            return;
-        }
-        Production_process_design_alteration p1 = new Production_process_design_alteration(0,sjdId,shdId,edie_date,0,userName);
 
-        production_process_design_alterationMapper.insertProductionAlteration(p1);
+        }else{
+            System.out.println("12345678写22");
+            Production_process_design_alteration p1 = new Production_process_design_alteration(0,sjdId,shdId,edie_date,1,userName);
+
+            production_process_design_alterationMapper.insertProductionAlteration(p1);
+        }
+
     }
 
 

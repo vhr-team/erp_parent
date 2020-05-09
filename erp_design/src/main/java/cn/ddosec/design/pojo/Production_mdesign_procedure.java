@@ -1,4 +1,4 @@
-package cn.ddossec.domain;
+package cn.ddosec.design.pojo;
 
 
 
@@ -121,36 +121,12 @@ public class Production_mdesign_procedure implements Serializable {
 
 
 
-    public Production_mdesign_procedure(Integer id, String design_id, String first_kind_id, String first_kind_name, String procedure_id, String procedure_name, Integer labour_hour_amount, String procedurce_describe, String amount_unit, Integer cost_price, Double subtotal, Double module_subtotal, String register, String register_time, String design_module_tag, String design_module_change_tag, String product_name, String product_stair_classify, String product_second_classify, String product_tertiary_classify, String product_designer) {
-        this.id = id;
+    public Production_mdesign_procedure( String design_id, String procedure_name,   String product_stair_classify, String register, String register_time, String product_designer) {
         this.design_id = design_id;
-        this.first_kind_id = first_kind_id;
-        this.first_kind_name = first_kind_name;
-        this.procedure_id = procedure_id;
         this.procedure_name = procedure_name;
-        this.labour_hour_amount = labour_hour_amount;
-        this.procedurce_describe = procedurce_describe;
-        this.amount_unit = amount_unit;
-        this.cost_price = cost_price;
-        this.subtotal = subtotal;
-        this.module_subtotal = module_subtotal;
+        this.product_stair_classify = product_stair_classify;
         this.register = register;
         this.register_time = register_time;
-        this.design_module_tag = design_module_tag;
-        this.design_module_change_tag = design_module_change_tag;
-        this.product_name = product_name;
-        this.product_stair_classify = product_stair_classify;
-        this.product_second_classify = product_second_classify;
-        this.product_tertiary_classify = product_tertiary_classify;
-        this.product_designer = product_designer;
-    }
-
-    public Production_mdesign_procedure(String design_id,    String product_name, String product_stair_classify, String product_designer,String register,String register_time) {
-        this.design_id = design_id;
-        this.register = register;
-        this.register_time = register_time;
-        this.product_name = product_name;
-        this.product_stair_classify = product_stair_classify;
         this.product_designer = product_designer;
     }
 

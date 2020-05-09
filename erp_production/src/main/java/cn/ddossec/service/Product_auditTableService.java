@@ -18,7 +18,7 @@ public interface Product_auditTableService {
      */
     public void insertProduct_auditTable();
 
-    void auditSjdShb(String shState, String audit_date, Integer sjdId, Integer shdId);
+    void auditSjdShb(String shState, String audit_date, Integer sjdId, Integer shdId,String product_name,String product_designer,String procedure_id,String auditor_name);
 
 
 

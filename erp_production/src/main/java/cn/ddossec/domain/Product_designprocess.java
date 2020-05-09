@@ -24,7 +24,7 @@ public class Product_designprocess{
     /**
      * 工序编号
      */
-    private Integer process_id;
+    private String process_id;
 
     /**
      * 工序描述
@@ -52,7 +52,7 @@ public class Product_designprocess{
      */
     private float process_time_cost;
 
-    public Product_designprocess(Integer id, String process_name, Integer process_id, String process_describe, Integer process_time_gs, String process_time_unitdw, float process_subtotal, String design_id, float process_time_cost) {
+    public Product_designprocess(Integer id, String process_name, String process_id, String process_describe, Integer process_time_gs, String process_time_unitdw, float process_subtotal, String design_id, float process_time_cost) {
         this.id = id;
         this.process_name = process_name;
         this.process_id = process_id;

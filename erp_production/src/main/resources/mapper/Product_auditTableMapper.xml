@@ -4,6 +4,7 @@
     <insert id="insertProduct_auditTable">
 
         insert into Product_auditTable (design_id,sjdState,shState,manhourcost) values (#{design_idA},#{sjdState},#{shState},#{manhourcost})
+
     </insert>
     <update id="updatePeoduct_audit">
         update  Product_auditTable

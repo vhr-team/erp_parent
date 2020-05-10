@@ -1,5 +1,6 @@
 package cn.ddossec.service;
 
+import cn.ddossec.common.DataGridView;
 import cn.ddossec.domain.WarehouseOutbound;
 import java.util.List;
 
@@ -10,6 +11,15 @@ import java.util.List;
  * @since 2020-04-22 14:34:41
  */
 public interface WarehouseOutboundService {
+
+    /**
+     * 查询可调度的数据进行调度
+     * @param check_tag 审核标志
+     * @param page
+     * @param limit
+     * @return
+     */
+    DataGridView queryWarehouseOutbound(String check_tag,Integer page,Integer limit);
 
     /**
      * 通过ID查询单条数据

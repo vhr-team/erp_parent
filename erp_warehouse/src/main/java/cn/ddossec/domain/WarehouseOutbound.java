@@ -1,5 +1,8 @@
 package cn.ddossec.domain;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,11 +18,13 @@ import java.io.Serializable;
  */
 @Data
 @NoArgsConstructor
-public class WarehouseOutbound<AllArgsConstructor> implements Serializable {
+@TableName(value = "Warehouse_outbound")
+public class WarehouseOutbound implements Serializable {
     private static final long serialVersionUID = -35768159757263339L;
     /**
     * 序号
     */
+    @TableId(value = "id",type = IdType.AUTO)
     private Integer id;
     /**
     * 出库单编号

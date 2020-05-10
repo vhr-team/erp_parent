@@ -22,15 +22,6 @@ public class WarehouseOutboundDetailedController {
     @Autowired
     private WarehouseOutboundDetailedService warehouseOutboundDetailedServiceImpl;
 
-    /**
-     * 通过主键查询单条数据
-     *
-     * @param id 主键
-     * @return 单条数据
-     */
-    @GetMapping("selectOne")
-    public WarehouseOutboundDetailed selectOne(Integer id) {
-        return this.warehouseOutboundDetailedServiceImpl.queryById(id);
-    }
+
 
 }

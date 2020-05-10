@@ -1,5 +1,6 @@
 package cn.ddossec.controller;
 
+import cn.ddossec.common.DataGridView;
 import cn.ddossec.domain.WarehouseOutbound;
 import cn.ddossec.service.WarehouseOutboundService;
 import io.swagger.annotations.ApiOperation;
@@ -24,26 +25,19 @@ public class WarehouseOutboundController {
     @Autowired
     private WarehouseOutboundService warehouseOutboundServiceImpl;
 
-    /**
-     * 通过主键查询单条数据
-     *
-     * @param id 主键
-     * @return 单条数据
-     */
-    @GetMapping("selectOne")
-    public WarehouseOutbound selectOne(Integer id) {
-        return this.warehouseOutboundServiceImpl.queryById(id);
-    }
 
-    @ApiOperation(value = "按出库单编号模糊查询+分页查询所有数据")
-    @GetMapping(value = {"queryAllByLimit/{offset}/{limit}/{outbound_id}","queryAllByLimit/{offset}/{limit}"})
-    public List<WarehouseOutbound> queryAllByLimit(@PathVariable("offset") Integer offset,
-                                                   @PathVariable("limit") Integer limit,
-                                                   @PathVariable(value = "outbound_id",required = false) String outbound_id){
-        if(outbound_id==null){
-            outbound_id="";
-        }
-        List<WarehouseOutbound> list = warehouseOutboundServiceImpl.queryAllByLimit(outbound_id,offset,limit);
-        return list;
+    /**
+     * 查询可调度的数据进行调度
+     * @param check_tag 审核标志 0待审核 1审核通过 2审核不通过
+     * @param page
+     * @param limit
+     * @return
+     */
+    @ApiOperation(value = "查询可调度的数据进行调度")
+    @RequestMapping("queryWarehouseOutbound")
+    public DataGridView queryWarehouseOutbound(@RequestParam("check_tag") String check_tag,
+                                               @RequestParam("page") Integer page,
+                                               @RequestParam("limit") Integer limit){
+        return warehouseOutboundServiceImpl.queryWarehouseOutbound(check_tag, page, limit);
     }
 }

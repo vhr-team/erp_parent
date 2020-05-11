@@ -46,9 +46,11 @@ public class WarehouseStockController {
     @RequestMapping(value = "findPagecheck")
     public PageResult findPagecheck(@RequestParam("page") Integer page,
                                     @RequestParam("limit") Integer pageSize,
-                                    @RequestParam("checkTag") String checkTag){
+                                    @RequestParam("checkTag") String checkTag,
+                                    @RequestParam("inventoryStatus") Integer inventoryStatus){
         product_design_record record = new product_design_record();
         record.setCheckTag(checkTag);
+        record.setInventoryStatus(inventoryStatus);
         return designRecordFeignService.findPagecheck(page, pageSize, record);
     }
 

@@ -65,7 +65,7 @@ public class WarehouseStockController {
         return designRecordFeignService.findPagecheck(page, pageSize, record);
     }
 
-    
+
 
     /**
      * 新增安全库存配置单

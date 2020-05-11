@@ -4,7 +4,6 @@ import cn.ddosec.design.entity.PageResult;
 import cn.ddosec.design.entity.Response;
 import cn.ddosec.design.pojo.product_design_record;
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -12,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 /**
  * 用feign调用设计的微服务
  */
-@Component
 @FeignClient(value = "design-provider")
 public interface designRecordFeignService {
 

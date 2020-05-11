@@ -24,6 +24,7 @@
         <result column="file_change_amount" property="fileChangeAmount" jdbcType="INTEGER"/>
         <result column="delete_tag" property="deleteTag" jdbcType="VARCHAR"/>
         <result column="materiel_archives_id" property="materielArchivesId" jdbcType="VARCHAR"/>
+        <result column="inventory_status" property="inventoryStatus" jdbcType="VARCHAR"/>
     </resultMap>
     <sql id="Example_Where_Clause">
         <where>

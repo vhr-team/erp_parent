@@ -40,13 +40,13 @@ public class WarehouseStockController {
      * @param checkTag
      * @return
      */
-    @ApiOperation(value = "修改设计单审核状态")
+    /*@ApiOperation(value = "修改设计单审核状态")
     @RequestMapping("updatecheck")
     public cn.ddosec.design.entity.Response updatecheck(String checkTag){
         product_design_record record = new product_design_record();
         record.setCheckTag(checkTag);
         return designRecordFeignService.updatecheck(record);
-    }
+    }*/
 
     /**
      *   查询设计审核状态

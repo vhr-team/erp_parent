@@ -113,6 +113,19 @@ public class product_design_record implements Serializable {
      */
     private String materielArchivesId;
 
+    /**
+     * 库存状态 默认为0 0代表安全库存未设置 1代表安全库存已设置
+     */
+    private Integer inventoryStatus;
+
+    public Integer getInventoryStatus() {
+        return inventoryStatus;
+    }
+
+    public void setInventoryStatus(Integer inventoryStatus) {
+        this.inventoryStatus = inventoryStatus;
+    }
+
     private static final long serialVersionUID = 1L;
 
     public Integer getId() {

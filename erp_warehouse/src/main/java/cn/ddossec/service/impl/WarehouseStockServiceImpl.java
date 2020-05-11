@@ -1,14 +1,17 @@
 package cn.ddossec.service.impl;
 
+import cn.ddosec.design.pojo.product_design_record;
 import cn.ddossec.common.DataGridView;
 import cn.ddossec.domain.WarehouseStock;
 import cn.ddossec.mapper.WarehouseStockMapper;
 import cn.ddossec.service.WarehouseStockService;
+import cn.ddossec.service.designRecordFeignService;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 import java.util.List;
@@ -25,6 +28,9 @@ public class WarehouseStockServiceImpl implements WarehouseStockService {
     @Autowired
     private WarehouseStockMapper warehouseStockMapper;
 
+    @Autowired
+    private designRecordFeignService designRecordFeignService;
+
 
     /**
      * 新增安全库存配置单
@@ -32,9 +38,18 @@ public class WarehouseStockServiceImpl implements WarehouseStockService {
      * @param warehouseStock 实例对象
      * @return 实例对象
      */
+    @Transactional
     @Override
     public int insertSecuritySheet(WarehouseStock warehouseStock) {
-        return this.warehouseStockMapper.insert(warehouseStock);
+        try {
+            this.warehouseStockMapper.insert(warehouseStock);
+            product_design_record record = new product_design_record();
+            record.setCheckTag("库存设置成功");
+            designRecordFeignService.updatecheck(record);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return 0;
     }
 
     /**

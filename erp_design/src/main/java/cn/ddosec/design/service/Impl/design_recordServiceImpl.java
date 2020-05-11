@@ -188,6 +188,9 @@ public class design_recordServiceImpl implements design_recordService {
             if (record.getCheckTag() != null) {
                 criteria.andCheckTagEqualTo(record.getCheckTag());
             }
+            if (record.getInventoryStatus() != null){
+                criteria.andInventoryStatusEqualTo(record.getInventoryStatus());
+            }
         }
         Page<product_design_record> product_design_records = (Page<product_design_record>) mapper.selectByExample(query);
         return new PageResult(product_design_records.getTotal(), product_design_records.getResult());

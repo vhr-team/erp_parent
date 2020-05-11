@@ -27,6 +27,17 @@ public class WarehouseInboundServiceImpl implements WarehouseInboundService {
     private WarehouseInboundMapper warehouseInboundMapper;
 
 
+    /**
+     * 查询所有审核通过 可入库的数据
+     *
+     * @param check_tag
+     * @return
+     */
+    @Override
+    public DataGridView queryAllInbound(Integer check_tag, Integer page, Integer limit) {
+        return null;
+    }
+
     @Override
     public DataGridView queryInbound(String storeTag, int page, int limit) {
         QueryWrapper<WarehouseInbound> queryWrapper = new QueryWrapper<>();

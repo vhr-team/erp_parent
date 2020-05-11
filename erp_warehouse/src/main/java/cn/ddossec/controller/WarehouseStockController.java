@@ -36,7 +36,7 @@ public class WarehouseStockController {
 
 
     /**
-     *   根据设计审核通过查询出制定安全库存配置单
+     *   查询设计审核状态
      * @param page
      * @param pageSize
      * @param checkTag 审核标志
@@ -46,11 +46,14 @@ public class WarehouseStockController {
     @RequestMapping(value = "findPagecheck")
     public PageResult findPagecheck(@RequestParam("page") Integer page,
                                     @RequestParam("limit") Integer pageSize,
-                                    @RequestParam("checkTag") String checkTag){
+                                    @RequestParam("checkTag") String checkTag,
+                                    @RequestParam("inventoryStatus") Integer inventoryStatus){
         product_design_record record = new product_design_record();
         record.setCheckTag(checkTag);
+        record.setInventoryStatus(inventoryStatus);
         return designRecordFeignService.findPagecheck(page, pageSize, record);
     }
+
 
 
     /**
@@ -61,16 +64,14 @@ public class WarehouseStockController {
      */
     @ApiOperation(value = "新增安全库存配置单")
     @PostMapping(value = "insertSecuritySheet")
-    public Response insertSecuritySheet(WarehouseStock warehouseStock){
+    public Response insertSecuritySheet(@RequestBody WarehouseStock warehouseStock){
         //生成库存编号
         warehouseStock.setStockId(ObjectId.next());
         //获取当前时间
         Date date = DateUtil.date();
         warehouseStock.setRegisterTime(date);
         try{
-            System.out.println(warehouseStock);
             warehouseStockServiceImpl.insertSecuritySheet(warehouseStock);
-            System.out.println(warehouseStock.getId());
             return new Response(true,"提交成功,等待审核!");
         }catch (Exception e){
             e.printStackTrace();

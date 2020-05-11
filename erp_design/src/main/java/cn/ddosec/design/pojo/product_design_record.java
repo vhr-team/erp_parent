@@ -104,7 +104,7 @@ public class product_design_record implements Serializable {
     private Integer fileChangeAmount;
 
     /**
-     * 产品删除标志(未删除/已删除)
+     * 产品回收标志(未回收/已回收)
      */
     private String deleteTag;
 
@@ -112,6 +112,11 @@ public class product_design_record implements Serializable {
      * 物料编号
      */
     private String materielArchivesId;
+
+    /**
+     * 库存状态
+     */
+    private Integer inventoryStatus;
 
     private static final long serialVersionUID = 1L;
 
@@ -291,6 +296,14 @@ public class product_design_record implements Serializable {
         this.materielArchivesId = materielArchivesId == null ? null : materielArchivesId.trim();
     }
 
+    public Integer getInventoryStatus() {
+        return inventoryStatus;
+    }
+
+    public void setInventoryStatus(Integer inventoryStatus) {
+        this.inventoryStatus = inventoryStatus;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -319,6 +332,7 @@ public class product_design_record implements Serializable {
         sb.append(", fileChangeAmount=").append(fileChangeAmount);
         sb.append(", deleteTag=").append(deleteTag);
         sb.append(", materielArchivesId=").append(materielArchivesId);
+        sb.append(", inventoryStatus=").append(inventoryStatus);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();
@@ -337,27 +351,28 @@ public class product_design_record implements Serializable {
         }
         product_design_record other = (product_design_record) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
-                && (this.getProductId() == null ? other.getProductId() == null : this.getProductId().equals(other.getProductId()))
-                && (this.getProductName() == null ? other.getProductName() == null : this.getProductName().equals(other.getProductName()))
-                && (this.getFactoryName() == null ? other.getFactoryName() == null : this.getFactoryName().equals(other.getFactoryName()))
-                && (this.getProductClass() == null ? other.getProductClass() == null : this.getProductClass().equals(other.getProductClass()))
-                && (this.getWarranty() == null ? other.getWarranty() == null : this.getWarranty().equals(other.getWarranty()))
-                && (this.getListPrice() == null ? other.getListPrice() == null : this.getListPrice().equals(other.getListPrice()))
-                && (this.getRealCostPrice() == null ? other.getRealCostPrice() == null : this.getRealCostPrice().equals(other.getRealCostPrice()))
-                && (this.getAmountUnit() == null ? other.getAmountUnit() == null : this.getAmountUnit().equals(other.getAmountUnit()))
-                && (this.getProductDescribe() == null ? other.getProductDescribe() == null : this.getProductDescribe().equals(other.getProductDescribe()))
-                && (this.getResponsiblePerson() == null ? other.getResponsiblePerson() == null : this.getResponsiblePerson().equals(other.getResponsiblePerson()))
-                && (this.getRegister() == null ? other.getRegister() == null : this.getRegister().equals(other.getRegister()))
-                && (this.getRegisterTime() == null ? other.getRegisterTime() == null : this.getRegisterTime().equals(other.getRegisterTime()))
-                && (this.getChecker() == null ? other.getChecker() == null : this.getChecker().equals(other.getChecker()))
-                && (this.getCheckTime() == null ? other.getCheckTime() == null : this.getCheckTime().equals(other.getCheckTime()))
-                && (this.getCheckTag() == null ? other.getCheckTag() == null : this.getCheckTag().equals(other.getCheckTag()))
-                && (this.getChanger() == null ? other.getChanger() == null : this.getChanger().equals(other.getChanger()))
-                && (this.getChangeTime() == null ? other.getChangeTime() == null : this.getChangeTime().equals(other.getChangeTime()))
-                && (this.getChangeTag() == null ? other.getChangeTag() == null : this.getChangeTag().equals(other.getChangeTag()))
-                && (this.getFileChangeAmount() == null ? other.getFileChangeAmount() == null : this.getFileChangeAmount().equals(other.getFileChangeAmount()))
-                && (this.getDeleteTag() == null ? other.getDeleteTag() == null : this.getDeleteTag().equals(other.getDeleteTag()))
-                && (this.getMaterielArchivesId() == null ? other.getMaterielArchivesId() == null : this.getMaterielArchivesId().equals(other.getMaterielArchivesId()));
+            && (this.getProductId() == null ? other.getProductId() == null : this.getProductId().equals(other.getProductId()))
+            && (this.getProductName() == null ? other.getProductName() == null : this.getProductName().equals(other.getProductName()))
+            && (this.getFactoryName() == null ? other.getFactoryName() == null : this.getFactoryName().equals(other.getFactoryName()))
+            && (this.getProductClass() == null ? other.getProductClass() == null : this.getProductClass().equals(other.getProductClass()))
+            && (this.getWarranty() == null ? other.getWarranty() == null : this.getWarranty().equals(other.getWarranty()))
+            && (this.getListPrice() == null ? other.getListPrice() == null : this.getListPrice().equals(other.getListPrice()))
+            && (this.getRealCostPrice() == null ? other.getRealCostPrice() == null : this.getRealCostPrice().equals(other.getRealCostPrice()))
+            && (this.getAmountUnit() == null ? other.getAmountUnit() == null : this.getAmountUnit().equals(other.getAmountUnit()))
+            && (this.getProductDescribe() == null ? other.getProductDescribe() == null : this.getProductDescribe().equals(other.getProductDescribe()))
+            && (this.getResponsiblePerson() == null ? other.getResponsiblePerson() == null : this.getResponsiblePerson().equals(other.getResponsiblePerson()))
+            && (this.getRegister() == null ? other.getRegister() == null : this.getRegister().equals(other.getRegister()))
+            && (this.getRegisterTime() == null ? other.getRegisterTime() == null : this.getRegisterTime().equals(other.getRegisterTime()))
+            && (this.getChecker() == null ? other.getChecker() == null : this.getChecker().equals(other.getChecker()))
+            && (this.getCheckTime() == null ? other.getCheckTime() == null : this.getCheckTime().equals(other.getCheckTime()))
+            && (this.getCheckTag() == null ? other.getCheckTag() == null : this.getCheckTag().equals(other.getCheckTag()))
+            && (this.getChanger() == null ? other.getChanger() == null : this.getChanger().equals(other.getChanger()))
+            && (this.getChangeTime() == null ? other.getChangeTime() == null : this.getChangeTime().equals(other.getChangeTime()))
+            && (this.getChangeTag() == null ? other.getChangeTag() == null : this.getChangeTag().equals(other.getChangeTag()))
+            && (this.getFileChangeAmount() == null ? other.getFileChangeAmount() == null : this.getFileChangeAmount().equals(other.getFileChangeAmount()))
+            && (this.getDeleteTag() == null ? other.getDeleteTag() == null : this.getDeleteTag().equals(other.getDeleteTag()))
+            && (this.getMaterielArchivesId() == null ? other.getMaterielArchivesId() == null : this.getMaterielArchivesId().equals(other.getMaterielArchivesId()))
+            && (this.getInventoryStatus() == null ? other.getInventoryStatus() == null : this.getInventoryStatus().equals(other.getInventoryStatus()));
     }
 
     @Override
@@ -386,6 +401,7 @@ public class product_design_record implements Serializable {
         result = prime * result + ((getFileChangeAmount() == null) ? 0 : getFileChangeAmount().hashCode());
         result = prime * result + ((getDeleteTag() == null) ? 0 : getDeleteTag().hashCode());
         result = prime * result + ((getMaterielArchivesId() == null) ? 0 : getMaterielArchivesId().hashCode());
+        result = prime * result + ((getInventoryStatus() == null) ? 0 : getInventoryStatus().hashCode());
         return result;
     }
 }

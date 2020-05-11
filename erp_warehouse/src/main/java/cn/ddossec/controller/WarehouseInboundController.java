@@ -55,7 +55,7 @@ public class WarehouseInboundController {
      * 入库申请登记
      * @return
      */
-    @ApiOperation(value = "入库申请登记")
+    /*@ApiOperation(value = "入库申请登记")
     @RequestMapping("insertWarehousing")
     public Response insertWarehousing(@Param("storer") String storer,
                                       @Param("reason") String reason,
@@ -105,7 +105,7 @@ public class WarehouseInboundController {
             e.printStackTrace();
             return new Response(false,"提交失败,请重试!");
         }
-    }
+    }*/
 
 
     /**

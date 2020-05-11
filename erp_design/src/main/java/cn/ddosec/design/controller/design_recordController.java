@@ -197,4 +197,22 @@ public class design_recordController {
             return new Response(false, "审核失败,请重新试试");
         }
     }
+
+    /**
+     * 根据产品编号修改安全库存状态
+     * @param productId
+     * @param InventoryStatus
+     * @return
+     */
+    @RequestMapping("updateinventoryStatus")
+    public Response updateinventoryStatus(@RequestParam("productId") String productId,
+                                          @RequestParam("InventoryStatus") Integer InventoryStatus){
+        try {
+            service.updateinventoryStatus(productId, InventoryStatus);
+        }catch (Exception e){
+            e.printStackTrace();
+            return new Response(false,"修改失败!");
+        }
+        return new Response(true,"修改成功!");
+    }
 }

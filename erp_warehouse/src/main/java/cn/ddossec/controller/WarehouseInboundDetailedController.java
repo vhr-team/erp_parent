@@ -48,4 +48,5 @@ public class WarehouseInboundDetailedController {
        return warehouseInboundDetailedServiceImpl.queryInboundDetailed(id, page, limit);
     }
 
+
 }

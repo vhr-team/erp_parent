@@ -34,9 +34,22 @@ public class WarehouseStockController {
     @Autowired
     private designRecordFeignService designRecordFeignService;
 
+    /**
+     * 修改审核状态
+     * (如果安全库存审核通过中有对应)
+     * @param checkTag
+     * @return
+     */
+    @ApiOperation(value = "修改设计单审核状态")
+    @RequestMapping("updatecheck")
+    public cn.ddosec.design.entity.Response updatecheck(String checkTag){
+        product_design_record record = new product_design_record();
+        record.setCheckTag(checkTag);
+        return designRecordFeignService.updatecheck(record);
+    }
 
     /**
-     *   根据设计审核通过查询出制定安全库存配置单
+     *   查询设计审核状态
      * @param page
      * @param pageSize
      * @param checkTag 审核标志
@@ -52,6 +65,7 @@ public class WarehouseStockController {
         return designRecordFeignService.findPagecheck(page, pageSize, record);
     }
 
+    
 
     /**
      * 新增安全库存配置单
@@ -61,7 +75,7 @@ public class WarehouseStockController {
      */
     @ApiOperation(value = "新增安全库存配置单")
     @PostMapping(value = "insertSecuritySheet")
-    public Response insertSecuritySheet(WarehouseStock warehouseStock){
+    public Response insertSecuritySheet(@RequestBody WarehouseStock warehouseStock){
         //生成库存编号
         warehouseStock.setStockId(ObjectId.next());
         //获取当前时间

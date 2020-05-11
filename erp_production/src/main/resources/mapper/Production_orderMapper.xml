@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.ddossec.mapper.Production_orderMapper">
+    <select id="findAllProductionOrder" resultType="cn.ddossec.domain.Production_order">
+        SELECT * from production_order;
+    </select>
+
+    <insert id="insertProductionOrder">
+        INSERT into production_order(schedule_id,product_id,product_name,product_describe,quantity,qutbound_order_id,review_time) VALUES(#{schedule_id},#{product_id},#{product_name},#{product_describe},#{quantity},#{qutbound_order_id},NOW());
+    </insert>
+</mapper>

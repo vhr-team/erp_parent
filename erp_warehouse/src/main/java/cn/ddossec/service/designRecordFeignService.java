@@ -15,13 +15,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 public interface designRecordFeignService {
 
     /**
-     * 修改审核状态
-     *
-     * @param record
+     * 根据产品编号修改安全库存状态
+     * @param productId
+     * @param InventoryStatus
      * @return
      */
-    @RequestMapping("/design_record/updatecheck")
-    Response updatecheck(@RequestBody product_design_record record);
+    @RequestMapping("/design_record/updateinventoryStatus")
+    Response updateinventoryStatus(@RequestParam("productId") String productId,@RequestParam("InventoryStatus") Integer InventoryStatus);
 
     /**
      *   根据设计审核通过查询出制定安全库存配置单

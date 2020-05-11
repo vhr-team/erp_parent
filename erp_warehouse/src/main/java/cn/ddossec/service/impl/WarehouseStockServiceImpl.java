@@ -43,13 +43,13 @@ public class WarehouseStockServiceImpl implements WarehouseStockService {
     public int insertSecuritySheet(WarehouseStock warehouseStock) {
         try {
             this.warehouseStockMapper.insert(warehouseStock);
-            product_design_record record = new product_design_record();
-            record.setCheckTag("库存设置成功");
-            designRecordFeignService.updatecheck(record);
+            Integer InventoryStatus = 1;
+            String ProductId = warehouseStock.getProductId();
+            designRecordFeignService.updateinventoryStatus(ProductId,InventoryStatus);
         }catch (Exception e){
             e.printStackTrace();
         }
-        return 0;
+        return 1;
     }
 
     /**

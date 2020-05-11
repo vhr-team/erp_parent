@@ -7,7 +7,6 @@ import cn.ddosec.design.pojo.product_design_record;
 import cn.ddosec.design.pojo.product_material_archives;
 import cn.ddosec.design.service.design_materialService;
 import cn.ddosec.design.service.design_recordService;
-import cn.ddosec.design.service.feign.erp_productionFegin;
 import cn.ddosec.design.service.material_archivesService;
 import com.sun.org.apache.bcel.internal.generic.RETURN;
 import io.swagger.annotations.ApiOperation;
@@ -37,15 +36,6 @@ public class material_archivesController {
     design_recordService recordService;
 
 
-    @Autowired
-    private erp_productionFegin erp_productionFegin1;
-
-    @RequestMapping("/getAllProduction")
-    public String getAllProduction(){
-
-
-        return   erp_productionFegin1.getAllProduction();
-    }
 
     /**
      * 获取现在时间
@@ -129,16 +119,4 @@ public class material_archivesController {
         return service.selectByproId(productId);
     }
 
-    @RequestMapping("/selectByproId2")
-    @ApiOperation("根据档案ID查询")
-    public Map<String,Object> selectByproId2(String  productId){
-        Map<String,Object> rut = new HashMap<>();
-        /*获取所有信息*/
-        List<product_material_archives> list = service.selectByproId(productId);
-        rut.put("data",list);
-        rut.put("code",0);
-        rut.put("msg","");
-        rut.put("count",100);
-        return rut ;
-    }
 }

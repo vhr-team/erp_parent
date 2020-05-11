@@ -7,7 +7,6 @@ import cn.ddosec.design.pojo.Production_mdesign_procedure;
 import cn.ddosec.design.pojo.product_design_record;
 import cn.ddosec.design.pojo.product_material_archives;
 import cn.ddosec.design.service.design_recordService;
-import cn.ddosec.design.service.feign.erp_productionFegin;
 import cn.ddosec.design.service.material_archivesService;
 
 import io.swagger.annotations.ApiOperation;
@@ -32,29 +31,9 @@ public class design_recordController {
     material_archivesService material_archivesservice;
 
 
-    @Autowired
-    private erp_productionFegin erp_productionFegin1;
 
 
 
-    @RequestMapping("getAllProduction6")
-    public String getAllProduction6(){
-
-        return erp_productionFegin1.getAllProduction();
-    }
-
-   /* @RequestMapping("insrtest1")
-    public String insrtest1(){
-        String productId ="CES";;
-        String productName ="CES";
-        String productClass ="CES";
-        String register ="CES";
-        String registerTime  = "CES";
-        String checker ="CES";
-        String RESULT = erp_productionFegin1.insertProduction_mdesign_procedure(productId, productName, productClass, register, registerTime, checker);
-
-        return  RESULT;
-    }*/
 
     /**
      * 根据ID查询档案
@@ -177,21 +156,7 @@ public class design_recordController {
         System.out.println(record);
         try {
             service.updatechecker(record);
-            String productId =record.getProductId();
-            String productName =record.getProductName();
-            String productClass =record.getProductClass();
-            String register =record.getRegister();
-            String registerTime  = record.getRegisterTime();
-            String checker =record.getChecker();
-            Production_mdesign_procedure  pa = new Production_mdesign_procedure(productId,productName,productClass,register,null,checker);
-            String RESULT = erp_productionFegin1.insertProduction_mdesign_procedure(productId, productName, productClass, register, registerTime, checker);
-            if (RESULT=="添加成功"){
-
-                return new Response(true, "审核成功");
-            }
             return new Response(true, "审核成功");
-            //     erp_productionFegin1.insertProduction_mdesign_procedure(pa);
-       //     return new Response(true, "审核成功");
         } catch (Exception e) {
             e.printStackTrace();
             return new Response(false, "审核失败,请重新试试");

@@ -40,4 +40,7 @@ public class WarehouseOutboundController {
                                                @RequestParam("limit") Integer limit){
         return warehouseOutboundServiceImpl.queryWarehouseOutbound(check_tag, page, limit);
     }
+
+
+
 }

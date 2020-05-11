@@ -16,6 +16,14 @@ import java.util.List;
 public interface WarehouseInboundService {
 
     /**
+     * 查询所有审核通过 可入库的数据
+     *
+     * @param check_tag
+     * @return
+     */
+    DataGridView queryAllInbound(Integer check_tag,Integer page,Integer limit);
+
+    /**
      * 入库管理
      * @param storeTag 入库标志
      * @param page

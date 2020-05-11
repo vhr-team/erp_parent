@@ -66,7 +66,7 @@ public class product_design_recordQuery {
     }
 
     public void setFields(String fields) {
-        this.fields = fields;
+        this.fields=fields;
     }
 
     public String getFields() {
@@ -1611,6 +1611,66 @@ public class product_design_recordQuery {
 
         public Criteria andMaterielArchivesIdNotBetween(String value1, String value2) {
             addCriterion("materiel_archives_id not between", value1, value2, "materielArchivesId");
+            return (Criteria) this;
+        }
+
+        public Criteria andInventoryStatusIsNull() {
+            addCriterion("inventory_status is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andInventoryStatusIsNotNull() {
+            addCriterion("inventory_status is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andInventoryStatusEqualTo(Integer value) {
+            addCriterion("inventory_status =", value, "inventoryStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andInventoryStatusNotEqualTo(Integer value) {
+            addCriterion("inventory_status <>", value, "inventoryStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andInventoryStatusGreaterThan(Integer value) {
+            addCriterion("inventory_status >", value, "inventoryStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andInventoryStatusGreaterThanOrEqualTo(Integer value) {
+            addCriterion("inventory_status >=", value, "inventoryStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andInventoryStatusLessThan(Integer value) {
+            addCriterion("inventory_status <", value, "inventoryStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andInventoryStatusLessThanOrEqualTo(Integer value) {
+            addCriterion("inventory_status <=", value, "inventoryStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andInventoryStatusIn(List<Integer> values) {
+            addCriterion("inventory_status in", values, "inventoryStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andInventoryStatusNotIn(List<Integer> values) {
+            addCriterion("inventory_status not in", values, "inventoryStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andInventoryStatusBetween(Integer value1, Integer value2) {
+            addCriterion("inventory_status between", value1, value2, "inventoryStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andInventoryStatusNotBetween(Integer value1, Integer value2) {
+            addCriterion("inventory_status not between", value1, value2, "inventoryStatus");
             return (Criteria) this;
         }
     }

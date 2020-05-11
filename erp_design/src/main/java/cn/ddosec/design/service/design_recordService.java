@@ -74,4 +74,7 @@ public interface design_recordService {
 
     /*档案审核*/
     void updatechecker(product_design_record record);
+
+    /**修改库存编号*/
+    void updateinventoryStatus(String productId,Integer InventoryStatus);
 }

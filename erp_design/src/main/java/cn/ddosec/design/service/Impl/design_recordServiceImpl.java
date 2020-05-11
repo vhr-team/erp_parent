@@ -36,7 +36,7 @@ public class design_recordServiceImpl implements design_recordService {
 
     /**
      * 由年月日时分秒+3位随机数
-     * 生成流水号
+0.     * 生成流水号
      *
      * @return
      */
@@ -188,6 +188,9 @@ public class design_recordServiceImpl implements design_recordService {
             if (record.getCheckTag() != null) {
                 criteria.andCheckTagEqualTo(record.getCheckTag());
             }
+            if (record.getInventoryStatus() != null){
+                criteria.andInventoryStatusEqualTo(record.getInventoryStatus());
+            }
         }
         Page<product_design_record> product_design_records = (Page<product_design_record>) mapper.selectByExample(query);
         return new PageResult(product_design_records.getTotal(), product_design_records.getResult());
@@ -223,6 +226,14 @@ public class design_recordServiceImpl implements design_recordService {
     public void updatechecker(product_design_record record) {
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
         record.setCheckTime(df.format(new Date()));
+        mapper.updateByPrimaryKeySelective(record);
+    }
+
+    @Override
+    public void updateinventoryStatus(String productId,Integer InventoryStatus) {
+        product_design_record record =new product_design_record();
+        record.setProductId(productId);
+        record.setInventoryStatus(InventoryStatus);
         mapper.updateByPrimaryKeySelective(record);
     }
 

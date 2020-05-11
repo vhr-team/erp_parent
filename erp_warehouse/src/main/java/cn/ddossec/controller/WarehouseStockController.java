@@ -61,7 +61,11 @@ public class WarehouseStockController {
      */
     @ApiOperation(value = "新增安全库存配置单")
     @PostMapping(value = "insertSecuritySheet")
-    public Response insertSecuritySheet(WarehouseStock warehouseStock){
+    public Response insertSecuritySheet(@RequestBody WarehouseStock warehouseStock){
+
+
+
+
         //生成库存编号
         warehouseStock.setStockId(ObjectId.next());
         //获取当前时间

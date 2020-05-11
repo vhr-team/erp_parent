@@ -39,14 +39,16 @@ public class WarehouseStockController {
      *   根据设计审核通过查询出制定安全库存配置单
      * @param page
      * @param pageSize
-     * @param record
+     * @param checkTag 审核标志
      * @return
      */
     @ApiOperation(value = "根据设计审核通过查询出制定安全库存配置单")
     @RequestMapping(value = "findPagecheck")
     public PageResult findPagecheck(@RequestParam("page") Integer page,
                                     @RequestParam("limit") Integer pageSize,
-                                    @RequestBody product_design_record record){
+                                    @RequestParam("checkTag") String checkTag){
+        product_design_record record = new product_design_record();
+        record.setCheckTag(checkTag);
         return designRecordFeignService.findPagecheck(page, pageSize, record);
     }
 
@@ -59,7 +61,11 @@ public class WarehouseStockController {
      */
     @ApiOperation(value = "新增安全库存配置单")
     @PostMapping(value = "insertSecuritySheet")
-    public Response insertSecuritySheet(WarehouseStock warehouseStock){
+    public Response insertSecuritySheet(@RequestBody WarehouseStock warehouseStock){
+
+
+
+
         //生成库存编号
         warehouseStock.setStockId(ObjectId.next());
         //获取当前时间

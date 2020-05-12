@@ -22,11 +22,6 @@
         <result property="storeTag" column="store_tag" jdbcType="VARCHAR"/>
     </resultMap>
 
-    <!--新增入库申请登记-->
-    <insert id="insertWarehousing" useGeneratedKeys="true" keyProperty="id" parameterType="WarehouseInbound">
-        insert into erp.Warehouse_inbound(inbound_id,storer,reason,amount_sum,cost_price_sum,register,register_time,pemark)
-        values (#{inboundId}, #{storer}, #{reason}, #{amountSum}, #{costPriceSum}, #{register}, #{registerTime}, #{pemark})
-    </insert>
 
     <!--入库申请审核-->
     <update id="updateWarehousing">

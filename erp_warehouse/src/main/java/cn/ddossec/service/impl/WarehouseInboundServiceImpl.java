@@ -2,7 +2,9 @@ package cn.ddossec.service.impl;
 
 import cn.ddossec.common.DataGridView;
 import cn.ddossec.domain.WarehouseInbound;
+import cn.ddossec.domain.WarehouseInboundDetailed;
 import cn.ddossec.mapper.WarehouseInboundMapper;
+import cn.ddossec.service.WarehouseInboundDetailedService;
 import cn.ddossec.service.WarehouseInboundService;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
@@ -25,6 +27,9 @@ import java.util.List;
 public class WarehouseInboundServiceImpl implements WarehouseInboundService {
     @Autowired
     private WarehouseInboundMapper warehouseInboundMapper;
+
+    @Autowired
+    private WarehouseInboundDetailedService warehouseInboundDetailedServiceImpl;
 
 
     @Override
@@ -59,8 +64,14 @@ public class WarehouseInboundServiceImpl implements WarehouseInboundService {
      */
     @Transactional
     @Override
-    public int insertWarehousing(WarehouseInbound warehouseInbound) {
-        return this.warehouseInboundMapper.insertWarehousing(warehouseInbound);
+    public void insertWarehousing(WarehouseInbound warehouseInbound, WarehouseInboundDetailed[] warehouseInboundDetailed) {
+        this.warehouseInboundMapper.insert(warehouseInbound);
+        WarehouseInboundDetailed warehouseInboundDetailed1 = null;
+        for (int i = 0; i < warehouseInboundDetailed.length; i++) {
+            warehouseInboundDetailed1 = warehouseInboundDetailed[i];
+            warehouseInboundDetailed1.setParentId(warehouseInbound.getId());
+            warehouseInboundDetailedServiceImpl.insertWarehouseDetailed(warehouseInboundDetailed1);
+        }
     }
 
     /**

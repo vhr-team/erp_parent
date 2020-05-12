@@ -15,13 +15,6 @@ import java.util.List;
  */
 public interface WarehouseInboundMapper extends BaseMapper<WarehouseInbound> {
 
-    /**
-     * 入库申请登记
-     *
-     * @param warehouseInbound 实例对象
-     * @return 主键id
-     */
-    int insertWarehousing(WarehouseInbound warehouseInbound);
 
     /**
      * 入库申请审核

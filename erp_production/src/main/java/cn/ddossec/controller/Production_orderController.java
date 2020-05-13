@@ -42,4 +42,14 @@ public class Production_orderController {
         production_orderService.insertProductionOrder(production_order);
         return "添加成功";
     }
+
+
+    @RequestMapping("/findByFields")
+    public Map<String,Object> findByFields(){
+        Map<String,Object> rut = new HashMap<>();
+        List<Production_order> byFields = production_orderService.findByFields();
+        rut.put("data",byFields);
+        return rut;
+    }
+
 }

@@ -24,4 +24,9 @@ public class Production_orderServiceImpl implements Production_orderService {
     public void insertProductionOrder(Production_order production_order) {
         production_orderMapper.insertProductionOrder(production_order);
     }
+
+    @Override
+    public List<Production_order> findByFields() {
+        return production_orderMapper.findByFields();
+    }
 }

@@ -8,9 +8,4 @@
     <insert id="insertProductionOrder">
         INSERT into production_order(schedule_id,product_id,product_name,product_describe,quantity,qutbound_order_id,review_time) VALUES(#{schedule_id},#{product_id},#{product_name},#{product_describe},#{quantity},#{qutbound_order_id},NOW());
     </insert>
-
-    <select id="findByFields" resultType="cn.ddossec.domain.Production_order">
-        SELECT schedule_id,product_id,product_name,quantity,qutbound_order_id,review_time from production_order;
-    </select>
-
 </mapper>

@@ -12,6 +12,7 @@ import java.util.List;
  */
 public interface WarehouseInboundDetailedService {
 
+
     /**
      * 入库调度表的调度查询
      *
@@ -23,43 +24,10 @@ public interface WarehouseInboundDetailedService {
     DataGridView queryInboundDetailed(Integer id, int page, int limit);
 
     /**
-     * 通过ID查询单条数据
-     *
-     * @param id 主键
-     * @return 实例对象
-     */
-    WarehouseInboundDetailed queryById(Integer id);
-
-    /**
-     * 查询多条数据
-     *
-     * @param offset 查询起始位置
-     * @param limit 查询条数
-     * @return 对象列表
-     */
-    List<WarehouseInboundDetailed> queryAllByLimit(int offset, int limit);
-
-    /**
-     * 新增入库详细单
-     *
-     * @param warehouseInboundDetailed 实例对象
+     * 插入入库详细表
+     * @param warehouseInboundDetailed
+     * @return
      */
     void insertWarehouseDetailed(WarehouseInboundDetailed warehouseInboundDetailed);
-
-    /**
-     * 修改数据
-     *
-     * @param warehouseInboundDetailed 实例对象
-     * @return 实例对象
-     */
-    WarehouseInboundDetailed update(WarehouseInboundDetailed warehouseInboundDetailed);
-
-    /**
-     * 通过主键删除数据
-     *
-     * @param id 主键
-     * @return 是否成功
-     */
-    boolean deleteById(Integer id);
 
 }

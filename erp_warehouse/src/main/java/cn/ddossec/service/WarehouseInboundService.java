@@ -2,6 +2,7 @@ package cn.ddossec.service;
 
 import cn.ddossec.common.DataGridView;
 import cn.ddossec.domain.WarehouseInbound;
+import cn.ddossec.domain.WarehouseInboundDetailed;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.Date;
@@ -14,14 +15,6 @@ import java.util.List;
  * @since 2020-04-24 17:06:40
  */
 public interface WarehouseInboundService {
-
-    /**
-     * 查询所有审核通过 可入库的数据
-     *
-     * @param check_tag
-     * @return
-     */
-    DataGridView queryAllInbound(Integer check_tag,Integer page,Integer limit);
 
     /**
      * 入库管理
@@ -49,7 +42,7 @@ public interface WarehouseInboundService {
      * @param warehouseInbound 实例对象
      * @return 主键id
      */
-    int insertWarehousing(WarehouseInbound warehouseInbound);
+    void insertWarehousing(WarehouseInbound warehouseInbound, WarehouseInboundDetailed[] warehouseInboundDetailed);
 
     /**
      * 入库申请审核

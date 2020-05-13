@@ -2,7 +2,9 @@ package cn.ddossec.service.impl;
 
 import cn.ddossec.common.DataGridView;
 import cn.ddossec.domain.WarehouseInbound;
+import cn.ddossec.domain.WarehouseInboundDetailed;
 import cn.ddossec.mapper.WarehouseInboundMapper;
+import cn.ddossec.service.WarehouseInboundDetailedService;
 import cn.ddossec.service.WarehouseInboundService;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
@@ -26,17 +28,9 @@ public class WarehouseInboundServiceImpl implements WarehouseInboundService {
     @Autowired
     private WarehouseInboundMapper warehouseInboundMapper;
 
+    @Autowired
+    private WarehouseInboundDetailedService warehouseInboundDetailedServiceImpl;
 
-    /**
-     * 查询所有审核通过 可入库的数据
-     *
-     * @param check_tag
-     * @return
-     */
-    @Override
-    public DataGridView queryAllInbound(Integer check_tag, Integer page, Integer limit) {
-        return null;
-    }
 
     @Override
     public DataGridView queryInbound(String storeTag, int page, int limit) {
@@ -70,8 +64,14 @@ public class WarehouseInboundServiceImpl implements WarehouseInboundService {
      */
     @Transactional
     @Override
-    public int insertWarehousing(WarehouseInbound warehouseInbound) {
-        return this.warehouseInboundMapper.insertWarehousing(warehouseInbound);
+    public void insertWarehousing(WarehouseInbound warehouseInbound, WarehouseInboundDetailed[] warehouseInboundDetailed) {
+        this.warehouseInboundMapper.insert(warehouseInbound);
+        WarehouseInboundDetailed warehouseInboundDetailed1 = null;
+        for (int i = 0; i < warehouseInboundDetailed.length; i++) {
+            warehouseInboundDetailed1 = warehouseInboundDetailed[i];
+            warehouseInboundDetailed1.setParentId(warehouseInbound.getId());
+            warehouseInboundDetailedServiceImpl.insertWarehouseDetailed(warehouseInboundDetailed1);
+        }
     }
 
     /**

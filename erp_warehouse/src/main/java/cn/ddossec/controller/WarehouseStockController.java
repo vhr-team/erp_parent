@@ -91,7 +91,7 @@ public class WarehouseStockController {
     @ApiOperation(value = "查询安全库存配置单")
     @GetMapping(value = "querySecuritySheet")
     public DataGridView querySecuritySheet(@RequestParam("check_tag") String checkTag,
-                                           @RequestParam("product_name") String productName,
+                                           @RequestParam(value = "product_name",required = false) String productName,
                                            @RequestParam("page") int page,
                                            @RequestParam("limit") int limit) {
         if (productName == null) {

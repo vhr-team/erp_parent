@@ -86,9 +86,9 @@
   </sql>
   <sql id="Base_Column_List" >
     <if test="fields == null" >
-      id, product_id, product_name, factory_name, product_class, warranty, list_price, 
-      real_cost_price, amount_unit, product_describe, responsible_person, register, register_time, 
-      checker, check_time, check_tag, changer, change_time, change_tag, file_change_amount, 
+      id, product_id, product_name, factory_name, product_class, warranty, list_price,
+      real_cost_price, amount_unit, product_describe, responsible_person, register, register_time,
+      checker, check_time, check_tag, changer, change_time, change_tag, file_change_amount,
       delete_tag, materiel_archives_id, inventory_status
     </if>
     <if test="fields != null" >
@@ -110,7 +110,7 @@
     </if>
   </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
+    select
     id,product_id,product_name,factory_name,product_class,warranty,list_price,real_cost_price,amount_unit,product_describe,responsible_person,register,register_time,checker,check_time,check_tag,changer,change_time,change_tag,file_change_amount,delete_tag,materiel_archives_id,inventory_status
     from product_design_record
     where id = #{id,jdbcType=INTEGER}
@@ -126,21 +126,21 @@
     </if>
   </delete>
   <insert id="insert" parameterType="cn.ddosec.design.pojo.product_design_record" >
-    insert into product_design_record (id, product_id, product_name, 
-      factory_name, product_class, warranty, 
-      list_price, real_cost_price, amount_unit, 
-      product_describe, responsible_person, register, 
-      register_time, checker, check_time, 
-      check_tag, changer, change_time, 
-      change_tag, file_change_amount, delete_tag, 
+    insert into product_design_record (id, product_id, product_name,
+      factory_name, product_class, warranty,
+      list_price, real_cost_price, amount_unit,
+      product_describe, responsible_person, register,
+      register_time, checker, check_time,
+      check_tag, changer, change_time,
+      change_tag, file_change_amount, delete_tag,
       materiel_archives_id, inventory_status)
-    values (#{id,jdbcType=INTEGER}, #{productId,jdbcType=VARCHAR}, #{productName,jdbcType=VARCHAR}, 
-      #{factoryName,jdbcType=VARCHAR}, #{productClass,jdbcType=VARCHAR}, #{warranty,jdbcType=VARCHAR}, 
-      #{listPrice,jdbcType=DOUBLE}, #{realCostPrice,jdbcType=DOUBLE}, #{amountUnit,jdbcType=VARCHAR}, 
-      #{productDescribe,jdbcType=VARCHAR}, #{responsiblePerson,jdbcType=VARCHAR}, #{register,jdbcType=VARCHAR}, 
-      #{registerTime,jdbcType=VARCHAR}, #{checker,jdbcType=VARCHAR}, #{checkTime,jdbcType=VARCHAR}, 
-      #{checkTag,jdbcType=VARCHAR}, #{changer,jdbcType=VARCHAR}, #{changeTime,jdbcType=VARCHAR}, 
-      #{changeTag,jdbcType=VARCHAR}, #{fileChangeAmount,jdbcType=INTEGER}, #{deleteTag,jdbcType=VARCHAR}, 
+    values (#{id,jdbcType=INTEGER}, #{productId,jdbcType=VARCHAR}, #{productName,jdbcType=VARCHAR},
+      #{factoryName,jdbcType=VARCHAR}, #{productClass,jdbcType=VARCHAR}, #{warranty,jdbcType=VARCHAR},
+      #{listPrice,jdbcType=DOUBLE}, #{realCostPrice,jdbcType=DOUBLE}, #{amountUnit,jdbcType=VARCHAR},
+      #{productDescribe,jdbcType=VARCHAR}, #{responsiblePerson,jdbcType=VARCHAR}, #{register,jdbcType=VARCHAR},
+      #{registerTime,jdbcType=VARCHAR}, #{checker,jdbcType=VARCHAR}, #{checkTime,jdbcType=VARCHAR},
+      #{checkTag,jdbcType=VARCHAR}, #{changer,jdbcType=VARCHAR}, #{changeTime,jdbcType=VARCHAR},
+      #{changeTag,jdbcType=VARCHAR}, #{fileChangeAmount,jdbcType=INTEGER}, #{deleteTag,jdbcType=VARCHAR},
       #{materielArchivesId,jdbcType=VARCHAR}, #{inventoryStatus,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="cn.ddosec.design.pojo.product_design_record" >
@@ -403,6 +403,69 @@
   <update id="updateByPrimaryKeySelective" parameterType="cn.ddosec.design.pojo.product_design_record" >
     update product_design_record
     <set >
+      <if test="productId != null" >
+        product_id = #{productId,jdbcType=VARCHAR},
+      </if>
+      <if test="productName != null" >
+        product_name = #{productName,jdbcType=VARCHAR},
+      </if>
+      <if test="factoryName != null" >
+        factory_name = #{factoryName,jdbcType=VARCHAR},
+      </if>
+      <if test="productClass != null" >
+        product_class = #{productClass,jdbcType=VARCHAR},
+      </if>
+      <if test="warranty != null" >
+        warranty = #{warranty,jdbcType=VARCHAR},
+      </if>
+      <if test="listPrice != null" >
+        list_price = #{listPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="realCostPrice != null" >
+        real_cost_price = #{realCostPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="amountUnit != null" >
+        amount_unit = #{amountUnit,jdbcType=VARCHAR},
+      </if>
+      <if test="productDescribe != null" >
+        product_describe = #{productDescribe,jdbcType=VARCHAR},
+      </if>
+      <if test="responsiblePerson != null" >
+        responsible_person = #{responsiblePerson,jdbcType=VARCHAR},
+      </if>
+      <if test="register != null" >
+        register = #{register,jdbcType=VARCHAR},
+      </if>
+      <if test="registerTime != null" >
+        register_time = #{registerTime,jdbcType=VARCHAR},
+      </if>
+      <if test="checker != null" >
+        checker = #{checker,jdbcType=VARCHAR},
+      </if>
+      <if test="checkTime != null" >
+        check_time = #{checkTime,jdbcType=VARCHAR},
+      </if>
+      <if test="checkTag != null" >
+        check_tag = #{checkTag,jdbcType=VARCHAR},
+      </if>
+      <if test="changer != null" >
+        changer = #{changer,jdbcType=VARCHAR},
+      </if>
+      <if test="changeTime != null" >
+        change_time = #{changeTime,jdbcType=VARCHAR},
+      </if>
+      <if test="changeTag != null" >
+        change_tag = #{changeTag,jdbcType=VARCHAR},
+      </if>
+      <if test="fileChangeAmount != null" >
+        file_change_amount = #{fileChangeAmount,jdbcType=INTEGER},
+      </if>
+      <if test="deleteTag != null" >
+        delete_tag = #{deleteTag,jdbcType=VARCHAR},
+      </if>
+      <if test="materielArchivesId != null" >
+        materiel_archives_id = #{materielArchivesId,jdbcType=VARCHAR},
+      </if>
       <if test="inventoryStatus != null" >
         inventory_status = #{inventoryStatus,jdbcType=INTEGER},
       </if>

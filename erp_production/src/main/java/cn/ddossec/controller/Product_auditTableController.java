@@ -40,7 +40,7 @@ public class Product_auditTableController {
     private Designfegin designfegin;
 
     @RequestMapping("hellaa2")
-    public String hellaa2(){
+    public Object hellaa2(){
         return designfegin.selectAll();
     }
 

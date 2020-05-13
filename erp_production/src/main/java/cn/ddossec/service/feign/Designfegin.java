@@ -11,5 +11,5 @@ public interface Designfegin {
      * @return
      */
     @RequestMapping("/design_material/selectAll")
-    public String selectAll();
+    public Object selectAll();
 }

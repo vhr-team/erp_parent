@@ -3,12 +3,15 @@ package cn.ddosec.design.service;
 import cn.ddosec.design.entity.PageResult;
 import cn.ddosec.design.pojo.product_design_record;
 
+import java.util.List;
+
 /**
  * @author joker_dj
  * @create 2020-04-30日 10:23
  */
 public interface design_recordService {
 
+    List<product_design_record> selectcheckAll();
     /**
      * 分页查询
      *

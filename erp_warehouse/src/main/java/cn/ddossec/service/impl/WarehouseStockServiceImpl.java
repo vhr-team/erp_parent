@@ -1,7 +1,7 @@
 package cn.ddossec.service.impl;
 
-import cn.ddosec.design.pojo.product_design_record;
 import cn.ddossec.common.DataGridView;
+import cn.ddossec.domain.WarehouseInbound;
 import cn.ddossec.domain.WarehouseStock;
 import cn.ddossec.mapper.WarehouseStockMapper;
 import cn.ddossec.service.WarehouseStockService;
@@ -14,7 +14,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
-import java.util.List;
 
 /**
  * (WarehouseStock)表服务实现类
@@ -77,7 +76,13 @@ public class WarehouseStockServiceImpl implements WarehouseStockService {
      * @return 影响行数
      */
     public int updateSecuritySheet(String check_tag, Date check_time, String product_id, String checker){
-        return this.warehouseStockMapper.updateSecuritySheet(check_tag,check_time,product_id,checker);
+        QueryWrapper<WarehouseStock> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq(product_id != null,"product_id",product_id).select("id");
+        WarehouseStock warehouseStock = warehouseStockMapper.selectOne(queryWrapper);
+        warehouseStock.setCheckTag(check_tag);
+        warehouseStock.setCheckTime(check_time);
+        warehouseStock.setChecker(checker);
+        return warehouseStockMapper.updateById(warehouseStock);
     }
 
     /**

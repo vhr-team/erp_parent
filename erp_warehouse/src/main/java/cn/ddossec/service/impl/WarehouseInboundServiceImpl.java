@@ -92,7 +92,7 @@ public class WarehouseInboundServiceImpl implements WarehouseInboundService {
     @Override
     public int updateWarehousing(String check_tag, Date check_time, String checker, String inbound_id) {
         QueryWrapper<WarehouseInbound> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq(inbound_id != null,"inbound_id",inbound_id);
+        queryWrapper.eq(inbound_id != null,"inbound_id",inbound_id).select("id");
         WarehouseInbound warehouseInbound = warehouseInboundMapper.selectOne(queryWrapper);
         warehouseInbound.setCheckTag(check_tag);
         warehouseInbound.setCheckTime(check_time);

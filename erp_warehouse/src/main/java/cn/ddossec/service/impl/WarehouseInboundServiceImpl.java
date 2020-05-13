@@ -6,13 +6,17 @@ import cn.ddossec.domain.WarehouseInboundDetailed;
 import cn.ddossec.mapper.WarehouseInboundMapper;
 import cn.ddossec.service.WarehouseInboundDetailedService;
 import cn.ddossec.service.WarehouseInboundService;
+import cn.hutool.core.date.DateUtil;
+import cn.hutool.core.lang.ObjectId;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -64,13 +68,15 @@ public class WarehouseInboundServiceImpl implements WarehouseInboundService {
      */
     @Transactional
     @Override
-    public void insertWarehousing(WarehouseInbound warehouseInbound, WarehouseInboundDetailed[] warehouseInboundDetailed) {
-        this.warehouseInboundMapper.insert(warehouseInbound);
-        WarehouseInboundDetailed warehouseInboundDetailed1 = null;
-        for (int i = 0; i < warehouseInboundDetailed.length; i++) {
-            warehouseInboundDetailed1 = warehouseInboundDetailed[i];
-            warehouseInboundDetailed1.setParentId(warehouseInbound.getId());
-            warehouseInboundDetailedServiceImpl.insertWarehouseDetailed(warehouseInboundDetailed1);
+    public void insertWarehousing(WarehouseInbound warehouseInbound) {
+        warehouseInbound.setInboundId(ObjectId.next()); //生成随机入库单编号
+        warehouseInbound.setRegisterTime(DateUtil.date()); //登记时间
+        this.warehouseInboundMapper.insert(warehouseInbound);//插入入库单
+
+        List<WarehouseInboundDetailed> list = warehouseInbound.getWarehouseInboundDetaileds();//获取入库详细单
+        for (WarehouseInboundDetailed detailed : list) {
+            detailed.setParentId(warehouseInbound.getId());//设置父级序号
+            this.warehouseInboundDetailedServiceImpl.insertWarehouseDetailed(detailed);//循环插入到入库详细单
         }
     }
 
@@ -85,7 +91,13 @@ public class WarehouseInboundServiceImpl implements WarehouseInboundService {
      */
     @Override
     public int updateWarehousing(String check_tag, Date check_time, String checker, String inbound_id) {
-        return this.warehouseInboundMapper.updateWarehousing(check_tag,check_time,checker,inbound_id);
+        QueryWrapper<WarehouseInbound> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq(inbound_id != null,"inbound_id",inbound_id);
+        WarehouseInbound warehouseInbound = warehouseInboundMapper.selectOne(queryWrapper);
+        warehouseInbound.setCheckTag(check_tag);
+        warehouseInbound.setCheckTime(check_time);
+        warehouseInbound.setChecker(checker);
+        return warehouseInboundMapper.updateById(warehouseInbound);
     }
 
 }

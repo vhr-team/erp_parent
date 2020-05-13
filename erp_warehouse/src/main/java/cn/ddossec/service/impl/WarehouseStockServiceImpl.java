@@ -61,7 +61,7 @@ public class WarehouseStockServiceImpl implements WarehouseStockService {
     public DataGridView querySecuritySheet(String checkTag,String productName,int page,int limit){
         QueryWrapper<WarehouseStock> queryWrapper = new QueryWrapper<>();
         //product_name,product_id,min_amount,max_amount,register,register_time,config,max_capacity_amount
-        queryWrapper.select("id","product_name","product_id","min_amount","max_amount","register","register_time","config","max_capacity_amount").eq("check_tag",checkTag).like("product_name",productName);
+        queryWrapper.select("id","product_name","stock_id","product_id","min_amount","max_amount","register","register_time","config","max_capacity_amount").eq("check_tag",checkTag).like("product_name",productName).orderByDesc("id");
         Page<WarehouseStock> pages = new Page<>(page,limit);
         IPage<WarehouseStock> iPage = this.warehouseStockMapper.selectPage(pages,queryWrapper);
         //iPage.getTotal() 总共多少页   iPage.getRecords()查询出来的所有数据

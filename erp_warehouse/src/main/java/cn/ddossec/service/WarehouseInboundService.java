@@ -42,7 +42,7 @@ public interface WarehouseInboundService {
      * @param warehouseInbound 实例对象
      * @return 主键id
      */
-    void insertWarehousing(WarehouseInbound warehouseInbound, WarehouseInboundDetailed[] warehouseInboundDetailed);
+    void insertWarehousing(WarehouseInbound warehouseInbound);
 
     /**
      * 入库申请审核

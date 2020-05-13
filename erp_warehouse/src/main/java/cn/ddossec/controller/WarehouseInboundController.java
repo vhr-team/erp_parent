@@ -55,12 +55,9 @@ public class WarehouseInboundController {
      */
     @ApiOperation(value = "入库申请登记")
     @RequestMapping("insertWarehousing")
-    public Response insertWarehousing(@RequestBody WarehouseInbound warehouseInbound,
-                                      @RequestBody WarehouseInboundDetailed[] warehouseInboundDetailed){
+    public Response insertWarehousing(@RequestBody WarehouseInbound warehouseInbound){
         try{
-            warehouseInbound.setInboundId(ObjectId.next()); //生成随机入库单编号
-            warehouseInbound.setRegisterTime(DateUtil.date()); //登记时间
-            warehouseInboundServiceImpl.insertWarehousing(warehouseInbound,warehouseInboundDetailed);
+            warehouseInboundServiceImpl.insertWarehousing(warehouseInbound);
             return new Response(true,"提交成功,等待审核!");
         }catch (Exception e){
             e.printStackTrace();

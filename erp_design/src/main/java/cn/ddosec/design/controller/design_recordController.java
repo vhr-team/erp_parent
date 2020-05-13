@@ -30,10 +30,15 @@ public class design_recordController {
     @Autowired
     material_archivesService material_archivesservice;
 
-
-
-
-
+    /**
+     * 查询全部已通过审核档案
+     * @return
+     */
+    @RequestMapping("/selectcheckAll")
+    @ApiOperation("查询全部已通过审核档案")
+    public List<product_design_record> selectcheckAll(){
+        return service.selectcheckAll();
+    }
 
     /**
      * 根据ID查询档案

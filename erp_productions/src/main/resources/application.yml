@@ -1,5 +1,5 @@
 server:
-  port: 8003
+  port: 8008
 spring:
   application:
     name: productions-provider
@@ -17,4 +17,4 @@ mybatis: #配置mybatis sql打印
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
   mapper-locations: classpath*:cn/ddosec/production/mapper/*.xml
-  type-aliases-package: cn.ddosec.production.pojo
+  type-aliases-package: cn.ddosec.domain.pojo

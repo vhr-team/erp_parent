@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author joker_dj
@@ -49,6 +50,14 @@ public class design_recordServiceImpl implements design_recordService {
 
     @Autowired
     product_design_recordmapper mapper;
+
+    @Override
+    public List<product_design_record> selectcheckAll() {
+        product_design_recordQuery query = new product_design_recordQuery();
+        product_design_recordQuery.Criteria criteria = query.createCriteria();
+        criteria.andCheckTagEqualTo("审核通过");
+        return mapper.selectByExample(query);
+    }
 
     /**
      * 分页查询

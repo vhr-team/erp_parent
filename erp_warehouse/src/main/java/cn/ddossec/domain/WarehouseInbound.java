@@ -88,11 +88,6 @@ public class WarehouseInbound implements Serializable {
     */
     private String storeTag;
 
-    /**
-     * 入库单详细
-     */
-    @TableField(exist = false)
-    private List<WarehouseInboundDetailed> warehouseInboundDetaileds;
 
     @TableField(exist = false)
     private String[] productName;

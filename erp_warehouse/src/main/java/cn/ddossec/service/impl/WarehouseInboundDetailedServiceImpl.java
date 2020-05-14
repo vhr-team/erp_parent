@@ -43,6 +43,12 @@ public class WarehouseInboundDetailedServiceImpl implements WarehouseInboundDeta
         return new DataGridView(iPage.getTotal(),iPage.getRecords());
     }
 
+
+    /**
+     * 插入入库详细表
+     * @param warehouseInboundDetailed
+     * @return
+     */
     @Override
     public void insertWarehouseDetailed(WarehouseInboundDetailed warehouseInboundDetailed) {
         warehouseInboundDetailedMapper.insert(warehouseInboundDetailed);

@@ -54,6 +54,17 @@ public class WarehouseInboundServiceImpl implements WarehouseInboundService {
     @Override
     public DataGridView queryInboundLimit(String checkTag, int page, int limit){
         QueryWrapper<WarehouseInbound> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("check_tag",checkTag).select("amount_sum","gathered_amount_sum");
+        List<WarehouseInbound> warehouseInbound = warehouseInboundMapper.selectList(queryWrapper);
+        for (WarehouseInbound inbound : warehouseInbound) {
+            for (Integer integer : inbound.getAmount()) {
+                for (Integer i = 0; i < inbound.getGatheredAmountSum(); i++) {
+                    if (integer==inbound.getGatheredAmountSum()){
+
+                    }
+                }
+            }
+        }
         queryWrapper.eq("check_tag",checkTag).select("id","inbound_id","reason","register_time","amount_sum","cost_price_sum");
         Page<WarehouseInbound> pages = new Page<>(page,limit);
         IPage iPage = warehouseInboundMapper.selectPage(pages,queryWrapper);
@@ -73,9 +84,17 @@ public class WarehouseInboundServiceImpl implements WarehouseInboundService {
         warehouseInbound.setRegisterTime(DateUtil.date()); //登记时间
         this.warehouseInboundMapper.insert(warehouseInbound);//插入入库单
 
-        List<WarehouseInboundDetailed> list = warehouseInbound.getWarehouseInboundDetaileds();//获取入库详细单
-        for (WarehouseInboundDetailed detailed : list) {
+        WarehouseInboundDetailed detailed = null;
+        for (int i = 0; i < warehouseInbound.getProductId().length; i++) {
+            detailed = new WarehouseInboundDetailed();
             detailed.setParentId(warehouseInbound.getId());//设置父级序号
+            detailed.setProductName(warehouseInbound.getProductName()[i]);
+            detailed.setProductId(warehouseInbound.getProductId()[i]);
+            detailed.setProductDescribe(warehouseInbound.getProductDescribe()[i]);
+            detailed.setAmount(warehouseInbound.getAmount()[i]);
+            detailed.setAmountUnit(warehouseInbound.getAmountUnit()[i]);
+            detailed.setCostPrice(warehouseInbound.getCostPrice()[i]);
+            detailed.setSubtotal(warehouseInbound.getSubtotal()[i]);
             this.warehouseInboundDetailedServiceImpl.insertWarehouseDetailed(detailed);//循环插入到入库详细单
         }
     }

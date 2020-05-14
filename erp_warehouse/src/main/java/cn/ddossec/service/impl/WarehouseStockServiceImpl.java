@@ -1,7 +1,6 @@
 package cn.ddossec.service.impl;
 
 import cn.ddossec.common.DataGridView;
-import cn.ddossec.domain.WarehouseInbound;
 import cn.ddossec.domain.WarehouseStock;
 import cn.ddossec.mapper.WarehouseStockMapper;
 import cn.ddossec.service.WarehouseStockService;

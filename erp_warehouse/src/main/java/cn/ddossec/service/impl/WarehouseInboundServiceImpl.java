@@ -54,10 +54,15 @@ public class WarehouseInboundServiceImpl implements WarehouseInboundService {
     @Override
     public DataGridView queryInboundLimit(String checkTag, int page, int limit){
         QueryWrapper<WarehouseInbound> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("check_tag",checkTag).gt("amount_sum",0).select("id","inbound_id","reason","register_time","amount_sum");
-        Page<WarehouseInbound> pages = new Page<>(page,limit);
-        IPage iPage = warehouseInboundMapper.selectPage(pages,queryWrapper);
-        return new DataGridView(iPage.getTotal(),iPage.getRecords());
+        queryWrapper.eq("check_tag",checkTag).select("id","inbound_id","reason","register_time","amount_sum","cost_price_sum","gathered_amount_sum","register","register_time");
+        List<WarehouseInbound> list = warehouseInboundMapper.selectList(queryWrapper);
+        ArrayList<Object> arrayList = new ArrayList<>();
+        for (WarehouseInbound inbound : list) {
+            if (inbound.getAmountSum()>inbound.getGatheredAmountSum()){
+                arrayList.add(inbound);
+            }
+        }
+        return new DataGridView(Long.valueOf(arrayList.size()),arrayList);
     }
 
     /**

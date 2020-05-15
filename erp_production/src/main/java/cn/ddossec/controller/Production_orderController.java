@@ -85,4 +85,16 @@ public class Production_orderController {
         return "审核失败";
     }
 
+
+    @RequestMapping("/getFindByChecked_audit")
+    public Map<String,Object> getFindByChecked_audit(){
+        Map<String,Object> rut = new HashMap<>();
+        List<Production_order> list = production_orderService.findByChecked_audit();
+        rut.put("data",list);
+        rut.put("code",0);
+        rut.put("msg","");
+        rut.put("count",100);
+        return rut;
+    }
+
 }

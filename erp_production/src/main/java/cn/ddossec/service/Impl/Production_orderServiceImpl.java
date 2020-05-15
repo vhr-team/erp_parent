@@ -45,5 +45,10 @@ public class Production_orderServiceImpl implements Production_orderService {
         return production_orderMapper.updatechecked_audit(id);
     }
 
+    @Override
+    public List<Production_order> findByChecked_audit() {
+        return production_orderMapper.findByChecked_audit();
+    }
+
 
 }

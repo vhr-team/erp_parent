@@ -25,4 +25,8 @@
         UPDATE production_order SET checked_audit = '已审核' where id = #{id}
     </update>
 
+    <select id="findByChecked_audit" resultType="cn.ddossec.domain.Production_order">
+        SELECT * from production_order WHERE checked_audit = '已审核';
+    </select>
+
 </mapper>

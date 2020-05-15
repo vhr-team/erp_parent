@@ -18,4 +18,6 @@ public interface Production_orderService {
 
     public boolean updatechecked_audit(String id);
 
+    public List<Production_order> findByChecked_audit();
+
 }

@@ -10,5 +10,12 @@ public interface Production_orderService {
 
     public void insertProductionOrder(Production_order production_order);
 
-    public List<Production_order> findByFields();
+    public boolean updateProductionOrder(String id);
+
+    public Production_order selectById(Integer id);
+
+    public List<Production_order> findByProduction_generate();
+
+    public boolean updatechecked_audit(String id);
+
 }

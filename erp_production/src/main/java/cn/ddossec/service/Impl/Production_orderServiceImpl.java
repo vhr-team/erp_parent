@@ -26,7 +26,24 @@ public class Production_orderServiceImpl implements Production_orderService {
     }
 
     @Override
-    public List<Production_order> findByFields() {
-        return production_orderMapper.findByFields();
+    public boolean updateProductionOrder(String id) {
+        return production_orderMapper.updateProductionOrder(id);
     }
+
+    @Override
+    public Production_order selectById(Integer id) {
+        return production_orderMapper.selectById(id);
+    }
+
+    @Override
+    public List<Production_order> findByProduction_generate() {
+        return production_orderMapper.findByProduction_generate();
+    }
+
+    @Override
+    public boolean updatechecked_audit(String id) {
+        return production_orderMapper.updatechecked_audit(id);
+    }
+
+
 }

@@ -30,6 +30,24 @@ public class WarehouseStockServiceImpl implements WarehouseStockService {
     private designRecordFeignService designRecordFeignService;
 
 
+
+    /**
+     * 通过产品编号获取安全库存的当前存储量和最大存储量，求出剩余存储量
+     *
+     * @param product_id 库存编号
+     * @param page
+     * @param limit
+     * @return
+     */
+    @Override
+    public DataGridView queryInventory(String product_id, Integer page, Integer limit) {
+        QueryWrapper<WarehouseStock> queryWrapper = new QueryWrapper<>();
+        queryWrapper.select("max_capacity_amount","amount").eq("product_id",product_id);
+        Page<WarehouseStock> pages = new Page<>(page,limit);
+        IPage iPage = warehouseStockMapper.selectPage(pages,queryWrapper);
+        return new DataGridView(iPage.getTotal(),iPage.getRecords());
+    }
+
     /**
      * 新增安全库存配置单
      *

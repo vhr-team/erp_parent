@@ -17,6 +17,16 @@ public interface WarehouseStockService {
 
 
     /**
+     * 通过产品编号获取安全库存的当前存储量和最大存储量，求出剩余存储量
+     *
+     * @param product_id 库存编号
+     * @param page
+     * @param limit
+     * @return
+     */
+    DataGridView queryInventory(String product_id,Integer page,Integer limit);
+
+    /**
      * 新增数据
      *
      * @param warehouseStock 实例对象

@@ -3,20 +3,18 @@ package cn.ddosec.design.controller;
 
 import cn.ddosec.design.entity.PageResult;
 import cn.ddosec.design.entity.Response;
-import cn.ddosec.design.pojo.Production_mdesign_procedure;
 import cn.ddosec.design.pojo.product_design_record;
 import cn.ddosec.design.pojo.product_material_archives;
 import cn.ddosec.design.service.design_recordService;
 import cn.ddosec.design.service.material_archivesService;
-
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
-import javax.annotation.Resource;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * @author joker_dj
@@ -32,11 +30,12 @@ public class design_recordController {
 
     /**
      * 查询全部已通过审核档案
+     *
      * @return
      */
     @RequestMapping("/selectcheckAll")
     @ApiOperation("查询全部已通过审核档案")
-    public List<product_design_record> selectcheckAll(){
+    public List<product_design_record> selectcheckAll() {
         return service.selectcheckAll();
     }
 
@@ -170,19 +169,45 @@ public class design_recordController {
 
     /**
      * 根据产品编号修改安全库存状态
+     *
      * @param productId
      * @param InventoryStatus
      * @return
      */
     @RequestMapping("updateinventoryStatus")
     public Response updateinventoryStatus(@RequestParam("productId") String productId,
-                                          @RequestParam("InventoryStatus") Integer InventoryStatus){
+                                          @RequestParam("InventoryStatus") Integer InventoryStatus) {
         try {
             service.updateinventoryStatus(productId, InventoryStatus);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
-            return new Response(false,"修改失败!");
+            return new Response(false, "修改失败!");
         }
-        return new Response(true,"修改成功!");
+        return new Response(true, "修改成功!");
+    }
+
+    /**
+     * 查询未生成工序&&审核通过的档案
+     *
+     * @return
+     */
+    @RequestMapping("/selectprocessAll")
+    public List<product_design_record> selectprocessAll() {
+        return service.selectprocess();
+    }
+
+    /**修改生产工序档案
+     * @param record
+     * @return
+     */
+    @RequestMapping("/updateprocess")
+    public Response updateprocess(@RequestBody product_design_record record) {
+        try {
+            service.updateprocess(record);
+            return new Response(true, "成功");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new Response(false, "失败");
+        }
     }
 }

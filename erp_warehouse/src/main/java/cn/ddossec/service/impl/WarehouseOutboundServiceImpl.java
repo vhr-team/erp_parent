@@ -1,14 +1,22 @@
 package cn.ddossec.service.impl;
 
 import cn.ddossec.common.DataGridView;
+import cn.ddossec.common.Response;
 import cn.ddossec.domain.WarehouseOutbound;
+import cn.ddossec.domain.WarehouseOutboundDetailed;
+import cn.ddossec.mapper.WarehouseOutboundDetailedMapper;
 import cn.ddossec.mapper.WarehouseOutboundMapper;
+import cn.ddossec.service.WarehouseOutboundDetailedService;
 import cn.ddossec.service.WarehouseOutboundService;
+import cn.hutool.core.date.DateUnit;
+import cn.hutool.core.date.DateUtil;
+import cn.hutool.core.lang.ObjectId;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -23,6 +31,9 @@ import java.util.List;
 public class WarehouseOutboundServiceImpl implements WarehouseOutboundService {
     @Autowired
     private WarehouseOutboundMapper warehouseOutboundMapper;
+
+    @Autowired
+    private WarehouseOutboundDetailedService warehouseOutboundDetailedServiceImpl;
 
     /**
      * 查询可调度的数据进行调度
@@ -40,6 +51,40 @@ public class WarehouseOutboundServiceImpl implements WarehouseOutboundService {
         IPage iPage = warehouseOutboundMapper.selectPage(pages,queryWrapper);
         //  总共多少页   查询出来的所有数据
         return new DataGridView(iPage.getTotal(),iPage.getRecords());
+    }
+
+    /**
+     * 添加出库申请单
+     *
+     * @param warehouseOutbound
+     * @return
+     */
+    @Override
+    @Transactional //开启事务
+    public Response addWarehouseOutbound(WarehouseOutbound warehouseOutbound) {
+        try {
+            warehouseOutbound.setOutboundId(ObjectId.next());//随机生成入库单编号
+            warehouseOutbound.setRegisterTime(DateUtil.date());//登记时间
+            warehouseOutboundMapper.insert(warehouseOutbound); //插入出库单
+
+            WarehouseOutboundDetailed detailed = null;
+            for (int i = 0; i < warehouseOutbound.getProductId().length(); i++) {
+                detailed = new WarehouseOutboundDetailed();
+                detailed.setParentId(warehouseOutbound.getId());//设置父级序号
+                detailed.setProductName(warehouseOutbound.getProductName());
+                detailed.setProductId(warehouseOutbound.getProductId());
+                detailed.setAmount(warehouseOutbound.getAmount());
+                detailed.setAmountUnit(warehouseOutbound.getAmountUnit());
+                detailed.setCostPrice(warehouseOutbound.getCostPrice());
+                detailed.setSubtotal(warehouseOutbound.getSubtotal());
+                detailed.setProductDescribe(warehouseOutbound.getProductDescribe());
+                warehouseOutboundDetailedServiceImpl.addWarehouseOutboundDetailed(detailed);
+            }
+            return new Response(true,"添加成功,等待审核!");
+        }catch (Exception e){
+            e.printStackTrace();
+            return new Response(false,"添加失败,请重试!");
+        }
     }
 
 

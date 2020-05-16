@@ -19,4 +19,10 @@ public interface WarehouseOutboundDetailedService {
      */
     DataGridView queryWarehouseOutboundDetailed(Integer page,Integer limit,Integer id);
 
+    /**
+     * 添加出库申请详细单
+     *
+     * @param warehouseOutboundDetailed
+     */
+    void addWarehouseOutboundDetailed(WarehouseOutboundDetailed warehouseOutboundDetailed);
 }

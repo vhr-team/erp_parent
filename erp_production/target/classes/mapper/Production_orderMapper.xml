@@ -18,7 +18,7 @@
     </select>
 
     <select id="findByProduction_generate" resultType="cn.ddossec.domain.Production_order">
-        SELECT *  from production_order WHERE  checked_audit = '未审核'
+        SELECT *  from production_order WHERE checked_audit = '未审核' AND production_generate = '已生成'
     </select>
 
     <update id="updatechecked_audit">

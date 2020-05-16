@@ -1,6 +1,7 @@
 package cn.ddossec.domain;
 
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.AllArgsConstructor;
@@ -86,5 +87,44 @@ public class WarehouseOutbound implements Serializable {
     * 库存标志
     */
     private String storeTag;
+
+
+//    ---------------------------出库详细表----------------------------
+
+    /**
+     * 产品名称
+     */
+    @TableField(exist = false)
+    private String productName;
+    /**
+     * 产品编号
+     */
+    @TableField(exist = false)
+    private String productId;
+    /**
+     * 数量
+     */
+    @TableField(exist = false)
+    private Integer amount;
+    /**
+     * 单位
+     */
+    @TableField(exist = false)
+    private String amountUnit;
+    /**
+     * 成本单价
+     */
+    @TableField(exist = false)
+    private Double costPrice;
+    /**
+     * 小计
+     */
+    @TableField(exist = false)
+    private Integer subtotal;
+    /**
+     * 描述
+     */
+    @TableField(exist = false)
+    private String productDescribe;
 
 }

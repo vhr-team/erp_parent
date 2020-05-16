@@ -13,6 +13,7 @@ import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -52,6 +53,7 @@ public class WarehouseInboundServiceImpl implements WarehouseInboundService {
      * @return 对象列表
      */
     @Override
+    @Cacheable(cacheNames = "cn.ddossec.service.impl.WarehouseInboundServiceImpl")
     public DataGridView queryInboundLimit(String checkTag, int page, int limit){
         QueryWrapper<WarehouseInbound> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("check_tag",checkTag).select("id","inbound_id","reason","register_time","amount_sum","cost_price_sum","gathered_amount_sum","register","register_time");

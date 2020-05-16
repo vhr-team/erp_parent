@@ -80,4 +80,9 @@ public interface design_recordService {
 
     /**修改库存编号*/
     void updateinventoryStatus(String productId,Integer InventoryStatus);
+
+    /*查询为工序设计的档案*/
+    List<product_design_record> selectprocess();
+    /*工序设计完成*/
+    void updateprocess(product_design_record record);
 }

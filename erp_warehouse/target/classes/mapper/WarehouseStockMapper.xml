@@ -24,12 +24,6 @@
         <result property="checkTag" column="check_tag" jdbcType="VARCHAR"/>
     </resultMap>
 
-    <!--复核成功-->
-    <update id="updateSecuritySheet">
-      update erp.Warehouse_stock set check_tag = #{check_tag},check_time = #{check_time},checker = #{checker}
-       where product_id = #{product_id}
-    </update>
-
     <!--通过序号修改安全库存配置-->
     <update id="updateAmount">
         update erp.Warehouse_stock

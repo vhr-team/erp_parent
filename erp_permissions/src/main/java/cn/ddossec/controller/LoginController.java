@@ -9,8 +9,7 @@ import cn.ddossec.domain.Menu;
 import cn.ddossec.domain.User;
 import cn.ddossec.service.LoginfoService;
 import cn.ddossec.service.MenuService;
-import cn.hutool.captcha.CaptchaUtil;
-import cn.hutool.captcha.ShearCaptcha;
+import com.wf.captcha.SpecCaptcha;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.UsernamePasswordToken;
@@ -24,7 +23,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
@@ -156,16 +154,18 @@ public class LoginController {
      * <p>
      * redis   key value
      */
+    @ResponseBody
     @RequestMapping("captcha")
-    public void captcha(HttpServletResponse response, String codeKey) throws IOException {
-        ShearCaptcha captcha = CaptchaUtil.createShearCaptcha(100, 38, 4, 4);
-        String code = captcha.getCode();
+    public ResultObj captcha(HttpServletRequest request, HttpServletResponse response, String codeKey) throws Exception {
+        SpecCaptcha specCaptcha = new SpecCaptcha(130, 48, 4);
+        specCaptcha.setCharType(2);
+        String code = specCaptcha.text().toLowerCase();
+
         ValueOperations<String, String> opsForValue = redisTemplate.opsForValue();
         opsForValue.set(codeKey, code);
         // 过期时间
         opsForValue.getOperations().expire(codeKey, 60, TimeUnit.SECONDS);
-        captcha.write(response.getOutputStream());
+
+        return new ResultObj(200, specCaptcha.toBase64());
     }
-
-
 }

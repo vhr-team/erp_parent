@@ -30,4 +30,15 @@ public class WarehouseOutboundDetailedServiceImpl implements WarehouseOutboundDe
 
         return null;
     }
+
+
+    /**
+     * 添加出库申请详细单
+     *
+     * @param warehouseOutboundDetailed
+     */
+    @Override
+    public void addWarehouseOutboundDetailed(WarehouseOutboundDetailed warehouseOutboundDetailed) {
+        warehouseOutboundDetailedMapper.insert(warehouseOutboundDetailed);
+    }
 }

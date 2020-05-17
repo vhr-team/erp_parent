@@ -24,4 +24,31 @@ public class Production_orderServiceImpl implements Production_orderService {
     public void insertProductionOrder(Production_order production_order) {
         production_orderMapper.insertProductionOrder(production_order);
     }
+
+    @Override
+    public boolean updateProductionOrder(String id) {
+        return production_orderMapper.updateProductionOrder(id);
+    }
+
+    @Override
+    public Production_order selectById(Integer id) {
+        return production_orderMapper.selectById(id);
+    }
+
+    @Override
+    public List<Production_order> findByProduction_generate() {
+        return production_orderMapper.findByProduction_generate();
+    }
+
+    @Override
+    public boolean updatechecked_audit(String id) {
+        return production_orderMapper.updatechecked_audit(id);
+    }
+
+    @Override
+    public List<Production_order> findByChecked_audit() {
+        return production_orderMapper.findByChecked_audit();
+    }
+
+
 }

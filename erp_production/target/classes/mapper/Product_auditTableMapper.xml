@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.ddossec.mapper.Product_auditTableMapper">
+    <insert id="insertProduct_auditTable">
+
+        insert into Product_auditTable (design_id,sjdState,shState,manhourcost) values (#{design_idA},#{sjdState},#{shState},#{manhourcost})
+
+    </insert>
+    <update id="updatePeoduct_audit">
+        update  Product_auditTable
+        <trim prefix="set" suffixOverrides=",">
+            <if test="shState!=null">shState=#{shState},</if>
+
+
+        </trim>
+        where id=#{id}
+
+    </update>
+
+
+    <select id="findAllProduct_auditTable" resultMap="ReturnListeMape">
+
+select * from
+Product_auditTable a
+inner join production_process_design_sheet b
+on a.design_id = b.id
+where a.shState = '未审核'
+
+    </select>
+    <select id="IsfindAllProduct_auditTable" resultMap="ReturnListeMape" >
+        select * from
+Product_auditTable a
+inner join production_process_design_sheet b
+on a.design_id = b.id
+where a.shState != '未审核'
+
+
+    </select>
+    <resultMap id="ReturnListeMape" type="cn.ddossec.domain.Product_auditTable">
+        <id property="id" column="id"></id>
+        <result  property="sjdState" column="sjdState"></result>
+
+        <result  property="shState" column="shState"></result>
+        <result  property="manhourcost" column="manhourcost"></result>
+        <association property="design_id" javaType="cn.ddossec.domain.Production_process_design_sheet">
+
+            <id  property="id" column="id"></id>
+            <result property="product_name"  column="product_name"></result>
+            <result property="esign_require"  column="esign_require"></result>
+            <result property="design_idB"  column="design_idB"></result>
+            <result property="product_registrant"  column="product_registrant"></result>
+            <result property="design_date"  column="design_date"></result>
+            <result property="design_number"  column="design_number"></result>
+            <result property="audit_date"  column="audit_date"></result>
+        </association>
+
+    </resultMap>
+
+</mapper>

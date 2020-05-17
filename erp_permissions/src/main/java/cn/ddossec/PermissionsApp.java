@@ -17,6 +17,7 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 // mapper接口的扫描
 @MapperScan(basePackages = {"cn.ddossec.mapper"})
 // 开启Redis缓存
+
 @EnableCaching
 // 服务发现
 @EnableDiscoveryClient

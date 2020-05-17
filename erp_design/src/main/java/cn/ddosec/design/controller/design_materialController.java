@@ -57,6 +57,11 @@ public class design_materialController {
         return service.selectAll();
     }
 
+    @RequestMapping("/selectByproidAll")
+    public List<product_design_material> selectByproidAll(@RequestBody product_design_material material) {
+        return service.selectAll(material);
+    }
+
     @ApiOperation("根据物料编号查询物料名称")
     @RequestMapping("/selectById")
     public product_design_material selectById(String ID) {

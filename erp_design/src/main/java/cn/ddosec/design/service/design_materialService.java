@@ -28,5 +28,7 @@ public interface design_materialService {
 
     List<product_design_material> selectAll();
 
+    List<product_design_material> selectAll(product_design_material material);
+
     product_design_material selectById(String Id);
 }

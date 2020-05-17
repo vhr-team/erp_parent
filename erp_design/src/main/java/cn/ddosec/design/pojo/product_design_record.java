@@ -104,7 +104,7 @@ public class product_design_record implements Serializable {
     private Integer fileChangeAmount;
 
     /**
-     * 产品回收标志(未回收/已回收)
+     * 产品删除标志(未删除/已删除)
      */
     private String deleteTag;
 
@@ -117,6 +117,11 @@ public class product_design_record implements Serializable {
      * 库存状态
      */
     private Integer inventoryStatus;
+
+    /**
+     * 工序设计状态
+     */
+    private Integer procssStatus;
 
     private static final long serialVersionUID = 1L;
 
@@ -304,6 +309,14 @@ public class product_design_record implements Serializable {
         this.inventoryStatus = inventoryStatus;
     }
 
+    public Integer getProcssStatus() {
+        return procssStatus;
+    }
+
+    public void setProcssStatus(Integer procssStatus) {
+        this.procssStatus = procssStatus;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -333,6 +346,7 @@ public class product_design_record implements Serializable {
         sb.append(", deleteTag=").append(deleteTag);
         sb.append(", materielArchivesId=").append(materielArchivesId);
         sb.append(", inventoryStatus=").append(inventoryStatus);
+        sb.append(", procssStatus=").append(procssStatus);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();
@@ -372,7 +386,8 @@ public class product_design_record implements Serializable {
             && (this.getFileChangeAmount() == null ? other.getFileChangeAmount() == null : this.getFileChangeAmount().equals(other.getFileChangeAmount()))
             && (this.getDeleteTag() == null ? other.getDeleteTag() == null : this.getDeleteTag().equals(other.getDeleteTag()))
             && (this.getMaterielArchivesId() == null ? other.getMaterielArchivesId() == null : this.getMaterielArchivesId().equals(other.getMaterielArchivesId()))
-            && (this.getInventoryStatus() == null ? other.getInventoryStatus() == null : this.getInventoryStatus().equals(other.getInventoryStatus()));
+            && (this.getInventoryStatus() == null ? other.getInventoryStatus() == null : this.getInventoryStatus().equals(other.getInventoryStatus()))
+            && (this.getProcssStatus() == null ? other.getProcssStatus() == null : this.getProcssStatus().equals(other.getProcssStatus()));
     }
 
     @Override
@@ -402,6 +417,7 @@ public class product_design_record implements Serializable {
         result = prime * result + ((getDeleteTag() == null) ? 0 : getDeleteTag().hashCode());
         result = prime * result + ((getMaterielArchivesId() == null) ? 0 : getMaterielArchivesId().hashCode());
         result = prime * result + ((getInventoryStatus() == null) ? 0 : getInventoryStatus().hashCode());
+        result = prime * result + ((getProcssStatus() == null) ? 0 : getProcssStatus().hashCode());
         return result;
     }
 }

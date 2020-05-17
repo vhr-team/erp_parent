@@ -2,7 +2,7 @@ package cn.ddossec.domain.pojo;
 
 import java.io.Serializable;
 
-public class product_design_record implements Serializable {
+public class product_design_record{
     /**
      * 序号
      */

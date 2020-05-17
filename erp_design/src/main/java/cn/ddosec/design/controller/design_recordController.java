@@ -192,8 +192,9 @@ public class design_recordController {
      * @return
      */
     @RequestMapping("/selectprocessAll")
-    public List<product_design_record> selectprocessAll() {
-        return service.selectprocess();
+    public List<product_design_record> selectprocessAll(@RequestBody product_design_record record) {
+        System.out.println(record);
+        return service.selectprocess(record);
     }
 
     /**修改生产工序档案

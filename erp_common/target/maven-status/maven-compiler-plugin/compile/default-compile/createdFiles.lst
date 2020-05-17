@@ -1,0 +1,11 @@
+cn\ddossec\vo\BaseVo.class
+cn\ddossec\common\DataGridView.class
+cn\ddossec\domain\Basics_supper.class
+cn\ddossec\domain\ProductType.class
+cn\ddossec\domain\User.class
+cn\ddossec\domain\Goods$GoodsBuilder.class
+cn\ddossec\domain\Goods.class
+cn\ddossec\common\Constant.class
+cn\ddossec\common\ResultObj.class
+cn\ddossec\domain\pojo\product_design_record.class
+cn\ddossec\domain\ProductType$ProductTypeBuilder.class

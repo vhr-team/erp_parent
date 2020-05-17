@@ -64,14 +64,11 @@ public class products_process_design_sheet implements Serializable {
     private String processDate;
 
     /**
-     * 工序审核状态
-     */
-    private String processCheck;
-
-    /**
      * 工序设计要求
      */
     private String processRequire;
+
+    private String processCheck;
 
     private static final long serialVersionUID = 1L;
 
@@ -171,20 +168,20 @@ public class products_process_design_sheet implements Serializable {
         this.processDate = processDate == null ? null : processDate.trim();
     }
 
-    public String getProcessCheck() {
-        return processCheck;
-    }
-
-    public void setProcessCheck(String processCheck) {
-        this.processCheck = processCheck == null ? null : processCheck.trim();
-    }
-
     public String getProcessRequire() {
         return processRequire;
     }
 
     public void setProcessRequire(String processRequire) {
         this.processRequire = processRequire == null ? null : processRequire.trim();
+    }
+
+    public String getProcessCheck() {
+        return processCheck;
+    }
+
+    public void setProcessCheck(String processCheck) {
+        this.processCheck = processCheck == null ? null : processCheck.trim();
     }
 
     @Override
@@ -205,8 +202,8 @@ public class products_process_design_sheet implements Serializable {
         sb.append(", timesumprice=").append(timesumprice);
         sb.append(", processRegister=").append(processRegister);
         sb.append(", processDate=").append(processDate);
-        sb.append(", processCheck=").append(processCheck);
         sb.append(", processRequire=").append(processRequire);
+        sb.append(", processCheck=").append(processCheck);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();
@@ -236,8 +233,8 @@ public class products_process_design_sheet implements Serializable {
             && (this.getTimesumprice() == null ? other.getTimesumprice() == null : this.getTimesumprice().equals(other.getTimesumprice()))
             && (this.getProcessRegister() == null ? other.getProcessRegister() == null : this.getProcessRegister().equals(other.getProcessRegister()))
             && (this.getProcessDate() == null ? other.getProcessDate() == null : this.getProcessDate().equals(other.getProcessDate()))
-            && (this.getProcessCheck() == null ? other.getProcessCheck() == null : this.getProcessCheck().equals(other.getProcessCheck()))
-            && (this.getProcessRequire() == null ? other.getProcessRequire() == null : this.getProcessRequire().equals(other.getProcessRequire()));
+            && (this.getProcessRequire() == null ? other.getProcessRequire() == null : this.getProcessRequire().equals(other.getProcessRequire()))
+            && (this.getProcessCheck() == null ? other.getProcessCheck() == null : this.getProcessCheck().equals(other.getProcessCheck()));
     }
 
     @Override
@@ -256,8 +253,8 @@ public class products_process_design_sheet implements Serializable {
         result = prime * result + ((getTimesumprice() == null) ? 0 : getTimesumprice().hashCode());
         result = prime * result + ((getProcessRegister() == null) ? 0 : getProcessRegister().hashCode());
         result = prime * result + ((getProcessDate() == null) ? 0 : getProcessDate().hashCode());
-        result = prime * result + ((getProcessCheck() == null) ? 0 : getProcessCheck().hashCode());
         result = prime * result + ((getProcessRequire() == null) ? 0 : getProcessRequire().hashCode());
+        result = prime * result + ((getProcessCheck() == null) ? 0 : getProcessCheck().hashCode());
         return result;
     }
 }

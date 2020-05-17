@@ -33,6 +33,11 @@ public class products_process_design implements Serializable {
      */
     private String processId;
 
+    /**
+     * 审核状态
+     */
+    private String processCheck;
+
     private static final long serialVersionUID = 1L;
 
     public Integer getId() {
@@ -83,6 +88,14 @@ public class products_process_design implements Serializable {
         this.processId = processId == null ? null : processId.trim();
     }
 
+    public String getProcessCheck() {
+        return processCheck;
+    }
+
+    public void setProcessCheck(String processCheck) {
+        this.processCheck = processCheck == null ? null : processCheck.trim();
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -95,6 +108,7 @@ public class products_process_design implements Serializable {
         sb.append(", desregister=").append(desregister);
         sb.append(", desdate=").append(desdate);
         sb.append(", processId=").append(processId);
+        sb.append(", processCheck=").append(processCheck);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();
@@ -117,7 +131,8 @@ public class products_process_design implements Serializable {
             && (this.getProductName() == null ? other.getProductName() == null : this.getProductName().equals(other.getProductName()))
             && (this.getDesregister() == null ? other.getDesregister() == null : this.getDesregister().equals(other.getDesregister()))
             && (this.getDesdate() == null ? other.getDesdate() == null : this.getDesdate().equals(other.getDesdate()))
-            && (this.getProcessId() == null ? other.getProcessId() == null : this.getProcessId().equals(other.getProcessId()));
+            && (this.getProcessId() == null ? other.getProcessId() == null : this.getProcessId().equals(other.getProcessId()))
+            && (this.getProcessCheck() == null ? other.getProcessCheck() == null : this.getProcessCheck().equals(other.getProcessCheck()));
     }
 
     @Override
@@ -130,6 +145,7 @@ public class products_process_design implements Serializable {
         result = prime * result + ((getDesregister() == null) ? 0 : getDesregister().hashCode());
         result = prime * result + ((getDesdate() == null) ? 0 : getDesdate().hashCode());
         result = prime * result + ((getProcessId() == null) ? 0 : getProcessId().hashCode());
+        result = prime * result + ((getProcessCheck() == null) ? 0 : getProcessCheck().hashCode());
         return result;
     }
 }

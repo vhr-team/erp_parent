@@ -523,6 +523,76 @@ public class products_process_designQuery {
             addCriterion("process_id not between", value1, value2, "processId");
             return (Criteria) this;
         }
+
+        public Criteria andProcessCheckIsNull() {
+            addCriterion("process_check is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andProcessCheckIsNotNull() {
+            addCriterion("process_check is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andProcessCheckEqualTo(String value) {
+            addCriterion("process_check =", value, "processCheck");
+            return (Criteria) this;
+        }
+
+        public Criteria andProcessCheckNotEqualTo(String value) {
+            addCriterion("process_check <>", value, "processCheck");
+            return (Criteria) this;
+        }
+
+        public Criteria andProcessCheckGreaterThan(String value) {
+            addCriterion("process_check >", value, "processCheck");
+            return (Criteria) this;
+        }
+
+        public Criteria andProcessCheckGreaterThanOrEqualTo(String value) {
+            addCriterion("process_check >=", value, "processCheck");
+            return (Criteria) this;
+        }
+
+        public Criteria andProcessCheckLessThan(String value) {
+            addCriterion("process_check <", value, "processCheck");
+            return (Criteria) this;
+        }
+
+        public Criteria andProcessCheckLessThanOrEqualTo(String value) {
+            addCriterion("process_check <=", value, "processCheck");
+            return (Criteria) this;
+        }
+
+        public Criteria andProcessCheckLike(String value) {
+            addCriterion("process_check like", value, "processCheck");
+            return (Criteria) this;
+        }
+
+        public Criteria andProcessCheckNotLike(String value) {
+            addCriterion("process_check not like", value, "processCheck");
+            return (Criteria) this;
+        }
+
+        public Criteria andProcessCheckIn(List<String> values) {
+            addCriterion("process_check in", values, "processCheck");
+            return (Criteria) this;
+        }
+
+        public Criteria andProcessCheckNotIn(List<String> values) {
+            addCriterion("process_check not in", values, "processCheck");
+            return (Criteria) this;
+        }
+
+        public Criteria andProcessCheckBetween(String value1, String value2) {
+            addCriterion("process_check between", value1, value2, "processCheck");
+            return (Criteria) this;
+        }
+
+        public Criteria andProcessCheckNotBetween(String value1, String value2) {
+            addCriterion("process_check not between", value1, value2, "processCheck");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

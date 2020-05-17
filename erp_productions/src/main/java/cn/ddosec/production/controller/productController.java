@@ -110,12 +110,38 @@ public class productController {
                 products_process_design.setProductid(sheet.getProcess().getProductId());
                 products_process_design.setDesdate(processDate);
                 products_process_design.setDesregister(sheet.getProcess().getProcessRegister());
+                products_process_design.setProcessCheck("待审核");
                 processService.addprocess(products_process_design);
             }
             return new Response(true,"添加成功");
         }catch (Exception e){
             e.printStackTrace();
             return new Response(false,"添加失败");
+        }
+    }
+
+    @RequestMapping("/selectAll")
+    public List<products_process_design> selectAll(@RequestBody products_process_design design){
+        List<products_process_design> products_process_designs = processService.selectAll(design);
+        return products_process_designs;
+    }
+
+    @RequestMapping("/selectAllSheet")
+    public List<products_process_design_sheet> selectAllSheet(@RequestBody products_process_design_sheet sheet){
+        return service.selectAllSheet(sheet);
+    }
+    @RequestMapping("/updatecheck")
+    public Response updatechecksheet(@RequestBody products_process_design_sheet sheet){
+        products_process_design products_process_design = new products_process_design();
+        products_process_design.setProcessCheck(sheet.getProcessCheck());
+        products_process_design.setProcessId(sheet.getProcessId());
+        try {
+            processService.updatecheck(products_process_design);
+            service.updatecheck(sheet);
+            return new Response(true,"审核成功");
+        }catch (Exception e){
+            e.printStackTrace();
+            return new Response(false,"审核失败");
         }
     }
 }

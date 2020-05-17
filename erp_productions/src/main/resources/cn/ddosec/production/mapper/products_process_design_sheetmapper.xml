@@ -14,8 +14,8 @@
     <result column="timesumprice" property="timesumprice" jdbcType="VARCHAR" />
     <result column="process_register" property="processRegister" jdbcType="VARCHAR" />
     <result column="process_date" property="processDate" jdbcType="VARCHAR" />
-    <result column="process_check" property="processCheck" jdbcType="VARCHAR" />
     <result column="process_require" property="processRequire" jdbcType="VARCHAR" />
+    <result column="process_check" property="processCheck" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -78,8 +78,8 @@
   <sql id="Base_Column_List" >
     <if test="fields == null" >
       id, process_id, product_id, product_name, process_name, process_remark, timenumber, 
-      timeunit, timeprice, timesumprice, process_register, process_date, process_check, 
-      process_require
+      timeunit, timeprice, timesumprice, process_register, process_date, process_require, 
+      process_check
     </if>
     <if test="fields != null" >
       ${fields}
@@ -101,7 +101,7 @@
   </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
-    id,process_id,product_id,product_name,process_name,process_remark,timenumber,timeunit,timeprice,timesumprice,process_register,process_date,process_check,process_require
+    id,process_id,product_id,product_name,process_name,process_remark,timenumber,timeunit,timeprice,timesumprice,process_register,process_date,process_require,process_check
     from products_process_design_sheet
     where id = #{id,jdbcType=INTEGER}
   </select>
@@ -120,12 +120,12 @@
       product_name, process_name, process_remark, 
       timenumber, timeunit, timeprice, 
       timesumprice, process_register, process_date, 
-      process_check, process_require)
+      process_require, process_check)
     values (#{id,jdbcType=INTEGER}, #{processId,jdbcType=VARCHAR}, #{productId,jdbcType=VARCHAR}, 
       #{productName,jdbcType=VARCHAR}, #{processName,jdbcType=VARCHAR}, #{processRemark,jdbcType=VARCHAR}, 
       #{timenumber,jdbcType=INTEGER}, #{timeunit,jdbcType=VARCHAR}, #{timeprice,jdbcType=VARCHAR}, 
       #{timesumprice,jdbcType=VARCHAR}, #{processRegister,jdbcType=VARCHAR}, #{processDate,jdbcType=VARCHAR}, 
-      #{processCheck,jdbcType=VARCHAR}, #{processRequire,jdbcType=VARCHAR})
+      #{processRequire,jdbcType=VARCHAR}, #{processCheck,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="cn.ddosec.production.pojo.products_process_design_sheet" >
     insert into products_process_design_sheet
@@ -166,11 +166,11 @@
       <if test="processDate != null" >
         process_date,
       </if>
-      <if test="processCheck != null" >
-        process_check,
-      </if>
       <if test="processRequire != null" >
         process_require,
+      </if>
+      <if test="processCheck != null" >
+        process_check,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
@@ -210,11 +210,11 @@
       <if test="processDate != null" >
         #{processDate,jdbcType=VARCHAR},
       </if>
-      <if test="processCheck != null" >
-        #{processCheck,jdbcType=VARCHAR},
-      </if>
       <if test="processRequire != null" >
         #{processRequire,jdbcType=VARCHAR},
+      </if>
+      <if test="processCheck != null" >
+        #{processCheck,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -263,11 +263,11 @@
       <if test="record.processDate != null" >
         process_date = #{record.processDate,jdbcType=VARCHAR},
       </if>
-      <if test="record.processCheck != null" >
-        process_check = #{record.processCheck,jdbcType=VARCHAR},
-      </if>
       <if test="record.processRequire != null" >
         process_require = #{record.processRequire,jdbcType=VARCHAR},
+      </if>
+      <if test="record.processCheck != null" >
+        process_check = #{record.processCheck,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -288,8 +288,8 @@
       timesumprice = #{record.timesumprice,jdbcType=VARCHAR},
       process_register = #{record.processRegister,jdbcType=VARCHAR},
       process_date = #{record.processDate,jdbcType=VARCHAR},
-      process_check = #{record.processCheck,jdbcType=VARCHAR},
-      process_require = #{record.processRequire,jdbcType=VARCHAR}
+      process_require = #{record.processRequire,jdbcType=VARCHAR},
+      process_check = #{record.processCheck,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -330,11 +330,11 @@
       <if test="processDate != null" >
         process_date = #{processDate,jdbcType=VARCHAR},
       </if>
-      <if test="processCheck != null" >
-        process_check = #{processCheck,jdbcType=VARCHAR},
-      </if>
       <if test="processRequire != null" >
         process_require = #{processRequire,jdbcType=VARCHAR},
+      </if>
+      <if test="processCheck != null" >
+        process_check = #{processCheck,jdbcType=VARCHAR},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
@@ -352,8 +352,8 @@
       timesumprice = #{timesumprice,jdbcType=VARCHAR},
       process_register = #{processRegister,jdbcType=VARCHAR},
       process_date = #{processDate,jdbcType=VARCHAR},
-      process_check = #{processCheck,jdbcType=VARCHAR},
-      process_require = #{processRequire,jdbcType=VARCHAR}
+      process_require = #{processRequire,jdbcType=VARCHAR},
+      process_check = #{processCheck,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

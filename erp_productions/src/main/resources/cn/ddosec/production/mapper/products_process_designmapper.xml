@@ -8,6 +8,7 @@
     <result column="desregister" property="desregister" jdbcType="VARCHAR" />
     <result column="desdate" property="desdate" jdbcType="VARCHAR" />
     <result column="process_id" property="processId" jdbcType="VARCHAR" />
+    <result column="process_check" property="processCheck" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -69,7 +70,7 @@
   </sql>
   <sql id="Base_Column_List" >
     <if test="fields == null" >
-      id, productid, product_name, desregister, desdate, process_id
+      id, productid, product_name, desregister, desdate, process_id, process_check
     </if>
     <if test="fields != null" >
       ${fields}
@@ -91,7 +92,7 @@
   </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
-    id,productid,product_name,desregister,desdate,process_id
+    id,productid,product_name,desregister,desdate,process_id,process_check
     from products_process_design
     where id = #{id,jdbcType=INTEGER}
   </select>
@@ -107,11 +108,11 @@
   </delete>
   <insert id="insert" parameterType="cn.ddosec.production.pojo.products_process_design" >
     insert into products_process_design (id, productid, product_name, 
-      desregister, desdate, process_id
-      )
+      desregister, desdate, process_id, 
+      process_check)
     values (#{id,jdbcType=INTEGER}, #{productid,jdbcType=VARCHAR}, #{productName,jdbcType=VARCHAR}, 
-      #{desregister,jdbcType=VARCHAR}, #{desdate,jdbcType=VARCHAR}, #{processId,jdbcType=VARCHAR}
-      )
+      #{desregister,jdbcType=VARCHAR}, #{desdate,jdbcType=VARCHAR}, #{processId,jdbcType=VARCHAR}, 
+      #{processCheck,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="cn.ddosec.production.pojo.products_process_design" >
     insert into products_process_design
@@ -134,6 +135,9 @@
       <if test="processId != null" >
         process_id,
       </if>
+      <if test="processCheck != null" >
+        process_check,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -153,6 +157,9 @@
       </if>
       <if test="processId != null" >
         #{processId,jdbcType=VARCHAR},
+      </if>
+      <if test="processCheck != null" >
+        #{processCheck,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -183,6 +190,9 @@
       <if test="record.processId != null" >
         process_id = #{record.processId,jdbcType=VARCHAR},
       </if>
+      <if test="record.processCheck != null" >
+        process_check = #{record.processCheck,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -195,7 +205,8 @@
       product_name = #{record.productName,jdbcType=VARCHAR},
       desregister = #{record.desregister,jdbcType=VARCHAR},
       desdate = #{record.desdate,jdbcType=VARCHAR},
-      process_id = #{record.processId,jdbcType=VARCHAR}
+      process_id = #{record.processId,jdbcType=VARCHAR},
+      process_check = #{record.processCheck,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -218,6 +229,9 @@
       <if test="processId != null" >
         process_id = #{processId,jdbcType=VARCHAR},
       </if>
+      <if test="processCheck != null" >
+        process_check = #{processCheck,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -227,7 +241,8 @@
       product_name = #{productName,jdbcType=VARCHAR},
       desregister = #{desregister,jdbcType=VARCHAR},
       desdate = #{desdate,jdbcType=VARCHAR},
-      process_id = #{processId,jdbcType=VARCHAR}
+      process_id = #{processId,jdbcType=VARCHAR},
+      process_check = #{processCheck,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

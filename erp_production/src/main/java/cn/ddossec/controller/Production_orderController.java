@@ -5,13 +5,16 @@ import cn.ddossec.service.Production_orderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+/*
+ * 生产调度管理控制器
+ */
 
 @RestController
 @RequestMapping("/production")

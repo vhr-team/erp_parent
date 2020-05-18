@@ -1,6 +1,5 @@
 package cn.ddossec.service.impl;
 
-import cn.ddosec.design.pojo.product_design_record;
 import cn.ddossec.common.DataGridView;
 import cn.ddossec.domain.WarehouseStock;
 import cn.ddossec.mapper.WarehouseStockMapper;
@@ -14,7 +13,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
-import java.util.List;
 
 /**
  * (WarehouseStock)表服务实现类
@@ -31,6 +29,24 @@ public class WarehouseStockServiceImpl implements WarehouseStockService {
     @Autowired
     private designRecordFeignService designRecordFeignService;
 
+
+
+    /**
+     * 通过产品编号获取安全库存的当前存储量和最大存储量，求出剩余存储量
+     *
+     * @param product_id 库存编号
+     * @param page
+     * @param limit
+     * @return
+     */
+    @Override
+    public DataGridView queryInventory(String product_id, Integer page, Integer limit) {
+        QueryWrapper<WarehouseStock> queryWrapper = new QueryWrapper<>();
+        queryWrapper.select("max_capacity_amount","amount").eq("product_id",product_id);
+        Page<WarehouseStock> pages = new Page<>(page,limit);
+        IPage iPage = warehouseStockMapper.selectPage(pages,queryWrapper);
+        return new DataGridView(iPage.getTotal(),iPage.getRecords());
+    }
 
     /**
      * 新增安全库存配置单
@@ -61,7 +77,7 @@ public class WarehouseStockServiceImpl implements WarehouseStockService {
     public DataGridView querySecuritySheet(String checkTag,String productName,int page,int limit){
         QueryWrapper<WarehouseStock> queryWrapper = new QueryWrapper<>();
         //product_name,product_id,min_amount,max_amount,register,register_time,config,max_capacity_amount
-        queryWrapper.eq("check_tag",checkTag).like("product_name",productName).select("id","product_name","product_id","min_amount","max_amount","register","register_time","config","max_capacity_amount");
+        queryWrapper.select("id","product_name","stock_id","product_id","min_amount","max_amount","register","register_time","config","max_capacity_amount").eq("check_tag",checkTag).like("product_name",productName).orderByDesc("id");
         Page<WarehouseStock> pages = new Page<>(page,limit);
         IPage<WarehouseStock> iPage = this.warehouseStockMapper.selectPage(pages,queryWrapper);
         //iPage.getTotal() 总共多少页   iPage.getRecords()查询出来的所有数据
@@ -77,7 +93,13 @@ public class WarehouseStockServiceImpl implements WarehouseStockService {
      * @return 影响行数
      */
     public int updateSecuritySheet(String check_tag, Date check_time, String product_id, String checker){
-        return this.warehouseStockMapper.updateSecuritySheet(check_tag,check_time,product_id,checker);
+        QueryWrapper<WarehouseStock> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq(product_id != null,"product_id",product_id).select("id");
+        WarehouseStock warehouseStock = warehouseStockMapper.selectOne(queryWrapper);
+        warehouseStock.setCheckTag(check_tag);
+        warehouseStock.setCheckTime(check_time);
+        warehouseStock.setChecker(checker);
+        return warehouseStockMapper.updateById(warehouseStock);
     }
 
     /**

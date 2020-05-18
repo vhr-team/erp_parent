@@ -5,6 +5,7 @@ import cn.ddossec.domain.WarehouseInbound;
 import cn.ddossec.domain.WarehouseInboundDetailed;
 import cn.ddossec.service.WarehouseInboundDetailedService;
 import cn.ddossec.service.WarehouseInboundService;
+import cn.ddossec.service.WarehouseStockService;
 import io.swagger.annotations.ApiOperation;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +31,24 @@ public class WarehouseInboundDetailedController {
 
     @Autowired
     private WarehouseInboundService warehouseInboundServiceImpl;
+
+    @Autowired
+    private WarehouseStockService warehouseStockServiceImpl;
+
+
+    /**
+     * 通过产品编号获取安全库存的当前存储量和最大存储量，求出剩余存储量
+     *
+     * @param product_id 库存编号
+     * @param page
+     * @param limit
+     * @return
+     */
+    @ApiOperation("通过产品编号获取安全库存的当前可存放数量")
+    @RequestMapping("queryInventory")
+    public DataGridView queryInventory(String product_id, Integer page, Integer limit) {
+        return warehouseStockServiceImpl.queryInventory(product_id, page, limit);
+    }
 
     /**
      * 入库调度表的调度查询

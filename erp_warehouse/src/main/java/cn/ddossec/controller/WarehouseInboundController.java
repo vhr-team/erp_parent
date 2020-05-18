@@ -31,8 +31,8 @@ public class WarehouseInboundController {
     @Autowired
     private WarehouseInboundService warehouseInboundServiceImpl;
 
-    @Autowired
-    private WarehouseInboundDetailedService warehouseInboundDetailedServiceImpl;
+
+
 
     /**
      * 查询可调度入库数据
@@ -42,7 +42,7 @@ public class WarehouseInboundController {
      * @param limit 查询条数
      * @return 对象列表
      */
-    @ApiOperation(value = "查询待调度入库数据")
+    @ApiOperation(value = "查询可调度入库数据")
     @RequestMapping("queryInboundLimit")
     public DataGridView queryInboundLimit(@Param("check_tag") String checkTag,
                                           @Param("page") int page,
@@ -55,57 +55,17 @@ public class WarehouseInboundController {
      * 入库申请登记
      * @return
      */
-    /*@ApiOperation(value = "入库申请登记")
+    @ApiOperation(value = "入库申请登记")
     @RequestMapping("insertWarehousing")
-    public Response insertWarehousing(@Param("storer") String storer,
-                                      @Param("reason") String reason,
-                                      @Param("amountSum") Integer amountSum,
-                                      @Param("costPriceSum") Double costPriceSum,
-                                      @Param("register") String register,
-                                      @Param("pemark") String pemark,
-                                      @Param("productName") String[] productName,
-                                      @Param("productId") String[] productId,
-                                      @Param("productDescribe") String[] productDescribe,
-                                      @Param("amount") Integer[] amount,
-                                      @Param("amountUnit") String[] amountUnit,
-                                      @Param("costPrice") Double[] costPrice,
-                                      @Param("subtotal") Integer[] subtotal){
+    public Response insertWarehousing(@RequestBody WarehouseInbound warehouseInbound){
         try{
-            String inboundId = ObjectId.next(); //生成随机入库单编号
-            Date registerTime = DateUtil.date(); //登记时间
-            WarehouseInbound warehouseInbound = new WarehouseInbound();
-            warehouseInbound.setInboundId(inboundId); //入库单编号
-            warehouseInbound.setStorer(storer); //入库人
-            warehouseInbound.setReason(reason); //入库理由
-            warehouseInbound.setAmountSum(amountSum); //总件数
-            warehouseInbound.setCostPriceSum(costPriceSum); //总金额
-            warehouseInbound.setRegister(register); //登记人
-            warehouseInbound.setRegisterTime(registerTime); //登记时间
-            warehouseInbound.setPemark(pemark); //备注
-            int ParentId = warehouseInboundServiceImpl.insertWarehousing(warehouseInbound); //返回主键id
-            if (ParentId>0){
-                WarehouseInboundDetailed warehouseInboundDetailed = null;
-                for (int i = 0; i < productId.length ; i++) {
-                    warehouseInboundDetailed = new WarehouseInboundDetailed();
-                    warehouseInboundDetailed.setParentId(ParentId); //父级编号
-                    warehouseInboundDetailed.setProductName(productName[i]); //产品名称
-                    warehouseInboundDetailed.setProductId(productId[i]); //产品编号
-                    warehouseInboundDetailed.setProductDescribe(productDescribe[i]); //描述
-                    warehouseInboundDetailed.setAmount(amount[i]); //数量
-                    warehouseInboundDetailed.setAmountUnit(amountUnit[i]); //单位
-                    warehouseInboundDetailed.setCostPrice(costPrice[i]); //单价
-                    warehouseInboundDetailed.setSubtotal(subtotal[i]); //小计
-                    warehouseInboundDetailedServiceImpl.insertWarehouseDetailed(warehouseInboundDetailed);
-                }
-            }else{
-                return new Response(false,"提交失败!");
-            }
+            warehouseInboundServiceImpl.insertWarehousing(warehouseInbound);
             return new Response(true,"提交成功,等待审核!");
         }catch (Exception e){
             e.printStackTrace();
             return new Response(false,"提交失败,请重试!");
         }
-    }*/
+    }
 
 
     /**

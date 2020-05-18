@@ -37,10 +37,21 @@ public class WarehouseInboundDetailedServiceImpl implements WarehouseInboundDeta
     @Override
     public DataGridView queryInboundDetailed(Integer id, int page, int limit) {
         QueryWrapper<WarehouseInboundDetailed> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("parent_id",id).select("id","product_id","product_name","amount","gathered_amount");
+        queryWrapper.eq("parent_id",id).select("id","product_id","product_name","amount","gathered_amount","cost_price");
         Page<WarehouseInboundDetailed> pages = new Page<>(page,limit);
         IPage iPage = warehouseInboundDetailedMapper.selectPage(pages,queryWrapper);
         return new DataGridView(iPage.getTotal(),iPage.getRecords());
+    }
+
+
+    /**
+     * 插入入库详细表
+     * @param warehouseInboundDetailed
+     * @return
+     */
+    @Override
+    public void insertWarehouseDetailed(WarehouseInboundDetailed warehouseInboundDetailed) {
+        warehouseInboundDetailedMapper.insert(warehouseInboundDetailed);
     }
 
 }

@@ -1,6 +1,7 @@
 package cn.ddossec.controller;
 
 import cn.ddossec.common.DataGridView;
+import cn.ddossec.common.Response;
 import cn.ddossec.domain.WarehouseOutbound;
 import cn.ddossec.service.WarehouseOutboundService;
 import io.swagger.annotations.ApiOperation;
@@ -42,5 +43,16 @@ public class WarehouseOutboundController {
     }
 
 
+    /**
+     * 添加出库申请单
+     *
+     * @param warehouseOutbound
+     * @return
+     */
+    @ApiOperation(value = "添加出库申请单")
+    @RequestMapping("addWarehouseOutbound")
+    public Response addWarehouseOutbound(@RequestBody WarehouseOutbound warehouseOutbound){
+        return warehouseOutboundServiceImpl.addWarehouseOutbound(warehouseOutbound);
+    }
 
 }

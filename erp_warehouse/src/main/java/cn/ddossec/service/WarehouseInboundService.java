@@ -2,6 +2,7 @@ package cn.ddossec.service;
 
 import cn.ddossec.common.DataGridView;
 import cn.ddossec.domain.WarehouseInbound;
+import cn.ddossec.domain.WarehouseInboundDetailed;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.Date;
@@ -41,7 +42,7 @@ public interface WarehouseInboundService {
      * @param warehouseInbound 实例对象
      * @return 主键id
      */
-    int insertWarehousing(WarehouseInbound warehouseInbound);
+    void insertWarehousing(WarehouseInbound warehouseInbound);
 
     /**
      * 入库申请审核

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.ddossec.mapper.Production_process_design_alterationMapper">
+    <select id="findAllProductionAlteration" resultMap="ReturnListeMape">
+      select * from  production_process_design_alteration  pa
+inner join  production_process_design_sheet ps
+on  pa.shdId = ps.id
+inner join Product_auditTable paa
+on pa.sjdId = paa.id
+    </select>
+    <resultMap id="ReturnListeMape" type="cn.ddossec.domain.Production_process_design_alteration">
+        <id property="id" column="id"></id>
+        <result  property="edit_date" column="edit_date"></result>
+
+        <result  property="edit_count" column="edit_count"></result>
+        <result  property="userName" column="userName"></result>
+        <association property="production_process_design_sheet" javaType="cn.ddossec.domain.Production_process_design_sheet">
+
+            <id  property="id" column="id"></id>
+            <result property="design_number"  column="design_number"></result>
+        </association>
+        <association property="product_auditTable" javaType="cn.ddossec.domain.Product_auditTable">
+
+            <id  property="id" column="id"></id>
+            <result property="design_idA"  column="design_idA"></result>
+        </association>
+
+    </resultMap>
+    <delete id="delProductionAlterationById">
+        DELETE FROM production_process_design_alteration WHERE id = #{id}
+    </delete>
+
+    <insert id="insertProductionAlteration">
+        INSERT INTO production_process_design_alteration(sjdId,shdId,edit_date,edit_count,userName) VALUES(#{sjdId},#{shdId},#{edit_date},#{edit_count},#{userName})
+    </insert>
+
+    <update id="updateProductionAlteration">
+        update  production_process_design_alteration
+        <trim prefix="set" suffixOverrides=",">
+            <if test="sjdId!=null">sjdId=#{sjdId},</if>
+            <if test="shdId!=null">shdId=#{shdId},</if>
+            <if test="edit_date!=null">edit_date=#{edit_date},</if>
+            <if test="edit_count!=null">edit_count=#{edit_count},</if>
+        </trim>
+        where id=#{id}
+    </update>
+
+    <select id="selectById" resultType="cn.ddossec.domain.Production_process_design_alteration">
+        SELECT * FROM production_process_design_alteration WHERE shdId = #{shdId}
+    </select>
+</mapper>

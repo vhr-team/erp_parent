@@ -13,13 +13,4 @@ import java.util.List;
  */
 public interface WarehouseInboundDetailedMapper extends BaseMapper<WarehouseInboundDetailed> {
 
-    /**
-     * 新增入库详细单
-     *
-     * @param warehouseInboundDetailed 实例对象
-     * @return 影响行数
-     */
-    int insertWarehouseDetailed(WarehouseInboundDetailed warehouseInboundDetailed);
-
-
 }

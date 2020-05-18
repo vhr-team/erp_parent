@@ -1673,6 +1673,66 @@ public class product_design_recordQuery {
             addCriterion("inventory_status not between", value1, value2, "inventoryStatus");
             return (Criteria) this;
         }
+
+        public Criteria andProcssStatusIsNull() {
+            addCriterion("procss_status is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andProcssStatusIsNotNull() {
+            addCriterion("procss_status is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andProcssStatusEqualTo(Integer value) {
+            addCriterion("procss_status =", value, "procssStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andProcssStatusNotEqualTo(Integer value) {
+            addCriterion("procss_status <>", value, "procssStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andProcssStatusGreaterThan(Integer value) {
+            addCriterion("procss_status >", value, "procssStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andProcssStatusGreaterThanOrEqualTo(Integer value) {
+            addCriterion("procss_status >=", value, "procssStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andProcssStatusLessThan(Integer value) {
+            addCriterion("procss_status <", value, "procssStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andProcssStatusLessThanOrEqualTo(Integer value) {
+            addCriterion("procss_status <=", value, "procssStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andProcssStatusIn(List<Integer> values) {
+            addCriterion("procss_status in", values, "procssStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andProcssStatusNotIn(List<Integer> values) {
+            addCriterion("procss_status not in", values, "procssStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andProcssStatusBetween(Integer value1, Integer value2) {
+            addCriterion("procss_status between", value1, value2, "procssStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andProcssStatusNotBetween(Integer value1, Integer value2) {
+            addCriterion("procss_status not between", value1, value2, "procssStatus");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

@@ -1,6 +1,7 @@
 package cn.ddossec.domain;
 
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
@@ -8,6 +9,7 @@ import lombok.NoArgsConstructor;
 
 import java.util.Date;
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * (WarehouseInbound)实体类
@@ -85,5 +87,28 @@ public class WarehouseInbound implements Serializable {
     * 库存标志
     */
     private String storeTag;
+
+
+    //入库详细表
+    @TableField(exist = false)
+    private String[] productName;
+
+    @TableField(exist = false)
+    private String[] productId;
+
+    @TableField(exist = false)
+    private String[] productDescribe;
+
+    @TableField(exist = false)
+    private Integer[] amount;
+
+    @TableField(exist = false)
+    private String[] amountUnit;
+
+    @TableField(exist = false)
+    private Double[] costPrice;
+
+    @TableField(exist = false)
+    private Integer[] subtotal;
 
 }

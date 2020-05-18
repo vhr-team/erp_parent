@@ -16,17 +16,6 @@ import java.util.List;
 public interface WarehouseStockMapper extends BaseMapper<WarehouseStock> {
 
     /**
-     * 复核成功
-     *
-     * @param check_tag 复核标志
-     * @param check_time 复核时间
-     * @param checker 复核人
-     * @param product_id 产品编号
-     * @return 影响行数
-     */
-    int updateSecuritySheet(@Param("check_tag") String check_tag, @Param("check_time") Date check_time, @Param("checker") String checker, @Param("product_id") String product_id);
-
-    /**
      * 通过库存编号修改安全库存配置
      * @param minAmount 库存报警下限
      * @param maxAmount 库存报警上限

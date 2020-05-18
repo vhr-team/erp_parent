@@ -23,5 +23,11 @@ public interface WarehouseInboundDetailedService {
      */
     DataGridView queryInboundDetailed(Integer id, int page, int limit);
 
+    /**
+     * 插入入库详细表
+     * @param warehouseInboundDetailed
+     * @return
+     */
+    void insertWarehouseDetailed(WarehouseInboundDetailed warehouseInboundDetailed);
 
 }

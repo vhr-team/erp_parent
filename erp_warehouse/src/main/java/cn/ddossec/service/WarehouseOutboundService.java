@@ -1,8 +1,8 @@
 package cn.ddossec.service;
 
 import cn.ddossec.common.DataGridView;
+import cn.ddossec.common.Response;
 import cn.ddossec.domain.WarehouseOutbound;
-import java.util.List;
 
 /**
  * (WarehouseOutbound)表服务接口
@@ -21,5 +21,12 @@ public interface WarehouseOutboundService {
      */
     DataGridView queryWarehouseOutbound(String check_tag,Integer page,Integer limit);
 
+    /**
+     * 添加出库申请单
+     *
+     * @param warehouseOutbound
+     * @return
+     */
+    Response addWarehouseOutbound(WarehouseOutbound warehouseOutbound);
 
 }

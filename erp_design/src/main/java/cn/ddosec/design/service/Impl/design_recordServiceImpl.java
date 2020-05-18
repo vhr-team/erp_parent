@@ -240,10 +240,13 @@ public class design_recordServiceImpl implements design_recordService {
 
     @Override
     public void updateinventoryStatus(String productId,Integer InventoryStatus) {
+        product_design_recordQuery query = new product_design_recordQuery();
+        product_design_recordQuery.Criteria criteria = query.createCriteria();
+        criteria.andProductIdEqualTo(productId);
         product_design_record record =new product_design_record();
         record.setProductId(productId);
         record.setInventoryStatus(InventoryStatus);
-        mapper.updateByPrimaryKeySelective(record);
+        mapper.updateByExampleSelective(record,query);
     }
 
     @Override

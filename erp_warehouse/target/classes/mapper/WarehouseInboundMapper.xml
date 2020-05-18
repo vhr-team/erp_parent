@@ -22,12 +22,4 @@
         <result property="storeTag" column="store_tag" jdbcType="VARCHAR"/>
     </resultMap>
 
-
-    <!--入库申请审核-->
-    <update id="updateWarehousing">
-        update erp.Warehouse_inbound set check_tag = #{check_tag},check_time = #{check_time},checker = #{checker}
-        where inbound_id = #{inbound_id}
-    </update>
-
-
 </mapper>

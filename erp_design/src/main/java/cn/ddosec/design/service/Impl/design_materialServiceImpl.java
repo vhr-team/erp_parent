@@ -104,6 +104,19 @@ public class design_materialServiceImpl implements design_materialService {
     }
 
     @Override
+    public List<product_design_material> selectAll(product_design_material material) {
+        product_design_materialQuery Query = new product_design_materialQuery();
+        if (material != null) {
+            product_design_materialQuery.Criteria criteria = Query.createCriteria();
+           if(material.getProductId()!=null){
+               criteria.andProductIdEqualTo(material.getProductId());
+           }
+        }
+        List<product_design_material> product_design_materials = mapper.selectByExample(Query);
+        return product_design_materials;
+    }
+
+    @Override
     public product_design_material selectById(String Id) {
         product_design_material product_design_material = mapper.selectByproId(Id);
         return product_design_material;

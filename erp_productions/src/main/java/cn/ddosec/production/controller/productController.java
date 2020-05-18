@@ -7,7 +7,6 @@ import cn.ddosec.production.service.feign.designService;
 import cn.ddosec.production.service.processService;
 import cn.ddosec.production.service.productsService;
 import cn.ddossec.domain.pojo.Response;
-import cn.ddossec.domain.pojo.product_design_material;
 import cn.ddossec.domain.pojo.product_design_record;
 import cn.ddossec.domain.pojo.product_material_archives;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 

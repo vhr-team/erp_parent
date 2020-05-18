@@ -265,6 +265,15 @@ public class design_recordServiceImpl implements design_recordService {
     }
 
     @Override
+    public List<product_design_record> selectprocesss(product_design_record record) {
+        product_design_recordQuery query = new product_design_recordQuery();
+        product_design_recordQuery.Criteria criteria = query.createCriteria();
+        criteria.andCheckTagEqualTo("审核通过");
+        List<product_design_record> product_design_records = mapper.selectByExample(query);
+        return product_design_records;
+    }
+
+    @Override
     public void updateprocess(product_design_record record) {
         product_design_recordQuery query = new product_design_recordQuery();
         product_design_recordQuery.Criteria criteria = query.createCriteria();

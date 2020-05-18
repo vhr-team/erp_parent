@@ -193,10 +193,17 @@ public class design_recordController {
      */
     @RequestMapping("/selectprocessAll")
     public List<product_design_record> selectprocessAll(@RequestBody product_design_record record) {
-        System.out.println(record);
         return service.selectprocess(record);
     }
 
+    /**审核通过的档案
+     *
+     * @return
+     */
+    @RequestMapping("/selectprocessAll")
+    public List<product_design_record> selectprocessAlls(@RequestBody product_design_record record) {
+        return service.selectprocesss(record);
+    }
     /**修改生产工序档案
      * @param record
      * @return

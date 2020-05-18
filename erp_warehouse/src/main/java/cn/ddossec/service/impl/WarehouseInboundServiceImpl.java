@@ -13,6 +13,7 @@ import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -53,7 +54,7 @@ public class WarehouseInboundServiceImpl implements WarehouseInboundService {
      * @return 对象列表
      */
     @Override
-    @Cacheable(cacheNames = "cn.ddossec.service.impl.WarehouseInboundServiceImpl")
+    @Cacheable(cacheNames = "cn.ddossec.service.impl.WarehouseInboundServiceImpl",key = "#checkTag")
     public DataGridView queryInboundLimit(String checkTag, int page, int limit){
         QueryWrapper<WarehouseInbound> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("check_tag",checkTag).select("id","inbound_id","reason","register_time","amount_sum","cost_price_sum","gathered_amount_sum","register","register_time");
@@ -75,6 +76,7 @@ public class WarehouseInboundServiceImpl implements WarehouseInboundService {
      */
     @Transactional
     @Override
+    @CachePut(cacheNames = "cn.ddossec.service.impl.WarehouseInboundServiceImpl",key = "#warehouseInbound.checkTag")
     public void insertWarehousing(WarehouseInbound warehouseInbound) {
         warehouseInbound.setInboundId(ObjectId.next()); //生成随机入库单编号
         warehouseInbound.setRegisterTime(DateUtil.date()); //登记时间
@@ -98,13 +100,14 @@ public class WarehouseInboundServiceImpl implements WarehouseInboundService {
     /**
      * 入库申请审核
      *
-     * @param check_tag 入库标志 0待审核 1复核不通过 2复核通过
+     * @param check_tag 入库标志 0待审核 1复核通过 2复核不通过
      * @param check_time 复核时间
      * @param checker 复核人
      * @param inbound_id 入库单编号 (随机生成)
      * @return
      */
     @Override
+    @CachePut(cacheNames = "cn.ddossec.service.impl.WarehouseInboundServiceImpl",key = "#check_tag")
     public int updateWarehousing(String check_tag, Date check_time, String checker, String inbound_id) {
         QueryWrapper<WarehouseInbound> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq(inbound_id != null,"inbound_id",inbound_id).select("id");

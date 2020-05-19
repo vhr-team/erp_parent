@@ -200,7 +200,7 @@ public class design_recordController {
      *
      * @return
      */
-    @RequestMapping("/selectprocessAll")
+    @RequestMapping("/selectprocessAlls")
     public List<product_design_record> selectprocessAlls(@RequestBody product_design_record record) {
         return service.selectprocesss(record);
     }

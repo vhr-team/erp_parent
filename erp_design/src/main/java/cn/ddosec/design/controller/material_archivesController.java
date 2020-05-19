@@ -104,12 +104,13 @@ public class material_archivesController {
             product_design_record product_design_record = new product_design_record();
             product_design_record.setProductId(archives.getRecord().getProductId());
             product_design_record.setMaterielArchivesId(ID);
+            product_design_record.setCheckTag("等待审核");
             recordService.updateByproID(product_design_record);
 
-            return new Response(true, "添加成功");
+            return new Response(true, "成功");
         } catch (Exception e) {
             e.printStackTrace();
-            return new Response(false, "添加失败");
+            return new Response(false, "失败");
         }
     }
 

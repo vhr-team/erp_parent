@@ -68,7 +68,7 @@ public class WarehouseInboundDetailedServiceImpl implements WarehouseInboundDeta
         int size = list.size();
         int count = 0;
         for (WarehouseInboundDetailed detailed : list) {
-            if (detailed.getGatherTag()=="2"){
+            if ("2".equals(detailed.getGatherTag())){
                 count++;
             }
         }

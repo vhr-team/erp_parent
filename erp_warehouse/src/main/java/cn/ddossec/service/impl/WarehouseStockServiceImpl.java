@@ -40,12 +40,10 @@ public class WarehouseStockServiceImpl implements WarehouseStockService {
      * @return
      */
     @Override
-    public DataGridView queryInventory(String product_id, Integer page, Integer limit) {
+    public DataGridView queryInventory(String product_id) {
         QueryWrapper<WarehouseStock> queryWrapper = new QueryWrapper<>();
         queryWrapper.select("max_capacity_amount","amount").eq("product_id",product_id);
-        Page<WarehouseStock> pages = new Page<>(page,limit);
-        IPage iPage = warehouseStockMapper.selectPage(pages,queryWrapper);
-        return new DataGridView(iPage.getTotal(),iPage.getRecords());
+        return new DataGridView(warehouseStockMapper.selectOne(queryWrapper));
     }
 
     /**

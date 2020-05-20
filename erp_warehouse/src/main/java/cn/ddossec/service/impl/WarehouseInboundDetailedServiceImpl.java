@@ -68,7 +68,7 @@ public class WarehouseInboundDetailedServiceImpl implements WarehouseInboundDeta
         int size = list.size();
         int count = 0;
         for (WarehouseInboundDetailed detailed : list) {
-            if (detailed.getGatherTag()=="2"){
+            if ("2".equals(detailed.getGatherTag())){
                 count++;
             }
         }
@@ -88,7 +88,7 @@ public class WarehouseInboundDetailedServiceImpl implements WarehouseInboundDeta
     @Override
     public DataGridView queryInboundDetailed(Integer id, int page, int limit) {
         QueryWrapper<WarehouseInboundDetailed> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("parent_id",id).select("id","product_id","product_name","amount","gathered_amount","cost_price");
+        queryWrapper.eq("parent_id",id).select("id","parent_id","product_id","product_name","amount","gathered_amount","cost_price");
         Page<WarehouseInboundDetailed> pages = new Page<>(page,limit);
         IPage iPage = warehouseInboundDetailedMapper.selectPage(pages,queryWrapper);
         return new DataGridView(iPage.getTotal(),iPage.getRecords());

@@ -57,14 +57,12 @@ public class WarehouseInboundDetailedController {
      * 通过产品编号获取安全库存的当前存储量和最大存储量，求出剩余存储量
      *
      * @param product_id 库存编号
-     * @param page
-     * @param limit
      * @return
      */
     @ApiOperation("通过产品编号获取安全库存的当前可存放数量")
     @RequestMapping("queryInventory")
-    public DataGridView queryInventory(String product_id, Integer page, Integer limit) {
-        return warehouseStockServiceImpl.queryInventory(product_id, page, limit);
+    public DataGridView queryInventory(String product_id) {
+        return warehouseStockServiceImpl.queryInventory(product_id);
     }
 
     /**

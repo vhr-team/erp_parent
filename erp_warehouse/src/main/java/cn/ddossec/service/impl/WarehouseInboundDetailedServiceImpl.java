@@ -1,15 +1,16 @@
 package cn.ddossec.service.impl;
 
 import cn.ddossec.common.DataGridView;
+import cn.ddossec.common.Response;
 import cn.ddossec.domain.WarehouseInboundDetailed;
 import cn.ddossec.mapper.WarehouseInboundDetailedMapper;
 import cn.ddossec.service.WarehouseInboundDetailedService;
+import cn.ddossec.service.WarehouseInboundService;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -25,6 +26,56 @@ public class WarehouseInboundDetailedServiceImpl implements WarehouseInboundDeta
     @Autowired
     private WarehouseInboundDetailedMapper warehouseInboundDetailedMapper;
 
+    @Autowired
+    private WarehouseInboundService warehouseInboundServiceImpl;
+
+
+    /**
+     * 入库调度提交
+     *
+     * @param id 入库详细单序号
+     * @param parent_id 父级序号
+     * @param gatherTag 库存标志 1为已登记 2为已调度
+     * @param attemper 调度人
+     * @return
+     */
+    @Override
+    public Response InboundDetailedCommit(Integer id, Integer parent_id, String gatherTag, String attemper) {
+        try {
+            WarehouseInboundDetailed detailed = new WarehouseInboundDetailed();
+            detailed.setId(id);
+            detailed.setGatherTag(gatherTag);
+            warehouseInboundDetailedMapper.updateById(detailed);
+            updatestoreTag(parent_id, attemper);
+            return new Response(true,"提交成功!");
+        }catch (Exception e){
+            e.printStackTrace();
+            return new Response(false,"提交失败,请重试!");
+        }
+    }
+
+    /**
+     *通过父级序号查询所有入库标志
+     *
+     * @param parent_id 父级序号
+     * @param attemper 调度人
+     */
+    @Override
+    public void updatestoreTag(Integer parent_id, String attemper) {
+        QueryWrapper<WarehouseInboundDetailed> queryWrapper = new QueryWrapper();
+        queryWrapper.select("gather_tag").eq("parent_id",parent_id);
+        List<WarehouseInboundDetailed> list = warehouseInboundDetailedMapper.selectList(queryWrapper);
+        int size = list.size();
+        int count = 0;
+        for (WarehouseInboundDetailed detailed : list) {
+            if (detailed.getGatherTag()=="2"){
+                count++;
+            }
+        }
+        if (size == count){
+            warehouseInboundServiceImpl.updateStoreTag(parent_id,"2",attemper,"0");
+        }
+    }
 
     /**
      * 入库调度表的调度查询
@@ -49,9 +100,9 @@ public class WarehouseInboundDetailedServiceImpl implements WarehouseInboundDeta
      * @param warehouseInboundDetailed
      * @return
      */
-    @Override
+    /*@Override
     public void insertWarehouseDetailed(WarehouseInboundDetailed warehouseInboundDetailed) {
         warehouseInboundDetailedMapper.insert(warehouseInboundDetailed);
-    }
+    }*/
 
 }

@@ -18,23 +18,33 @@ public interface WarehouseInboundService {
 
     /**
      * 入库管理
-     * @param storeTag 入库标志
+     * @param checkTag 入库标志
      * @param page
      * @param limit
      * @return
      */
-    DataGridView queryInbound(String storeTag, int page, int limit);
+    DataGridView queryInbound(String checkTag, int page, int limit);
 
 
     /**
      * 查询可调度入库数据
      *
-     * @param checkTag 入库审核状态
+     * @param storeTag 入库审核状态
      * @param page 查询起始位置
      * @param limit 查询条数
      * @return 对象列表
      */
-    DataGridView queryInboundLimit(String checkTag, int page, int limit);
+    DataGridView queryInboundLimit(String storeTag, int page, int limit);
+
+    /**
+     * 修改入库单的库存标志
+     *
+     * @param parent_id 序号 (父级序号 查找序号)
+     * @param store_tag 库存标志 (变成2 已调度)
+     * @param attemper 调度人
+     * @param check_tag 审核标志 (变成0 待入库状态)
+     */
+    void updateStoreTag(Integer parent_id, String store_tag, String attemper, String check_tag);
 
     /**
      * 入库申请登记
@@ -42,7 +52,7 @@ public interface WarehouseInboundService {
      * @param warehouseInbound 实例对象
      * @return 主键id
      */
-    void insertWarehousing(WarehouseInbound warehouseInbound);
+    //void insertWarehousing(WarehouseInbound warehouseInbound);
 
     /**
      * 入库申请审核
@@ -53,7 +63,7 @@ public interface WarehouseInboundService {
      * @param inbound_id 入库单编号 (随机生成)
      * @return
      */
-    int updateWarehousing(String check_tag,Date check_time,String checker,String inbound_id);
+    //int updateWarehousing(String check_tag,Date check_time,String checker,String inbound_id);
 
 
 }

@@ -1,6 +1,7 @@
 package cn.ddossec.controller;
 
 import cn.ddossec.common.DataGridView;
+import cn.ddossec.common.Response;
 import cn.ddossec.domain.WarehouseInbound;
 import cn.ddossec.domain.WarehouseInboundDetailed;
 import cn.ddossec.service.WarehouseInboundDetailedService;
@@ -34,6 +35,22 @@ public class WarehouseInboundDetailedController {
 
     @Autowired
     private WarehouseStockService warehouseStockServiceImpl;
+
+
+    /**
+     * 入库调度提交
+     *
+     * @param id 入库详细单序号
+     * @param parent_id 父级序号
+     * @param gatherTag 库存标志 1为已登记 2为已调度
+     * @param attemper 调度人
+     * @return
+     */
+    @ApiOperation(value = "入库调度提交")
+    @RequestMapping("InboundDetailedCommit")
+    public Response InboundDetailedCommit(Integer id, Integer parent_id, String gatherTag, String attemper){
+        return warehouseInboundDetailedServiceImpl.InboundDetailedCommit(id, parent_id, gatherTag, attemper);
+    }
 
 
     /**

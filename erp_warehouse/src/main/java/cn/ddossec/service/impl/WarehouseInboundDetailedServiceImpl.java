@@ -100,9 +100,9 @@ public class WarehouseInboundDetailedServiceImpl implements WarehouseInboundDeta
      * @param warehouseInboundDetailed
      * @return
      */
-    /*@Override
+    @Override
     public void insertWarehouseDetailed(WarehouseInboundDetailed warehouseInboundDetailed) {
         warehouseInboundDetailedMapper.insert(warehouseInboundDetailed);
-    }*/
+    }
 
 }

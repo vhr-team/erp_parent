@@ -102,9 +102,9 @@ public class WarehouseInboundServiceImpl implements WarehouseInboundService {
      * @param warehouseInbound 实例对象
      * @return 实例对象
      */
-    /*@Transactional
+    @Transactional
     @Override
-    @CachePut(cacheNames = "cn.ddossec.service.impl.WarehouseInboundServiceImpl",key = "#warehouseInbound.checkTag")
+    //@CachePut(cacheNames = "cn.ddossec.service.impl.WarehouseInboundServiceImpl",key = "#warehouseInbound.checkTag")
     public void insertWarehousing(WarehouseInbound warehouseInbound) {
         warehouseInbound.setInboundId(ObjectId.next()); //生成随机入库单编号
         warehouseInbound.setRegisterTime(DateUtil.date()); //登记时间
@@ -123,7 +123,7 @@ public class WarehouseInboundServiceImpl implements WarehouseInboundService {
             detailed.setSubtotal(warehouseInbound.getSubtotal()[i]);
             this.warehouseInboundDetailedServiceImpl.insertWarehouseDetailed(detailed);//循环插入到入库详细单
         }
-    }*/
+    }
 
     /**
      * 入库申请审核

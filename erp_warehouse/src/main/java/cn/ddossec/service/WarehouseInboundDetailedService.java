@@ -48,6 +48,6 @@ public interface WarehouseInboundDetailedService {
      * @param warehouseInboundDetailed
      * @return
      */
-    //void insertWarehouseDetailed(WarehouseInboundDetailed warehouseInboundDetailed);
+    void insertWarehouseDetailed(WarehouseInboundDetailed warehouseInboundDetailed);
 
 }

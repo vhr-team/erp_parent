@@ -72,7 +72,7 @@ public class WarehouseInboundServiceImpl implements WarehouseInboundService {
         Map<String,Object> map = new HashMap<>();
         map.put("store_tag",storeTag);
         map.put("check_tag",checkTag);
-        queryWrapper.allEq(map,false).select("id","inbound_id","reason","register","register_time","amount_sum","cost_price_sum","gathered_amount_sum");
+        queryWrapper.allEq(map,false).select("id","inbound_id","register","register_time","amount_sum","cost_price_sum","gathered_amount_sum");
         List<WarehouseInbound> list = warehouseInboundMapper.selectList(queryWrapper);
         ArrayList<Object> arrayList = new ArrayList<>();
         for (WarehouseInbound inbound : list) {

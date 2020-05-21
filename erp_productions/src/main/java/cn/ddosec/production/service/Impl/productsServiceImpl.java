@@ -41,5 +41,22 @@ public class productsServiceImpl implements productsService {
         mapper.updateByExampleSelective(sheet,query);
     }
 
+    @Override
+    public List<products_process_design_sheet> selectprocessById(String processId) {
+        products_process_design_sheetQuery query = new products_process_design_sheetQuery();
+        products_process_design_sheetQuery.Criteria criteria = query.createCriteria();
+        criteria.andProcessIdEqualTo(processId);
+        List<products_process_design_sheet> products_process_design_sheets = mapper.selectByExample(query);
+        return products_process_design_sheets;
+    }
+
+    @Override
+    public void deleteByprocessId(String processId) {
+        products_process_design_sheetQuery query = new products_process_design_sheetQuery();
+        products_process_design_sheetQuery.Criteria criteria = query.createCriteria();
+        criteria.andProcessIdEqualTo(processId);
+        mapper.deleteByExample(query);
+    }
+
 
 }

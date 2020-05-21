@@ -2,7 +2,7 @@ package cn.ddossec.domain.pojo;
 
 import java.io.Serializable;
 
-public class product_design_record{
+public class product_design_record implements Serializable {
     /**
      * 序号
      */
@@ -122,6 +122,11 @@ public class product_design_record{
      * 工序设计状态
      */
     private Integer procssStatus;
+
+    /**
+     * 计划单状态（未完成/已完成）
+     */
+    private String planCheckstatus;
 
     private static final long serialVersionUID = 1L;
 
@@ -317,6 +322,14 @@ public class product_design_record{
         this.procssStatus = procssStatus;
     }
 
+    public String getPlanCheckstatus() {
+        return planCheckstatus;
+    }
+
+    public void setPlanCheckstatus(String planCheckstatus) {
+        this.planCheckstatus = planCheckstatus == null ? null : planCheckstatus.trim();
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -347,6 +360,7 @@ public class product_design_record{
         sb.append(", materielArchivesId=").append(materielArchivesId);
         sb.append(", inventoryStatus=").append(inventoryStatus);
         sb.append(", procssStatus=").append(procssStatus);
+        sb.append(", planCheckstatus=").append(planCheckstatus);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();
@@ -365,29 +379,30 @@ public class product_design_record{
         }
         product_design_record other = (product_design_record) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
-                && (this.getProductId() == null ? other.getProductId() == null : this.getProductId().equals(other.getProductId()))
-                && (this.getProductName() == null ? other.getProductName() == null : this.getProductName().equals(other.getProductName()))
-                && (this.getFactoryName() == null ? other.getFactoryName() == null : this.getFactoryName().equals(other.getFactoryName()))
-                && (this.getProductClass() == null ? other.getProductClass() == null : this.getProductClass().equals(other.getProductClass()))
-                && (this.getWarranty() == null ? other.getWarranty() == null : this.getWarranty().equals(other.getWarranty()))
-                && (this.getListPrice() == null ? other.getListPrice() == null : this.getListPrice().equals(other.getListPrice()))
-                && (this.getRealCostPrice() == null ? other.getRealCostPrice() == null : this.getRealCostPrice().equals(other.getRealCostPrice()))
-                && (this.getAmountUnit() == null ? other.getAmountUnit() == null : this.getAmountUnit().equals(other.getAmountUnit()))
-                && (this.getProductDescribe() == null ? other.getProductDescribe() == null : this.getProductDescribe().equals(other.getProductDescribe()))
-                && (this.getResponsiblePerson() == null ? other.getResponsiblePerson() == null : this.getResponsiblePerson().equals(other.getResponsiblePerson()))
-                && (this.getRegister() == null ? other.getRegister() == null : this.getRegister().equals(other.getRegister()))
-                && (this.getRegisterTime() == null ? other.getRegisterTime() == null : this.getRegisterTime().equals(other.getRegisterTime()))
-                && (this.getChecker() == null ? other.getChecker() == null : this.getChecker().equals(other.getChecker()))
-                && (this.getCheckTime() == null ? other.getCheckTime() == null : this.getCheckTime().equals(other.getCheckTime()))
-                && (this.getCheckTag() == null ? other.getCheckTag() == null : this.getCheckTag().equals(other.getCheckTag()))
-                && (this.getChanger() == null ? other.getChanger() == null : this.getChanger().equals(other.getChanger()))
-                && (this.getChangeTime() == null ? other.getChangeTime() == null : this.getChangeTime().equals(other.getChangeTime()))
-                && (this.getChangeTag() == null ? other.getChangeTag() == null : this.getChangeTag().equals(other.getChangeTag()))
-                && (this.getFileChangeAmount() == null ? other.getFileChangeAmount() == null : this.getFileChangeAmount().equals(other.getFileChangeAmount()))
-                && (this.getDeleteTag() == null ? other.getDeleteTag() == null : this.getDeleteTag().equals(other.getDeleteTag()))
-                && (this.getMaterielArchivesId() == null ? other.getMaterielArchivesId() == null : this.getMaterielArchivesId().equals(other.getMaterielArchivesId()))
-                && (this.getInventoryStatus() == null ? other.getInventoryStatus() == null : this.getInventoryStatus().equals(other.getInventoryStatus()))
-                && (this.getProcssStatus() == null ? other.getProcssStatus() == null : this.getProcssStatus().equals(other.getProcssStatus()));
+            && (this.getProductId() == null ? other.getProductId() == null : this.getProductId().equals(other.getProductId()))
+            && (this.getProductName() == null ? other.getProductName() == null : this.getProductName().equals(other.getProductName()))
+            && (this.getFactoryName() == null ? other.getFactoryName() == null : this.getFactoryName().equals(other.getFactoryName()))
+            && (this.getProductClass() == null ? other.getProductClass() == null : this.getProductClass().equals(other.getProductClass()))
+            && (this.getWarranty() == null ? other.getWarranty() == null : this.getWarranty().equals(other.getWarranty()))
+            && (this.getListPrice() == null ? other.getListPrice() == null : this.getListPrice().equals(other.getListPrice()))
+            && (this.getRealCostPrice() == null ? other.getRealCostPrice() == null : this.getRealCostPrice().equals(other.getRealCostPrice()))
+            && (this.getAmountUnit() == null ? other.getAmountUnit() == null : this.getAmountUnit().equals(other.getAmountUnit()))
+            && (this.getProductDescribe() == null ? other.getProductDescribe() == null : this.getProductDescribe().equals(other.getProductDescribe()))
+            && (this.getResponsiblePerson() == null ? other.getResponsiblePerson() == null : this.getResponsiblePerson().equals(other.getResponsiblePerson()))
+            && (this.getRegister() == null ? other.getRegister() == null : this.getRegister().equals(other.getRegister()))
+            && (this.getRegisterTime() == null ? other.getRegisterTime() == null : this.getRegisterTime().equals(other.getRegisterTime()))
+            && (this.getChecker() == null ? other.getChecker() == null : this.getChecker().equals(other.getChecker()))
+            && (this.getCheckTime() == null ? other.getCheckTime() == null : this.getCheckTime().equals(other.getCheckTime()))
+            && (this.getCheckTag() == null ? other.getCheckTag() == null : this.getCheckTag().equals(other.getCheckTag()))
+            && (this.getChanger() == null ? other.getChanger() == null : this.getChanger().equals(other.getChanger()))
+            && (this.getChangeTime() == null ? other.getChangeTime() == null : this.getChangeTime().equals(other.getChangeTime()))
+            && (this.getChangeTag() == null ? other.getChangeTag() == null : this.getChangeTag().equals(other.getChangeTag()))
+            && (this.getFileChangeAmount() == null ? other.getFileChangeAmount() == null : this.getFileChangeAmount().equals(other.getFileChangeAmount()))
+            && (this.getDeleteTag() == null ? other.getDeleteTag() == null : this.getDeleteTag().equals(other.getDeleteTag()))
+            && (this.getMaterielArchivesId() == null ? other.getMaterielArchivesId() == null : this.getMaterielArchivesId().equals(other.getMaterielArchivesId()))
+            && (this.getInventoryStatus() == null ? other.getInventoryStatus() == null : this.getInventoryStatus().equals(other.getInventoryStatus()))
+            && (this.getProcssStatus() == null ? other.getProcssStatus() == null : this.getProcssStatus().equals(other.getProcssStatus()))
+            && (this.getPlanCheckstatus() == null ? other.getPlanCheckstatus() == null : this.getPlanCheckstatus().equals(other.getPlanCheckstatus()));
     }
 
     @Override
@@ -418,6 +433,7 @@ public class product_design_record{
         result = prime * result + ((getMaterielArchivesId() == null) ? 0 : getMaterielArchivesId().hashCode());
         result = prime * result + ((getInventoryStatus() == null) ? 0 : getInventoryStatus().hashCode());
         result = prime * result + ((getProcssStatus() == null) ? 0 : getProcssStatus().hashCode());
+        result = prime * result + ((getPlanCheckstatus() == null) ? 0 : getPlanCheckstatus().hashCode());
         return result;
     }
 }

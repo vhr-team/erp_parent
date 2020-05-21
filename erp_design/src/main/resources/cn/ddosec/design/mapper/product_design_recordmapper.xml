@@ -26,6 +26,7 @@
     <result column="materiel_archives_id" property="materielArchivesId" jdbcType="VARCHAR" />
     <result column="inventory_status" property="inventoryStatus" jdbcType="INTEGER" />
     <result column="procss_status" property="procssStatus" jdbcType="INTEGER" />
+    <result column="plan_checkstatus" property="planCheckstatus" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -90,7 +91,7 @@
       id, product_id, product_name, factory_name, product_class, warranty, list_price, 
       real_cost_price, amount_unit, product_describe, responsible_person, register, register_time, 
       checker, check_time, check_tag, changer, change_time, change_tag, file_change_amount, 
-      delete_tag, materiel_archives_id, inventory_status, procss_status
+      delete_tag, materiel_archives_id, inventory_status, procss_status, plan_checkstatus
     </if>
     <if test="fields != null" >
       ${fields}
@@ -112,7 +113,7 @@
   </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
-    id,product_id,product_name,factory_name,product_class,warranty,list_price,real_cost_price,amount_unit,product_describe,responsible_person,register,register_time,checker,check_time,check_tag,changer,change_time,change_tag,file_change_amount,delete_tag,materiel_archives_id,inventory_status,procss_status
+    id,product_id,product_name,factory_name,product_class,warranty,list_price,real_cost_price,amount_unit,product_describe,responsible_person,register,register_time,checker,check_time,check_tag,changer,change_time,change_tag,file_change_amount,delete_tag,materiel_archives_id,inventory_status,procss_status,plan_checkstatus
     from product_design_record
     where id = #{id,jdbcType=INTEGER}
   </select>
@@ -134,8 +135,8 @@
       register_time, checker, check_time, 
       check_tag, changer, change_time, 
       change_tag, file_change_amount, delete_tag, 
-      materiel_archives_id, inventory_status, procss_status
-      )
+      materiel_archives_id, inventory_status, procss_status, 
+      plan_checkstatus)
     values (#{id,jdbcType=INTEGER}, #{productId,jdbcType=VARCHAR}, #{productName,jdbcType=VARCHAR}, 
       #{factoryName,jdbcType=VARCHAR}, #{productClass,jdbcType=VARCHAR}, #{warranty,jdbcType=VARCHAR}, 
       #{listPrice,jdbcType=DOUBLE}, #{realCostPrice,jdbcType=DOUBLE}, #{amountUnit,jdbcType=VARCHAR}, 
@@ -143,8 +144,8 @@
       #{registerTime,jdbcType=VARCHAR}, #{checker,jdbcType=VARCHAR}, #{checkTime,jdbcType=VARCHAR}, 
       #{checkTag,jdbcType=VARCHAR}, #{changer,jdbcType=VARCHAR}, #{changeTime,jdbcType=VARCHAR}, 
       #{changeTag,jdbcType=VARCHAR}, #{fileChangeAmount,jdbcType=INTEGER}, #{deleteTag,jdbcType=VARCHAR}, 
-      #{materielArchivesId,jdbcType=VARCHAR}, #{inventoryStatus,jdbcType=INTEGER}, #{procssStatus,jdbcType=INTEGER}
-      )
+      #{materielArchivesId,jdbcType=VARCHAR}, #{inventoryStatus,jdbcType=INTEGER}, #{procssStatus,jdbcType=INTEGER}, 
+      #{planCheckstatus,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="cn.ddosec.design.pojo.product_design_record" >
     insert into product_design_record
@@ -221,6 +222,9 @@
       <if test="procssStatus != null" >
         procss_status,
       </if>
+      <if test="planCheckstatus != null" >
+        plan_checkstatus,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -294,6 +298,9 @@
       </if>
       <if test="procssStatus != null" >
         #{procssStatus,jdbcType=INTEGER},
+      </if>
+      <if test="planCheckstatus != null" >
+        #{planCheckstatus,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -378,6 +385,9 @@
       <if test="record.procssStatus != null" >
         procss_status = #{record.procssStatus,jdbcType=INTEGER},
       </if>
+      <if test="record.planCheckstatus != null" >
+        plan_checkstatus = #{record.planCheckstatus,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -408,7 +418,8 @@
       delete_tag = #{record.deleteTag,jdbcType=VARCHAR},
       materiel_archives_id = #{record.materielArchivesId,jdbcType=VARCHAR},
       inventory_status = #{record.inventoryStatus,jdbcType=INTEGER},
-      procss_status = #{record.procssStatus,jdbcType=INTEGER}
+      procss_status = #{record.procssStatus,jdbcType=INTEGER},
+      plan_checkstatus = #{record.planCheckstatus,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -485,6 +496,9 @@
       <if test="procssStatus != null" >
         procss_status = #{procssStatus,jdbcType=INTEGER},
       </if>
+      <if test="planCheckstatus != null" >
+        plan_checkstatus = #{planCheckstatus,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -512,7 +526,8 @@
       delete_tag = #{deleteTag,jdbcType=VARCHAR},
       materiel_archives_id = #{materielArchivesId,jdbcType=VARCHAR},
       inventory_status = #{inventoryStatus,jdbcType=INTEGER},
-      procss_status = #{procssStatus,jdbcType=INTEGER}
+      procss_status = #{procssStatus,jdbcType=INTEGER},
+      plan_checkstatus = #{planCheckstatus,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

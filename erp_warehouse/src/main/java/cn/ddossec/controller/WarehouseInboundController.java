@@ -44,10 +44,11 @@ public class WarehouseInboundController {
      */
     @ApiOperation(value = "查询可调度入库数据")
     @RequestMapping("queryInboundLimit")
-    public DataGridView queryInboundLimit(@Param("storeTag") String storeTag,
-                                          @Param("page") int page,
-                                          @Param("limit") int limit){
-        return warehouseInboundServiceImpl.queryInboundLimit(storeTag, page, limit);
+    public DataGridView queryInboundLimit(@RequestParam("storeTag") String storeTag,
+                                          @RequestParam(value = "checkTag",required = false) String checkTag,
+                                          @RequestParam("page") int page,
+                                          @RequestParam("limit") int limit){
+        return warehouseInboundServiceImpl.queryInboundLimit(storeTag, checkTag, page, limit);
     }
 
 

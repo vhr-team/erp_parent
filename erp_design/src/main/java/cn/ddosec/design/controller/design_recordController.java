@@ -27,6 +27,8 @@ public class design_recordController {
     design_recordService service;
     @Autowired
     material_archivesService material_archivesservice;
+    @Autowired
+    desgin_checkService desgin_checkservice;
 
     /**
      * 查询全部已通过审核档案
@@ -156,10 +158,11 @@ public class design_recordController {
 
     @ApiOperation("档案审核")
     @RequestMapping("/updatecheck")
-    public Response updatecheck(@RequestBody product_design_record record) {
-        System.out.println(record);
+    public Response updatecheck(@RequestBody productcheck check) {
+        System.out.println(check);
         try {
-            service.updatechecker(record);
+            service.updatechecker(check.getRecord());
+            desgin_checkservice.addcheck(check.getCheck());
             return new Response(true, "审核成功");
         } catch (Exception e) {
             e.printStackTrace();
@@ -196,7 +199,8 @@ public class design_recordController {
         return service.selectprocess(record);
     }
 
-    /**审核通过的档案
+    /**
+     * 审核通过的档案
      *
      * @return
      */
@@ -204,7 +208,10 @@ public class design_recordController {
     public List<product_design_record> selectprocessAlls() {
         return service.selectprocesss();
     }
-    /**修改生产工序档案
+
+    /**
+     * 修改生产工序档案
+     *
      * @param record
      * @return
      */
@@ -217,5 +224,10 @@ public class design_recordController {
             e.printStackTrace();
             return new Response(false, "失败");
         }
+    }
+    /*查询审核状态*/
+    @RequestMapping("/selectcheckremarkAll")
+    public List<product_check> selectcheckremarkAll(String productId){
+        return desgin_checkservice.selectAll(productId);
     }
 }

@@ -37,17 +37,17 @@ public class WarehouseInboundController {
     /**
      * 查询可调度入库数据
      *
-     * @param checkTag 入库审核状态
+     * @param storeTag 入库审核状态  1
      * @param page 查询起始位置
      * @param limit 查询条数
      * @return 对象列表
      */
     @ApiOperation(value = "查询可调度入库数据")
     @RequestMapping("queryInboundLimit")
-    public DataGridView queryInboundLimit(@Param("check_tag") String checkTag,
+    public DataGridView queryInboundLimit(@Param("storeTag") String storeTag,
                                           @Param("page") int page,
                                           @Param("limit") int limit){
-        return warehouseInboundServiceImpl.queryInboundLimit(checkTag, page, limit);
+        return warehouseInboundServiceImpl.queryInboundLimit(storeTag, page, limit);
     }
 
 
@@ -55,7 +55,7 @@ public class WarehouseInboundController {
      * 入库申请登记
      * @return
      */
-    @ApiOperation(value = "入库申请登记")
+    /*@ApiOperation(value = "入库申请登记")
     @RequestMapping("insertWarehousing")
     public Response insertWarehousing(@RequestBody WarehouseInbound warehouseInbound){
         try{
@@ -65,7 +65,7 @@ public class WarehouseInboundController {
             e.printStackTrace();
             return new Response(false,"提交失败,请重试!");
         }
-    }
+    }*/
 
 
     /**
@@ -77,7 +77,7 @@ public class WarehouseInboundController {
      * @param inbound_id 入库单编号 (随机生成)
      * @return
      */
-    @ApiOperation(value = "入库审核")
+    /*@ApiOperation(value = "入库审核")
     @RequestMapping("updateWarehousing/{check_tag}/{checker}/{inbound_id}")
     public Response updateWarehousing(@PathVariable(value = "check_tag") String check_tag,@PathVariable(value = "checker") String checker,@PathVariable(value = "inbound_id") String inbound_id) {
         Date check_time = DateUtil.date();
@@ -88,7 +88,7 @@ public class WarehouseInboundController {
             e.printStackTrace();
             return new Response(false,"请稍后再试!");
         }
-    }
+    }*/
 
 
 

@@ -2,6 +2,7 @@ package cn.ddossec.service;
 
 import cn.ddossec.common.DataGridView;
 import cn.ddossec.common.Response;
+import cn.ddossec.domain.WarehouseInbound;
 import cn.ddossec.domain.WarehouseInboundDetailed;
 import java.util.List;
 
@@ -12,6 +13,8 @@ import java.util.List;
  * @since 2020-04-24 17:08:29
  */
 public interface WarehouseInboundDetailedService {
+
+    void updateWarehouseInboundDetailedAmount(WarehouseInboundDetailed detailed);
 
 
     /**
@@ -48,6 +51,6 @@ public interface WarehouseInboundDetailedService {
      * @param warehouseInboundDetailed
      * @return
      */
-    //void insertWarehouseDetailed(WarehouseInboundDetailed warehouseInboundDetailed);
+    void insertWarehouseDetailed(WarehouseInboundDetailed warehouseInboundDetailed);
 
 }

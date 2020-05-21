@@ -253,6 +253,8 @@ public class OrderModelServiceImpl extends ServiceImpl<OrderModelMapper, OrderMo
         QueryWrapper<OrderModel> qw = new QueryWrapper<>();
         // 订单类型
         qw.eq(null != vo.getOrderType(), "order_type", vo.getOrderType());
+
+        System.out.println(vo.getOrderState());
         // 订单状态
         qw.eq(null != vo.getOrderState(), "order_state", vo.getOrderState());
 
@@ -277,11 +279,11 @@ public class OrderModelServiceImpl extends ServiceImpl<OrderModelMapper, OrderMo
                 // 审核人
                 qw.eq(null != user.getId(), "checker", user.getId());
             }
+        }
 
-            if (null != vo.getCompleterName() && vo.getCompleterName().equals(user.getName())) {
-                // 跟单人
-                qw.eq(null != user.getId(), "completer", user.getId());
-            }
+        if (null != vo.getCompleter() && vo.getOrderType() == 2) {
+            // 跟单人
+            qw.eq(null != vo.getCompleter(), "completer", vo.getCompleter());
         }
 
 
@@ -328,6 +330,7 @@ public class OrderModelServiceImpl extends ServiceImpl<OrderModelMapper, OrderMo
 
     /**
      * 任务指派
+     *
      * @param orderModel
      */
     @Override
@@ -337,7 +340,7 @@ public class OrderModelServiceImpl extends ServiceImpl<OrderModelMapper, OrderMo
         model.setCompleter(orderModel.getCompleter());
         // 订单状态改为运输单
         model.setOrderType(new Integer(Constants.ORDER_TYPE_TRANS));
-        model.setOrderState(new Integer(Constants.ORDER_TYPE_TRANS_BUYING));
+        model.setOrderState(new Integer(Constants.ORDER_TYPE_TRANS_BUY));
 
         this.orderModelMapper.updateById(model);
     }
@@ -354,6 +357,7 @@ public class OrderModelServiceImpl extends ServiceImpl<OrderModelMapper, OrderMo
 
     /**
      * 结单
+     *
      * @param orderModel
      */
     @Override

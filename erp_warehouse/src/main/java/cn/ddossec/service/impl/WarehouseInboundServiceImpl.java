@@ -17,9 +17,7 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 /**
  * (WarehouseInbound)表服务实现类
@@ -45,7 +43,7 @@ public class WarehouseInboundServiceImpl implements WarehouseInboundService {
      * @param limit
      * @return
      */
-    @Override
+    /*@Override
     public DataGridView queryInbound(String checkTag, int page, int limit) {
         QueryWrapper<WarehouseInbound> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("store_tag",2).eq("check_tag",checkTag).select("id","inbound_id","reason","register_time","amount_sum","cost_price_sum");
@@ -57,7 +55,7 @@ public class WarehouseInboundServiceImpl implements WarehouseInboundService {
         IPage iPage = warehouseInboundMapper.selectPage(pages,queryWrapper);
         //总行数   总数据
         return new DataGridView(iPage.getTotal(),iPage.getRecords());
-    }
+    }*/
 
     /**
      * 查询可调度入库数据
@@ -69,9 +67,12 @@ public class WarehouseInboundServiceImpl implements WarehouseInboundService {
      */
     @Override
     //@Cacheable(cacheNames = "cn.ddossec.service.impl.WarehouseInboundServiceImpl",key = "#checkTag")
-    public DataGridView queryInboundLimit(String storeTag, int page, int limit){
+    public DataGridView queryInboundLimit(String storeTag, String checkTag, int page, int limit){
         QueryWrapper<WarehouseInbound> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("store_tag",storeTag).select("id","inbound_id","reason","register_time","amount_sum","cost_price_sum","gathered_amount_sum","register","register_time");
+        Map<String,Object> map = new HashMap<>();
+        map.put("store_tag",storeTag);
+        map.put("check_tag",checkTag);
+        queryWrapper.allEq(map,false).select("id","inbound_id","reason","register","register_time","amount_sum","cost_price_sum","gathered_amount_sum");
         List<WarehouseInbound> list = warehouseInboundMapper.selectList(queryWrapper);
         ArrayList<Object> arrayList = new ArrayList<>();
         for (WarehouseInbound inbound : list) {
@@ -97,7 +98,7 @@ public class WarehouseInboundServiceImpl implements WarehouseInboundService {
     }
 
     /**
-     * 入库申请登记
+     * 入库申请登记.
      *
      * @param warehouseInbound 实例对象
      * @return 实例对象

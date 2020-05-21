@@ -23,7 +23,7 @@ public interface WarehouseInboundService {
      * @param limit
      * @return
      */
-    DataGridView queryInbound(String checkTag, int page, int limit);
+    //DataGridView queryInbound(String checkTag, int page, int limit);
 
 
     /**
@@ -34,7 +34,7 @@ public interface WarehouseInboundService {
      * @param limit 查询条数
      * @return 对象列表
      */
-    DataGridView queryInboundLimit(String storeTag, int page, int limit);
+    DataGridView queryInboundLimit(String storeTag, String checkTag, int page, int limit);
 
     /**
      * 修改入库单的库存标志

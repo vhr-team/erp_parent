@@ -1,6 +1,7 @@
 package cn.ddossec.service.impl;
 
 import cn.ddossec.common.DataGridView;
+import cn.ddossec.common.Response;
 import cn.ddossec.domain.WarehouseInbound;
 import cn.ddossec.domain.WarehouseInboundDetailed;
 import cn.ddossec.mapper.WarehouseInboundMapper;
@@ -57,6 +58,33 @@ public class WarehouseInboundServiceImpl implements WarehouseInboundService {
         return new DataGridView(iPage.getTotal(),iPage.getRecords());
     }*/
 
+
+    /**
+     * 入库登记提交（序号，入库人，详细单编号，确认入库总件数，确认入库件数，）
+     *
+     * @param warehouseInbound
+     * @return
+     */
+    @Override
+    @Transactional
+    public Response insertInboundAmount(WarehouseInbound warehouseInbound) {
+        try {
+            warehouseInboundMapper.updateById(warehouseInbound);
+            WarehouseInboundDetailed detailed = null;
+            for (int i = 0; i < warehouseInbound.getGathered_amount().length ; i++) {
+                detailed = new WarehouseInboundDetailed();
+                detailed.setId(warehouseInbound.getIds()[i]);
+                detailed.setGatheredAmount(warehouseInbound.getGathered_amount()[i]);
+                warehouseInboundDetailedServiceImpl.updateWarehouseInboundDetailedAmount(detailed);
+            }
+            return new Response(true,"登记成功!");
+        }catch (Exception e){
+            e.printStackTrace();
+            return new Response(false,"登记失败,请稍后再试!");
+        }
+    }
+
+
     /**
      * 查询可调度入库数据
      *
@@ -69,7 +97,7 @@ public class WarehouseInboundServiceImpl implements WarehouseInboundService {
     //@Cacheable(cacheNames = "cn.ddossec.service.impl.WarehouseInboundServiceImpl",key = "#checkTag")
     public DataGridView queryInboundLimit(String storeTag, int page, int limit){
         QueryWrapper<WarehouseInbound> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("store_tag",storeTag).select("id","inbound_id","reason","register","register_time","amount_sum","cost_price_sum","gathered_amount_sum");
+        queryWrapper.eq("store_tag",storeTag).select("id","inbound_id","register","register_time","amount_sum","cost_price_sum");
         List<WarehouseInbound> list = warehouseInboundMapper.selectList(queryWrapper);
         ArrayList<Object> arrayList = new ArrayList<>();
         for (WarehouseInbound inbound : list) {

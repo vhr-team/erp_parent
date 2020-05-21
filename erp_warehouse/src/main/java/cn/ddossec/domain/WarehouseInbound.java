@@ -91,6 +91,9 @@ public class WarehouseInbound implements Serializable {
 
     //入库详细表
     @TableField(exist = false)
+    private Integer[] ids;
+
+    @TableField(exist = false)
     private String[] productName;
 
     @TableField(exist = false)

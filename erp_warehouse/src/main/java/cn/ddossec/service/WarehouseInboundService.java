@@ -1,6 +1,7 @@
 package cn.ddossec.service;
 
 import cn.ddossec.common.DataGridView;
+import cn.ddossec.common.Response;
 import cn.ddossec.domain.WarehouseInbound;
 import cn.ddossec.domain.WarehouseInboundDetailed;
 import org.apache.ibatis.annotations.Param;
@@ -25,6 +26,14 @@ public interface WarehouseInboundService {
      */
     //DataGridView queryInbound(String checkTag, int page, int limit);
 
+
+    /**
+     * 入库登记提交（序号，入库人，确认入库总件数，确认入库件数，）
+     *
+     * @param warehouseInbound
+     * @return
+     */
+    Response insertInboundAmount(WarehouseInbound warehouseInbound);
 
     /**
      * 查询可调度入库数据

@@ -29,12 +29,12 @@ public interface WarehouseInboundService {
     /**
      * 查询可调度入库数据
      *
-     * @param storeTag 入库审核状态
+     * @param storeTag 库存标志
      * @param page 查询起始位置
      * @param limit 查询条数
      * @return 对象列表
      */
-    DataGridView queryInboundLimit(String storeTag, String checkTag, int page, int limit);
+    DataGridView queryInboundLimit(String storeTag, int page, int limit);
 
     /**
      * 修改入库单的库存标志
@@ -42,9 +42,8 @@ public interface WarehouseInboundService {
      * @param parent_id 序号 (父级序号 查找序号)
      * @param store_tag 库存标志 (变成2 已调度)
      * @param attemper 调度人
-     * @param check_tag 审核标志 (变成0 待入库状态)
      */
-    void updateStoreTag(Integer parent_id, String store_tag, String attemper, String check_tag);
+    void updateStoreTag(Integer parent_id, String store_tag, String attemper);
 
     /**
      * 入库申请登记

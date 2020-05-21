@@ -2,6 +2,7 @@ package cn.ddossec.service;
 
 import cn.ddossec.common.DataGridView;
 import cn.ddossec.common.Response;
+import cn.ddossec.domain.WarehouseInbound;
 import cn.ddossec.domain.WarehouseInboundDetailed;
 import java.util.List;
 
@@ -13,6 +14,14 @@ import java.util.List;
  */
 public interface WarehouseInboundDetailedService {
 
+
+    /**
+     * 入库管理提交（添加入库人，确认入库总件数，确认入库件数，）
+     *
+     * @param warehouseInbound
+     * @return
+     */
+    Response insertInboundDetailedAmount(WarehouseInbound warehouseInbound);
 
     /**
      * 入库调度提交

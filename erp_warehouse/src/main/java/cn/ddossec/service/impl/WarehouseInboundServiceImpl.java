@@ -60,19 +60,16 @@ public class WarehouseInboundServiceImpl implements WarehouseInboundService {
     /**
      * 查询可调度入库数据
      *
-     * @param checkTag 入库审核状态
+     * @param store_tag 库存标志
      * @param offset 查询起始位置
      * @param limit 查询条数
      * @return 对象列表
      */
     @Override
     //@Cacheable(cacheNames = "cn.ddossec.service.impl.WarehouseInboundServiceImpl",key = "#checkTag")
-    public DataGridView queryInboundLimit(String storeTag, String checkTag, int page, int limit){
+    public DataGridView queryInboundLimit(String storeTag, int page, int limit){
         QueryWrapper<WarehouseInbound> queryWrapper = new QueryWrapper<>();
-        Map<String,Object> map = new HashMap<>();
-        map.put("store_tag",storeTag);
-        map.put("check_tag",checkTag);
-        queryWrapper.allEq(map,false).select("id","inbound_id","register","register_time","amount_sum","cost_price_sum","gathered_amount_sum");
+        queryWrapper.eq("store_tag",storeTag).select("id","inbound_id","register","register_time","amount_sum","cost_price_sum","gathered_amount_sum");
         List<WarehouseInbound> list = warehouseInboundMapper.selectList(queryWrapper);
         ArrayList<Object> arrayList = new ArrayList<>();
         for (WarehouseInbound inbound : list) {
@@ -87,13 +84,12 @@ public class WarehouseInboundServiceImpl implements WarehouseInboundService {
      * 修改入库单的库存标志
      */
     @Override
-    public void updateStoreTag(Integer parent_id, String store_tag, String attemper, String check_tag) {
+    public void updateStoreTag(Integer parent_id, String store_tag, String attemper) {
         WarehouseInbound warehouseInbound = new WarehouseInbound();
         warehouseInbound.setId(parent_id); //序号
         warehouseInbound.setStoreTag(store_tag);//库存标志
         warehouseInbound.setAttemper(attemper); //调度人
         warehouseInbound.setAttemperTime(DateUtil.date());//调度时间
-        warehouseInbound.setCheckTag(check_tag);
         warehouseInboundMapper.updateById(warehouseInbound);
     }
 

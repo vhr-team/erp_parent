@@ -2,6 +2,7 @@ package cn.ddossec.service.impl;
 
 import cn.ddossec.common.DataGridView;
 import cn.ddossec.common.Response;
+import cn.ddossec.domain.WarehouseInbound;
 import cn.ddossec.domain.WarehouseInboundDetailed;
 import cn.ddossec.mapper.WarehouseInboundDetailedMapper;
 import cn.ddossec.service.WarehouseInboundDetailedService;
@@ -29,6 +30,11 @@ public class WarehouseInboundDetailedServiceImpl implements WarehouseInboundDeta
     @Autowired
     private WarehouseInboundService warehouseInboundServiceImpl;
 
+
+    @Override
+    public Response insertInboundDetailedAmount(WarehouseInbound warehouseInbound) {
+        return null;
+    }
 
     /**
      * 入库调度提交
@@ -73,7 +79,7 @@ public class WarehouseInboundDetailedServiceImpl implements WarehouseInboundDeta
             }
         }
         if (size == count){
-            warehouseInboundServiceImpl.updateStoreTag(parent_id,"2",attemper,"0");
+            warehouseInboundServiceImpl.updateStoreTag(parent_id,"2",attemper);
         }
     }
 

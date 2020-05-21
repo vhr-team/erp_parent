@@ -37,7 +37,7 @@ public class WarehouseInboundController {
     /**
      * 查询可调度入库数据
      *
-     * @param storeTag 入库审核状态  1
+     * @param storeTag 库存标志
      * @param page 查询起始位置
      * @param limit 查询条数
      * @return 对象列表
@@ -45,10 +45,9 @@ public class WarehouseInboundController {
     @ApiOperation(value = "查询可调度入库数据")
     @RequestMapping("queryInboundLimit")
     public DataGridView queryInboundLimit(@RequestParam("storeTag") String storeTag,
-                                          @RequestParam(value = "checkTag",required = false) String checkTag,
                                           @RequestParam("page") int page,
                                           @RequestParam("limit") int limit){
-        return warehouseInboundServiceImpl.queryInboundLimit(storeTag, checkTag, page, limit);
+        return warehouseInboundServiceImpl.queryInboundLimit(storeTag, page, limit);
     }
 
 

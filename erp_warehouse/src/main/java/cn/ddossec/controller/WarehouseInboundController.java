@@ -33,6 +33,18 @@ public class WarehouseInboundController {
 
 
 
+    /**
+     * 入库登记提交（序号，入库人，确认入库总件数，确认入库件数）
+     *
+     * @param warehouseInbound
+     * @return
+     */
+    @ApiOperation(value = "入库登记提交")
+    @RequestMapping("insertInboundAmount")
+    public Response insertInboundAmount(@RequestBody WarehouseInbound warehouseInbound){
+        return warehouseInboundServiceImpl.insertInboundAmount(warehouseInbound);
+    }
+
 
     /**
      * 查询可调度入库数据

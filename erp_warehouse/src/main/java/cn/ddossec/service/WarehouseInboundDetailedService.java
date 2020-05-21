@@ -14,14 +14,8 @@ import java.util.List;
  */
 public interface WarehouseInboundDetailedService {
 
+    void updateWarehouseInboundDetailedAmount(WarehouseInboundDetailed detailed);
 
-    /**
-     * 入库管理提交（添加入库人，确认入库总件数，确认入库件数，）
-     *
-     * @param warehouseInbound
-     * @return
-     */
-    Response insertInboundDetailedAmount(WarehouseInbound warehouseInbound);
 
     /**
      * 入库调度提交

@@ -32,8 +32,8 @@ public class WarehouseInboundDetailedServiceImpl implements WarehouseInboundDeta
 
 
     @Override
-    public Response insertInboundDetailedAmount(WarehouseInbound warehouseInbound) {
-        return null;
+    public void updateWarehouseInboundDetailedAmount(WarehouseInboundDetailed detailed) {
+        warehouseInboundDetailedMapper.updateById(detailed);
     }
 
     /**

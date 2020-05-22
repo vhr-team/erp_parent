@@ -12,14 +12,23 @@ import cn.ddossec.domain.WarehouseOutbound;
  */
 public interface WarehouseOutboundService {
 
+
+    /**
+     *出库申请单审核
+     *
+     * @param warehouseOutbound
+     * @return
+     */
+    Response warehouseOutboundDetailedAudit(WarehouseOutbound warehouseOutbound);
+    
     /**
      * 查询可调度的数据进行调度
-     * @param check_tag 审核标志
+     * @param store_tag 库存标志 1已申请 2已调度
      * @param page
      * @param limit
      * @return
      */
-    DataGridView queryWarehouseOutbound(String check_tag,Integer page,Integer limit);
+    DataGridView queryWarehouseOutbound(String store_tag,Integer page,Integer limit);
 
     /**
      * 添加出库申请单

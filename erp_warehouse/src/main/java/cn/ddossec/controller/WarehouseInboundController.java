@@ -32,6 +32,20 @@ public class WarehouseInboundController {
     private WarehouseInboundService warehouseInboundServiceImpl;
 
 
+    /**
+     *
+     * @param id 入库单 序号
+     * @param product_id 入库详细单 产品编号
+     * @param gathered_amount 入库详细单 确认入库件数
+     * @return
+     */
+    @ApiOperation(value = "入库登记审核")
+    @RequestMapping("WarehouseInboundDetailedAudit")
+    public Response WarehouseInboundDetailedAudit(@RequestParam("id") Integer id,
+                                                  @RequestParam("product_id") String[] product_id,
+                                                  @RequestParam("gathered_amount") Integer[] gathered_amount) {
+        return warehouseInboundServiceImpl.WarehouseInboundDetailedAudit(id, product_id, gathered_amount);
+    }
 
     /**
      * 入库登记提交（序号，入库人，确认入库总件数，确认入库件数）

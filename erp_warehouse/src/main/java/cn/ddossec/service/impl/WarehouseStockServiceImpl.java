@@ -30,6 +30,19 @@ public class WarehouseStockServiceImpl implements WarehouseStockService {
     private designRecordFeignService designRecordFeignService;
 
 
+    /**
+     * 根据产品编号查询出序号
+     * @param product_id 产品编号
+     * @return
+     */
+    @Override
+    public void queryId(String product_id,Integer gathered_amount) {
+        QueryWrapper<WarehouseStock> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("product_id",product_id).select("id","amount");//查询出序号和当前存储量
+        WarehouseStock warehouseStock = warehouseStockMapper.selectOne(queryWrapper);
+        warehouseStock.setAmount(warehouseStock.getAmount()+gathered_amount);
+        warehouseStockMapper.updateById(warehouseStock);
+    }
 
     /**
      * 通过产品编号获取安全库存的当前存储量和最大存储量，求出剩余存储量

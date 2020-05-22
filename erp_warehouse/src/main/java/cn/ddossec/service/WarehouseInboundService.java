@@ -17,6 +17,10 @@ import java.util.List;
  */
 public interface WarehouseInboundService {
 
+
+
+
+
     /**
      * 入库管理
      * @param checkTag 入库标志
@@ -25,6 +29,17 @@ public interface WarehouseInboundService {
      * @return
      */
     //DataGridView queryInbound(String checkTag, int page, int limit);
+
+
+    /**
+     * 入库登记提交
+     *
+     * @param id
+     * @param product_id
+     * @param gathered_amount
+     * @return
+     */
+    Response WarehouseInboundDetailedAudit(Integer id,String[] product_id,Integer[] gathered_amount);
 
 
     /**

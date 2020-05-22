@@ -2,6 +2,7 @@ package cn.ddossec.service.impl;
 
 import cn.ddossec.common.DataGridView;
 import cn.ddossec.common.Response;
+import cn.ddossec.domain.WarehouseInbound;
 import cn.ddossec.domain.WarehouseInboundDetailed;
 import cn.ddossec.mapper.WarehouseInboundDetailedMapper;
 import cn.ddossec.service.WarehouseInboundDetailedService;
@@ -29,6 +30,11 @@ public class WarehouseInboundDetailedServiceImpl implements WarehouseInboundDeta
     @Autowired
     private WarehouseInboundService warehouseInboundServiceImpl;
 
+
+    @Override
+    public void updateWarehouseInboundDetailedAmount(WarehouseInboundDetailed detailed) {
+        warehouseInboundDetailedMapper.updateById(detailed);
+    }
 
     /**
      * 入库调度提交
@@ -73,7 +79,7 @@ public class WarehouseInboundDetailedServiceImpl implements WarehouseInboundDeta
             }
         }
         if (size == count){
-            warehouseInboundServiceImpl.updateStoreTag(parent_id,"2",attemper,"0");
+            warehouseInboundServiceImpl.updateStoreTag(parent_id,"2",attemper);
         }
     }
 
@@ -88,6 +94,7 @@ public class WarehouseInboundDetailedServiceImpl implements WarehouseInboundDeta
     @Override
     public DataGridView queryInboundDetailed(Integer id, int page, int limit) {
         QueryWrapper<WarehouseInboundDetailed> queryWrapper = new QueryWrapper<>();
+                                                            //编号 父级编号 产品编号 产品名称  数量  确认入库件数  单价
         queryWrapper.eq("parent_id",id).select("id","parent_id","product_id","product_name","amount","gathered_amount","cost_price");
         Page<WarehouseInboundDetailed> pages = new Page<>(page,limit);
         IPage iPage = warehouseInboundDetailedMapper.selectPage(pages,queryWrapper);
@@ -100,9 +107,9 @@ public class WarehouseInboundDetailedServiceImpl implements WarehouseInboundDeta
      * @param warehouseInboundDetailed
      * @return
      */
-    /*@Override
+    @Override
     public void insertWarehouseDetailed(WarehouseInboundDetailed warehouseInboundDetailed) {
         warehouseInboundDetailedMapper.insert(warehouseInboundDetailed);
-    }*/
+    }
 
 }

@@ -32,21 +32,47 @@ public class WarehouseInboundController {
     private WarehouseInboundService warehouseInboundServiceImpl;
 
 
+    /**
+     *
+     * @param id 入库单 序号
+     * @param product_id 入库详细单 产品编号
+     * @param gathered_amount 入库详细单 确认入库件数
+     * @return
+     */
+    @ApiOperation(value = "入库登记审核")
+    @RequestMapping("WarehouseInboundDetailedAudit")
+    public Response WarehouseInboundDetailedAudit(@RequestParam("id") Integer id,
+                                                  @RequestParam("product_id") String[] product_id,
+                                                  @RequestParam("gathered_amount") Integer[] gathered_amount) {
+        return warehouseInboundServiceImpl.WarehouseInboundDetailedAudit(id, product_id, gathered_amount);
+    }
+
+    /**
+     * 入库登记提交（序号，入库人，确认入库总件数，确认入库件数）
+     *
+     * @param warehouseInbound
+     * @return
+     */
+    @ApiOperation(value = "入库登记提交")
+    @RequestMapping("insertInboundAmount")
+    public Response insertInboundAmount(@RequestBody WarehouseInbound warehouseInbound){
+        return warehouseInboundServiceImpl.insertInboundAmount(warehouseInbound);
+    }
 
 
     /**
      * 查询可调度入库数据
      *
-     * @param storeTag 入库审核状态  1
+     * @param storeTag 库存标志
      * @param page 查询起始位置
      * @param limit 查询条数
      * @return 对象列表
      */
     @ApiOperation(value = "查询可调度入库数据")
     @RequestMapping("queryInboundLimit")
-    public DataGridView queryInboundLimit(@Param("storeTag") String storeTag,
-                                          @Param("page") int page,
-                                          @Param("limit") int limit){
+    public DataGridView queryInboundLimit(@RequestParam("storeTag") String storeTag,
+                                          @RequestParam("page") int page,
+                                          @RequestParam("limit") int limit){
         return warehouseInboundServiceImpl.queryInboundLimit(storeTag, page, limit);
     }
 
@@ -55,7 +81,7 @@ public class WarehouseInboundController {
      * 入库申请登记
      * @return
      */
-    /*@ApiOperation(value = "入库申请登记")
+    @ApiOperation(value = "入库申请登记")
     @RequestMapping("insertWarehousing")
     public Response insertWarehousing(@RequestBody WarehouseInbound warehouseInbound){
         try{
@@ -65,7 +91,7 @@ public class WarehouseInboundController {
             e.printStackTrace();
             return new Response(false,"提交失败,请重试!");
         }
-    }*/
+    }
 
 
     /**

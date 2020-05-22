@@ -1,11 +1,14 @@
 package cn.ddossec.service.impl;
 
 import cn.ddossec.common.DataGridView;
+import cn.ddossec.common.Response;
 import cn.ddossec.domain.WarehouseInbound;
 import cn.ddossec.domain.WarehouseInboundDetailed;
+import cn.ddossec.domain.WarehouseStock;
 import cn.ddossec.mapper.WarehouseInboundMapper;
 import cn.ddossec.service.WarehouseInboundDetailedService;
 import cn.ddossec.service.WarehouseInboundService;
+import cn.ddossec.service.WarehouseStockService;
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.lang.ObjectId;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
@@ -17,9 +20,7 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 /**
  * (WarehouseInbound)表服务实现类
@@ -36,6 +37,9 @@ public class WarehouseInboundServiceImpl implements WarehouseInboundService {
     @Autowired
     private WarehouseInboundDetailedService warehouseInboundDetailedServiceImpl;
 
+    @Autowired
+    private WarehouseStockService warehouseStockServiceImpl;
+
 
     /**
      * 入库管理
@@ -45,7 +49,7 @@ public class WarehouseInboundServiceImpl implements WarehouseInboundService {
      * @param limit
      * @return
      */
-    @Override
+    /*@Override
     public DataGridView queryInbound(String checkTag, int page, int limit) {
         QueryWrapper<WarehouseInbound> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("store_tag",2).eq("check_tag",checkTag).select("id","inbound_id","reason","register_time","amount_sum","cost_price_sum");
@@ -57,12 +61,57 @@ public class WarehouseInboundServiceImpl implements WarehouseInboundService {
         IPage iPage = warehouseInboundMapper.selectPage(pages,queryWrapper);
         //总行数   总数据
         return new DataGridView(iPage.getTotal(),iPage.getRecords());
+    }*/
+
+    @Override
+    public Response WarehouseInboundDetailedAudit(Integer id,String[] product_id, Integer[] gathered_amount) {
+        try {
+            WarehouseInbound warehouseInbound = new WarehouseInbound();
+            warehouseInbound.setId(id);
+            warehouseInbound.setCheckTag("1");
+            warehouseInboundMapper.updateById(warehouseInbound);
+            for (int i = 0; i < product_id.length ; i++) {
+                warehouseStockServiceImpl.queryId(product_id[i],gathered_amount[i]);
+            }
+            return new Response(true,"审核成功!");
+        }catch (Exception e){
+            e.printStackTrace();
+            return new Response(false,"审核失败,请重试!");
+        }
     }
+
+
+    /**
+     * 入库登记提交（序号，入库人，详细单编号，确认入库总件数，确认入库件数，）
+     *
+     * @param warehouseInbound
+     * @return
+     */
+    @Override
+    @Transactional
+    public Response insertInboundAmount(WarehouseInbound warehouseInbound) {
+        try {
+            warehouseInbound.setCheckTag("0");
+            warehouseInboundMapper.updateById(warehouseInbound);
+            WarehouseInboundDetailed detailed = null;
+            for (int i = 0; i < warehouseInbound.getGathered_amount().length ; i++) {
+                detailed = new WarehouseInboundDetailed();
+                detailed.setId(warehouseInbound.getIds()[i]);
+                detailed.setGatheredAmount(warehouseInbound.getGathered_amount()[i]);
+                warehouseInboundDetailedServiceImpl.updateWarehouseInboundDetailedAmount(detailed);
+            }
+            return new Response(true,"登记成功!");
+        }catch (Exception e){
+            e.printStackTrace();
+            return new Response(false,"登记失败,请稍后再试!");
+        }
+    }
+
 
     /**
      * 查询可调度入库数据
      *
-     * @param checkTag 入库审核状态
+     * @param store_tag 库存标志
      * @param offset 查询起始位置
      * @param limit 查询条数
      * @return 对象列表
@@ -71,7 +120,7 @@ public class WarehouseInboundServiceImpl implements WarehouseInboundService {
     //@Cacheable(cacheNames = "cn.ddossec.service.impl.WarehouseInboundServiceImpl",key = "#checkTag")
     public DataGridView queryInboundLimit(String storeTag, int page, int limit){
         QueryWrapper<WarehouseInbound> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("store_tag",storeTag).select("id","inbound_id","reason","register_time","amount_sum","cost_price_sum","gathered_amount_sum","register","register_time");
+        queryWrapper.eq("store_tag",storeTag).select("id","inbound_id","reason","register","register_time","amount_sum","cost_price_sum","gathered_amount_sum");
         List<WarehouseInbound> list = warehouseInboundMapper.selectList(queryWrapper);
         ArrayList<Object> arrayList = new ArrayList<>();
         for (WarehouseInbound inbound : list) {
@@ -86,25 +135,24 @@ public class WarehouseInboundServiceImpl implements WarehouseInboundService {
      * 修改入库单的库存标志
      */
     @Override
-    public void updateStoreTag(Integer parent_id, String store_tag, String attemper, String check_tag) {
+    public void updateStoreTag(Integer parent_id, String store_tag, String attemper) {
         WarehouseInbound warehouseInbound = new WarehouseInbound();
         warehouseInbound.setId(parent_id); //序号
         warehouseInbound.setStoreTag(store_tag);//库存标志
         warehouseInbound.setAttemper(attemper); //调度人
         warehouseInbound.setAttemperTime(DateUtil.date());//调度时间
-        warehouseInbound.setCheckTag(check_tag);
         warehouseInboundMapper.updateById(warehouseInbound);
     }
 
     /**
-     * 入库申请登记
+     * 入库申请登记.
      *
      * @param warehouseInbound 实例对象
      * @return 实例对象
      */
-    /*@Transactional
+    @Transactional
     @Override
-    @CachePut(cacheNames = "cn.ddossec.service.impl.WarehouseInboundServiceImpl",key = "#warehouseInbound.checkTag")
+    //@CachePut(cacheNames = "cn.ddossec.service.impl.WarehouseInboundServiceImpl",key = "#warehouseInbound.checkTag")
     public void insertWarehousing(WarehouseInbound warehouseInbound) {
         warehouseInbound.setInboundId(ObjectId.next()); //生成随机入库单编号
         warehouseInbound.setRegisterTime(DateUtil.date()); //登记时间
@@ -123,7 +171,7 @@ public class WarehouseInboundServiceImpl implements WarehouseInboundService {
             detailed.setSubtotal(warehouseInbound.getSubtotal()[i]);
             this.warehouseInboundDetailedServiceImpl.insertWarehouseDetailed(detailed);//循环插入到入库详细单
         }
-    }*/
+    }
 
     /**
      * 入库申请审核

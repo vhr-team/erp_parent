@@ -41,28 +41,6 @@ public class WarehouseInboundServiceImpl implements WarehouseInboundService {
     private WarehouseStockService warehouseStockServiceImpl;
 
 
-    /**
-     * 入库管理
-     * @param storeTag 入库标志 0待审核 1审核通过 2审核不通过
-     *        store_tag 2已调度
-     * @param page
-     * @param limit
-     * @return
-     */
-    /*@Override
-    public DataGridView queryInbound(String checkTag, int page, int limit) {
-        QueryWrapper<WarehouseInbound> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("store_tag",2).eq("check_tag",checkTag).select("id","inbound_id","reason","register_time","amount_sum","cost_price_sum");
-        List<WarehouseInbound> list = warehouseInboundMapper.selectList(queryWrapper);
-
-
-
-        Page<WarehouseInbound> pages = new Page<>(page,limit);
-        IPage iPage = warehouseInboundMapper.selectPage(pages,queryWrapper);
-        //总行数   总数据
-        return new DataGridView(iPage.getTotal(),iPage.getRecords());
-    }*/
-
 
     /**
      * 入库登记审核
@@ -92,7 +70,7 @@ public class WarehouseInboundServiceImpl implements WarehouseInboundService {
 
 
     /**
-     * 入库登记提交（序号，入库人，详细单编号，确认入库件数，）
+     * 入库登记提交（序号，详细单编号，确认入库件数）
      *
      * @param warehouseInbound
      * @return

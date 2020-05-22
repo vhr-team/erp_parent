@@ -1,6 +1,8 @@
 package cn.ddossec.service;
 
 import cn.ddossec.common.DataGridView;
+import cn.ddossec.common.Response;
+import cn.ddossec.domain.WarehouseOutbound;
 import cn.ddossec.domain.WarehouseOutboundDetailed;
 import java.util.List;
 
@@ -12,9 +14,18 @@ import java.util.List;
  */
 public interface WarehouseOutboundDetailedService {
 
+
     /**
+     * 修改出库标志
      *
-     * @param id 出库详细单序号（用于条件查询出库详细单）
+     * @param detailed
+     */
+    void updateDetailedPayTag(WarehouseOutboundDetailed detailed);
+
+    /**
+     *查询出库详细单
+     *
+     * @param id
      * @return
      */
     DataGridView queryWarehouseOutboundDetailed(Integer page,Integer limit,Integer id);

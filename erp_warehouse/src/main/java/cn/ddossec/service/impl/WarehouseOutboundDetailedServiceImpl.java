@@ -1,10 +1,14 @@
 package cn.ddossec.service.impl;
 
 import cn.ddossec.common.DataGridView;
+import cn.ddossec.common.Response;
+import cn.ddossec.domain.WarehouseOutbound;
 import cn.ddossec.domain.WarehouseOutboundDetailed;
 import cn.ddossec.mapper.WarehouseOutboundDetailedMapper;
 import cn.ddossec.service.WarehouseOutboundDetailedService;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,12 +27,30 @@ public class WarehouseOutboundDetailedServiceImpl implements WarehouseOutboundDe
     private WarehouseOutboundDetailedMapper warehouseOutboundDetailedMapper;
 
 
+
+    /**
+     * 修改出库标志
+     *
+     * @param detailed
+     */
+    @Override
+    public void updateDetailedPayTag(WarehouseOutboundDetailed detailed) {
+        warehouseOutboundDetailedMapper.updateById(detailed);
+    }
+
+    /**
+     *查询出库详细单
+     *
+     * @param id
+     * @return
+     */
     @Override
     public DataGridView queryWarehouseOutboundDetailed(Integer page,Integer limit,Integer id) {
         QueryWrapper<WarehouseOutboundDetailed> queryWrapper = new QueryWrapper<>();
-        queryWrapper.select("id","product_name","product_id","amount").eq("parent_id",id);
-
-        return null;
+        queryWrapper.eq("parent_id",id).select("id","product_name","product_id","amount","amount_unit","cost_price","subtotal");
+        Page<WarehouseOutboundDetailed> pages = new Page<>();
+        IPage iPage = warehouseOutboundDetailedMapper.selectPage(pages,queryWrapper);
+        return new DataGridView(iPage.getTotal(),iPage.getRecords());
     }
 
 

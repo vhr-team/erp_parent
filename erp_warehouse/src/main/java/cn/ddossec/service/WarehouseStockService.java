@@ -15,6 +15,12 @@ import java.util.List;
  */
 public interface WarehouseStockService {
 
+    /**
+     * 根据产品编号查询出序号
+     * @param product_id 产品编号
+     * @return
+     */
+    void queryId(String product_id,Integer gathered_amount);
 
     /**
      * 通过产品编号获取安全库存的当前存储量和最大存储量，求出剩余存储量

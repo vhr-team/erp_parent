@@ -72,6 +72,7 @@ public class design_recordServiceImpl implements design_recordService {
     public PageResult findPage(Integer page, Integer pageSize, product_design_record record) {
         PageHelper.startPage(page, pageSize);
         product_design_recordQuery query = new product_design_recordQuery();
+        query.setOrderByClause("id desc");
         product_design_recordQuery.Criteria criteria = query.createCriteria();
         criteria.andDeleteTagEqualTo("未回收");
         if (record != null) {
@@ -146,6 +147,7 @@ public class design_recordServiceImpl implements design_recordService {
     public PageResult findPagerecycle(Integer page, Integer pageSize, product_design_record record) {
         PageHelper.startPage(page, pageSize);
         product_design_recordQuery query = new product_design_recordQuery();
+        query.setOrderByClause("id desc");
         product_design_recordQuery.Criteria criteria = query.createCriteria();
         criteria.andDeleteTagEqualTo("已回收");
         if (record != null) {
@@ -186,6 +188,7 @@ public class design_recordServiceImpl implements design_recordService {
     public PageResult findPagecheck(Integer page, Integer pageSize, product_design_record record) {
         PageHelper.startPage(page, pageSize);
         product_design_recordQuery query = new product_design_recordQuery();
+        query.setOrderByClause("id desc");
         product_design_recordQuery.Criteria criteria = query.createCriteria();
         if (record != null) {
             if (record.getProductName() != null) {
@@ -252,6 +255,7 @@ public class design_recordServiceImpl implements design_recordService {
     @Override
     public List<product_design_record> selectprocess(product_design_record record) {
         product_design_recordQuery query = new product_design_recordQuery();
+        query.setOrderByClause("id desc");
         product_design_recordQuery.Criteria criteria = query.createCriteria();
         if(record!=null){
             if(record.getRegisterTime()!=null){

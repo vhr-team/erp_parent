@@ -120,13 +120,8 @@ public class WarehouseInboundServiceImpl implements WarehouseInboundService {
     //@Cacheable(cacheNames = "cn.ddossec.service.impl.WarehouseInboundServiceImpl",key = "#checkTag")
     public DataGridView queryInboundLimit(String storeTag, int page, int limit){
         QueryWrapper<WarehouseInbound> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("store_tag",storeTag).select("id","inbound_id","register","register_time","amount_sum","cost_price_sum");
+        queryWrapper.eq("store_tag",storeTag).select("id","inbound_id","reason","register","register_time","amount_sum","cost_price_sum","gathered_amount_sum");
         List<WarehouseInbound> list = warehouseInboundMapper.selectList(queryWrapper);
-        if (list == null){
-            DataGridView dataGridView = new DataGridView();
-            dataGridView.setMsg("没有待入库的数据!");
-            return dataGridView;
-        }
         ArrayList<Object> arrayList = new ArrayList<>();
         for (WarehouseInbound inbound : list) {
             if (inbound.getAmountSum()>inbound.getGatheredAmountSum()){

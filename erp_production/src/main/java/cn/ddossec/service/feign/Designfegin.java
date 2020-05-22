@@ -1,9 +1,8 @@
 package cn.ddossec.service.feign;
 
-import cn.ddossec.PageResult;
+import cn.ddossec.entity.PageResult;
 import cn.ddossec.domain.pojo.product_design_record;
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -34,6 +33,8 @@ public interface Designfegin {
      */
     @RequestMapping("/design_record/findPage")
     PageResult findPage(@RequestParam Integer page, @RequestParam Integer pageSize);
+
+
 
 
 

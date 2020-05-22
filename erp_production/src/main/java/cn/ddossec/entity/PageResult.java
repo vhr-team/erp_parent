@@ -1,4 +1,4 @@
-package cn.ddossec;
+package cn.ddossec.entity;
 
 import lombok.Data;
 

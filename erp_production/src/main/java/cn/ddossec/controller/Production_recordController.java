@@ -1,10 +1,9 @@
 package cn.ddossec.controller;
 
-import cn.ddossec.PageResult;
+import cn.ddossec.entity.PageResult;
 import cn.ddossec.domain.pojo.product_design_record;
 import cn.ddossec.service.feign.Designfegin;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;

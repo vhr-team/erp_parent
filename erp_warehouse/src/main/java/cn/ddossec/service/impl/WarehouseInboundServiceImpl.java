@@ -65,7 +65,7 @@ public class WarehouseInboundServiceImpl implements WarehouseInboundService {
 
 
     /**
-     * 入库登记提交
+     * 入库登记审核
      *
      * @param id
      * @param product_id

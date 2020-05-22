@@ -31,6 +31,7 @@ public class desgin_checkServiceImpl implements desgin_checkService {
     @Override
     public List<product_check> selectAll(String productId) {
         product_checkQuery query = new product_checkQuery();
+        query.setOrderByClause("id desc");
         product_checkQuery.Criteria criteria = query.createCriteria();
         criteria.andProductIdEqualTo(productId);
         List<cn.ddosec.design.pojo.product_check> product_checks = mapper.selectByExample(query);

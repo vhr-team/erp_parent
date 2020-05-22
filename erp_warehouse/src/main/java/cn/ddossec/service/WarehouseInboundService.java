@@ -17,6 +17,10 @@ import java.util.List;
  */
 public interface WarehouseInboundService {
 
+
+
+
+
     /**
      * 入库管理
      * @param checkTag 入库标志
@@ -28,7 +32,18 @@ public interface WarehouseInboundService {
 
 
     /**
-     * 入库登记提交（序号，入库人，确认入库总件数，确认入库件数，）
+     * 入库登记提交
+     *
+     * @param id
+     * @param product_id
+     * @param gathered_amount
+     * @return
+     */
+    Response WarehouseInboundDetailedAudit(Integer id,Integer gathered_amount_sum,String[] product_id,Integer[] gathered_amount);
+
+
+    /**
+     * 入库登记提交（序号，入库人，确认入库件数，）
      *
      * @param warehouseInbound
      * @return
@@ -43,7 +58,7 @@ public interface WarehouseInboundService {
      * @param limit 查询条数
      * @return 对象列表
      */
-    DataGridView queryInboundLimit(String storeTag, int page, int limit);
+    DataGridView queryInboundLimit(String storeTag, String checkTag, int page, int limit);
 
     /**
      * 修改入库单的库存标志

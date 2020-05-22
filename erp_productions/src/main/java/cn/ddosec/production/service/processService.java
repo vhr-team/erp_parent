@@ -16,4 +16,5 @@ public interface processService {
     List<products_process_design> selectcheckAll(products_process_design design);
     void updatecheck(products_process_design design);
 
+    List<products_process_design> selectprocess(products_process_design design);
 }

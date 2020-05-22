@@ -27,6 +27,7 @@ public class processServiceImpl implements processService {
     @Override
     public List<products_process_design> selectAll(products_process_design design) {
         products_process_designQuery query = new products_process_designQuery();
+        query.setOrderByClause("id desc");
         products_process_designQuery.Criteria criteria = query.createCriteria();
         if(design!=null){
             if (design.getProductName()!=null){
@@ -43,6 +44,7 @@ public class processServiceImpl implements processService {
     @Override
     public List<products_process_design> selectcheckAll(products_process_design design) {
         products_process_designQuery query = new products_process_designQuery();
+        query.setOrderByClause("id desc");
         products_process_designQuery.Criteria criteria = query.createCriteria();
         if(design!=null){
             if (design.getProductName()!=null){
@@ -59,5 +61,18 @@ public class processServiceImpl implements processService {
         products_process_designQuery.Criteria criteria = query.createCriteria();
         criteria.andProcessIdEqualTo(design.getProcessId());
         mapper.updateByExampleSelective(design,query);
+    }
+
+    @Override
+    public List<products_process_design> selectprocess(products_process_design design) {
+        products_process_designQuery query = new products_process_designQuery();
+        query.setOrderByClause("id desc");
+        if(design!=null){
+            products_process_designQuery.Criteria criteria = query.createCriteria();
+            if(design.getDesdate()!=null){
+                criteria.andDesdateLike("%"+design.getDesdate()+"%");
+            }
+        }
+        return mapper.selectByExample(query);
     }
 }

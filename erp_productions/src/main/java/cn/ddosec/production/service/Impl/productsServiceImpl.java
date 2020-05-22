@@ -27,6 +27,7 @@ public class productsServiceImpl implements productsService {
     @Override
     public List<products_process_design_sheet> selectAllSheet(products_process_design_sheet sheet) {
         products_process_design_sheetQuery query = new products_process_design_sheetQuery();
+        query.setOrderByClause("id desc");
         products_process_design_sheetQuery.Criteria criteria = query.createCriteria();
         criteria.andProcessIdEqualTo(sheet.getProcessId());
         List<products_process_design_sheet> products_process_design_sheets = mapper.selectByExample(query);
@@ -44,6 +45,7 @@ public class productsServiceImpl implements productsService {
     @Override
     public List<products_process_design_sheet> selectprocessById(String processId) {
         products_process_design_sheetQuery query = new products_process_design_sheetQuery();
+        query.setOrderByClause("id desc");
         products_process_design_sheetQuery.Criteria criteria = query.createCriteria();
         criteria.andProcessIdEqualTo(processId);
         List<products_process_design_sheet> products_process_design_sheets = mapper.selectByExample(query);

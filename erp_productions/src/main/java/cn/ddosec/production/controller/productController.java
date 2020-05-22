@@ -218,4 +218,8 @@ public class productController {
         return checkservice.selectcheck(check);
     }
 
+    @RequestMapping("/selectprocess")
+    public List<products_process_design> selectprocess(@RequestBody products_process_design design){
+        return processService.selectprocess(design);
+    }
 }

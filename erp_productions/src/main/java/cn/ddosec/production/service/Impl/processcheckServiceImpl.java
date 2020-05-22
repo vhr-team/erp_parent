@@ -32,6 +32,7 @@ public class processcheckServiceImpl implements processcheckService {
     @Override
     public List<products_process_check> selectcheck(products_process_check check) {
         products_process_checkQuery query = new products_process_checkQuery();
+        query.setOrderByClause("id desc");
         products_process_checkQuery.Criteria criteria = query.createCriteria();
         criteria.andProcessIdEqualTo(check.getProcessId());
         return mapper.selectByExample(query);

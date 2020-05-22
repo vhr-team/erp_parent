@@ -63,11 +63,21 @@ public class WarehouseInboundServiceImpl implements WarehouseInboundService {
         return new DataGridView(iPage.getTotal(),iPage.getRecords());
     }*/
 
+
+    /**
+     * 入库登记审核
+     *
+     * @param id
+     * @param product_id
+     * @param gathered_amount
+     * @return
+     */
     @Override
-    public Response WarehouseInboundDetailedAudit(Integer id,String[] product_id, Integer[] gathered_amount) {
+    public Response WarehouseInboundDetailedAudit(Integer id,Integer gathered_amount_sum,String[] product_id, Integer[] gathered_amount) {
         try {
             WarehouseInbound warehouseInbound = new WarehouseInbound();
             warehouseInbound.setId(id);
+            warehouseInbound.setGatheredAmountSum(gathered_amount_sum);
             warehouseInbound.setCheckTag("1");
             warehouseInboundMapper.updateById(warehouseInbound);
             for (int i = 0; i < product_id.length ; i++) {
@@ -82,7 +92,7 @@ public class WarehouseInboundServiceImpl implements WarehouseInboundService {
 
 
     /**
-     * 入库登记提交（序号，入库人，详细单编号，确认入库总件数，确认入库件数，）
+     * 入库登记提交（序号，入库人，详细单编号，确认入库件数，）
      *
      * @param warehouseInbound
      * @return
@@ -94,10 +104,10 @@ public class WarehouseInboundServiceImpl implements WarehouseInboundService {
             warehouseInbound.setCheckTag("0");
             warehouseInboundMapper.updateById(warehouseInbound);
             WarehouseInboundDetailed detailed = null;
-            for (int i = 0; i < warehouseInbound.getGathered_amount().length ; i++) {
+            for (int i = 0; i < warehouseInbound.getGatheredAmount().length ; i++) {
                 detailed = new WarehouseInboundDetailed();
                 detailed.setId(warehouseInbound.getIds()[i]);
-                detailed.setGatheredAmount(warehouseInbound.getGathered_amount()[i]);
+                detailed.setGatheredAmount(warehouseInbound.getGatheredAmount()[i]);
                 warehouseInboundDetailedServiceImpl.updateWarehouseInboundDetailedAmount(detailed);
             }
             return new Response(true,"登记成功!");
@@ -118,17 +128,23 @@ public class WarehouseInboundServiceImpl implements WarehouseInboundService {
      */
     @Override
     //@Cacheable(cacheNames = "cn.ddossec.service.impl.WarehouseInboundServiceImpl",key = "#checkTag")
-    public DataGridView queryInboundLimit(String storeTag, int page, int limit){
+    public DataGridView queryInboundLimit(String storeTag, String checkTag, int page, int limit){
         QueryWrapper<WarehouseInbound> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("store_tag",storeTag).select("id","inbound_id","reason","register","register_time","amount_sum","cost_price_sum","gathered_amount_sum");
+        Map<String,Object> map = new HashMap<>();
+        map.put("store_tag",storeTag);
+        map.put("check_tag",checkTag);
+        queryWrapper.allEq(map).select("id","inbound_id","reason","register","register_time","amount_sum","cost_price_sum","gathered_amount_sum");
+        Page<WarehouseInbound> pages = new Page<>(page,limit);
+        IPage iPage = warehouseInboundMapper.selectPage(pages,queryWrapper);
+        /*queryWrapper.eq("store_tag",storeTag).select("id","inbound_id","reason","register","register_time","amount_sum","cost_price_sum","gathered_amount_sum");
         List<WarehouseInbound> list = warehouseInboundMapper.selectList(queryWrapper);
         ArrayList<Object> arrayList = new ArrayList<>();
         for (WarehouseInbound inbound : list) {
             if (inbound.getAmountSum()>inbound.getGatheredAmountSum()){
                 arrayList.add(inbound);
             }
-        }
-        return new DataGridView(Long.valueOf(arrayList.size()),arrayList);
+        }*/
+        return new DataGridView(iPage.getTotal(),iPage.getRecords());
     }
 
     /**

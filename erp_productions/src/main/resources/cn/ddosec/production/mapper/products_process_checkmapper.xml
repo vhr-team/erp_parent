@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.ddosec.production.mapper.products_process_checkmapper" >
+  <resultMap id="BaseResultMap" type="cn.ddosec.production.pojo.products_process_check" >
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <result column="process_id" property="processId" jdbcType="VARCHAR" />
+    <result column="process_name" property="processName" jdbcType="VARCHAR" />
+    <result column="process_check" property="processCheck" jdbcType="VARCHAR" />
+    <result column="process_check_remark" property="processCheckRemark" jdbcType="VARCHAR" />
+    <result column="process_check_person" property="processCheckPerson" jdbcType="VARCHAR" />
+    <result column="process_check_date" property="processCheckDate" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    <if test="fields == null" >
+      ID, process_id, process_name, process_check, process_check_remark, process_check_person, 
+      process_check_date
+    </if>
+    <if test="fields != null" >
+      ${fields}
+    </if>
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.ddosec.production.pojo.products_process_checkQuery" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from products_process_check
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    ID,process_id,process_name,process_check,process_check_remark,process_check_person,process_check_date
+    from products_process_check
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from products_process_check
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="cn.ddosec.production.pojo.products_process_checkQuery" >
+    delete from products_process_check
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="cn.ddosec.production.pojo.products_process_check" >
+    insert into products_process_check (ID, process_id, process_name, 
+      process_check, process_check_remark, process_check_person, 
+      process_check_date)
+    values (#{id,jdbcType=INTEGER}, #{processId,jdbcType=VARCHAR}, #{processName,jdbcType=VARCHAR}, 
+      #{processCheck,jdbcType=VARCHAR}, #{processCheckRemark,jdbcType=VARCHAR}, #{processCheckPerson,jdbcType=VARCHAR}, 
+      #{processCheckDate,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.ddosec.production.pojo.products_process_check" >
+    insert into products_process_check
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="processId != null" >
+        process_id,
+      </if>
+      <if test="processName != null" >
+        process_name,
+      </if>
+      <if test="processCheck != null" >
+        process_check,
+      </if>
+      <if test="processCheckRemark != null" >
+        process_check_remark,
+      </if>
+      <if test="processCheckPerson != null" >
+        process_check_person,
+      </if>
+      <if test="processCheckDate != null" >
+        process_check_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="processId != null" >
+        #{processId,jdbcType=VARCHAR},
+      </if>
+      <if test="processName != null" >
+        #{processName,jdbcType=VARCHAR},
+      </if>
+      <if test="processCheck != null" >
+        #{processCheck,jdbcType=VARCHAR},
+      </if>
+      <if test="processCheckRemark != null" >
+        #{processCheckRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="processCheckPerson != null" >
+        #{processCheckPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="processCheckDate != null" >
+        #{processCheckDate,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="cn.ddosec.production.pojo.products_process_checkQuery" resultType="java.lang.Integer" >
+    select count(*) from products_process_check
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update products_process_check
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.processId != null" >
+        process_id = #{record.processId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.processName != null" >
+        process_name = #{record.processName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.processCheck != null" >
+        process_check = #{record.processCheck,jdbcType=VARCHAR},
+      </if>
+      <if test="record.processCheckRemark != null" >
+        process_check_remark = #{record.processCheckRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.processCheckPerson != null" >
+        process_check_person = #{record.processCheckPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="record.processCheckDate != null" >
+        process_check_date = #{record.processCheckDate,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update products_process_check
+    set ID = #{record.id,jdbcType=INTEGER},
+      process_id = #{record.processId,jdbcType=VARCHAR},
+      process_name = #{record.processName,jdbcType=VARCHAR},
+      process_check = #{record.processCheck,jdbcType=VARCHAR},
+      process_check_remark = #{record.processCheckRemark,jdbcType=VARCHAR},
+      process_check_person = #{record.processCheckPerson,jdbcType=VARCHAR},
+      process_check_date = #{record.processCheckDate,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.ddosec.production.pojo.products_process_check" >
+    update products_process_check
+    <set >
+      <if test="processId != null" >
+        process_id = #{processId,jdbcType=VARCHAR},
+      </if>
+      <if test="processName != null" >
+        process_name = #{processName,jdbcType=VARCHAR},
+      </if>
+      <if test="processCheck != null" >
+        process_check = #{processCheck,jdbcType=VARCHAR},
+      </if>
+      <if test="processCheckRemark != null" >
+        process_check_remark = #{processCheckRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="processCheckPerson != null" >
+        process_check_person = #{processCheckPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="processCheckDate != null" >
+        process_check_date = #{processCheckDate,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.ddosec.production.pojo.products_process_check" >
+    update products_process_check
+    set process_id = #{processId,jdbcType=VARCHAR},
+      process_name = #{processName,jdbcType=VARCHAR},
+      process_check = #{processCheck,jdbcType=VARCHAR},
+      process_check_remark = #{processCheckRemark,jdbcType=VARCHAR},
+      process_check_person = #{processCheckPerson,jdbcType=VARCHAR},
+      process_check_date = #{processCheckDate,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -282,5 +282,23 @@ public class design_recordServiceImpl implements design_recordService {
         mapper.updateByExampleSelective(record,query);
     }
 
+    @Override
+    public List<product_design_record> selectplancheck() {
+        product_design_recordQuery query = new product_design_recordQuery();
+        product_design_recordQuery.Criteria criteria = query.createCriteria();
+        criteria.andCheckTagEqualTo("审核通过");
+        criteria.andPlanCheckstatusEqualTo("未完成");
+        return mapper.selectByExample(query);
+    }
+
+    @Override
+    public void updateplancheck(product_design_record record) {
+        product_design_recordQuery query = new product_design_recordQuery();
+        product_design_recordQuery.Criteria criteria = query.createCriteria();
+        criteria.andProductIdEqualTo(record.getProductId());
+        mapper.updateByExampleSelective(record,query);
+
+    }
+
 
 }

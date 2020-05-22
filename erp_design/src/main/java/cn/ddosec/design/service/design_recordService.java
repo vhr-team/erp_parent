@@ -87,4 +87,9 @@ public interface design_recordService {
     List<product_design_record> selectprocesss();
     /*工序设计完成*/
     void updateprocess(product_design_record record);
+
+    /*查询档案审核通过且生产审核待审核的档案*/
+    List<product_design_record> selectplancheck();
+
+    void updateplancheck(product_design_record record);
 }

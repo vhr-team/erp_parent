@@ -15,4 +15,8 @@ public interface productsService  {
     List<products_process_design_sheet> selectAllSheet(products_process_design_sheet sheet);
 
     void updatecheck(products_process_design_sheet sheet);
+
+    List<products_process_design_sheet> selectprocessById(String processId);
+
+    void deleteByprocessId(String processId);
 }

@@ -14,6 +14,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 @EnableDiscoveryClient//服务发现
 @EnableFeignClients//feign调用
 @MapperScan("cn.ddosec.production.mapper")
+
 public class ProductionsApp {
     public static void main(String[] args) {
         SpringApplication.run(ProductionsApp.class,args);

@@ -1733,6 +1733,76 @@ public class product_design_recordQuery {
             addCriterion("procss_status not between", value1, value2, "procssStatus");
             return (Criteria) this;
         }
+
+        public Criteria andPlanCheckstatusIsNull() {
+            addCriterion("plan_checkstatus is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPlanCheckstatusIsNotNull() {
+            addCriterion("plan_checkstatus is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPlanCheckstatusEqualTo(String value) {
+            addCriterion("plan_checkstatus =", value, "planCheckstatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andPlanCheckstatusNotEqualTo(String value) {
+            addCriterion("plan_checkstatus <>", value, "planCheckstatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andPlanCheckstatusGreaterThan(String value) {
+            addCriterion("plan_checkstatus >", value, "planCheckstatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andPlanCheckstatusGreaterThanOrEqualTo(String value) {
+            addCriterion("plan_checkstatus >=", value, "planCheckstatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andPlanCheckstatusLessThan(String value) {
+            addCriterion("plan_checkstatus <", value, "planCheckstatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andPlanCheckstatusLessThanOrEqualTo(String value) {
+            addCriterion("plan_checkstatus <=", value, "planCheckstatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andPlanCheckstatusLike(String value) {
+            addCriterion("plan_checkstatus like", value, "planCheckstatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andPlanCheckstatusNotLike(String value) {
+            addCriterion("plan_checkstatus not like", value, "planCheckstatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andPlanCheckstatusIn(List<String> values) {
+            addCriterion("plan_checkstatus in", values, "planCheckstatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andPlanCheckstatusNotIn(List<String> values) {
+            addCriterion("plan_checkstatus not in", values, "planCheckstatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andPlanCheckstatusBetween(String value1, String value2) {
+            addCriterion("plan_checkstatus between", value1, value2, "planCheckstatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andPlanCheckstatusNotBetween(String value1, String value2) {
+            addCriterion("plan_checkstatus not between", value1, value2, "planCheckstatus");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

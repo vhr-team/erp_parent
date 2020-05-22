@@ -233,4 +233,23 @@ public class design_recordController {
     public List<product_check> selectcheckremarkAll(String productId){
         return desgin_checkservice.selectAll(productId);
     }
+
+
+    /*查询档案审核通过且生产审核待审核的档案*/
+    @RequestMapping("/selectplancheck")
+    List<product_design_record> selectplancheck(){
+        return service.selectplancheck();
+    }
+
+    /*计划生产状态*/
+    public Response updateplancheck(@RequestBody product_design_record record){
+        try {
+            service.updateplancheck(record);
+            return new Response(true, "成功");
+        }catch (Exception e){
+            e.printStackTrace();
+            return new Response(false, "失败");
+        }
+
+    }
 }

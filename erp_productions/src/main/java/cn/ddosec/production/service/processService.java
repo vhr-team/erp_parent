@@ -13,6 +13,7 @@ public interface processService {
     void addprocess(products_process_design design);
 
     List<products_process_design> selectAll(products_process_design design);
-
+    List<products_process_design> selectcheckAll(products_process_design design);
     void updatecheck(products_process_design design);
+
 }

@@ -35,10 +35,10 @@ public class WarehouseInboundServiceImpl implements WarehouseInboundService {
     private WarehouseInboundMapper warehouseInboundMapper;
 
     @Autowired
-    private WarehouseInboundDetailedService warehouseInboundDetailedServiceImpl;
+    private WarehouseInboundDetailedService warehouseInboundDetailedService;
 
     @Autowired
-    private WarehouseStockService warehouseStockServiceImpl;
+    private WarehouseStockService warehouseStockService;
 
 
 
@@ -59,7 +59,7 @@ public class WarehouseInboundServiceImpl implements WarehouseInboundService {
             warehouseInbound.setCheckTag("1");
             warehouseInboundMapper.updateById(warehouseInbound);
             for (int i = 0; i < product_id.length ; i++) {
-                warehouseStockServiceImpl.queryId(product_id[i],gathered_amount[i]);
+                warehouseStockService.queryId(product_id[i],gathered_amount[i]);
             }
             return new Response(true,"审核成功!");
         }catch (Exception e){
@@ -86,7 +86,7 @@ public class WarehouseInboundServiceImpl implements WarehouseInboundService {
                 detailed = new WarehouseInboundDetailed();
                 detailed.setId(warehouseInbound.getIds()[i]);
                 detailed.setGatheredAmount(warehouseInbound.getGatheredAmount()[i]);
-                warehouseInboundDetailedServiceImpl.updateWarehouseInboundDetailedAmount(detailed);
+                warehouseInboundDetailedService.updateWarehouseInboundDetailedAmount(detailed);
             }
             return new Response(true,"登记成功!");
         }catch (Exception e){
@@ -163,7 +163,7 @@ public class WarehouseInboundServiceImpl implements WarehouseInboundService {
             detailed.setAmountUnit(warehouseInbound.getAmountUnit()[i]);
             detailed.setCostPrice(warehouseInbound.getCostPrice()[i]);
             detailed.setSubtotal(warehouseInbound.getSubtotal()[i]);
-            this.warehouseInboundDetailedServiceImpl.insertWarehouseDetailed(detailed);//循环插入到入库详细单
+            this.warehouseInboundDetailedService.insertWarehouseDetailed(detailed);//循环插入到入库详细单
         }
     }
 

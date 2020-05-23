@@ -31,7 +31,6 @@ public class WarehouseInboundDetailedServiceImpl implements WarehouseInboundDeta
     private WarehouseInboundService warehouseInboundServiceImpl;
 
 
-    @Override
     public void updateWarehouseInboundDetailedAmount(WarehouseInboundDetailed detailed) {
         warehouseInboundDetailedMapper.updateById(detailed);
     }
@@ -41,7 +40,7 @@ public class WarehouseInboundDetailedServiceImpl implements WarehouseInboundDeta
      *
      * @param id 入库详细单序号
      * @param parent_id 父级序号
-     * @param gatherTag 库存标志 1为已登记 2为已调度
+     * @param gatherTag 入库标志 1为已登记 2为已调度
      * @param attemper 调度人
      * @return
      */
@@ -107,7 +106,6 @@ public class WarehouseInboundDetailedServiceImpl implements WarehouseInboundDeta
      * @param warehouseInboundDetailed
      * @return
      */
-    @Override
     public void insertWarehouseDetailed(WarehouseInboundDetailed warehouseInboundDetailed) {
         warehouseInboundDetailedMapper.insert(warehouseInboundDetailed);
     }

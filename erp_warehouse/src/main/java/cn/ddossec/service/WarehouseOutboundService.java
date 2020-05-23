@@ -12,6 +12,10 @@ import cn.ddossec.domain.WarehouseOutbound;
  */
 public interface WarehouseOutboundService {
 
+    /**
+     * 修改库存标志
+     */
+    void updateStoreTag(Integer parent_id,String store_tag,String attemper);
 
     /**
      *出库申请单审核

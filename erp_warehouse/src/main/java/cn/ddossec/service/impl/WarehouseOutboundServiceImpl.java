@@ -40,6 +40,18 @@ public class WarehouseOutboundServiceImpl implements WarehouseOutboundService {
 
 
     /**
+     *修改库存标志
+     */
+    public void updateStoreTag(Integer parent_id,String store_tag,String attemper) {
+        WarehouseOutbound warehouseOutbound = new WarehouseOutbound();
+        warehouseOutbound.setId(parent_id); //序号
+        warehouseOutbound.setStoreTag(store_tag); //库存标志
+        warehouseOutbound.setAttemper(attemper); //调度人
+        warehouseOutbound.setAttemperTime(DateUtil.date()); //调度时间
+        warehouseOutboundMapper.updateById(warehouseOutbound);
+    }
+
+    /**
      * 出库申请单审核
      *
      * @param warehouseOutbound

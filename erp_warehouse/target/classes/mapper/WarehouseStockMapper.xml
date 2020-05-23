@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.ddossec.mapper.WarehouseStockMapper">
+
+    <resultMap type="WarehouseStock" id="WarehouseStockMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="stockId" column="stock_id" jdbcType="VARCHAR"/>
+        <result property="productId" column="product_id" jdbcType="VARCHAR"/>
+        <result property="productName" column="product_name" jdbcType="VARCHAR"/>
+        <result property="firstKindId" column="first_kind_id" jdbcType="VARCHAR"/>
+        <result property="firstKindName" column="first_kind_name" jdbcType="VARCHAR"/>
+        <result property="secondKindId" column="second_kind_id" jdbcType="VARCHAR"/>
+        <result property="secondKindName" column="second_kind_name" jdbcType="VARCHAR"/>
+        <result property="minAmount" column="min_amount" jdbcType="INTEGER"/>
+        <result property="maxAmount" column="max_amount" jdbcType="INTEGER"/>
+        <result property="maxCapacityAmount" column="max_capacity_amount" jdbcType="INTEGER"/>
+        <result property="amount" column="amount" jdbcType="INTEGER"/>
+        <result property="config" column="config" jdbcType="VARCHAR"/>
+        <result property="register" column="register" jdbcType="VARCHAR"/>
+        <result property="registerTime" column="register_time" jdbcType="TIMESTAMP"/>
+        <result property="checker" column="checker" jdbcType="VARCHAR"/>
+        <result property="checkTime" column="check_time" jdbcType="TIMESTAMP"/>
+        <result property="checkTag" column="check_tag" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!--通过序号修改安全库存配置-->
+    <update id="updateAmount">
+        update erp.Warehouse_stock
+        <set>
+            <if test="minAmount != null">
+                min_amount = #{minAmount},
+            </if>
+            <if test="maxAmount != null">
+                max_amount = #{maxAmount},
+            </if>
+            <if test="maxCapacityAmount != null">
+                max_capacity_amount = #{maxCapacityAmount},
+            </if>
+        </set>
+        where id = #{Id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteByProductId">
+        delete from erp.Warehouse_stock where id = #{id}
+    </delete>
+
+</mapper>

@@ -1,0 +1,16 @@
+ogging:
+  level:
+    cn.ddoesc.sale: debug
+server:
+  port: 8007
+
+spring:
+  application:
+    name: erp_sale
+
+  # 数据源配置
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://xhh.ddos-sec.cn:3306/erp?useUnicode=true&characterEncoding=utf8&serverTimezone=GMT%2B8&useSSL=false
+    username: root
+    password: 1234

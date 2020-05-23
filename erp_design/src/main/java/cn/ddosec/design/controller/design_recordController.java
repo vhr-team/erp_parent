@@ -3,8 +3,11 @@ package cn.ddosec.design.controller;
 
 import cn.ddosec.design.entity.PageResult;
 import cn.ddosec.design.entity.Response;
+import cn.ddosec.design.entity.productcheck;
+import cn.ddosec.design.pojo.product_check;
 import cn.ddosec.design.pojo.product_design_record;
 import cn.ddosec.design.pojo.product_material_archives;
+import cn.ddosec.design.service.desgin_checkService;
 import cn.ddosec.design.service.design_recordService;
 import cn.ddosec.design.service.material_archivesService;
 import io.swagger.annotations.ApiOperation;
@@ -232,7 +235,7 @@ public class design_recordController {
     }
 
 
-    /*查询档案审核通过且生产审核待审核的档案*/
+    /*查询档案审核通过且生产审核待完成的档案*/
     @RequestMapping("/selectplancheck")
     List<product_design_record> selectplancheck(){
         return service.selectplancheck();

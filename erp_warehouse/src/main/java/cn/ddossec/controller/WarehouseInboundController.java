@@ -50,7 +50,7 @@ public class WarehouseInboundController {
     }
 
     /**
-     * 入库登记提交（序号，入库人，确认入库件数）
+     * 入库登记提交（序号，详细单编号，确认入库件数）
      *
      * @param warehouseInbound
      * @return

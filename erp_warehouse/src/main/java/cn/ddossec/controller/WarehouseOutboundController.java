@@ -28,18 +28,31 @@ public class WarehouseOutboundController {
 
 
     /**
+     * 出库申请单审核
+     *
+     * @param warehouseOutbound
+     * @return
+     */
+    @ApiOperation(value = "出库申请单审核")
+    @RequestMapping("warehouseOutboundDetailedAudit")
+    public Response warehouseOutboundDetailedAudit(@RequestBody WarehouseOutbound warehouseOutbound) {
+        return warehouseOutboundServiceImpl.warehouseOutboundDetailedAudit(warehouseOutbound);
+    }
+
+
+    /**
      * 查询可调度的数据进行调度
-     * @param check_tag 审核标志 0待审核 1审核通过 2审核不通过
+     * @param store_tag 库存标志 1已申请 2已调度
      * @param page
      * @param limit
      * @return
      */
     @ApiOperation(value = "查询可调度的数据进行调度")
     @RequestMapping("queryWarehouseOutbound")
-    public DataGridView queryWarehouseOutbound(@RequestParam("check_tag") String check_tag,
+    public DataGridView queryWarehouseOutbound(@RequestParam(value = "store_tag",required = false) String store_tag,
                                                @RequestParam("page") Integer page,
                                                @RequestParam("limit") Integer limit){
-        return warehouseOutboundServiceImpl.queryWarehouseOutbound(check_tag, page, limit);
+        return warehouseOutboundServiceImpl.queryWarehouseOutbound(store_tag, page, limit);
     }
 
 

@@ -35,37 +35,15 @@ public class WarehouseInboundServiceImpl implements WarehouseInboundService {
     private WarehouseInboundMapper warehouseInboundMapper;
 
     @Autowired
-    private WarehouseInboundDetailedService warehouseInboundDetailedServiceImpl;
+    private WarehouseInboundDetailedService warehouseInboundDetailedService;
 
     @Autowired
-    private WarehouseStockService warehouseStockServiceImpl;
+    private WarehouseStockService warehouseStockService;
+
 
 
     /**
-     * 入库管理
-     * @param storeTag 入库标志 0待审核 1审核通过 2审核不通过
-     *        store_tag 2已调度
-     * @param page
-     * @param limit
-     * @return
-     */
-    /*@Override
-    public DataGridView queryInbound(String checkTag, int page, int limit) {
-        QueryWrapper<WarehouseInbound> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("store_tag",2).eq("check_tag",checkTag).select("id","inbound_id","reason","register_time","amount_sum","cost_price_sum");
-        List<WarehouseInbound> list = warehouseInboundMapper.selectList(queryWrapper);
-
-
-
-        Page<WarehouseInbound> pages = new Page<>(page,limit);
-        IPage iPage = warehouseInboundMapper.selectPage(pages,queryWrapper);
-        //总行数   总数据
-        return new DataGridView(iPage.getTotal(),iPage.getRecords());
-    }*/
-
-
-    /**
-     * 入库登记提交
+     * 入库登记审核
      *
      * @param id
      * @param product_id
@@ -81,7 +59,7 @@ public class WarehouseInboundServiceImpl implements WarehouseInboundService {
             warehouseInbound.setCheckTag("1");
             warehouseInboundMapper.updateById(warehouseInbound);
             for (int i = 0; i < product_id.length ; i++) {
-                warehouseStockServiceImpl.queryId(product_id[i],gathered_amount[i]);
+                warehouseStockService.queryId(product_id[i],gathered_amount[i]);
             }
             return new Response(true,"审核成功!");
         }catch (Exception e){
@@ -92,7 +70,7 @@ public class WarehouseInboundServiceImpl implements WarehouseInboundService {
 
 
     /**
-     * 入库登记提交（序号，入库人，详细单编号，确认入库件数，）
+     * 入库登记提交（序号，详细单编号，确认入库件数）
      *
      * @param warehouseInbound
      * @return
@@ -108,7 +86,7 @@ public class WarehouseInboundServiceImpl implements WarehouseInboundService {
                 detailed = new WarehouseInboundDetailed();
                 detailed.setId(warehouseInbound.getIds()[i]);
                 detailed.setGatheredAmount(warehouseInbound.getGatheredAmount()[i]);
-                warehouseInboundDetailedServiceImpl.updateWarehouseInboundDetailedAmount(detailed);
+                warehouseInboundDetailedService.updateWarehouseInboundDetailedAmount(detailed);
             }
             return new Response(true,"登记成功!");
         }catch (Exception e){
@@ -185,7 +163,7 @@ public class WarehouseInboundServiceImpl implements WarehouseInboundService {
             detailed.setAmountUnit(warehouseInbound.getAmountUnit()[i]);
             detailed.setCostPrice(warehouseInbound.getCostPrice()[i]);
             detailed.setSubtotal(warehouseInbound.getSubtotal()[i]);
-            this.warehouseInboundDetailedServiceImpl.insertWarehouseDetailed(detailed);//循环插入到入库详细单
+            this.warehouseInboundDetailedService.insertWarehouseDetailed(detailed);//循环插入到入库详细单
         }
     }
 

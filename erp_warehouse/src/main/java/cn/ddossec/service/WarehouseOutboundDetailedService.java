@@ -1,6 +1,8 @@
 package cn.ddossec.service;
 
 import cn.ddossec.common.DataGridView;
+import cn.ddossec.common.Response;
+import cn.ddossec.domain.WarehouseOutbound;
 import cn.ddossec.domain.WarehouseOutboundDetailed;
 import java.util.List;
 
@@ -12,9 +14,39 @@ import java.util.List;
  */
 public interface WarehouseOutboundDetailedService {
 
+
     /**
+     * 出库调度提交
      *
-     * @param id 出库详细单序号（用于条件查询出库详细单）
+     * @param id 详细表 序号
+     * @param parent_id 详细表 父级序号
+     * @param attemper 调度人
+     * @param pay_tag 详细表 出库标志
+     * @return
+     */
+    Response OutboundDetailedCommit(Integer id,Integer parent_id,String attemper,String pay_tag);
+
+
+    /**
+     * 修改出库单库存标志
+     *
+     * @param parent_id 父级序号
+     * @param attemper 调度人
+     */
+    void updateOutboundStoreTag(Integer parent_id, String attemper);
+
+
+    /**
+     * 修改出库标志
+     *
+     * @param detailed
+     */
+    void updateDetailedPayTag(WarehouseOutboundDetailed detailed);
+
+    /**
+     *查询出库详细单
+     *
+     * @param id
      * @return
      */
     DataGridView queryWarehouseOutboundDetailed(Integer page,Integer limit,Integer id);

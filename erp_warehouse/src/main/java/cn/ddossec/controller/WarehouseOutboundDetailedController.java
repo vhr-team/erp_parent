@@ -1,7 +1,9 @@
 package cn.ddossec.controller;
 
+import cn.ddossec.common.DataGridView;
 import cn.ddossec.domain.WarehouseOutboundDetailed;
 import cn.ddossec.service.WarehouseOutboundDetailedService;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,5 +25,16 @@ public class WarehouseOutboundDetailedController {
     private WarehouseOutboundDetailedService warehouseOutboundDetailedServiceImpl;
 
 
+    /**
+     *查询出库详细单
+     *
+     * @param id
+     * @return
+     */
+    @ApiOperation(value = "查询出库详细单")
+    @RequestMapping("queryWarehouseOutboundDetailed")
+    public DataGridView queryWarehouseOutboundDetailed(Integer page, Integer limit, Integer id) {
+        return warehouseOutboundDetailedServiceImpl.queryWarehouseOutboundDetailed(page, limit, id);
+    }
 
 }

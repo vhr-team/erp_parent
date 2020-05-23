@@ -35,6 +35,7 @@ public class WarehouseInboundController {
     /**
      *
      * @param id 入库单 序号
+     * @param gathered_amount_sum 入库单 确认入库总件数
      * @param product_id 入库详细单 产品编号
      * @param gathered_amount 入库详细单 确认入库件数
      * @return
@@ -42,13 +43,14 @@ public class WarehouseInboundController {
     @ApiOperation(value = "入库登记审核")
     @RequestMapping("WarehouseInboundDetailedAudit")
     public Response WarehouseInboundDetailedAudit(@RequestParam("id") Integer id,
+                                                  @RequestParam("gathered_amount_sum") Integer gathered_amount_sum,
                                                   @RequestParam("product_id") String[] product_id,
                                                   @RequestParam("gathered_amount") Integer[] gathered_amount) {
-        return warehouseInboundServiceImpl.WarehouseInboundDetailedAudit(id, product_id, gathered_amount);
+        return warehouseInboundServiceImpl.WarehouseInboundDetailedAudit(id, gathered_amount_sum, product_id, gathered_amount);
     }
 
     /**
-     * 入库登记提交（序号，入库人，确认入库总件数，确认入库件数）
+     * 入库登记提交（序号，详细单编号，确认入库件数）
      *
      * @param warehouseInbound
      * @return
@@ -71,9 +73,10 @@ public class WarehouseInboundController {
     @ApiOperation(value = "查询可调度入库数据")
     @RequestMapping("queryInboundLimit")
     public DataGridView queryInboundLimit(@RequestParam("storeTag") String storeTag,
+                                          @RequestParam(value = "checkTag",required = false) String checkTag,
                                           @RequestParam("page") int page,
                                           @RequestParam("limit") int limit){
-        return warehouseInboundServiceImpl.queryInboundLimit(storeTag, page, limit);
+        return warehouseInboundServiceImpl.queryInboundLimit(storeTag, checkTag, page, limit);
     }
 
 

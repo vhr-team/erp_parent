@@ -22,7 +22,7 @@ public interface WarehouseInboundDetailedService {
      *
      * @param id 入库详细单序号
      * @param parent_id 父级序号
-     * @param gatherTag 库存标志 1为已登记 2为已调度
+     * @param gatherTag 入库标志 1为已登记 2为已调度
      * @param attemper 调度人
      * @return
      */

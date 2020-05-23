@@ -84,7 +84,7 @@ public interface design_recordService {
     /*查询为工序设计的档案*/
     List<product_design_record> selectprocess(product_design_record record);
     /*查询为工序设计的档案*/
-    List<product_design_record> selectprocesss(product_design_record record);
+    List<product_design_record> selectprocesss();
     /*工序设计完成*/
     void updateprocess(product_design_record record);
 

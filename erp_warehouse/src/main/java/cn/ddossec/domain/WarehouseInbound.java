@@ -115,6 +115,6 @@ public class WarehouseInbound implements Serializable {
     private Integer[] subtotal;
 
     @TableField(exist = false)
-    private Integer[] gathered_amount;
+    private Integer[] gatheredAmount;
 
 }

@@ -92,39 +92,45 @@ public class WarehouseOutbound implements Serializable {
 //    ---------------------------出库详细表----------------------------
 
     /**
+     * 序号
+     */
+    @TableField(exist = false)
+    private Integer[] ids;
+
+    /**
      * 产品名称
      */
     @TableField(exist = false)
-    private String productName;
+    private String[] productName;
     /**
      * 产品编号
      */
     @TableField(exist = false)
-    private String productId;
+    private String[] productId;
     /**
      * 数量
      */
     @TableField(exist = false)
-    private Integer amount;
+    private Integer[] amount;
     /**
      * 单位
      */
     @TableField(exist = false)
-    private String amountUnit;
+    private String[] amountUnit;
     /**
      * 成本单价
      */
     @TableField(exist = false)
-    private Double costPrice;
+    private Double[] costPrice;
     /**
      * 小计
      */
     @TableField(exist = false)
-    private Integer subtotal;
+    private Integer[] subtotal;
     /**
      * 描述
      */
     @TableField(exist = false)
-    private String productDescribe;
+    private String[] productDescribe;
 
 }

@@ -16,6 +16,27 @@ public interface WarehouseOutboundDetailedService {
 
 
     /**
+     * 出库调度提交
+     *
+     * @param id 详细表 序号
+     * @param parent_id 详细表 父级序号
+     * @param attemper 调度人
+     * @param pay_tag 详细表 出库标志
+     * @return
+     */
+    Response OutboundDetailedCommit(Integer id,Integer parent_id,String attemper,String pay_tag);
+
+
+    /**
+     * 修改出库单库存标志
+     *
+     * @param parent_id 父级序号
+     * @param attemper 调度人
+     */
+    void updateOutboundStoreTag(Integer parent_id, String attemper);
+
+
+    /**
      * 修改出库标志
      *
      * @param detailed

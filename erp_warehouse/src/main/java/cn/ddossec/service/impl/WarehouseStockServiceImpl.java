@@ -35,7 +35,6 @@ public class WarehouseStockServiceImpl implements WarehouseStockService {
      * @param product_id 产品编号
      * @return
      */
-    @Override
     public void queryId(String product_id,Integer gathered_amount) {
         QueryWrapper<WarehouseStock> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("product_id",product_id).select("id","amount");//查询出序号和当前存储量

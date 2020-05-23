@@ -42,6 +42,7 @@ public class WarehouseOutboundServiceImpl implements WarehouseOutboundService {
     /**
      *修改库存标志
      */
+    @Override
     public void updateStoreTag(Integer parent_id,String store_tag,String attemper) {
         WarehouseOutbound warehouseOutbound = new WarehouseOutbound();
         warehouseOutbound.setId(parent_id); //序号

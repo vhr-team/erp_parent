@@ -212,6 +212,7 @@ public class design_recordServiceImpl implements design_recordService {
     public PageResult notconstitute(Integer page, Integer pageSize, product_design_record record) {
         PageHelper.startPage(page, pageSize);
         product_design_recordQuery query = new product_design_recordQuery();
+        query.setOrderByClause("id desc");
         product_design_recordQuery.Criteria criteria = query.createCriteria();
         if (record != null) {
             if (record.getProductName() != null) {

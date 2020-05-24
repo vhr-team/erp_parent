@@ -80,7 +80,7 @@ public class productionController {
      * @return
      */
     @RequestMapping("/addproductionOrder")
-    public Response addproductionOrder(@RequestBody production_order order) {
+    public Response addproductionOrder(production_order order) {
         Integer sumprice=0;
         try {
             order.setScheduleId(Getnum());

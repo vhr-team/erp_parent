@@ -99,7 +99,7 @@ public class productionController {
     }
 
     /**
-     * 生产审核  传入计划单编号和审核状态（审核通过/审核不通过）
+     * 生产审核  传入 产品编号 计划单编号和审核状态（审核通过/审核不通过）
      * @param order
      * @return
      */

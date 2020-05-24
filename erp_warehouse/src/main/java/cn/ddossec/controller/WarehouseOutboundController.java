@@ -37,7 +37,10 @@ public class WarehouseOutboundController {
      */
     @ApiOperation(value = "出库登记复核")
     @RequestMapping("WarehouseOutboundAudit")
-    public Response WarehouseOutboundAudit(Integer id, Integer paid_amount_sum, String[] product_id, Integer[] paid_amount) {
+    public Response WarehouseOutboundAudit(@RequestParam("id") Integer id,
+                                           @RequestParam("paid_amount_sum") Integer paid_amount_sum,
+                                           @RequestParam("product_id") String[] product_id,
+                                           @RequestParam("paid_amount") Integer[] paid_amount) {
         return warehouseOutboundServiceImpl.WarehouseOutboundAudit(id, paid_amount_sum, product_id, paid_amount);
     }
 

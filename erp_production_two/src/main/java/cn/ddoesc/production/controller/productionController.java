@@ -29,6 +29,7 @@ public class productionController {
     public List<product_design_record> selectPlancheckAll(){
         return feignservice.selectcheckplanAll();
     }
+
     public Response updatePlancheck(@RequestBody product_design_record record){
         record.setPlanCheckstatus("已完成");
        try {

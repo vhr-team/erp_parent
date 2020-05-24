@@ -92,4 +92,10 @@ public interface design_recordService {
     List<product_design_record> selectplancheck();
 
     void updateplancheck(product_design_record record);
+
+    /**
+     * 档案永久删除
+     * @param record
+     */
+    void deleteperpetual(product_design_record record);
 }

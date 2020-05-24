@@ -305,5 +305,13 @@ public class design_recordServiceImpl implements design_recordService {
 
     }
 
+    @Override
+    public void deleteperpetual(product_design_record record) {
+        product_design_recordQuery query = new product_design_recordQuery();
+        product_design_recordQuery.Criteria criteria = query.createCriteria();
+        criteria.andProductIdEqualTo(record.getProductId());
+        mapper.deleteByExample(query);
+    }
+
 
 }

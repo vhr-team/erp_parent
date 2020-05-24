@@ -159,7 +159,7 @@ public class LoginController {
      * 验证码
      * <p>
      * redis   key value
-     */
+         */
     @ResponseBody
     @RequestMapping("captcha")
     public ResultObj captcha(HttpServletRequest request, HttpServletResponse response, String codeKey) throws Exception {

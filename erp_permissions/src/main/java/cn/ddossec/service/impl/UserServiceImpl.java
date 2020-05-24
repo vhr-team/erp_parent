@@ -241,6 +241,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     @Override
     public void regist(String username, String password) {
         User user = new User();
+        user.setLoginname(username);
         // 设置盐
         user.setSalt(MD5Utils.createUUID());
         user.setType(Constant.USER_TYPE_NORMAL);

@@ -235,7 +235,7 @@ public class design_recordController {
     }
 
 
-    /*查询档案审核通过且生产审核待审核的档案*/
+    /*查询档案审核通过且生产审核待完成的档案*/
     @RequestMapping("/selectplancheck")
     List<product_design_record> selectplancheck(){
         return service.selectplancheck();

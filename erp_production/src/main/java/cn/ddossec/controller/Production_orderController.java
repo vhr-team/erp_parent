@@ -85,6 +85,7 @@ public class Production_orderController {
         } catch (ParseException e) {
             e.printStackTrace();
         }
+
         int aggregate = 0;
         aggregate = production_order.getQuantity() * production_order.getPrice();//计算总价 = 单价 * 数量
         production_order.setAggregate(aggregate);//总价

@@ -1,6 +1,5 @@
 package cn.ddossec.mapper;
 
-import cn.ddossec.domain.Production_mdesign_procedure;
 import cn.ddossec.domain.Production_order;
 
 import java.util.List;
@@ -21,5 +20,10 @@ public interface Production_orderMapper {
     public boolean updatechecked_audit(String id);
 
     public List<Production_order> findByChecked_audit();
+
+
+    public List<Production_order> findByAdd_status();
+
+    public boolean updateAdd_status(String id);
 
 }

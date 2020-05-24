@@ -58,7 +58,7 @@ public class design_recordController {
 
     @ApiOperation("分页&&条件查询")
     @RequestMapping("/findPage")
-    public PageResult findPage(Integer page, Integer pageSize, @RequestBody product_design_record record) {
+    public PageResult findPage(Integer page, Integer pageSize, @RequestBody @RequestParam(required = false)product_design_record record) {
         return service.findPage(page, pageSize, record);
     }
 
@@ -208,8 +208,8 @@ public class design_recordController {
      * @return
      */
     @RequestMapping("/selectprocessAlls")
-    public List<product_design_record> selectprocessAlls(@RequestBody product_design_record record) {
-        return service.selectprocesss(record);
+    public List<product_design_record> selectprocessAlls() {
+        return service.selectprocesss();
     }
 
     /**

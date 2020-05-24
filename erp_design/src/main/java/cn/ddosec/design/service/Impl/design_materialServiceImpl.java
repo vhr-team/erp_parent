@@ -62,6 +62,7 @@ public class design_materialServiceImpl implements design_materialService {
     public PageResult findpage(Integer page, Integer pageSize, product_design_material material) {
         PageHelper.startPage(page, pageSize);
         product_design_materialQuery Query = new product_design_materialQuery();
+        Query.setOrderByClause("id desc");
         if (material != null) {
             product_design_materialQuery.Criteria criteria = Query.createCriteria();
             if (material.getProductName() != null) {
@@ -106,6 +107,7 @@ public class design_materialServiceImpl implements design_materialService {
     @Override
     public List<product_design_material> selectAll(product_design_material material) {
         product_design_materialQuery Query = new product_design_materialQuery();
+        Query.setOrderByClause("id desc");
         if (material != null) {
             product_design_materialQuery.Criteria criteria = Query.createCriteria();
            if(material.getProductId()!=null){

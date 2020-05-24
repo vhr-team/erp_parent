@@ -63,7 +63,8 @@ public class material_archivesServiceImpl implements material_archivesService {
     @Override
     public List<product_material_archives> selectBymaterielArchivesId(String materielArchivesId) {
         product_material_archivesQuery product_material_archivesQuery = new product_material_archivesQuery();
-        cn.ddosec.design.pojo.product_material_archivesQuery.Criteria criteria = product_material_archivesQuery.createCriteria();
+        product_material_archivesQuery.setOrderByClause("id desc");
+        product_material_archivesQuery.Criteria criteria = product_material_archivesQuery.createCriteria();
         criteria.andAssembleidEqualTo(materielArchivesId);
         List<product_material_archives> product_material_archives = mapper.selectByExample(product_material_archivesQuery);
         return product_material_archives;

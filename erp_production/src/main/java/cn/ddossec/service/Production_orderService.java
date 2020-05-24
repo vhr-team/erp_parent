@@ -20,4 +20,8 @@ public interface Production_orderService {
 
     public List<Production_order> findByChecked_audit();
 
+    public List<Production_order> findByAdd_status();
+
+    public boolean updateAdd_status(String id);
+
 }

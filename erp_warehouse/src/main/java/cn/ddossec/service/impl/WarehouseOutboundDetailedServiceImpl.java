@@ -101,7 +101,7 @@ public class WarehouseOutboundDetailedServiceImpl implements WarehouseOutboundDe
     @Override
     public DataGridView queryWarehouseOutboundDetailed(Integer page,Integer limit,Integer id) {
         QueryWrapper<WarehouseOutboundDetailed> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("parent_id",id).select("id","product_name","product_id","amount","amount_unit","cost_price","subtotal");
+        queryWrapper.eq("parent_id",id).select("id","product_name","product_id","product_describe","amount","amount_unit","cost_price","subtotal");
         Page<WarehouseOutboundDetailed> pages = new Page<>();
         IPage iPage = warehouseOutboundDetailedMapper.selectPage(pages,queryWrapper);
         return new DataGridView(iPage.getTotal(),iPage.getRecords());

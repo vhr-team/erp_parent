@@ -16,6 +16,14 @@ import java.util.List;
 public interface WarehouseStockService {
 
     /**
+     * 根据产品编号查出当前存储量
+     *
+     * @param product_id 产品编号
+     * @return
+     */
+    DataGridView queryStockAmount(String product_id);
+
+    /**
      * 根据产品编号查询出序号
      * @param product_id 产品编号
      * @param a 1入库 2出库

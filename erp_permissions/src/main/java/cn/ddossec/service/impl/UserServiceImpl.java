@@ -12,6 +12,7 @@ import cn.ddossec.mapper.RoleMapper;
 import cn.ddossec.mapper.UserMapper;
 import cn.ddossec.service.DeptService;
 import cn.ddossec.service.UserService;
+import cn.ddossec.vo.RegistObj;
 import cn.ddossec.vo.UserVo;
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.bean.copier.CopyOptions;
@@ -239,13 +240,14 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     }
 
     @Override
-    public void regist(String username, String password) {
+    public void regist(RegistObj registObj) {
         User user = new User();
-        user.setLoginname(username);
+        user.setLoginname(registObj.getLoginname());
+        user.setName(registObj.getName());
         // 设置盐
         user.setSalt(MD5Utils.createUUID());
         user.setType(Constant.USER_TYPE_NORMAL);
-        user.setPwd(MD5Utils.md5(password, user.getSalt(), 2));
+        user.setPwd(MD5Utils.md5(registObj.getPwd(), user.getSalt(), 2));
         // 可用
         user.setAvailable(Constant.AVAILABLE_TRUE);
         user.setImgpath(Constant.DEFAULT_TITLE_IMAGE);

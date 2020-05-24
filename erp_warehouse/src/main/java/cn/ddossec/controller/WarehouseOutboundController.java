@@ -26,6 +26,24 @@ public class WarehouseOutboundController {
     @Autowired
     private WarehouseOutboundService warehouseOutboundServiceImpl;
 
+    /**
+     *出库登记复核
+     *
+     * @param id 出库单 序号
+     * @param paid_amount_sum 出库单 确认出库总件数
+     * @param product_id 详细表 产品编号
+     * @param paid_amount 详细表 确认出库件数
+     * @return
+     */
+    @ApiOperation(value = "出库登记复核")
+    @RequestMapping("WarehouseOutboundAudit")
+    public Response WarehouseOutboundAudit(@RequestParam("id") Integer id,
+                                           @RequestParam("paid_amount_sum") Integer paid_amount_sum,
+                                           @RequestParam("product_id") String[] product_id,
+                                           @RequestParam("paid_amount") Integer[] paid_amount) {
+        return warehouseOutboundServiceImpl.WarehouseOutboundAudit(id, paid_amount_sum, product_id, paid_amount);
+    }
+
 
     /**
      * 出库登记提交

@@ -72,7 +72,7 @@ public class productionController {
            e.printStackTrace();
            return new Response(false,"失败");
        }
-    }*/
+    }
 
     /**
      * 修改档案生产状态 添加生产档案

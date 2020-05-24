@@ -34,6 +34,15 @@ public class WarehouseOutboundDetailedServiceImpl implements WarehouseOutboundDe
 
 
     /**
+     * 修改出库详细单确认入库数量
+     * @param detailed
+     */
+    @Override
+    public void updateWarehouseOutboundDetailedAmount(WarehouseOutboundDetailed detailed) {
+        warehouseOutboundDetailedMapper.updateById(detailed);
+    }
+
+    /**
      * 出库调度提交
      *
      * @param id 详细表 序号

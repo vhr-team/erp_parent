@@ -1,4 +1,5 @@
 cn\ddossec\domain\pojo\Response.class
+cn\ddossec\utils\SmsUtil.class
 cn\ddossec\common\DataGridView.class
 cn\ddossec\domain\User.class
 cn\ddossec\domain\Goods$GoodsBuilder.class
@@ -12,3 +13,4 @@ cn\ddossec\domain\ProductType.class
 cn\ddossec\domain\pojo\product_design_material.class
 cn\ddossec\common\ResultObj.class
 cn\ddossec\domain\ProductType$ProductTypeBuilder.class
+cn\ddossec\utils\PhoneFormatCheckUtils.class

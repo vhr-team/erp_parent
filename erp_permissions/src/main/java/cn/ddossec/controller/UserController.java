@@ -3,6 +3,7 @@ package cn.ddossec.controller;
 import cn.ddossec.common.*;
 import cn.ddossec.domain.User;
 import cn.ddossec.service.UserService;
+import cn.ddossec.utils.PhoneFormatCheckUtils;
 import cn.ddossec.vo.UserVo;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -33,6 +34,23 @@ public class UserController {
     @RequestMapping("/loadAllUserNoQuery")
     public List<User> loadAllUser() {
         return this.userService.loadAllUser();
+    }
+
+    @RequestMapping("/sendCode")
+    public ResultObj sendCode(String phone) {
+        try {
+            if (phone == null || "".equals(phone)) {
+                return new ResultObj(-1, "手机号不能为空!");
+            }
+            if (!PhoneFormatCheckUtils.isPhoneLegal(phone)) {
+                return new ResultObj(-1, "手机号格式不正确");
+            }
+            userService.sendCode(phone);
+            return new ResultObj(200, "发送成功!");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResultObj(-1, "发送失败!");
+        }
     }
 
     /**

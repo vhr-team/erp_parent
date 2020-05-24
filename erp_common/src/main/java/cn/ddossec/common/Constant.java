@@ -3,6 +3,11 @@ package cn.ddossec.common;
 public class Constant {
 
     /**
+     * 性别保密
+     */
+    public static final Integer SEX_UNKNOW = 3;
+
+    /**
      * 用户类型
      */
     public static final Integer USER_TYPE_SUPER = 0;

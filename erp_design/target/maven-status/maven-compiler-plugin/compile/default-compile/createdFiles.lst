@@ -38,6 +38,7 @@ cn\ddosec\design\pojo\product_checkQuery.class
 cn\ddosec\design\service\Impl\desgin_checkServiceImpl.class
 cn\ddosec\design\service\Impl\design_materialServiceImpl.class
 cn\ddosec\design\entity\Response.class
+cn\ddosec\design\config\TransactionConfiguration.class
 cn\ddosec\design\service\design_materialService.class
 cn\ddosec\design\config\SwaggerConfig.class
 cn\ddosec\design\service\design_recordService.class

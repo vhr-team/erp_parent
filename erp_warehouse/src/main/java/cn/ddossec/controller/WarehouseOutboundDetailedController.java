@@ -1,12 +1,12 @@
 package cn.ddossec.controller;
 
 import cn.ddossec.common.DataGridView;
+import cn.ddossec.common.Response;
 import cn.ddossec.domain.WarehouseOutboundDetailed;
 import cn.ddossec.service.WarehouseOutboundDetailedService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 
 
 /**
@@ -26,7 +26,7 @@ public class WarehouseOutboundDetailedController {
 
 
     /**
-     *查询出库详细单
+     * 查询出库详细单
      *
      * @param id
      * @return
@@ -35,6 +35,11 @@ public class WarehouseOutboundDetailedController {
     @RequestMapping("queryWarehouseOutboundDetailed")
     public DataGridView queryWarehouseOutboundDetailed(Integer page, Integer limit, Integer id) {
         return warehouseOutboundDetailedServiceImpl.queryWarehouseOutboundDetailed(page, limit, id);
+    }
+
+    @GetMapping("OutboundDetailedCommit")
+    public Response OutboundDetailedCommit(Integer id, Integer parent_id, String attemper, String pay_tag) {
+        return this.warehouseOutboundDetailedServiceImpl.OutboundDetailedCommit(id, parent_id, attemper, pay_tag);
     }
 
 }

@@ -2,6 +2,7 @@ package cn.ddossec.service;
 
 import cn.ddossec.common.DataGridView;
 import cn.ddossec.domain.User;
+import cn.ddossec.vo.RegistObj;
 import cn.ddossec.vo.UserVo;
 import com.baomidou.mybatisplus.extension.service.IService;
 
@@ -45,9 +46,6 @@ public interface UserService extends IService<User> {
 
     /**
      * 注册用户
-     *
-     * @param username 用户名
-     * @param password 密码
      */
-    void regist(String username, String password);
+    void regist(RegistObj registObj);
 }

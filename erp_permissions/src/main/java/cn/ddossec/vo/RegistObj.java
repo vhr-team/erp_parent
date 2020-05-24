@@ -18,6 +18,8 @@ public class RegistObj {
     private String name;
     private String pwd;
 
+    private String loginname;
+
     private String code;
 
     private String phone;

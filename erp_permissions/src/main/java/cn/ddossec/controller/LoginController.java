@@ -159,7 +159,7 @@ public class LoginController {
      * 验证码
      * <p>
      * redis   key value
-         */
+     */
     @ResponseBody
     @RequestMapping("captcha")
     public ResultObj captcha(HttpServletRequest request, HttpServletResponse response, String codeKey) throws Exception {
@@ -175,16 +175,6 @@ public class LoginController {
         return new ResultObj(200, specCaptcha.toBase64());
     }
 
-    @PostMapping("regist")
-    public ResultObj regist(String username, String password) {
-        User user = userService.queryUserByLoginName(username);
-        if (user != null) {
-            return new ResultObj(-1, "该用户名已存在！");
-        }
-        this.userService.regist(username, password);
-        return new ResultObj(200, "注册成功！");
-    }
-
     /**
      * 　　* @描述: 校验验证码
      * 　　* @参数 ${tags}
@@ -194,15 +184,21 @@ public class LoginController {
      * 　　* @时间 2020-05-24 20:59
      */
     @PostMapping("registeredUser")
+    @ResponseBody
     public ResultObj registeredUser(@RequestBody RegistObj registObj) {
         try {
-            // 从Redis 取出 验证码 和用户输入的比较
-            String phoneCode = redisTemplate.boundValueOps(registObj.getPhone()).get();
-            if(!phoneCode.equals(registObj.getCode())){
-                return new ResultObj(-1, "验证码错误！");
+            User user = userService.queryUserByLoginName(registObj.getName());
+            if (user != null) {
+                return new ResultObj(-1, "该用户名已存在！");
+            } else {
+                // 从Redis 取出 验证码 和用户输入的比较
+                String phoneCode = redisTemplate.boundValueOps(registObj.getPhone()).get();
+                if (!phoneCode.equals(registObj.getCode())) {
+                    return new ResultObj(-1, "验证码错误！");
+                }
+                this.userService.regist(registObj);
+                return new ResultObj(200, "注册成功! ");
             }
-            this.userService.regist(registObj.getName(),registObj.getPwd());
-            return new ResultObj(200, "注册成功! ");
         } catch (Exception e) {
             return new ResultObj(-1, "注册失败！");
         }

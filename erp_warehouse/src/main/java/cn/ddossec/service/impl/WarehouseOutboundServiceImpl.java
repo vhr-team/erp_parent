@@ -64,14 +64,14 @@ public class WarehouseOutboundServiceImpl implements WarehouseOutboundService {
         try {
             warehouseOutbound.setCheckTime(DateUtil.date());
             warehouseOutboundMapper.updateById(warehouseOutbound);
-            WarehouseOutboundDetailed detailed = null;
-            for (int i = 0; i < warehouseOutbound.getIds().length; i++) {
-                detailed = new WarehouseOutboundDetailed();
-                detailed.setId(warehouseOutbound.getIds()[i]);
-                if("1".equals(warehouseOutbound.getStoreTag())){
+            if("1".equals(warehouseOutbound.getStoreTag())){
+                WarehouseOutboundDetailed detailed = null;
+                for (int i = 0; i < warehouseOutbound.getIds().length; i++) {
+                    detailed = new WarehouseOutboundDetailed();
+                    detailed.setId(warehouseOutbound.getIds()[i]);
                     detailed.setPayTag("1");
+                    warehouseOutboundDetailedServiceImpl.updateDetailedPayTag(detailed);
                 }
-                warehouseOutboundDetailedServiceImpl.updateDetailedPayTag(detailed);
             }
             return new Response(true,"审核成功!");
         }catch (Exception e){

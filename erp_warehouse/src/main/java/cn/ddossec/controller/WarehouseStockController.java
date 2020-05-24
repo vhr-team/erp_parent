@@ -36,6 +36,19 @@ public class WarehouseStockController {
 
 
     /**
+     * 根据产品编号查出当前存储量
+     *
+     * @param product_id 产品编号
+     * @return
+     */
+    @ApiOperation(value = "根据产品编号查出当前存储量")
+    @RequestMapping("queryStockAmount")
+    public DataGridView queryStockAmount(String product_id) {
+        return warehouseStockServiceImpl.queryStockAmount(product_id);
+    }
+
+
+    /**
      * 查询设计审核状态
      *
      * @param page

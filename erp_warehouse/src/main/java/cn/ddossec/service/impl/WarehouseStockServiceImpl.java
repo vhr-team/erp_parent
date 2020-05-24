@@ -31,6 +31,20 @@ public class WarehouseStockServiceImpl implements WarehouseStockService {
 
 
     /**
+     * 根据产品编号查出当前存储量
+     *
+     * @param product_id 产品编号
+     * @return
+     */
+    @Override
+    public DataGridView queryStockAmount(String product_id) {
+        QueryWrapper<WarehouseStock> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("product_id",product_id).select("amount");
+        WarehouseStock warehouseStock = warehouseStockMapper.selectOne(queryWrapper);
+        return new DataGridView(warehouseStock);
+    }
+
+    /**
      * 根据产品编号查询出序号
      * @param product_id 产品编号
      * @param a 1入库 2出库

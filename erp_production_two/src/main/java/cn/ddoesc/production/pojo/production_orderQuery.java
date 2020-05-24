@@ -1044,6 +1044,216 @@ public class production_orderQuery {
             addCriterion("add_status not between", value1, value2, "addStatus");
             return (Criteria) this;
         }
+
+        public Criteria andRegistrantIsNull() {
+            addCriterion("registrant is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andRegistrantIsNotNull() {
+            addCriterion("registrant is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andRegistrantEqualTo(String value) {
+            addCriterion("registrant =", value, "registrant");
+            return (Criteria) this;
+        }
+
+        public Criteria andRegistrantNotEqualTo(String value) {
+            addCriterion("registrant <>", value, "registrant");
+            return (Criteria) this;
+        }
+
+        public Criteria andRegistrantGreaterThan(String value) {
+            addCriterion("registrant >", value, "registrant");
+            return (Criteria) this;
+        }
+
+        public Criteria andRegistrantGreaterThanOrEqualTo(String value) {
+            addCriterion("registrant >=", value, "registrant");
+            return (Criteria) this;
+        }
+
+        public Criteria andRegistrantLessThan(String value) {
+            addCriterion("registrant <", value, "registrant");
+            return (Criteria) this;
+        }
+
+        public Criteria andRegistrantLessThanOrEqualTo(String value) {
+            addCriterion("registrant <=", value, "registrant");
+            return (Criteria) this;
+        }
+
+        public Criteria andRegistrantLike(String value) {
+            addCriterion("registrant like", value, "registrant");
+            return (Criteria) this;
+        }
+
+        public Criteria andRegistrantNotLike(String value) {
+            addCriterion("registrant not like", value, "registrant");
+            return (Criteria) this;
+        }
+
+        public Criteria andRegistrantIn(List<String> values) {
+            addCriterion("registrant in", values, "registrant");
+            return (Criteria) this;
+        }
+
+        public Criteria andRegistrantNotIn(List<String> values) {
+            addCriterion("registrant not in", values, "registrant");
+            return (Criteria) this;
+        }
+
+        public Criteria andRegistrantBetween(String value1, String value2) {
+            addCriterion("registrant between", value1, value2, "registrant");
+            return (Criteria) this;
+        }
+
+        public Criteria andRegistrantNotBetween(String value1, String value2) {
+            addCriterion("registrant not between", value1, value2, "registrant");
+            return (Criteria) this;
+        }
+
+        public Criteria andDispatchIsNull() {
+            addCriterion("dispatch is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDispatchIsNotNull() {
+            addCriterion("dispatch is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andDispatchEqualTo(String value) {
+            addCriterion("dispatch =", value, "dispatch");
+            return (Criteria) this;
+        }
+
+        public Criteria andDispatchNotEqualTo(String value) {
+            addCriterion("dispatch <>", value, "dispatch");
+            return (Criteria) this;
+        }
+
+        public Criteria andDispatchGreaterThan(String value) {
+            addCriterion("dispatch >", value, "dispatch");
+            return (Criteria) this;
+        }
+
+        public Criteria andDispatchGreaterThanOrEqualTo(String value) {
+            addCriterion("dispatch >=", value, "dispatch");
+            return (Criteria) this;
+        }
+
+        public Criteria andDispatchLessThan(String value) {
+            addCriterion("dispatch <", value, "dispatch");
+            return (Criteria) this;
+        }
+
+        public Criteria andDispatchLessThanOrEqualTo(String value) {
+            addCriterion("dispatch <=", value, "dispatch");
+            return (Criteria) this;
+        }
+
+        public Criteria andDispatchLike(String value) {
+            addCriterion("dispatch like", value, "dispatch");
+            return (Criteria) this;
+        }
+
+        public Criteria andDispatchNotLike(String value) {
+            addCriterion("dispatch not like", value, "dispatch");
+            return (Criteria) this;
+        }
+
+        public Criteria andDispatchIn(List<String> values) {
+            addCriterion("dispatch in", values, "dispatch");
+            return (Criteria) this;
+        }
+
+        public Criteria andDispatchNotIn(List<String> values) {
+            addCriterion("dispatch not in", values, "dispatch");
+            return (Criteria) this;
+        }
+
+        public Criteria andDispatchBetween(String value1, String value2) {
+            addCriterion("dispatch between", value1, value2, "dispatch");
+            return (Criteria) this;
+        }
+
+        public Criteria andDispatchNotBetween(String value1, String value2) {
+            addCriterion("dispatch not between", value1, value2, "dispatch");
+            return (Criteria) this;
+        }
+
+        public Criteria andCheckpersonIsNull() {
+            addCriterion("checkperson is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCheckpersonIsNotNull() {
+            addCriterion("checkperson is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCheckpersonEqualTo(String value) {
+            addCriterion("checkperson =", value, "checkperson");
+            return (Criteria) this;
+        }
+
+        public Criteria andCheckpersonNotEqualTo(String value) {
+            addCriterion("checkperson <>", value, "checkperson");
+            return (Criteria) this;
+        }
+
+        public Criteria andCheckpersonGreaterThan(String value) {
+            addCriterion("checkperson >", value, "checkperson");
+            return (Criteria) this;
+        }
+
+        public Criteria andCheckpersonGreaterThanOrEqualTo(String value) {
+            addCriterion("checkperson >=", value, "checkperson");
+            return (Criteria) this;
+        }
+
+        public Criteria andCheckpersonLessThan(String value) {
+            addCriterion("checkperson <", value, "checkperson");
+            return (Criteria) this;
+        }
+
+        public Criteria andCheckpersonLessThanOrEqualTo(String value) {
+            addCriterion("checkperson <=", value, "checkperson");
+            return (Criteria) this;
+        }
+
+        public Criteria andCheckpersonLike(String value) {
+            addCriterion("checkperson like", value, "checkperson");
+            return (Criteria) this;
+        }
+
+        public Criteria andCheckpersonNotLike(String value) {
+            addCriterion("checkperson not like", value, "checkperson");
+            return (Criteria) this;
+        }
+
+        public Criteria andCheckpersonIn(List<String> values) {
+            addCriterion("checkperson in", values, "checkperson");
+            return (Criteria) this;
+        }
+
+        public Criteria andCheckpersonNotIn(List<String> values) {
+            addCriterion("checkperson not in", values, "checkperson");
+            return (Criteria) this;
+        }
+
+        public Criteria andCheckpersonBetween(String value1, String value2) {
+            addCriterion("checkperson between", value1, value2, "checkperson");
+            return (Criteria) this;
+        }
+
+        public Criteria andCheckpersonNotBetween(String value1, String value2) {
+            addCriterion("checkperson not between", value1, value2, "checkperson");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

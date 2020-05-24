@@ -83,6 +83,7 @@ public class productionController {
     public Response addproductionOrder(production_order order) {
         Integer sumprice=0;
         try {
+            order.setId(null);
             order.setScheduleId(Getnum());
             sumprice=order.getListPrice()*order.getQuantity();
             product_design_record product_design_record = new product_design_record();

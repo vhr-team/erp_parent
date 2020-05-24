@@ -16,6 +16,9 @@
     <result column="checked_audit" property="checkedAudit" jdbcType="VARCHAR" />
     <result column="production_generate" property="productionGenerate" jdbcType="VARCHAR" />
     <result column="add_status" property="addStatus" jdbcType="VARCHAR" />
+    <result column="registrant" property="registrant" jdbcType="VARCHAR" />
+    <result column="dispatch" property="dispatch" jdbcType="VARCHAR" />
+    <result column="checkperson" property="checkperson" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -79,7 +82,7 @@
     <if test="fields == null" >
       id, schedule_id, product_id, product_name, product_describe, quantity, qutbound_order_id, 
       amount_unit, list_price, aggregate, review_time, checked_audit, production_generate, 
-      add_status
+      add_status, registrant, dispatch, checkperson
     </if>
     <if test="fields != null" >
       ${fields}
@@ -101,7 +104,7 @@
   </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
-    id,schedule_id,product_id,product_name,product_describe,quantity,qutbound_order_id,amount_unit,list_price,aggregate,review_time,checked_audit,production_generate,add_status
+    id,schedule_id,product_id,product_name,product_describe,quantity,qutbound_order_id,amount_unit,list_price,aggregate,review_time,checked_audit,production_generate,add_status,registrant,dispatch,checkperson
     from production_order
     where id = #{id,jdbcType=INTEGER}
   </select>
@@ -120,12 +123,14 @@
       product_name, product_describe, quantity, 
       qutbound_order_id, amount_unit, list_price, 
       aggregate, review_time, checked_audit, 
-      production_generate, add_status)
+      production_generate, add_status, registrant, 
+      dispatch, checkperson)
     values (#{id,jdbcType=INTEGER}, #{scheduleId,jdbcType=VARCHAR}, #{productId,jdbcType=VARCHAR}, 
       #{productName,jdbcType=VARCHAR}, #{productDescribe,jdbcType=VARCHAR}, #{quantity,jdbcType=INTEGER}, 
       #{qutboundOrderId,jdbcType=VARCHAR}, #{amountUnit,jdbcType=VARCHAR}, #{listPrice,jdbcType=INTEGER}, 
       #{aggregate,jdbcType=INTEGER}, #{reviewTime,jdbcType=TIMESTAMP}, #{checkedAudit,jdbcType=VARCHAR}, 
-      #{productionGenerate,jdbcType=VARCHAR}, #{addStatus,jdbcType=VARCHAR})
+      #{productionGenerate,jdbcType=VARCHAR}, #{addStatus,jdbcType=VARCHAR}, #{registrant,jdbcType=VARCHAR}, 
+      #{dispatch,jdbcType=VARCHAR}, #{checkperson,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="cn.ddoesc.production.pojo.production_order" >
     insert into production_order
@@ -172,6 +177,15 @@
       <if test="addStatus != null" >
         add_status,
       </if>
+      <if test="registrant != null" >
+        registrant,
+      </if>
+      <if test="dispatch != null" >
+        dispatch,
+      </if>
+      <if test="checkperson != null" >
+        checkperson,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -215,6 +229,15 @@
       </if>
       <if test="addStatus != null" >
         #{addStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="registrant != null" >
+        #{registrant,jdbcType=VARCHAR},
+      </if>
+      <if test="dispatch != null" >
+        #{dispatch,jdbcType=VARCHAR},
+      </if>
+      <if test="checkperson != null" >
+        #{checkperson,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -269,6 +292,15 @@
       <if test="record.addStatus != null" >
         add_status = #{record.addStatus,jdbcType=VARCHAR},
       </if>
+      <if test="record.registrant != null" >
+        registrant = #{record.registrant,jdbcType=VARCHAR},
+      </if>
+      <if test="record.dispatch != null" >
+        dispatch = #{record.dispatch,jdbcType=VARCHAR},
+      </if>
+      <if test="record.checkperson != null" >
+        checkperson = #{record.checkperson,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -289,7 +321,10 @@
       review_time = #{record.reviewTime,jdbcType=TIMESTAMP},
       checked_audit = #{record.checkedAudit,jdbcType=VARCHAR},
       production_generate = #{record.productionGenerate,jdbcType=VARCHAR},
-      add_status = #{record.addStatus,jdbcType=VARCHAR}
+      add_status = #{record.addStatus,jdbcType=VARCHAR},
+      registrant = #{record.registrant,jdbcType=VARCHAR},
+      dispatch = #{record.dispatch,jdbcType=VARCHAR},
+      checkperson = #{record.checkperson,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -336,6 +371,15 @@
       <if test="addStatus != null" >
         add_status = #{addStatus,jdbcType=VARCHAR},
       </if>
+      <if test="registrant != null" >
+        registrant = #{registrant,jdbcType=VARCHAR},
+      </if>
+      <if test="dispatch != null" >
+        dispatch = #{dispatch,jdbcType=VARCHAR},
+      </if>
+      <if test="checkperson != null" >
+        checkperson = #{checkperson,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -353,7 +397,10 @@
       review_time = #{reviewTime,jdbcType=TIMESTAMP},
       checked_audit = #{checkedAudit,jdbcType=VARCHAR},
       production_generate = #{productionGenerate,jdbcType=VARCHAR},
-      add_status = #{addStatus,jdbcType=VARCHAR}
+      add_status = #{addStatus,jdbcType=VARCHAR},
+      registrant = #{registrant,jdbcType=VARCHAR},
+      dispatch = #{dispatch,jdbcType=VARCHAR},
+      checkperson = #{checkperson,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

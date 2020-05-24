@@ -74,6 +74,21 @@ public class production_order implements Serializable {
      */
     private String addStatus;
 
+    /**
+     * 登记人
+     */
+    private String registrant;
+
+    /**
+     * 派工人姓名
+     */
+    private String dispatch;
+
+    /**
+     * 审核人姓名
+     */
+    private String checkperson;
+
     private static final long serialVersionUID = 1L;
 
     public Integer getId() {
@@ -188,6 +203,30 @@ public class production_order implements Serializable {
         this.addStatus = addStatus == null ? null : addStatus.trim();
     }
 
+    public String getRegistrant() {
+        return registrant;
+    }
+
+    public void setRegistrant(String registrant) {
+        this.registrant = registrant == null ? null : registrant.trim();
+    }
+
+    public String getDispatch() {
+        return dispatch;
+    }
+
+    public void setDispatch(String dispatch) {
+        this.dispatch = dispatch == null ? null : dispatch.trim();
+    }
+
+    public String getCheckperson() {
+        return checkperson;
+    }
+
+    public void setCheckperson(String checkperson) {
+        this.checkperson = checkperson == null ? null : checkperson.trim();
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -208,6 +247,9 @@ public class production_order implements Serializable {
         sb.append(", checkedAudit=").append(checkedAudit);
         sb.append(", productionGenerate=").append(productionGenerate);
         sb.append(", addStatus=").append(addStatus);
+        sb.append(", registrant=").append(registrant);
+        sb.append(", dispatch=").append(dispatch);
+        sb.append(", checkperson=").append(checkperson);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();
@@ -238,7 +280,10 @@ public class production_order implements Serializable {
             && (this.getReviewTime() == null ? other.getReviewTime() == null : this.getReviewTime().equals(other.getReviewTime()))
             && (this.getCheckedAudit() == null ? other.getCheckedAudit() == null : this.getCheckedAudit().equals(other.getCheckedAudit()))
             && (this.getProductionGenerate() == null ? other.getProductionGenerate() == null : this.getProductionGenerate().equals(other.getProductionGenerate()))
-            && (this.getAddStatus() == null ? other.getAddStatus() == null : this.getAddStatus().equals(other.getAddStatus()));
+            && (this.getAddStatus() == null ? other.getAddStatus() == null : this.getAddStatus().equals(other.getAddStatus()))
+            && (this.getRegistrant() == null ? other.getRegistrant() == null : this.getRegistrant().equals(other.getRegistrant()))
+            && (this.getDispatch() == null ? other.getDispatch() == null : this.getDispatch().equals(other.getDispatch()))
+            && (this.getCheckperson() == null ? other.getCheckperson() == null : this.getCheckperson().equals(other.getCheckperson()));
     }
 
     @Override
@@ -259,6 +304,9 @@ public class production_order implements Serializable {
         result = prime * result + ((getCheckedAudit() == null) ? 0 : getCheckedAudit().hashCode());
         result = prime * result + ((getProductionGenerate() == null) ? 0 : getProductionGenerate().hashCode());
         result = prime * result + ((getAddStatus() == null) ? 0 : getAddStatus().hashCode());
+        result = prime * result + ((getRegistrant() == null) ? 0 : getRegistrant().hashCode());
+        result = prime * result + ((getDispatch() == null) ? 0 : getDispatch().hashCode());
+        result = prime * result + ((getCheckperson() == null) ? 0 : getCheckperson().hashCode());
         return result;
     }
 }

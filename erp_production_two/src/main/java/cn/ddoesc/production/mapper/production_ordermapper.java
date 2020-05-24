@@ -2,11 +2,10 @@ package cn.ddoesc.production.mapper;
 
 import cn.ddoesc.production.pojo.production_order;
 import cn.ddoesc.production.pojo.production_orderQuery;
-import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
-@Mapper
+
 public interface production_ordermapper {
     int countByExample(production_orderQuery example);
 

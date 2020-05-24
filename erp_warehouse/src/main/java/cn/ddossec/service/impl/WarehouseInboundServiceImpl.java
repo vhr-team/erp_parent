@@ -43,7 +43,7 @@ public class WarehouseInboundServiceImpl implements WarehouseInboundService {
 
 
     /**
-     * 入库登记审核
+     * 入库登记复核
      *
      * @param id
      * @param product_id
@@ -59,7 +59,7 @@ public class WarehouseInboundServiceImpl implements WarehouseInboundService {
             warehouseInbound.setCheckTag("1");
             warehouseInboundMapper.updateById(warehouseInbound);
             for (int i = 0; i < product_id.length ; i++) {
-                warehouseStockService.queryId(product_id[i],gathered_amount[i]);
+                warehouseStockService.queryId(product_id[i],gathered_amount[i],1);
             }
             return new Response(true,"审核成功!");
         }catch (Exception e){

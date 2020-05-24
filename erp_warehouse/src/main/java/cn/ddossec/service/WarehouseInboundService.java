@@ -32,7 +32,7 @@ public interface WarehouseInboundService {
 
 
     /**
-     * 入库登记审核
+     * 入库登记复核
      *
      * @param id
      * @param product_id

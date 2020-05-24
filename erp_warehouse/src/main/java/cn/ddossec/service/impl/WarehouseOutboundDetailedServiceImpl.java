@@ -34,6 +34,15 @@ public class WarehouseOutboundDetailedServiceImpl implements WarehouseOutboundDe
 
 
     /**
+     * 修改出库详细单确认入库数量
+     * @param detailed
+     */
+    @Override
+    public void updateWarehouseOutboundDetailedAmount(WarehouseOutboundDetailed detailed) {
+        warehouseOutboundDetailedMapper.updateById(detailed);
+    }
+
+    /**
      * 出库调度提交
      *
      * @param id 详细表 序号
@@ -101,7 +110,7 @@ public class WarehouseOutboundDetailedServiceImpl implements WarehouseOutboundDe
     @Override
     public DataGridView queryWarehouseOutboundDetailed(Integer page,Integer limit,Integer id) {
         QueryWrapper<WarehouseOutboundDetailed> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("parent_id",id).select("id","product_name","product_id","amount","amount_unit","cost_price","subtotal");
+        queryWrapper.eq("parent_id",id).select("id","product_name","product_id","product_describe","amount","amount_unit","cost_price","subtotal");
         Page<WarehouseOutboundDetailed> pages = new Page<>();
         IPage iPage = warehouseOutboundDetailedMapper.selectPage(pages,queryWrapper);
         return new DataGridView(iPage.getTotal(),iPage.getRecords());

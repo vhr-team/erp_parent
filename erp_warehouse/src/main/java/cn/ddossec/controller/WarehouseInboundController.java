@@ -40,7 +40,7 @@ public class WarehouseInboundController {
      * @param gathered_amount 入库详细单 确认入库件数
      * @return
      */
-    @ApiOperation(value = "入库登记审核")
+    @ApiOperation(value = "入库登记复核")
     @RequestMapping("WarehouseInboundDetailedAudit")
     public Response WarehouseInboundDetailedAudit(@RequestParam("id") Integer id,
                                                   @RequestParam("gathered_amount_sum") Integer gathered_amount_sum,

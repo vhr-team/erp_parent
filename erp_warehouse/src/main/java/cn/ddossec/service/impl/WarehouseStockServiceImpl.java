@@ -33,13 +33,19 @@ public class WarehouseStockServiceImpl implements WarehouseStockService {
     /**
      * 根据产品编号查询出序号
      * @param product_id 产品编号
+     * @param a 1入库 2出库
      * @return
      */
-    public void queryId(String product_id,Integer gathered_amount) {
+    public void queryId(String product_id,Integer gathered_amount,int a) {
         QueryWrapper<WarehouseStock> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("product_id",product_id).select("id","amount");//查询出序号和当前存储量
         WarehouseStock warehouseStock = warehouseStockMapper.selectOne(queryWrapper);
-        warehouseStock.setAmount(warehouseStock.getAmount()+gathered_amount);
+        if (a==1){
+            warehouseStock.setAmount(warehouseStock.getAmount()+gathered_amount);
+        }
+        if (a==2){
+            warehouseStock.setAmount(warehouseStock.getAmount()-gathered_amount);
+        }
         warehouseStockMapper.updateById(warehouseStock);
     }
 

@@ -235,7 +235,7 @@ public class design_recordController {
     }
 
 
-    /*查询档案审核通过且生产审核待审核的档案*/
+    /*查询档案审核通过且生产审核待完成的档案*/
     @RequestMapping("/selectplancheck")
     List<product_design_record> selectplancheck(){
         return service.selectplancheck();
@@ -250,6 +250,15 @@ public class design_recordController {
             e.printStackTrace();
             return new Response(false, "失败");
         }
-
+    }
+    @RequestMapping("/deleteperpetual")
+    public Response deleteperpetual(@RequestBody product_design_record record){
+        try {
+            service.deleteperpetual(record);
+            return new Response(true, "删除成功");
+        }catch (Exception e){
+            e.printStackTrace();
+            return new Response(false, "删除失败");
+        }
     }
 }

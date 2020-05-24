@@ -3,7 +3,10 @@ package cn.ddossec.service.impl;
 import cn.ddossec.common.AppUtils;
 import cn.ddossec.common.Constant;
 import cn.ddossec.common.DataGridView;
+import cn.ddossec.common.MD5Utils;
+import cn.ddossec.config.ActiveMqConfig;
 import cn.ddossec.domain.Dept;
+import cn.ddossec.domain.Role;
 import cn.ddossec.domain.User;
 import cn.ddossec.mapper.RoleMapper;
 import cn.ddossec.mapper.UserMapper;
@@ -12,23 +15,31 @@ import cn.ddossec.service.UserService;
 import cn.ddossec.vo.UserVo;
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.bean.copier.CopyOptions;
+import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
+
+import javax.jms.*;
+
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
+import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.jms.core.JmsTemplate;
+import org.springframework.jms.core.MessageCreator;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 @Service
 @Transactional
@@ -42,6 +53,15 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     private RoleMapper roleMapper;
 
     private ApplicationContext context;
+
+    @Autowired
+    private StringRedisTemplate redisTemplate;
+
+    @Autowired
+    private JmsTemplate jmsTemplate;
+
+    @Autowired
+    private ActiveMqConfig smsDestination;
 
     @Override
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
@@ -187,5 +207,53 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     @Override
     public User queryUserById(Integer mgr) {
         return this.userMapper.selectById(mgr);
+    }
+
+    /*发送短信验证码*/
+    @Override
+    public void sendCode(final String phone) {
+        //1. 生成一个随机6为数字, 作为验证码
+        StringBuffer sb = new StringBuffer();
+        for (int i = 1; i < 7; i++) {
+            int s = new Random().nextInt(10);
+            sb.append(s);
+        }
+        //2. 手机号作为key, 验证码作为value保存到redis中, 生存时间为10分钟
+        redisTemplate.boundValueOps(phone).set(sb.toString(), 60 * 10, TimeUnit.SECONDS);
+        final String smsCode = sb.toString();
+
+        //3. 将手机号, 短信内容, 模板编号, 签名封装成map消息发送给消息服务器
+        jmsTemplate.send(smsDestination.queue(), new MessageCreator() {
+            @Override
+            public Message createMessage(Session session) throws JMSException {
+                MapMessage message = session.createMapMessage();
+                message.setString("mobile", phone);//手机号
+                message.setString("template_code", "SMS_169111508");//模板编码
+                message.setString("sign_name", "疯码");//签名
+                Map map = new HashMap();
+                map.put("code", smsCode);    //验证码
+                message.setString("param", JSON.toJSONString(map));
+                return (Message) message;
+            }
+        });
+    }
+
+    @Override
+    public void regist(String username, String password) {
+        User user = new User();
+        // 设置盐
+        user.setSalt(MD5Utils.createUUID());
+        user.setType(Constant.USER_TYPE_NORMAL);
+        user.setPwd(MD5Utils.md5(password, user.getSalt(), 2));
+        // 可用
+        user.setAvailable(Constant.AVAILABLE_TRUE);
+        user.setImgpath(Constant.DEFAULT_TITLE_IMAGE);
+
+        user.setSex(Constant.SEX_UNKNOW);
+
+        // 注册用户
+        this.userMapper.insert(user);
+        // 保存用户和角色关系
+        this.saveUserRole(user.getId(), new Integer[]{19});
     }
 }

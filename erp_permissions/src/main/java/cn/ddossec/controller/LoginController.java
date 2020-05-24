@@ -9,20 +9,23 @@ import cn.ddossec.domain.Menu;
 import cn.ddossec.domain.User;
 import cn.ddossec.service.LoginfoService;
 import cn.ddossec.service.MenuService;
+import cn.ddossec.service.UserService;
+import cn.ddossec.vo.RegistObj;
 import com.wf.captcha.SpecCaptcha;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.BoundValueOperations;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.constraints.NotBlank;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
@@ -38,6 +41,9 @@ public class LoginController {
 
     @Autowired
     private LoginfoService loginfoService;
+
+    @Autowired
+    private UserService userService;
 
     /**
      * 用户登录
@@ -167,5 +173,38 @@ public class LoginController {
         opsForValue.getOperations().expire(codeKey, 60, TimeUnit.SECONDS);
 
         return new ResultObj(200, specCaptcha.toBase64());
+    }
+
+    @PostMapping("regist")
+    public ResultObj regist(String username, String password) {
+        User user = userService.queryUserByLoginName(username);
+        if (user != null) {
+            return new ResultObj(-1, "该用户名已存在！");
+        }
+        this.userService.regist(username, password);
+        return new ResultObj(200, "注册成功！");
+    }
+
+    /**
+     * 　　* @描述: 校验验证码
+     * 　　* @参数 ${tags}
+     * 　　* @返回值 ${return_type}
+     * 　　* @throws
+     * 　　* @作者: 小灰灰
+     * 　　* @时间 2020-05-24 20:59
+     */
+    @PostMapping("registeredUser")
+    public ResultObj registeredUser(@RequestBody RegistObj registObj) {
+        try {
+            // 从Redis 取出 验证码 和用户输入的比较
+            String phoneCode = redisTemplate.boundValueOps(registObj.getPhone()).get();
+            if(!phoneCode.equals(registObj.getCode())){
+                return new ResultObj(-1, "验证码错误！");
+            }
+            this.userService.regist(registObj.getName(),registObj.getPwd());
+            return new ResultObj(200, "注册成功! ");
+        } catch (Exception e) {
+            return new ResultObj(-1, "注册失败！");
+        }
     }
 }

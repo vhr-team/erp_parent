@@ -39,4 +39,15 @@ public interface UserService extends IService<User> {
      * @return
      */
     User queryUserById(Integer mgr);
+
+    /*发送短信验证码*/
+    public void sendCode(String phone);
+
+    /**
+     * 注册用户
+     *
+     * @param username 用户名
+     * @param password 密码
+     */
+    void regist(String username, String password);
 }

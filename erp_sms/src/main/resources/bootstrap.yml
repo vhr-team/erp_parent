@@ -1,0 +1,13 @@
+spring:
+  profiles:
+    active: dev  #${spring.profile.active}
+
+  application:
+    name: sms-provider  #${prefix}
+
+  cloud:
+    nacos:
+      config:
+        server-addr: 121.43.145.142:8849,121.43.145.142:8851
+        file-extension: yaml  #${file-extension}
+        group: DEFAULT_GROUP

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xmlns="http://maven.apache.org/POM/4.0.0"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <artifactId>erp_parent</artifactId>
@@ -9,17 +9,32 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>erp_design</artifactId>
+    <artifactId>erp_production_two</artifactId>
 
     <dependencies>
         <dependency>
+            <groupId>cn.ddossec</groupId>
+            <artifactId>erp_common</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.baomidou</groupId>
+                    <artifactId>mybatis-plus-boot-starter</artifactId>
+                </exclusion>
+            </exclusions>
+            <version>1.0</version>
+        </dependency>
+
+        <!--cloud-->
+        <dependency>
             <groupId>com.alibaba.cloud</groupId>
-            <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-openfeign</artifactId>
         </dependency>
+        <!--cloud-->
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
@@ -30,23 +45,8 @@
             <version>1.3.2</version>
         </dependency>
         <dependency>
-            <groupId>com.alibaba.cloud</groupId>
-            <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.mybatis</groupId>
-            <artifactId>mybatis</artifactId>
-            <version>3.5.3</version>
-        </dependency>
-        <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <version>1.18.12</version>
         </dependency>
         <!-- springboot分页插件 -->
         <dependency>
@@ -78,33 +78,5 @@
             <version>2.3</version>
             <classifier>jdk15</classifier>
         </dependency>
-        <dependency>
-            <groupId>cn.hutool</groupId>
-            <artifactId>hutool-all</artifactId>
-            <version>5.1.1</version>
-        </dependency>
-
-
-        <!--  &lt;!&ndash; redis启动器坐标 &ndash;&gt;
-          <dependency>
-              <groupId>org.springframework.boot</groupId>
-              <artifactId>spring-boot-starter-data-redis</artifactId>
-              <exclusions>
-                  <exclusion>
-                      <groupId>io.lettuce</groupId>
-                      <artifactId>lettuce-core</artifactId>
-                  </exclusion>
-              </exclusions>
-          </dependency>-->
-        <!--  &lt;!&ndash; jedis坐标 &ndash;&gt;
-          <dependency>
-              <groupId>redis.clients</groupId>
-              <artifactId>jedis</artifactId>
-          </dependency>
-          <dependency>
-              <groupId>org.springframework.data</groupId>
-              <artifactId>spring-data-redis</artifactId>
-          </dependency>-->
     </dependencies>
-
 </project>

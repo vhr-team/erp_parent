@@ -241,7 +241,8 @@ public class design_recordController {
         return service.selectplancheck();
     }
 
-    /*计划生产状态*/
+    /*计划生产状态修改*/
+    @RequestMapping("/updateplancheck")
     public Response updateplancheck(@RequestBody product_design_record record){
         try {
             service.updateplancheck(record);

@@ -63,7 +63,7 @@ public class WarehouseOutboundServiceImpl implements WarehouseOutboundService {
     public Response warehouseOutboundDetailedAudit(WarehouseOutbound warehouseOutbound) {
         try {
             warehouseOutbound.setCheckTime(DateUtil.date());
-            warehouseOutboundMapper.insert(warehouseOutbound);
+            warehouseOutboundMapper.updateById(warehouseOutbound);
             WarehouseOutboundDetailed detailed = null;
             for (int i = 0; i < warehouseOutbound.getIds().length; i++) {
                 detailed = new WarehouseOutboundDetailed();

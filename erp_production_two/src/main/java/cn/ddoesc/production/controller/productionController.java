@@ -97,4 +97,27 @@ public class productionController {
             return new Response(false,"失败");
         }
     }
+
+    /**
+     * 生产审核  传入计划单编号和审核状态（审核通过/审核不通过）
+     * @param order
+     * @return
+     */
+    @RequestMapping("/updatecheck")
+    public Response updatecheck(@RequestBody production_order order) {
+        try {
+            if("审核不通过".equals(order.getCheckedAudit())){
+                product_design_record product_design_record = new product_design_record();
+                product_design_record.setProductId(order.getProductId());
+                product_design_record.setPlanCheckstatus("未完成");
+            }else{
+                proservice.updatecheck(order);
+            }
+
+            return new Response(true,"审核成功");
+        }catch (Exception e){
+            e.printStackTrace();
+            return new Response(false,"审核失败");
+        }
+    }
 }

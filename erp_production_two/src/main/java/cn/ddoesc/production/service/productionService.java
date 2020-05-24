@@ -14,4 +14,5 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public interface productionService {
     void addproductionOrder(production_order order);
+    void updatecheck(production_order order);
 }

@@ -250,6 +250,15 @@ public class design_recordController {
             e.printStackTrace();
             return new Response(false, "失败");
         }
-
+    }
+    @RequestMapping("/deleteperpetual")
+    public Response deleteperpetual(@RequestBody product_design_record record){
+        try {
+            service.deleteperpetual(record);
+            return new Response(true, "删除成功");
+        }catch (Exception e){
+            e.printStackTrace();
+            return new Response(false, "删除失败");
+        }
     }
 }

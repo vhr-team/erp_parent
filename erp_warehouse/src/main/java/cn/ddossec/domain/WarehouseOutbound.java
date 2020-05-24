@@ -132,5 +132,10 @@ public class WarehouseOutbound implements Serializable {
      */
     @TableField(exist = false)
     private String[] productDescribe;
+    /**
+     * 确认出库件数
+     */
+    @TableField(exist = false)
+    private Integer[] paidAmount;
 
 }

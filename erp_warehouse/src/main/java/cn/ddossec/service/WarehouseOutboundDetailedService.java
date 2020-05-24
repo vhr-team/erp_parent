@@ -16,6 +16,13 @@ public interface WarehouseOutboundDetailedService {
 
 
     /**
+     * 修改出库详细单确认入库数量
+     * @param detailed
+     */
+    void updateWarehouseOutboundDetailedAmount(WarehouseOutboundDetailed detailed);
+
+
+    /**
      * 出库调度提交
      *
      * @param id 详细表 序号

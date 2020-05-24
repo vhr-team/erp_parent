@@ -53,6 +53,7 @@ public class WarehouseOutboundServiceImpl implements WarehouseOutboundService {
      * @return
      */
     @Override
+    @Transactional
     public Response WarehouseOutboundAudit(Integer id, Integer paid_amount_sum, String[] product_id, Integer[] paid_amount) {
         try {
             WarehouseOutbound warehouseOutbound = new WarehouseOutbound();

@@ -10,7 +10,7 @@
     <result column="quantity" property="quantity" jdbcType="INTEGER" />
     <result column="qutbound_order_id" property="qutboundOrderId" jdbcType="VARCHAR" />
     <result column="amount_unit" property="amountUnit" jdbcType="VARCHAR" />
-    <result column="price" property="price" jdbcType="INTEGER" />
+    <result column="list_price" property="listPrice" jdbcType="INTEGER" />
     <result column="aggregate" property="aggregate" jdbcType="INTEGER" />
     <result column="review_time" property="reviewTime" jdbcType="TIMESTAMP" />
     <result column="checked_audit" property="checkedAudit" jdbcType="VARCHAR" />
@@ -78,7 +78,8 @@
   <sql id="Base_Column_List" >
     <if test="fields == null" >
       id, schedule_id, product_id, product_name, product_describe, quantity, qutbound_order_id, 
-      amount_unit, price, aggregate, review_time, checked_audit, production_generate, add_status
+      amount_unit, list_price, aggregate, review_time, checked_audit, production_generate, 
+      add_status
     </if>
     <if test="fields != null" >
       ${fields}
@@ -100,7 +101,7 @@
   </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
-    id,schedule_id,product_id,product_name,product_describe,quantity,qutbound_order_id,amount_unit,price,aggregate,review_time,checked_audit,production_generate,add_status
+    id,schedule_id,product_id,product_name,product_describe,quantity,qutbound_order_id,amount_unit,list_price,aggregate,review_time,checked_audit,production_generate,add_status
     from production_order
     where id = #{id,jdbcType=INTEGER}
   </select>
@@ -117,12 +118,12 @@
   <insert id="insert" parameterType="cn.ddoesc.production.pojo.production_order" >
     insert into production_order (id, schedule_id, product_id, 
       product_name, product_describe, quantity, 
-      qutbound_order_id, amount_unit, price, 
+      qutbound_order_id, amount_unit, list_price, 
       aggregate, review_time, checked_audit, 
       production_generate, add_status)
     values (#{id,jdbcType=INTEGER}, #{scheduleId,jdbcType=VARCHAR}, #{productId,jdbcType=VARCHAR}, 
       #{productName,jdbcType=VARCHAR}, #{productDescribe,jdbcType=VARCHAR}, #{quantity,jdbcType=INTEGER}, 
-      #{qutboundOrderId,jdbcType=VARCHAR}, #{amountUnit,jdbcType=VARCHAR}, #{price,jdbcType=INTEGER}, 
+      #{qutboundOrderId,jdbcType=VARCHAR}, #{amountUnit,jdbcType=VARCHAR}, #{listPrice,jdbcType=INTEGER}, 
       #{aggregate,jdbcType=INTEGER}, #{reviewTime,jdbcType=TIMESTAMP}, #{checkedAudit,jdbcType=VARCHAR}, 
       #{productionGenerate,jdbcType=VARCHAR}, #{addStatus,jdbcType=VARCHAR})
   </insert>
@@ -153,8 +154,8 @@
       <if test="amountUnit != null" >
         amount_unit,
       </if>
-      <if test="price != null" >
-        price,
+      <if test="listPrice != null" >
+        list_price,
       </if>
       <if test="aggregate != null" >
         aggregate,
@@ -197,8 +198,8 @@
       <if test="amountUnit != null" >
         #{amountUnit,jdbcType=VARCHAR},
       </if>
-      <if test="price != null" >
-        #{price,jdbcType=INTEGER},
+      <if test="listPrice != null" >
+        #{listPrice,jdbcType=INTEGER},
       </if>
       <if test="aggregate != null" >
         #{aggregate,jdbcType=INTEGER},
@@ -250,8 +251,8 @@
       <if test="record.amountUnit != null" >
         amount_unit = #{record.amountUnit,jdbcType=VARCHAR},
       </if>
-      <if test="record.price != null" >
-        price = #{record.price,jdbcType=INTEGER},
+      <if test="record.listPrice != null" >
+        list_price = #{record.listPrice,jdbcType=INTEGER},
       </if>
       <if test="record.aggregate != null" >
         aggregate = #{record.aggregate,jdbcType=INTEGER},
@@ -283,7 +284,7 @@
       quantity = #{record.quantity,jdbcType=INTEGER},
       qutbound_order_id = #{record.qutboundOrderId,jdbcType=VARCHAR},
       amount_unit = #{record.amountUnit,jdbcType=VARCHAR},
-      price = #{record.price,jdbcType=INTEGER},
+      list_price = #{record.listPrice,jdbcType=INTEGER},
       aggregate = #{record.aggregate,jdbcType=INTEGER},
       review_time = #{record.reviewTime,jdbcType=TIMESTAMP},
       checked_audit = #{record.checkedAudit,jdbcType=VARCHAR},
@@ -317,8 +318,8 @@
       <if test="amountUnit != null" >
         amount_unit = #{amountUnit,jdbcType=VARCHAR},
       </if>
-      <if test="price != null" >
-        price = #{price,jdbcType=INTEGER},
+      <if test="listPrice != null" >
+        list_price = #{listPrice,jdbcType=INTEGER},
       </if>
       <if test="aggregate != null" >
         aggregate = #{aggregate,jdbcType=INTEGER},
@@ -347,7 +348,7 @@
       quantity = #{quantity,jdbcType=INTEGER},
       qutbound_order_id = #{qutboundOrderId,jdbcType=VARCHAR},
       amount_unit = #{amountUnit,jdbcType=VARCHAR},
-      price = #{price,jdbcType=INTEGER},
+      list_price = #{listPrice,jdbcType=INTEGER},
       aggregate = #{aggregate,jdbcType=INTEGER},
       review_time = #{reviewTime,jdbcType=TIMESTAMP},
       checked_audit = #{checkedAudit,jdbcType=VARCHAR},

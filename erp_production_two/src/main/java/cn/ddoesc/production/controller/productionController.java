@@ -84,7 +84,7 @@ public class productionController {
         Integer sumprice=0;
         try {
             order.setScheduleId(Getnum());
-            sumprice=order.getPrice()*order.getQuantity();
+            sumprice=order.getListPrice()*order.getQuantity();
             product_design_record product_design_record = new product_design_record();
             product_design_record.setProductId(order.getProductId());
             product_design_record.setPlanCheckstatus("已完成");

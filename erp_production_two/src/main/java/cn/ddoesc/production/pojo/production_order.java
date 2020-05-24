@@ -47,7 +47,7 @@ public class production_order implements Serializable {
     /**
      * 单价
      */
-    private Integer price;
+    private Integer listPrice;
 
     /**
      * 总金额
@@ -140,12 +140,12 @@ public class production_order implements Serializable {
         this.amountUnit = amountUnit == null ? null : amountUnit.trim();
     }
 
-    public Integer getPrice() {
-        return price;
+    public Integer getListPrice() {
+        return listPrice;
     }
 
-    public void setPrice(Integer price) {
-        this.price = price;
+    public void setListPrice(Integer listPrice) {
+        this.listPrice = listPrice;
     }
 
     public Integer getAggregate() {
@@ -202,7 +202,7 @@ public class production_order implements Serializable {
         sb.append(", quantity=").append(quantity);
         sb.append(", qutboundOrderId=").append(qutboundOrderId);
         sb.append(", amountUnit=").append(amountUnit);
-        sb.append(", price=").append(price);
+        sb.append(", listPrice=").append(listPrice);
         sb.append(", aggregate=").append(aggregate);
         sb.append(", reviewTime=").append(reviewTime);
         sb.append(", checkedAudit=").append(checkedAudit);
@@ -233,7 +233,7 @@ public class production_order implements Serializable {
             && (this.getQuantity() == null ? other.getQuantity() == null : this.getQuantity().equals(other.getQuantity()))
             && (this.getQutboundOrderId() == null ? other.getQutboundOrderId() == null : this.getQutboundOrderId().equals(other.getQutboundOrderId()))
             && (this.getAmountUnit() == null ? other.getAmountUnit() == null : this.getAmountUnit().equals(other.getAmountUnit()))
-            && (this.getPrice() == null ? other.getPrice() == null : this.getPrice().equals(other.getPrice()))
+            && (this.getListPrice() == null ? other.getListPrice() == null : this.getListPrice().equals(other.getListPrice()))
             && (this.getAggregate() == null ? other.getAggregate() == null : this.getAggregate().equals(other.getAggregate()))
             && (this.getReviewTime() == null ? other.getReviewTime() == null : this.getReviewTime().equals(other.getReviewTime()))
             && (this.getCheckedAudit() == null ? other.getCheckedAudit() == null : this.getCheckedAudit().equals(other.getCheckedAudit()))
@@ -253,7 +253,7 @@ public class production_order implements Serializable {
         result = prime * result + ((getQuantity() == null) ? 0 : getQuantity().hashCode());
         result = prime * result + ((getQutboundOrderId() == null) ? 0 : getQutboundOrderId().hashCode());
         result = prime * result + ((getAmountUnit() == null) ? 0 : getAmountUnit().hashCode());
-        result = prime * result + ((getPrice() == null) ? 0 : getPrice().hashCode());
+        result = prime * result + ((getListPrice() == null) ? 0 : getListPrice().hashCode());
         result = prime * result + ((getAggregate() == null) ? 0 : getAggregate().hashCode());
         result = prime * result + ((getReviewTime() == null) ? 0 : getReviewTime().hashCode());
         result = prime * result + ((getCheckedAudit() == null) ? 0 : getCheckedAudit().hashCode());

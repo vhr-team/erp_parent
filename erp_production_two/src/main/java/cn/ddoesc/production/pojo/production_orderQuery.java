@@ -655,63 +655,63 @@ public class production_orderQuery {
             return (Criteria) this;
         }
 
-        public Criteria andPriceIsNull() {
-            addCriterion("price is null");
+        public Criteria andListPriceIsNull() {
+            addCriterion("list_price is null");
             return (Criteria) this;
         }
 
-        public Criteria andPriceIsNotNull() {
-            addCriterion("price is not null");
+        public Criteria andListPriceIsNotNull() {
+            addCriterion("list_price is not null");
             return (Criteria) this;
         }
 
-        public Criteria andPriceEqualTo(Integer value) {
-            addCriterion("price =", value, "price");
+        public Criteria andListPriceEqualTo(Integer value) {
+            addCriterion("list_price =", value, "listPrice");
             return (Criteria) this;
         }
 
-        public Criteria andPriceNotEqualTo(Integer value) {
-            addCriterion("price <>", value, "price");
+        public Criteria andListPriceNotEqualTo(Integer value) {
+            addCriterion("list_price <>", value, "listPrice");
             return (Criteria) this;
         }
 
-        public Criteria andPriceGreaterThan(Integer value) {
-            addCriterion("price >", value, "price");
+        public Criteria andListPriceGreaterThan(Integer value) {
+            addCriterion("list_price >", value, "listPrice");
             return (Criteria) this;
         }
 
-        public Criteria andPriceGreaterThanOrEqualTo(Integer value) {
-            addCriterion("price >=", value, "price");
+        public Criteria andListPriceGreaterThanOrEqualTo(Integer value) {
+            addCriterion("list_price >=", value, "listPrice");
             return (Criteria) this;
         }
 
-        public Criteria andPriceLessThan(Integer value) {
-            addCriterion("price <", value, "price");
+        public Criteria andListPriceLessThan(Integer value) {
+            addCriterion("list_price <", value, "listPrice");
             return (Criteria) this;
         }
 
-        public Criteria andPriceLessThanOrEqualTo(Integer value) {
-            addCriterion("price <=", value, "price");
+        public Criteria andListPriceLessThanOrEqualTo(Integer value) {
+            addCriterion("list_price <=", value, "listPrice");
             return (Criteria) this;
         }
 
-        public Criteria andPriceIn(List<Integer> values) {
-            addCriterion("price in", values, "price");
+        public Criteria andListPriceIn(List<Integer> values) {
+            addCriterion("list_price in", values, "listPrice");
             return (Criteria) this;
         }
 
-        public Criteria andPriceNotIn(List<Integer> values) {
-            addCriterion("price not in", values, "price");
+        public Criteria andListPriceNotIn(List<Integer> values) {
+            addCriterion("list_price not in", values, "listPrice");
             return (Criteria) this;
         }
 
-        public Criteria andPriceBetween(Integer value1, Integer value2) {
-            addCriterion("price between", value1, value2, "price");
+        public Criteria andListPriceBetween(Integer value1, Integer value2) {
+            addCriterion("list_price between", value1, value2, "listPrice");
             return (Criteria) this;
         }
 
-        public Criteria andPriceNotBetween(Integer value1, Integer value2) {
-            addCriterion("price not between", value1, value2, "price");
+        public Criteria andListPriceNotBetween(Integer value1, Integer value2) {
+            addCriterion("list_price not between", value1, value2, "listPrice");
             return (Criteria) this;
         }
 

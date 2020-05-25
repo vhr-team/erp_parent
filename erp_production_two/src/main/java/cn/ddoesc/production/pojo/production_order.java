@@ -1,5 +1,7 @@
 package cn.ddoesc.production.pojo;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -57,6 +59,7 @@ public class production_order implements Serializable {
     /**
      * 制定时间
      */
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date reviewTime;
 
     /**

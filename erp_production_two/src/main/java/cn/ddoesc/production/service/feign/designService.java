@@ -18,6 +18,6 @@ public interface designService {
     List<product_design_record> selectcheckplanAll();
 
     /*修改生产状态*/
-    @RequestMapping("/updateplancheck")
+    @RequestMapping("/design_record/updateplancheck")
     void updatePlancheck(@RequestBody product_design_record record);
 }

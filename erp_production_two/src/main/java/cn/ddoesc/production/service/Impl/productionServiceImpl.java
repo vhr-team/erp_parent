@@ -39,9 +39,6 @@ public class productionServiceImpl implements productionService {
         production_orderQuery.Criteria criteria = query.createCriteria();
         criteria.andProductionGenerateEqualTo("已生成");
         criteria.andCheckedAuditEqualTo("审核通过");
-        if(order.getProductName()!=null){
-            criteria.andProductNameLike("%"+order.getProductName()+"%");
-        }
         return mapper.selectByExample(query);
     }
 

@@ -112,6 +112,7 @@ public class productionController {
                 product_design_record.setProductId(order.getProductId());
                 product_design_record.setPlanCheckstatus("未完成");
             }else{
+                order.setProductionGenerate("已生成");
                 proservice.updatecheck(order);
             }
 
@@ -121,4 +122,58 @@ public class productionController {
             return new Response(false,"审核失败");
         }
     }
+
+    /**
+     * 查询生产状态已生成且 审核通过的计划单
+     * @param order [可传入产品名称查询]
+     * @return
+     */
+    @RequestMapping("/selectOrderList")
+    List<production_order> selectOrderList(@RequestBody production_order order){
+        return proservice.selectOrderList(order);
+    }
+    /**
+     * 指定派送人
+     * 传入计划单编号,派送人姓名
+     */
+    @RequestMapping("/updatedispach")
+    public Response updatedispach(@RequestBody production_order order){
+        try {
+            proservice.updateplanperson(order);
+            return new Response(true,"成功");
+        }catch (Exception e){
+            return new Response(false,"失败");
+        }
+
+    }
+    /**
+     * 查询计划单审核通过,派工单待审核测单子
+     *
+     */
+    @RequestMapping("/selectcheck")
+    public List<production_order> selectcheck(){
+        return proservice.selectcheck();
+    }
+    /**
+     * 计划单审核通过
+     * 传入计划单编号即可
+     */
+    @RequestMapping("/updatecheckperson")
+    public Response updatecheckperson(@RequestBody production_order order){
+        try {
+            proservice.updatecheckperson(order);
+            return new Response(true,"成功");
+        }catch (Exception e){
+            return new Response(false,"失败");
+        }
+
+    }
+    /**
+     * 查询所有已生成的派工单
+     */
+    @RequestMapping("/selectList")
+    public List<production_order> selectList(){
+        return proservice.selectList();
+    }
+
 }

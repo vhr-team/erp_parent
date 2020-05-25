@@ -1,7 +1,5 @@
 package cn.ddoesc.production.pojo;
 
-import org.springframework.format.annotation.DateTimeFormat;
-
 import java.io.Serializable;
 import java.util.Date;
 
@@ -59,7 +57,6 @@ public class production_order implements Serializable {
     /**
      * 制定时间
      */
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date reviewTime;
 
     /**
@@ -91,6 +88,11 @@ public class production_order implements Serializable {
      * 审核人姓名
      */
     private String checkperson;
+
+    /**
+     * 生产状态
+     */
+    private String state;
 
     private static final long serialVersionUID = 1L;
 
@@ -230,6 +232,14 @@ public class production_order implements Serializable {
         this.checkperson = checkperson == null ? null : checkperson.trim();
     }
 
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state == null ? null : state.trim();
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -253,6 +263,7 @@ public class production_order implements Serializable {
         sb.append(", registrant=").append(registrant);
         sb.append(", dispatch=").append(dispatch);
         sb.append(", checkperson=").append(checkperson);
+        sb.append(", state=").append(state);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();
@@ -286,7 +297,8 @@ public class production_order implements Serializable {
             && (this.getAddStatus() == null ? other.getAddStatus() == null : this.getAddStatus().equals(other.getAddStatus()))
             && (this.getRegistrant() == null ? other.getRegistrant() == null : this.getRegistrant().equals(other.getRegistrant()))
             && (this.getDispatch() == null ? other.getDispatch() == null : this.getDispatch().equals(other.getDispatch()))
-            && (this.getCheckperson() == null ? other.getCheckperson() == null : this.getCheckperson().equals(other.getCheckperson()));
+            && (this.getCheckperson() == null ? other.getCheckperson() == null : this.getCheckperson().equals(other.getCheckperson()))
+            && (this.getState() == null ? other.getState() == null : this.getState().equals(other.getState()));
     }
 
     @Override
@@ -310,6 +322,7 @@ public class production_order implements Serializable {
         result = prime * result + ((getRegistrant() == null) ? 0 : getRegistrant().hashCode());
         result = prime * result + ((getDispatch() == null) ? 0 : getDispatch().hashCode());
         result = prime * result + ((getCheckperson() == null) ? 0 : getCheckperson().hashCode());
+        result = prime * result + ((getState() == null) ? 0 : getState().hashCode());
         return result;
     }
 }

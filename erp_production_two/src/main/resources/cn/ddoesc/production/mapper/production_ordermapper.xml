@@ -19,6 +19,7 @@
     <result column="registrant" property="registrant" jdbcType="VARCHAR" />
     <result column="dispatch" property="dispatch" jdbcType="VARCHAR" />
     <result column="checkperson" property="checkperson" jdbcType="VARCHAR" />
+    <result column="state" property="state" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -82,7 +83,7 @@
     <if test="fields == null" >
       id, schedule_id, product_id, product_name, product_describe, quantity, qutbound_order_id, 
       amount_unit, list_price, aggregate, review_time, checked_audit, production_generate, 
-      add_status, registrant, dispatch, checkperson
+      add_status, registrant, dispatch, checkperson, state
     </if>
     <if test="fields != null" >
       ${fields}
@@ -104,7 +105,7 @@
   </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
-    id,schedule_id,product_id,product_name,product_describe,quantity,qutbound_order_id,amount_unit,list_price,aggregate,review_time,checked_audit,production_generate,add_status,registrant,dispatch,checkperson
+    id,schedule_id,product_id,product_name,product_describe,quantity,qutbound_order_id,amount_unit,list_price,aggregate,review_time,checked_audit,production_generate,add_status,registrant,dispatch,checkperson,state
     from production_order
     where id = #{id,jdbcType=INTEGER}
   </select>
@@ -124,13 +125,15 @@
       qutbound_order_id, amount_unit, list_price, 
       aggregate, review_time, checked_audit, 
       production_generate, add_status, registrant, 
-      dispatch, checkperson)
+      dispatch, checkperson, state
+      )
     values (#{id,jdbcType=INTEGER}, #{scheduleId,jdbcType=VARCHAR}, #{productId,jdbcType=VARCHAR}, 
       #{productName,jdbcType=VARCHAR}, #{productDescribe,jdbcType=VARCHAR}, #{quantity,jdbcType=INTEGER}, 
       #{qutboundOrderId,jdbcType=VARCHAR}, #{amountUnit,jdbcType=VARCHAR}, #{listPrice,jdbcType=INTEGER}, 
       #{aggregate,jdbcType=INTEGER}, #{reviewTime,jdbcType=TIMESTAMP}, #{checkedAudit,jdbcType=VARCHAR}, 
       #{productionGenerate,jdbcType=VARCHAR}, #{addStatus,jdbcType=VARCHAR}, #{registrant,jdbcType=VARCHAR}, 
-      #{dispatch,jdbcType=VARCHAR}, #{checkperson,jdbcType=VARCHAR})
+      #{dispatch,jdbcType=VARCHAR}, #{checkperson,jdbcType=VARCHAR}, #{state,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="cn.ddoesc.production.pojo.production_order" >
     insert into production_order
@@ -186,6 +189,9 @@
       <if test="checkperson != null" >
         checkperson,
       </if>
+      <if test="state != null" >
+        state,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -238,6 +244,9 @@
       </if>
       <if test="checkperson != null" >
         #{checkperson,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -301,6 +310,9 @@
       <if test="record.checkperson != null" >
         checkperson = #{record.checkperson,jdbcType=VARCHAR},
       </if>
+      <if test="record.state != null" >
+        state = #{record.state,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -324,7 +336,8 @@
       add_status = #{record.addStatus,jdbcType=VARCHAR},
       registrant = #{record.registrant,jdbcType=VARCHAR},
       dispatch = #{record.dispatch,jdbcType=VARCHAR},
-      checkperson = #{record.checkperson,jdbcType=VARCHAR}
+      checkperson = #{record.checkperson,jdbcType=VARCHAR},
+      state = #{record.state,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -380,6 +393,9 @@
       <if test="checkperson != null" >
         checkperson = #{checkperson,jdbcType=VARCHAR},
       </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -400,7 +416,8 @@
       add_status = #{addStatus,jdbcType=VARCHAR},
       registrant = #{registrant,jdbcType=VARCHAR},
       dispatch = #{dispatch,jdbcType=VARCHAR},
-      checkperson = #{checkperson,jdbcType=VARCHAR}
+      checkperson = #{checkperson,jdbcType=VARCHAR},
+      state = #{state,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

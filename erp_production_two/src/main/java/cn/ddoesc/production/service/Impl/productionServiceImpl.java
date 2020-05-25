@@ -37,6 +37,7 @@ public class productionServiceImpl implements productionService {
     public List<production_order> selectOrderList(production_order order) {
         production_orderQuery query = new production_orderQuery();
         production_orderQuery.Criteria criteria = query.createCriteria();
+        criteria.andStateEqualTo("未生成");
         criteria.andProductionGenerateEqualTo("已生成");
         criteria.andCheckedAuditEqualTo("审核通过");
         return mapper.selectByExample(query);
@@ -49,6 +50,7 @@ public class productionServiceImpl implements productionService {
     @Override
     public void updateplanperson(production_order order) {
         order.setAddStatus("等待审核");
+        order.setState("已生成");
         production_orderQuery query = new production_orderQuery();
         production_orderQuery.Criteria criteria = query.createCriteria();
         criteria.andScheduleIdEqualTo(order.getScheduleId());

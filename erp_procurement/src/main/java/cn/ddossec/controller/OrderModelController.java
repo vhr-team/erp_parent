@@ -2,14 +2,18 @@ package cn.ddossec.controller;
 
 import cn.ddossec.common.DataGridView;
 import cn.ddossec.common.ResultObj;
+import cn.ddossec.domain.OrderDetail;
 import cn.ddossec.domain.OrderModel;
 import cn.ddossec.domain.User;
+import cn.ddossec.domain.WarehouseInbound;
 import cn.ddossec.service.OrderModelService;
+import cn.ddossec.service.feign.GRNFegin;
 import cn.ddossec.service.feign.UserFeign;
 import cn.ddossec.vo.OrderModelVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -24,6 +28,9 @@ public class OrderModelController {
 
     @Autowired
     private UserFeign userFeign;
+
+    @Autowired
+    private GRNFegin grnFegin;
 
     /**
      * 查询所有订单，可以带条件，分页查询
@@ -157,6 +164,60 @@ public class OrderModelController {
     public ResultObj finishTranOrder(@RequestBody OrderModel orderModel) {
         try {
             this.orderModelService.finishTranOrder(orderModel);
+
+            List<User> users = this.userFeign.loadAllUser();
+
+            for (User user : users) {
+                if(user.getId().equals(orderModel.getCompleter())){
+                    orderModel.getUser().setName(user.getName());
+                }
+            }
+
+            WarehouseInbound warehouseInbound = new WarehouseInbound();
+            warehouseInbound.setAmountSum(orderModel.getTotalNum());// 商品总件数
+            warehouseInbound.setStorer(orderModel.getUser().getName());// 入库人
+            warehouseInbound.setCostPriceSum(orderModel.getTotalPrice());
+            warehouseInbound.setReason("采购单入库");//入库理由
+
+            List<OrderDetail> details = orderModel.getDetails();
+
+            List<Integer> list = new ArrayList<>();
+            List<String> nameList = new ArrayList<>();
+            List<String> produIdList = new ArrayList<>();
+            List<Integer> numList = new ArrayList<>();
+            List<String> amountUnit = new ArrayList<>();
+            List<Double> costPrice = new ArrayList<>();
+            List<Double> subtotal = new ArrayList<>();
+
+            for (OrderDetail detail : details) {
+                list.add(detail.getOrderDetailId());
+                nameList.add(detail.getGoods().getProductname());
+                produIdList.add(detail.getGoods().getId()+"");
+
+                /*数量*/
+                numList.add(detail.getDetailNum());
+                /*单位*/
+                amountUnit.add(detail.getGoods().getUnit());
+                /*单价*/
+                costPrice.add(detail.getGoods().getPrice());
+
+                /*小计*/
+                subtotal.add(detail.getDetailNum() * detail.getGoods().getPrice());
+            }
+            warehouseInbound.setIds(list.toArray(new Integer[list.size()]));
+            warehouseInbound.setProductName(nameList.toArray(new String[nameList.size()]));
+            warehouseInbound.setProductId(produIdList.toArray(new String[produIdList.size()]));
+            warehouseInbound.setAmount(numList.toArray(new Integer[numList.size()]));
+            /*单位*/
+            warehouseInbound.setAmountUnit(amountUnit.toArray(new String[amountUnit.size()]));
+            /*成本单价*/
+            warehouseInbound.setCostPrice(costPrice.toArray(new Double[costPrice.size()]));
+            /*小计*/
+            warehouseInbound.setSubtotal(subtotal.toArray(new Integer[subtotal.size()]));
+
+            System.out.println(warehouseInbound);
+            grnFegin.insertWarehousing(warehouseInbound);
+
             return ResultObj.TRANORDER_SUCCESS;
         } catch (Exception e) {
             return ResultObj.TRANORDER_ERROR;

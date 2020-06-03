@@ -44,15 +44,17 @@ git clone https://github.com/vhr-team/erp_parent.git
 
 ## 效果预览
 
-![](https://img2020.cnblogs.com/blog/1871532/202004/1871532-20200414164831124-1744818878.png)
+系统页面
+<img src='https://img-blog.csdnimg.cn/20200604001801940.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2pva2VyZGoyMzM=,size_16,color_FFFFFF,t_70'>
+业务页面
+<img src="https://img-blog.csdnimg.cn/20200604002009770.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2pva2VyZGoyMzM=,size_16,color_FFFFFF,t_70">
+安全库存
+<img src='https://img-blog.csdnimg.cn/20200604002230315.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2pva2VyZGoyMzM=,size_16,color_FFFFFF,t_70'>
+后端代码目录
+<img src='https://img-blog.csdnimg.cn/20200604002516769.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2pva2VyZGoyMzM=,size_16,color_FFFFFF,t_70'>
+前端代码目录
+<img src='https://img-blog.csdnimg.cn/20200604002626295.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2pva2VyZGoyMzM=,size_16,color_FFFFFF,t_70'>
 
-![](https://img2020.cnblogs.com/blog/1871532/202004/1871532-20200414164903360-58612556.png)
-
-![](https://img2020.cnblogs.com/blog/1871532/202004/1871532-20200414164921250-670971193.png)
-
-![](https://img2020.cnblogs.com/blog/1871532/202004/1871532-20200414164939773-28206162.png)
-
-![](https://img2020.cnblogs.com/blog/1871532/202004/1871532-20200414164958561-335358585.png)
 
 ## 使用说明
 
